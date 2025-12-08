@@ -55,6 +55,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -68,6 +76,8 @@ body {
   margin: 0;
   padding: 0;
   min-width: 320px;
+  width: 100%;
+  max-width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
 }

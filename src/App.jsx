@@ -76,12 +76,12 @@ export default function App() {
       backgroundColor: bgColor, 
       color: textColor, 
       minHeight: '100vh', 
-      width: '100vw',
-      position: 'relative',
-      left: '50%',
-      right: '50%',
-      marginLeft: '-50vw',
-      marginRight: '-50vw'
+      width: '100%',
+      maxWidth: '100vw',
+      margin: 0,
+      padding: 0,
+      overflowX: 'hidden',
+      position: 'relative'
     }}>
       <AppBar 
         position="fixed" 
