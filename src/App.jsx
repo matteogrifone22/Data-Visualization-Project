@@ -89,8 +89,8 @@ export default function App() {
           top: 20,
           left: '50%',
           transform: 'translateX(-50%)',
-          width: { xs: '95%', sm: 'auto' },
-          maxWidth: { xs: '95%', sm: '90%' },
+          width: { xs: '95%', md: 'auto' },
+          maxWidth: { xs: '95%', md: '90%' },
           borderRadius: '50px',
           backgroundColor: navbarBgColor,
           backdropFilter: 'blur(10px)',
@@ -102,7 +102,7 @@ export default function App() {
           transition: 'box-shadow 0.3s ease, background-color 0.3s ease'
         }}
       >
-        <Toolbar sx={{ gap: 2, padding: '8px 24px', justifyContent: 'center' }}>
+        <Toolbar sx={{ gap: { xs: 0.8, md: 2 }, padding: { xs: '8px 8px', md: '8px 24px' }, justifyContent: 'space-between' }}>
           
           <Link 
             href="#introduction" 
@@ -110,7 +110,7 @@ export default function App() {
             sx={{ 
               color: activeSection === 'introduction' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
-              fontSize: '0.95rem',
+              fontSize: { xs: '0.8rem', md: '0.95rem' },
               cursor: 'pointer',
               transition: 'color 0.3s ease',
               fontFamily: 'var(--font-serif)',
@@ -118,7 +118,12 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            War or Genocide?
+            <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
+              War or Genocide?
+            </Box>
+            <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
+              Intro
+            </Box>
           </Link>
           <Link 
             href="#chapter1" 
@@ -126,7 +131,7 @@ export default function App() {
             sx={{ 
               color: activeSection === 'chapter1' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
-              fontSize: '0.95rem',
+              fontSize: { xs: '0.8rem', md: '0.95rem' },
               cursor: 'pointer',
               transition: 'color 0.3s ease',
               fontFamily: 'var(--font-serif)',
@@ -134,7 +139,12 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            Chapter 1
+            <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
+              Chapter 1
+            </Box>
+            <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
+              Ch 1
+            </Box>
           </Link>
           <Link 
             href="#chapter2" 
@@ -142,7 +152,7 @@ export default function App() {
             sx={{ 
               color: activeSection === 'chapter2' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
-              fontSize: '0.95rem',
+              fontSize: { xs: '0.8rem', md: '0.95rem' },
               cursor: 'pointer',
               transition: 'color 0.3s ease',
               fontFamily: 'var(--font-serif)',
@@ -150,7 +160,12 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            Chapter 2
+            <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
+              Chapter 2
+            </Box>
+            <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
+              Ch 2
+            </Box>
           </Link>
           <Link 
             href="#chapter3" 
@@ -158,7 +173,7 @@ export default function App() {
             sx={{ 
               color: activeSection === 'chapter3' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
-              fontSize: '0.95rem',
+              fontSize: { xs: '0.8rem', md: '0.95rem' },
               cursor: 'pointer',
               transition: 'color 0.3s ease',
               fontFamily: 'var(--font-serif)',
@@ -166,7 +181,12 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            Chapter 3
+            <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
+              Chapter 3
+            </Box>
+            <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
+              Ch 3
+            </Box>
           </Link>
           <Link 
             href="#chapter4" 
@@ -174,7 +194,7 @@ export default function App() {
             sx={{ 
               color: activeSection === 'chapter4' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
-              fontSize: '0.95rem',
+              fontSize: { xs: '0.8rem', md: '0.95rem' },
               cursor: 'pointer',
               transition: 'color 0.3s ease',
               fontFamily: 'var(--font-serif)',
@@ -182,7 +202,12 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            Chapter 4
+            <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
+              Chapter 4
+            </Box>
+            <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
+              Ch 4
+            </Box>
           </Link>
           <IconButton
             onClick={toggleTheme}
