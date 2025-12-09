@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab } from '@mui/material';
 import { DarkMode, LightMode } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -7,7 +7,8 @@ import MyChart from './components/MyChart';
 export default function App() {
   const [isDark, setIsDark] = useState(true);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [activeSection, setActiveSection] = useState('Title');
+  const [activeSection, setActiveSection] = useState('introduction');
+  const navbarRef = useRef(null);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -17,42 +18,27 @@ export default function App() {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
 
-      // Determine active section: pick the one with most occupancy in center square (50% screen, centered)
-      const sections = ['Title', 'chart1', 'insights'];
-      const navbarHeight = 100;
-      const viewportStart = window.scrollY + navbarHeight;
-      const viewportEnd = window.scrollY + window.innerHeight;
-      const viewportHeight = viewportEnd - viewportStart;
-      const screenCenterY = (viewportStart + viewportEnd) / 2;
+      // Determine active section based on which section is most visible
+      const sections = ['introduction', 'chapter1', 'chapter2', 'chapter3', 'chapter4'];
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
 
-      // Center square: 50% of viewport height/width, centered on screen
-      const boxSize = viewportHeight * 0.5;
-      const boxStart = screenCenterY - boxSize / 2;
-      const boxEnd = screenCenterY + boxSize / 2;
+      let currentSection = sections[0];
 
-      let bestSection = sections[0];
-      let maxOccupancy = 0;
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const { offsetTop, offsetHeight } = element;
-          const sectionStart = offsetTop;
-          const sectionEnd = offsetTop + offsetHeight;
-
-          // Calculate occupancy in center box
-          const occupiedStart = Math.max(sectionStart, boxStart);
-          const occupiedEnd = Math.min(sectionEnd, boxEnd);
-          const occupancy = Math.max(0, occupiedEnd - occupiedStart);
-
-          if (occupancy > maxOccupancy) {
-            maxOccupancy = occupancy;
-            bestSection = section;
-          }
+      // Check from bottom to top which section we've scrolled past
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const element = document.getElementById(sections[i]);
+        if (element && element.offsetTop <= scrollPosition) {
+          currentSection = sections[i];
+          break;
         }
       }
+      
+      // If at very top of page, always show first section
+      if (window.scrollY < 100) {
+        currentSection = sections[0];
+      }
 
-      setActiveSection(bestSection);
+      setActiveSection(currentSection);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -62,6 +48,19 @@ export default function App() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToSection = (event, sectionId) => {
+    event.preventDefault();
+    const target = document.getElementById(sectionId);
+    if (!target) return;
+
+    const navbarHeight = navbarRef.current?.getBoundingClientRect().height || 0;
+    const extraGap = 16; // breathing room so content is not hidden under the navbar
+    const offset = navbarHeight + extraGap;
+    const targetTop = target.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({ top: Math.max(targetTop, 0), behavior: 'smooth' });
   };
 
   const bgColor = isDark ? '#25282A' : '#D9D9D6';
@@ -85,6 +84,7 @@ export default function App() {
     }}>
       <AppBar 
         position="fixed" 
+        ref={navbarRef}
         sx={{ 
           top: 20,
           left: '50%',
@@ -105,49 +105,84 @@ export default function App() {
         <Toolbar sx={{ gap: 2, padding: '8px 24px', justifyContent: 'center' }}>
           
           <Link 
-            href="#Title" 
+            href="#introduction" 
+            onClick={(e) => scrollToSection(e, 'introduction')}
             sx={{ 
-              color: activeSection === 'Title' ? linkHoverColor : navbarTextColor,
+              color: activeSection === 'introduction' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
               fontSize: '0.95rem',
               cursor: 'pointer',
               transition: 'color 0.3s ease',
               fontFamily: 'var(--font-serif)',
-              fontWeight: activeSection === 'Title' ? 700 : 600,
+              fontWeight: activeSection === 'introduction' ? 700 : 600,
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            Title
+            War or Genocide?
           </Link>
           <Link 
-            href="#chart1" 
+            href="#chapter1" 
+            onClick={(e) => scrollToSection(e, 'chapter1')}
             sx={{ 
-              color: activeSection === 'chart1' ? linkHoverColor : navbarTextColor,
+              color: activeSection === 'chapter1' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
               fontSize: '0.95rem',
               cursor: 'pointer',
               transition: 'color 0.3s ease',
               fontFamily: 'var(--font-serif)',
-              fontWeight: activeSection === 'chart1' ? 700 : 600,
+              fontWeight: activeSection === 'chapter1' ? 700 : 600,
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            Chart 1
+            Chapter 1
           </Link>
           <Link 
-            href="#insights" 
+            href="#chapter2" 
+            onClick={(e) => scrollToSection(e, 'chapter2')}
             sx={{ 
-              color: activeSection === 'insights' ? linkHoverColor : navbarTextColor,
+              color: activeSection === 'chapter2' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
               fontSize: '0.95rem',
               cursor: 'pointer',
               transition: 'color 0.3s ease',
               fontFamily: 'var(--font-serif)',
-              fontWeight: activeSection === 'insights' ? 700 : 600,
+              fontWeight: activeSection === 'chapter2' ? 700 : 600,
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            Insights
+            Chapter 2
+          </Link>
+          <Link 
+            href="#chapter3" 
+            onClick={(e) => scrollToSection(e, 'chapter3')}
+            sx={{ 
+              color: activeSection === 'chapter3' ? linkHoverColor : navbarTextColor,
+              textDecoration: 'none',
+              fontSize: '0.95rem',
+              cursor: 'pointer',
+              transition: 'color 0.3s ease',
+              fontFamily: 'var(--font-serif)',
+              fontWeight: activeSection === 'chapter3' ? 700 : 600,
+              '&:hover': { color: linkHoverColor, opacity: 1 }
+            }}
+          >
+            Chapter 3
+          </Link>
+          <Link 
+            href="#chapter4" 
+            onClick={(e) => scrollToSection(e, 'chapter4')}
+            sx={{ 
+              color: activeSection === 'chapter4' ? linkHoverColor : navbarTextColor,
+              textDecoration: 'none',
+              fontSize: '0.95rem',
+              cursor: 'pointer',
+              transition: 'color 0.3s ease',
+              fontFamily: 'var(--font-serif)',
+              fontWeight: activeSection === 'chapter4' ? 700 : 600,
+              '&:hover': { color: linkHoverColor, opacity: 1 }
+            }}
+          >
+            Chapter 4
           </Link>
           <IconButton
             onClick={toggleTheme}
@@ -180,7 +215,7 @@ export default function App() {
       <Box sx={{  transition: 'background-color 0.3s ease, color 0.3s ease' }}>
         {/* Title Section */}
         <Box 
-          id="Title" 
+          id="introduction" 
           sx={{ 
             minHeight: 'auto', 
             display: 'flex', 
@@ -190,7 +225,7 @@ export default function App() {
             padding: '30vh 4vw 20vh 4vw'
           }}
         >
-          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: '40%' }}>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' } }}>
             <Typography 
               variant="h2" 
               gutterBottom 
@@ -201,7 +236,7 @@ export default function App() {
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
               }}
             >
-              Title
+              War or Genocide?
             </Typography>
             <Typography 
               variant="body1" 
@@ -212,16 +247,16 @@ export default function App() {
                 fontWeight: 300
               }}
             >
-              Welcome to the Data Visualization Project. This page showcases interactive charts and visualizations
-              built with React, D3.js, and Material-UI. Navigate through the different sections to explore
-              various data visualization techniques and insights.
+              Introduzione con definizione di Guerra e Genocidio + spiegazione dataset usato e spiegazione del progetto.
+              probabilmente userò acled, our world in data e world population prospect dataset.
+              Allunghiamo un po' questo testo per avere un placeholder più realistico e vedere come si comporta il layout con più contenuto.
             </Typography>
           </Box>
         </Box>
 
         {/* Chart 1 Section */}
         <Box 
-          id="chart1" 
+          id="chapter1" 
           sx={{ 
             minHeight: 'auto', 
             display: 'flex', 
@@ -231,7 +266,7 @@ export default function App() {
             padding: '2vh 4vw 10vh 4vw'
           }}
         >
-          <Box sx={{ textAlign: 'center', width: '98%', maxWidth: '100%' }}>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' } }}>
             <Typography 
               variant="h2" 
               gutterBottom 
@@ -242,7 +277,27 @@ export default function App() {
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
               }}
             >
-              Chart 1
+              Events and fatalities over time
+            </Typography>
+            <Typography 
+              variant="body1" 
+              sx={{ 
+                fontSize: '1.1rem', 
+                lineHeight: 1.8, 
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 4,
+                marginLeft: 'auto',
+                marginRight: 'auto'
+              }}
+            >
+              In questa sezione mostrerò gli eventi e le morti per Palestina e Israele dal 2000 al 2025.
+              Il dataset usato sarà ACLED (agglomerated data-middle east).
+              L'obiettivo è vedere se ci sono differenze significative tra i due paesi in termini di eventi e morti.
+              Verrà usato probabilmente un line chart con due linee (una per paese) e punti dati evidenziati per le fatalities.
+              Verrà usato un ridge plot per mostrare la distribuzione degli eventi nel tempo, con possibilità di filtrare per tipo di evento (battaglia, violenza politica, ecc) da capire se con uno small multiples o con un menù a tendina.
+              Questa prima sezione con due visualizzazioni serve per dare un contesto storico al conflitto.
+              Numero Visualizzazioni: 2 (line chart + ridge plot).
             </Typography>
             <Box sx={{ width: '100%' }}>
               <MyChart />
@@ -250,9 +305,9 @@ export default function App() {
           </Box>
         </Box>
 
-        {/* Insights Section */}
+        {/* Chapter 2 Section */}
         <Box 
-          id="insights" 
+          id="chapter2" 
           sx={{ 
             minHeight: 'auto', 
             display: 'flex', 
@@ -262,7 +317,7 @@ export default function App() {
             padding: '2vh 4vw 12vh 4vw'
           }}
         >
-          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: '40%' }}>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' } }}>
             <Typography 
               variant="h2" 
               gutterBottom 
@@ -273,7 +328,7 @@ export default function App() {
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
               }}
             >
-              Insights
+              Demographics and fatalities or mortality rate over time
             </Typography>
             <Typography 
               variant="body1" 
@@ -284,11 +339,110 @@ export default function App() {
                 fontWeight: 300
               }}
             >
-              Data visualization is a powerful tool for understanding complex information. By presenting data in visual formats, 
-              we can quickly identify patterns, trends, and outliers. This project demonstrates various visualization techniques 
-              and best practices for creating engaging and informative charts. Explore the different sections to see how data can 
-              be transformed into meaningful insights.
+              Qua mostrerò l'andamento demografico di Palestina e Israele nel tempo (2000-2025) e lo confronterò con il tasso di mortalità.
+              Per farlo userò il dataset World Population Prospects della UN.
+              I grafici usati saranno due pyramid charts per mostrare la distribuzione della popolazione per età e sesso in due anni diversi (2000 e 2025), o un boxplot per mostrare la distribuzione della popolazione nel tempo.
+              Aggiungerò la possibilità di scegliere tra dataset (popolazione totale, tasso di mortalità, morti totali) e la possibilità di scegliere l'anno di riferimento per i pyramid charts con un animazione tra gli anni selezionati.
+              i due paesi saranno mostrati affiancati per facilitare il confronto.
+              Lo scopo di questo capitolo è per mostrare le differenze tra i due popoli in termini di demografia e tasso di mortalità, per capire se ci sono elementi che possano far pensare a un genocidio.
+              Numero Visualizzazioni: 1 pyramid chart (o boxplot) con scelta del dataset e dell'anno.
             </Typography>
+            <Box sx={{ width: '100%' }}>
+              <MyChart />
+            </Box>
+          </Box>
+        </Box>
+
+        {/* Chapter 3 Section */}
+        <Box 
+          id="chapter3" 
+          sx={{ 
+            minHeight: 'auto', 
+            display: 'flex', 
+            alignItems: 'center',
+            justifyContent: 'center',
+            scrollMarginTop: '8vh',
+            padding: '2vh 4vw 12vh 4vw'
+          }}
+        >
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' } }}>
+            <Typography 
+              variant="h2" 
+              gutterBottom 
+              sx={{ 
+                color: 'var(--color-unige-light-blue)', 
+                fontWeight: 700,
+                marginBottom: 3,
+                fontSize: { xs: '2.5rem', md: '3.5rem' }
+              }}
+            >
+              Types of events
+            </Typography>
+            <Typography 
+              variant="body1" 
+              sx={{ 
+                fontSize: '1.1rem', 
+                lineHeight: 1.8, 
+                color: textColor,
+                fontWeight: 300
+              }}
+            >
+              Non sono sicuro di cosa mettere qui, vorrei mostrare i tipi di eventi che accadono nei due paesi e il numero di essi, ma non vorrei ripetere il primo capitolo.
+              Un Alluvional o un grouped bar chart potrebbe andare bene per mostrare il numero di eventi per tipo (battaglia, violenza politica, ecc) per i due paesi.
+              Potrebbe essere interessante una mappa, ma non penso di avere dati geografici sufficienti per farlo.
+              Lo scopo di questa sezione è di mostrare le differenze dei tipi di eventi che accadono nei due paesi, per vedere se la violenza è "equamente" distribuita o se c'è un tipo di evento predominante in uno dei due paesi.
+              Numero Visualizzazioni: 1 alluvional o grouped bar chart.
+            </Typography>
+            <Box sx={{ width: '100%' }}>
+              <MyChart />
+            </Box>
+          </Box>
+        </Box>
+
+        {/* Chapter 4 Section */}
+        <Box 
+          id="chapter4" 
+          sx={{ 
+            minHeight: 'auto', 
+            display: 'flex', 
+            alignItems: 'center',
+            justifyContent: 'center',
+            scrollMarginTop: '8vh',
+            padding: '2vh 4vw 12vh 4vw'
+          }}
+        >
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' } }}>
+            <Typography 
+              variant="h2" 
+              gutterBottom 
+              sx={{ 
+                color: 'var(--color-unige-blue)', 
+                fontWeight: 700,
+                marginBottom: 3,
+                fontSize: { xs: '2.5rem', md: '3.5rem' }
+              }}
+            >
+              Life during the conflict
+            </Typography>
+            <Typography 
+              variant="body1" 
+              sx={{ 
+                fontSize: '1.1rem', 
+                lineHeight: 1.8, 
+                color: textColor,
+                fontWeight: 300
+              }}
+            >
+              In questa sezione vorrei mostrare la qualità di vita nei due paesi nel periodo di tempo considerato (2000-2025).
+              Potrei usare dati sull'accesso a servizi essenziali (acqua, elettricità, sanità) o dati economici (PIL pro capite, tasso di disoccupazione).
+              Il dataset di Our World in Data potrebbe essere utile per questo scopo, ma i dati trovati finora sono fino al 2023.
+              Il grafico usato non è ancora stato scelto ma potrebbe essere uno small multiples di barchart o line chart.
+              Lo scopo di questa sezione è di mostrare come la qualità di vita sia cambiata nei due paesi durante il conflitto, per vedere se ci sono differenze significative tra i due paesi.
+              Numero Visualizzazioni: 1 small multiples di barchart o line chart.
+            </Typography>
+            <Box sx={{ width: '100%' }}>
+              <MyChart />
+            </Box>
           </Box>
         </Box>
       </Box>
@@ -306,11 +460,45 @@ export default function App() {
         }}
       >
         <Typography variant="body2" sx={{ fontSize: '0.95rem', mb: 1 }}>
-          © 2025 Data Visualization Project - University of Genoa
+          A.Y. 2025-2026 Data Visualization Project - Università di Genova
         </Typography>
-        <Typography variant="body2" sx={{ fontSize: '0.85rem', opacity: 0.8 }}>
-          Built with React, D3.js, and Material-UI
+        <Typography variant="body2" sx={{ fontSize: '0.85rem', mb: 1 }}>
+          Created by Matteo Ferrari
         </Typography>
+      
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 2 }}>
+          <Link 
+            href="https://www.linkedin.com/in/mfmatteoferrari/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            sx={{ 
+              color: navbarTextColor,
+              textDecoration: 'none',
+              fontSize: '0.85rem',
+              transition: 'color 0.3s ease',
+              '&:hover': { color: linkHoverColor }
+            }}
+          >
+            LinkedIn
+          </Link>
+          <Typography variant="body2" sx={{ fontSize: '0.85rem', opacity: 0.5 }}>
+            -
+          </Typography>
+          <Link 
+            href="https://github.com/matteogrifone22" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            sx={{ 
+              color: navbarTextColor,
+              textDecoration: 'none',
+              fontSize: '0.85rem',
+              transition: 'color 0.3s ease',
+              '&:hover': { color: linkHoverColor }
+            }}
+          >
+            GitHub
+          </Link>
+        </Box>
       </Box>
 
       {/* Scroll to Top Button */}
