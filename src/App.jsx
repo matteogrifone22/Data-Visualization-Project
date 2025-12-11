@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab } from '@mui/material';
 import { DarkMode, LightMode } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import MyChart from './components/MyChart';
-import gazaMapSvg from './json/GazaStrip_MunicipalBoundaries.svg';
 import gaza1Light from './json/gaza1Light.svg';
 import gaza1Dark from './json/gaza1Dark.svg';
 import gaza2Light from './json/gaza2Light.svg';
@@ -14,13 +13,51 @@ import gaza4Light from './json/gaza4Light.svg';
 import gaza4Dark from './json/gaza4Dark.svg';
 import gaza5Light from './json/gaza5Light.svg';
 import gaza5Dark from './json/gaza5Dark.svg';
+import { rgb } from 'd3';
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeSection, setActiveSection] = useState('introduction');
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [preloadedImages, setPreloadedImages] = useState(new Set());
   const navbarRef = useRef(null);
+
+  // Map of all SVG resources
+  const svgMap = useMemo(() => ({
+    introduction: { light: gaza1Light, dark: gaza1Dark },
+    chapter1: { light: gaza2Light, dark: gaza2Dark },
+    chapter2: { light: gaza3Light, dark: gaza3Dark },
+    chapter3: { light: gaza4Light, dark: gaza4Dark },
+    chapter4: { light: gaza5Light, dark: gaza5Dark }
+  }), []);
+
+  // Preload images asynchronously
+  useEffect(() => {
+    const preloadImage = (src) => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(src);
+        img.onerror = reject;
+        img.src = src;
+      });
+    };
+
+    // Preload all SVG images in the background
+    const allImages = Object.values(svgMap).flatMap(section => [section.light, section.dark]);
+    
+    Promise.all(allImages.map(src => preloadImage(src)))
+      .then(loaded => {
+        setPreloadedImages(new Set(loaded));
+      })
+      .catch(err => console.warn('Some images failed to preload:', err));
+  }, [svgMap]);
+
+  // Get current SVG based on active section and theme
+  const currentGazaSvg = useMemo(() => {
+    const section = svgMap[activeSection] || svgMap.introduction;
+    return isDark ? section.dark : section.light;
+  }, [activeSection, isDark, svgMap]);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -104,125 +141,56 @@ export default function App() {
       overflowX: 'hidden',
       position: 'relative'
     }}>
-      {/* Fixed Gaza Map backgrounds on left and right */}
+      {/* Gaza Map overlay on left side - changes based on activeSection and theme */}
       <Box
         sx={{
           position: 'fixed',
           left: 0,
           top: 0,
-          width: `${gazaMap_width_left}px`,
+          width: { xs: '250px', sm: '350px', md: '450px', lg: `${gazaMap_width_left}px` },
           height: '100vh',
-          backgroundImage: `url(${isDark ? gaza1Dark : gaza1Light})`,
+          backgroundImage: `url(${currentGazaSvg})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'left center',
-          opacity: 1,
+          opacity: { xs: 0.3, md: 0.5, lg: 1 },
           pointerEvents: 'none',
           zIndex: 0,
-          display: { xs: 'none', lg: 'block' },
-          transform: 'rotate(-45deg)'
+          display: { xs: 'none', md: 'block' },
+          transform: 'rotate(-45deg)',
+          transition: 'background-image 0.3s ease'
         }}
       />
-      {/* Gaza overlay on left side - shows based on activeSection */}
+      {/* Map label - only visible in first section */}
       {activeSection === 'introduction' && (
         <Box
           sx={{
             position: 'fixed',
-            left: 0,
-            top: 0,
-            width: `${gazaMap_width_left}px`,
-            height: '100vh',
-            backgroundImage: `url(${isDark ? gaza1Dark : gaza1Light})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'left center',
-            opacity: 1,
+            left: -20,
+            top: '90vh',
+            width: { xs: '250px', sm: '350px', md: '450px', lg: '500px' },
+            display: { xs: 'none', md: 'flex' },
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 100,
             pointerEvents: 'none',
-            zIndex: 1,
-            display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-45deg)'
+            padding: '20px',
+            animation: activeSection === 'introduction' ? 'fadeIn 0.5s ease-in' : 'fadeOut 0.5s ease-out'
           }}
-        />
-      )}
-      {activeSection === 'chapter1' && (
-        <Box
-          sx={{
-            position: 'fixed',
-            left: 0,
-            top: 0,
-            width: `${gazaMap_width_left}px`,
-            height: '100vh',
-            backgroundImage: `url(${isDark ? gaza2Dark : gaza2Light})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'left center',
-            opacity: 1,
-            pointerEvents: 'none',
-            zIndex: 1,
-            display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-45deg)'
-          }}
-        />
-      )}
-      {activeSection === 'chapter2' && (
-        <Box
-          sx={{
-            position: 'fixed',
-            left: 0,
-            top: 0,
-            width: `${gazaMap_width_left}px`,
-            height: '100vh',
-            backgroundImage: `url(${isDark ? gaza3Dark : gaza3Light})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'left center',
-            opacity: 1,
-            pointerEvents: 'none',
-            zIndex: 1,
-            display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-45deg)'
-          }}
-        />
-      )}
-      {activeSection === 'chapter3' && (
-        <Box
-          sx={{
-            position: 'fixed',
-            left: 0,
-            top: 0,
-            width: `${gazaMap_width_left}px`,
-            height: '100vh',
-            backgroundImage: `url(${isDark ? gaza4Dark : gaza4Light})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'left center',
-            opacity: 1,
-            pointerEvents: 'none',
-            zIndex: 1,
-            display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-45deg)'
-          }}
-        />
-      )}
-      {activeSection === 'chapter4' && (
-        <Box
-          sx={{
-            position: 'fixed',
-            left: 0,
-            top: 0,
-            width: `${gazaMap_width_left}px`,
-            height: '100vh',
-            backgroundImage: `url(${isDark ? gaza5Dark : gaza5Light})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'left center',
-            opacity: 1,
-            pointerEvents: 'none',
-            zIndex: 1,
-            display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-45deg)'
-          }}
-        />
+        >
+          <Typography
+            sx={{
+              fontSize: '0.6rem',
+              color: textColor,
+              fontStyle: 'italic',
+              fontWeight: 500,
+              lineHeight: 1.5,
+              textAlign: 'center'
+            }}
+          >
+            This map shows the progress of destruction caused by Israel
+          </Typography>
+        </Box>
       )}
       <AppBar 
         position="fixed" 
@@ -622,13 +590,11 @@ export default function App() {
         component="footer"
         sx={{ 
           position: 'relative',
-          zIndex: 1000,
-          backgroundColor: bgColor,
+          backgroundColor: rgb(0, 0, 0, 0),
           opacity: 1,
           color: navbarTextColor,
           padding: '12vh 5vw 6vh 5vw',
           textAlign: 'center',
-          boxShadow: '0 -8px 24px rgba(0, 0, 0, 0.3)',
           transition: 'color 0.3s ease, box-shadow 0.3s ease'
         }}
       >
