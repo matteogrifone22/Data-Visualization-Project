@@ -4,11 +4,16 @@ import { DarkMode, LightMode } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import MyChart from './components/MyChart';
 import gazaMapSvg from './json/GazaStrip_MunicipalBoundaries.svg';
-import gaza1Svg from './json/gaza1.svg';
-import gaza2Svg from './json/gaza2.svg';
-import gaza3Svg from './json/gaza3.svg';
-import gaza4Svg from './json/gaza4.svg';
-import gaza5Svg from './json/gaza6.svg';
+import gaza1Light from './json/gaza1Light.svg';
+import gaza1Dark from './json/gaza1Dark.svg';
+import gaza2Light from './json/gaza2Light.svg';
+import gaza2Dark from './json/gaza2Dark.svg';
+import gaza3Light from './json/gaza3Light.svg';
+import gaza3Dark from './json/gaza3Dark.svg';
+import gaza4Light from './json/gaza4Light.svg';
+import gaza4Dark from './json/gaza4Dark.svg';
+import gaza5Light from './json/gaza5Light.svg';
+import gaza5Dark from './json/gaza5Dark.svg';
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
@@ -82,7 +87,8 @@ export default function App() {
   const navbarShadow = '0 8px 24px rgba(0, 0, 0, 0.5)';
   const navbarBgColor = isDark ? 'rgba(37, 40, 42, 0.85)' : 'rgba(217, 217, 214, 0.85)';
 
-  const gazaMap_width = 300;
+  const gazaMap_width_left = 500;
+  const gazaMap_width_right = 300;
   return (
 
 
@@ -104,9 +110,9 @@ export default function App() {
           position: 'fixed',
           left: 0,
           top: 0,
-          width: `${gazaMap_width}px`,
+          width: `${gazaMap_width_left}px`,
           height: '100vh',
-          backgroundImage: `url(${gazaMapSvg})`,
+          backgroundImage: `url(${isDark ? gaza1Dark : gaza1Light})`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'left center',
@@ -114,7 +120,7 @@ export default function App() {
           pointerEvents: 'none',
           zIndex: 0,
           display: { xs: 'none', lg: 'block' },
-          transform: 'rotate(-20deg)'
+          transform: 'rotate(-45deg)'
         }}
       />
       {/* Gaza overlay on left side - shows based on activeSection */}
@@ -124,9 +130,9 @@ export default function App() {
             position: 'fixed',
             left: 0,
             top: 0,
-            width: `${gazaMap_width}px`,
+            width: `${gazaMap_width_left}px`,
             height: '100vh',
-            backgroundImage: `url(${gaza1Svg})`,
+            backgroundImage: `url(${isDark ? gaza1Dark : gaza1Light})`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'left center',
@@ -134,7 +140,7 @@ export default function App() {
             pointerEvents: 'none',
             zIndex: 1,
             display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-20deg)'
+            transform: 'rotate(-45deg)'
           }}
         />
       )}
@@ -144,9 +150,9 @@ export default function App() {
             position: 'fixed',
             left: 0,
             top: 0,
-            width: `${gazaMap_width}px`,
+            width: `${gazaMap_width_left}px`,
             height: '100vh',
-            backgroundImage: `url(${gaza2Svg})`,
+            backgroundImage: `url(${isDark ? gaza2Dark : gaza2Light})`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'left center',
@@ -154,7 +160,7 @@ export default function App() {
             pointerEvents: 'none',
             zIndex: 1,
             display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-20deg)'
+            transform: 'rotate(-45deg)'
           }}
         />
       )}
@@ -164,9 +170,9 @@ export default function App() {
             position: 'fixed',
             left: 0,
             top: 0,
-            width: `${gazaMap_width}px`,
+            width: `${gazaMap_width_left}px`,
             height: '100vh',
-            backgroundImage: `url(${gaza3Svg})`,
+            backgroundImage: `url(${isDark ? gaza3Dark : gaza3Light})`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'left center',
@@ -174,7 +180,7 @@ export default function App() {
             pointerEvents: 'none',
             zIndex: 1,
             display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-20deg)'
+            transform: 'rotate(-45deg)'
           }}
         />
       )}
@@ -184,9 +190,9 @@ export default function App() {
             position: 'fixed',
             left: 0,
             top: 0,
-            width: `${gazaMap_width}px`,
+            width: `${gazaMap_width_left}px`,
             height: '100vh',
-            backgroundImage: `url(${gaza4Svg})`,
+            backgroundImage: `url(${isDark ? gaza4Dark : gaza4Light})`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'left center',
@@ -194,7 +200,7 @@ export default function App() {
             pointerEvents: 'none',
             zIndex: 1,
             display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-20deg)'
+            transform: 'rotate(-45deg)'
           }}
         />
       )}
@@ -204,9 +210,9 @@ export default function App() {
             position: 'fixed',
             left: 0,
             top: 0,
-            width: `${gazaMap_width}px`,
+            width: `${gazaMap_width_left}px`,
             height: '100vh',
-            backgroundImage: `url(${gaza5Svg})`,
+            backgroundImage: `url(${isDark ? gaza5Dark : gaza5Light})`,
             backgroundSize: 'contain',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'left center',
@@ -214,126 +220,7 @@ export default function App() {
             pointerEvents: 'none',
             zIndex: 1,
             display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-20deg)'
-          }}
-        />
-      )}
-      <Box
-        sx={{
-          position: 'fixed',
-          right: 0,
-          top: 0,
-          width: `${gazaMap_width}px`,
-          height: '100vh',
-          backgroundImage: `url(${gazaMapSvg})`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'right center',
-          opacity: 1,
-          pointerEvents: 'none',
-          zIndex: 0,
-          display: { xs: 'none', lg: 'block' },
-          transform: 'rotate(-20deg)'
-        }}
-      />
-      {/* Gaza overlay on right side - shows based on activeSection */}
-      {activeSection === 'introduction' && (
-        <Box
-          sx={{
-            position: 'fixed',
-            right: 0,
-            top: 0,
-            width: `${gazaMap_width}px`,
-            height: '100vh',
-            backgroundImage: `url(${gaza1Svg})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right center',
-            opacity: 1,
-            pointerEvents: 'none',
-            zIndex: 1,
-            display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-20deg)'
-          }}
-        />
-      )}
-      {activeSection === 'chapter1' && (
-        <Box
-          sx={{
-            position: 'fixed',
-            right: 0,
-            top: 0,
-            width: `${gazaMap_width}px`,
-            height: '100vh',
-            backgroundImage: `url(${gaza2Svg})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right center',
-            opacity: 1,
-            pointerEvents: 'none',
-            zIndex: 1,
-            display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-20deg)'
-          }}
-        />
-      )}
-      {activeSection === 'chapter2' && (
-        <Box
-          sx={{
-            position: 'fixed',
-            right: 0,
-            top: 0,
-            width: `${gazaMap_width}px`,
-            height: '100vh',
-            backgroundImage: `url(${gaza3Svg})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right center',
-            opacity: 1,
-            pointerEvents: 'none',
-            zIndex: 1,
-            display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-20deg)'
-          }}
-        />
-      )}
-      {activeSection === 'chapter3' && (
-        <Box
-          sx={{
-            position: 'fixed',
-            right: 0,
-            top: 0,
-            width: `${gazaMap_width}px`,
-            height: '100vh',
-            backgroundImage: `url(${gaza4Svg})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right center',
-            opacity: 1,
-            pointerEvents: 'none',
-            zIndex: 1,
-            display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-20deg)'
-          }}
-        />
-      )}
-      {activeSection === 'chapter4' && (
-        <Box
-          sx={{
-            position: 'fixed',
-            right: 0,
-            top: 0,
-            width: `${gazaMap_width}px`,
-            height: '100vh',
-            backgroundImage: `url(${gaza5Svg})`,
-            backgroundSize: 'contain',
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'right center',
-            opacity: 1,
-            pointerEvents: 'none',
-            zIndex: 1,
-            display: { xs: 'none', lg: 'block' },
-            transform: 'rotate(-20deg)'
+            transform: 'rotate(-45deg)'
           }}
         />
       )}
