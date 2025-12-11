@@ -1,0 +1,15 @@
+{
+    "created": "2019-07-18T09:17:17.056126",
+    "description": "Gaza Strip Municipal Boundaries",
+    "format": "SHP",
+    "download_url": "https://data.humdata.org/dataset/6b79f7ab-9e13-48e5-9f58-dc45b4a9222c/resource/f131956a-8cc6-424c-a831-5b8b0d6956b9/download/gazastrip_municipalboundaries.zip",
+    "id": "f131956a-8cc6-424c-a831-5b8b0d6956b9",
+    "last_modified": "2019-07-18T09:17:16.635547",
+    "metadata_modified": "2025-04-08T18:37:08.587210",
+    "microdata": false,
+    "dataset_id": "6b79f7ab-9e13-48e5-9f58-dc45b4a9222c",
+    "resource_type": "file.upload",
+    "name": "GazaStrip_MunicipalBoundaries.zip",
+    "mimetype": "application/zip",
+    "size": "66.2K"
+}

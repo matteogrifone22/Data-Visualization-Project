@@ -3,11 +3,18 @@ import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab } from '@mui/ma
 import { DarkMode, LightMode } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import MyChart from './components/MyChart';
+import gazaMapSvg from './json/GazaStrip_MunicipalBoundaries.svg';
+import gaza1Svg from './json/gaza1.svg';
+import gaza2Svg from './json/gaza2.svg';
+import gaza3Svg from './json/gaza3.svg';
+import gaza4Svg from './json/gaza4.svg';
+import gaza5Svg from './json/gaza6.svg';
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeSection, setActiveSection] = useState('introduction');
+  const [scrollProgress, setScrollProgress] = useState(0);
   const navbarRef = useRef(null);
 
   const toggleTheme = () => {
@@ -17,6 +24,11 @@ export default function App() {
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
+
+      // Calculate scroll progress (0 to 1)
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = Math.min(window.scrollY / maxScroll, 1);
+      setScrollProgress(progress);
 
       // Determine active section based on which section is most visible
       const sections = ['introduction', 'chapter1', 'chapter2', 'chapter3', 'chapter4'];
@@ -70,7 +82,11 @@ export default function App() {
   const navbarShadow = '0 8px 24px rgba(0, 0, 0, 0.5)';
   const navbarBgColor = isDark ? 'rgba(37, 40, 42, 0.85)' : 'rgba(217, 217, 214, 0.85)';
 
+  const gazaMap_width = 300;
   return (
+
+
+
     <Box sx={{ 
       backgroundColor: bgColor, 
       color: textColor, 
@@ -82,6 +98,245 @@ export default function App() {
       overflowX: 'hidden',
       position: 'relative'
     }}>
+      {/* Fixed Gaza Map backgrounds on left and right */}
+      <Box
+        sx={{
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          width: `${gazaMap_width}px`,
+          height: '100vh',
+          backgroundImage: `url(${gazaMapSvg})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'left center',
+          opacity: 1,
+          pointerEvents: 'none',
+          zIndex: 0,
+          display: { xs: 'none', lg: 'block' },
+          transform: 'rotate(-20deg)'
+        }}
+      />
+      {/* Gaza overlay on left side - shows based on activeSection */}
+      {activeSection === 'introduction' && (
+        <Box
+          sx={{
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            width: `${gazaMap_width}px`,
+            height: '100vh',
+            backgroundImage: `url(${gaza1Svg})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'left center',
+            opacity: 1,
+            pointerEvents: 'none',
+            zIndex: 1,
+            display: { xs: 'none', lg: 'block' },
+            transform: 'rotate(-20deg)'
+          }}
+        />
+      )}
+      {activeSection === 'chapter1' && (
+        <Box
+          sx={{
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            width: `${gazaMap_width}px`,
+            height: '100vh',
+            backgroundImage: `url(${gaza2Svg})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'left center',
+            opacity: 1,
+            pointerEvents: 'none',
+            zIndex: 1,
+            display: { xs: 'none', lg: 'block' },
+            transform: 'rotate(-20deg)'
+          }}
+        />
+      )}
+      {activeSection === 'chapter2' && (
+        <Box
+          sx={{
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            width: `${gazaMap_width}px`,
+            height: '100vh',
+            backgroundImage: `url(${gaza3Svg})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'left center',
+            opacity: 1,
+            pointerEvents: 'none',
+            zIndex: 1,
+            display: { xs: 'none', lg: 'block' },
+            transform: 'rotate(-20deg)'
+          }}
+        />
+      )}
+      {activeSection === 'chapter3' && (
+        <Box
+          sx={{
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            width: `${gazaMap_width}px`,
+            height: '100vh',
+            backgroundImage: `url(${gaza4Svg})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'left center',
+            opacity: 1,
+            pointerEvents: 'none',
+            zIndex: 1,
+            display: { xs: 'none', lg: 'block' },
+            transform: 'rotate(-20deg)'
+          }}
+        />
+      )}
+      {activeSection === 'chapter4' && (
+        <Box
+          sx={{
+            position: 'fixed',
+            left: 0,
+            top: 0,
+            width: `${gazaMap_width}px`,
+            height: '100vh',
+            backgroundImage: `url(${gaza5Svg})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'left center',
+            opacity: 1,
+            pointerEvents: 'none',
+            zIndex: 1,
+            display: { xs: 'none', lg: 'block' },
+            transform: 'rotate(-20deg)'
+          }}
+        />
+      )}
+      <Box
+        sx={{
+          position: 'fixed',
+          right: 0,
+          top: 0,
+          width: `${gazaMap_width}px`,
+          height: '100vh',
+          backgroundImage: `url(${gazaMapSvg})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'right center',
+          opacity: 1,
+          pointerEvents: 'none',
+          zIndex: 0,
+          display: { xs: 'none', lg: 'block' },
+          transform: 'rotate(-20deg)'
+        }}
+      />
+      {/* Gaza overlay on right side - shows based on activeSection */}
+      {activeSection === 'introduction' && (
+        <Box
+          sx={{
+            position: 'fixed',
+            right: 0,
+            top: 0,
+            width: `${gazaMap_width}px`,
+            height: '100vh',
+            backgroundImage: `url(${gaza1Svg})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'right center',
+            opacity: 1,
+            pointerEvents: 'none',
+            zIndex: 1,
+            display: { xs: 'none', lg: 'block' },
+            transform: 'rotate(-20deg)'
+          }}
+        />
+      )}
+      {activeSection === 'chapter1' && (
+        <Box
+          sx={{
+            position: 'fixed',
+            right: 0,
+            top: 0,
+            width: `${gazaMap_width}px`,
+            height: '100vh',
+            backgroundImage: `url(${gaza2Svg})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'right center',
+            opacity: 1,
+            pointerEvents: 'none',
+            zIndex: 1,
+            display: { xs: 'none', lg: 'block' },
+            transform: 'rotate(-20deg)'
+          }}
+        />
+      )}
+      {activeSection === 'chapter2' && (
+        <Box
+          sx={{
+            position: 'fixed',
+            right: 0,
+            top: 0,
+            width: `${gazaMap_width}px`,
+            height: '100vh',
+            backgroundImage: `url(${gaza3Svg})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'right center',
+            opacity: 1,
+            pointerEvents: 'none',
+            zIndex: 1,
+            display: { xs: 'none', lg: 'block' },
+            transform: 'rotate(-20deg)'
+          }}
+        />
+      )}
+      {activeSection === 'chapter3' && (
+        <Box
+          sx={{
+            position: 'fixed',
+            right: 0,
+            top: 0,
+            width: `${gazaMap_width}px`,
+            height: '100vh',
+            backgroundImage: `url(${gaza4Svg})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'right center',
+            opacity: 1,
+            pointerEvents: 'none',
+            zIndex: 1,
+            display: { xs: 'none', lg: 'block' },
+            transform: 'rotate(-20deg)'
+          }}
+        />
+      )}
+      {activeSection === 'chapter4' && (
+        <Box
+          sx={{
+            position: 'fixed',
+            right: 0,
+            top: 0,
+            width: `${gazaMap_width}px`,
+            height: '100vh',
+            backgroundImage: `url(${gaza5Svg})`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'right center',
+            opacity: 1,
+            pointerEvents: 'none',
+            zIndex: 1,
+            display: { xs: 'none', lg: 'block' },
+            transform: 'rotate(-20deg)'
+          }}
+        />
+      )}
       <AppBar 
         position="fixed" 
         ref={navbarRef}
@@ -242,12 +497,12 @@ export default function App() {
         <Box 
           id="introduction" 
           sx={{ 
-            minHeight: 'auto', 
+            minHeight: 'auto',
             display: 'flex', 
             alignItems: 'center',
             justifyContent: 'center',
             scrollMarginTop: '8vh',
-            padding: '30vh 4vw 20vh 4vw'
+            padding: '16vh 4vw 10vh 4vw'
           }}
         >
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' } }}>
@@ -255,9 +510,9 @@ export default function App() {
               variant="h2" 
               gutterBottom 
               sx={{ 
-                color: 'var(--color-unige-blue)', 
+                color: textColor, 
                 fontWeight: 700,
-                marginBottom: 3,
+                marginBottom: 4,
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
               }}
             >
@@ -269,13 +524,16 @@ export default function App() {
                 fontSize: '1.1rem', 
                 lineHeight: 1.8, 
                 color: textColor,
-                fontWeight: 300
+                fontWeight: 300,
+                marginBottom: 4,
+                marginLeft: 'auto',
+                marginRight: 'auto'
               }}
             >
               Introduzione con definizione di Guerra e Genocidio + spiegazione dataset usato e spiegazione del progetto.
               probabilmente userò acled, our world in data e world population prospect dataset.
               Allunghiamo un po' questo testo per avere un placeholder più realistico e vedere come si comporta il layout con più contenuto.
-            </Typography>
+              </Typography>
           </Box>
         </Box>
 
@@ -296,7 +554,7 @@ export default function App() {
               variant="h2" 
               gutterBottom 
               sx={{ 
-                color: 'var(--color-unige-light-blue)', 
+                color: textColor, 
                 fontWeight: 700,
                 marginBottom: 4,
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
@@ -347,7 +605,7 @@ export default function App() {
               variant="h2" 
               gutterBottom 
               sx={{ 
-                color: 'var(--color-unige-blue)', 
+                color: textColor, 
                 fontWeight: 700,
                 marginBottom: 3,
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
@@ -395,7 +653,7 @@ export default function App() {
               variant="h2" 
               gutterBottom 
               sx={{ 
-                color: 'var(--color-unige-light-blue)', 
+                color: textColor, 
                 fontWeight: 700,
                 marginBottom: 3,
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
@@ -441,7 +699,7 @@ export default function App() {
               variant="h2" 
               gutterBottom 
               sx={{ 
-                color: 'var(--color-unige-blue)', 
+                color: textColor, 
                 fontWeight: 700,
                 marginBottom: 3,
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
@@ -476,7 +734,10 @@ export default function App() {
       <Box 
         component="footer"
         sx={{ 
-          backgroundColor: 'var(--color-unige-blue)',
+          position: 'relative',
+          zIndex: 1000,
+          backgroundColor: bgColor,
+          opacity: 1,
           color: navbarTextColor,
           padding: '12vh 5vw 6vh 5vw',
           textAlign: 'center',

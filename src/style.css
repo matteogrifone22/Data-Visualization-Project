@@ -49,6 +49,14 @@
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
+  /* Core palette used in inline styles (e.g., footer background) */
+  --color-unige-blue: #002677;
+  --color-unige-yellow: #F4DA40;
+  --color-unige-red: #C8102E;
+  --color-unige-light-blue: #199BFC;
+  --color-unige-dark: #25282A;
+  --color-unige-gray: #D9D9D6;
+
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
