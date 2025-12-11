@@ -13,6 +13,9 @@ import gaza4Light from './json/gaza4Light.svg';
 import gaza4Dark from './json/gaza4Dark.svg';
 import gaza5Light from './json/gaza5Light.svg';
 import gaza5Dark from './json/gaza5Dark.svg';
+import israelLight from './json/israelLight.svg';
+import israelDark from './json/israelDark.svg';
+
 import { rgb } from 'd3';
 
 export default function App() {
@@ -58,6 +61,11 @@ export default function App() {
     const section = svgMap[activeSection] || svgMap.introduction;
     return isDark ? section.dark : section.light;
   }, [activeSection, isDark, svgMap]);
+
+  // Get current Israel SVG based on theme
+  const currentIsraelSvg = useMemo(() => {
+    return isDark ? israelDark : israelLight;
+  }, [isDark]);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -161,7 +169,27 @@ export default function App() {
           transition: 'background-image 0.3s ease'
         }}
       />
-      {/* Map label - only visible in first section */}
+      {/* Israel Map overlay on right side */}
+      <Box
+        sx={{
+          position: 'fixed',
+          right: 100,
+          top: 0,
+          width: { xs: '250px', sm: '350px', md: '450px', lg: `${gazaMap_width_left/2.2}px` },
+          height: '100vh',
+          backgroundImage: `url(${currentIsraelSvg})`,
+          backgroundSize: 'contain',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'right center',
+          opacity: { xs: 0.3, md: 0.5, lg: 1 },
+          pointerEvents: 'none',
+          zIndex: 0,
+          display: { xs: 'none', md: 'block' },
+          transform: 'rotate(0deg)',
+          transition: 'background-image 0.3s ease'
+        }}
+      />
+      {/* Gaza Map label - only visible in first section */}
       {activeSection === 'introduction' && (
         <Box
           sx={{
@@ -175,12 +203,11 @@ export default function App() {
             zIndex: 100,
             pointerEvents: 'none',
             padding: '20px',
-            animation: activeSection === 'introduction' ? 'fadeIn 0.5s ease-in' : 'fadeOut 0.5s ease-out'
           }}
         >
           <Typography
             sx={{
-              fontSize: '0.6rem',
+               fontSize: '0.6rem',
               color: textColor,
               fontStyle: 'italic',
               fontWeight: 500,
@@ -188,7 +215,37 @@ export default function App() {
               textAlign: 'center'
             }}
           >
-            This map shows the progress of destruction caused by Israel
+              This map shows the increasing destruction in Gaza caused by Israel
+            </Typography>
+        </Box>
+      )}
+      {/* Israel Map label - only visible in first section */}
+      {activeSection === 'introduction' && (
+        <Box
+          sx={{
+            position: 'fixed',
+            right: -40,
+            top: '90vh',
+            width: { xs: '250px', sm: '350px', md: '450px', lg: '500px' },
+            display: { xs: 'none', md: 'flex' },
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 100,
+            pointerEvents: 'none',
+            padding: '20px',
+          }}
+        >
+          <Typography
+            sx={{
+               fontSize: '0.6rem',
+              color: textColor,
+              fontStyle: 'italic',
+              fontWeight: 500,
+              lineHeight: 1.5,
+              textAlign: 'center'
+            }}
+          >
+            This map shows the increasing destruction in Israel caused by the State of Palestine
           </Typography>
         </Box>
       )}

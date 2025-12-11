@@ -1,0 +1,15 @@
+{
+    "created": "2023-07-10T18:14:33.777945",
+    "description": "Release 2023-06-28",
+    "format": "Geopackage",
+    "download_url": "https://geodata-eu-central-1-kontur-public.s3.amazonaws.com/kontur_datasets/kontur_topology_boundaries_IL_20230628.gpkg.gz",
+    "id": "c8ad6f80-1fe5-4a02-99d8-c6f416ea075b",
+    "last_modified": "2023-07-10T18:14:34",
+    "metadata_modified": "2025-08-26T12:24:34.233325",
+    "microdata": false,
+    "dataset_id": "305f1588-4572-4434-8b60-8177c31d20f3",
+    "resource_type": "api",
+    "name": "kontur_topology_boundaries_IL_20230628.gpkg",
+    "mimetype": null,
+    "size": "1.0M"
+}
