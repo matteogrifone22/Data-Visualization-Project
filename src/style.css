@@ -271,6 +271,15 @@ button:focus-visible {
   font-weight: 300;
 }
 
+/* Justify all body copy */
+.MuiTypography-body1,
+.MuiTypography-body2,
+.section-text {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
 /* Page Container */
 .page-container {
   background-color: var(--bg-primary);

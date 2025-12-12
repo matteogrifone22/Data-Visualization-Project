@@ -1,20 +1,9 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab } from '@mui/material';
 import { DarkMode, LightMode } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import MyChart from './components/MyChart';
-import gaza1Light from './json/gaza1Light.svg';
-import gaza1Dark from './json/gaza1Dark.svg';
-import gaza2Light from './json/gaza2Light.svg';
-import gaza2Dark from './json/gaza2Dark.svg';
-import gaza3Light from './json/gaza3Light.svg';
-import gaza3Dark from './json/gaza3Dark.svg';
-import gaza4Light from './json/gaza4Light.svg';
-import gaza4Dark from './json/gaza4Dark.svg';
-import gaza5Light from './json/gaza5Light.svg';
-import gaza5Dark from './json/gaza5Dark.svg';
-import israelLight from './json/israelLight.svg';
-import israelDark from './json/israelDark.svg';
+
 
 import { rgb } from 'd3';
 
@@ -23,49 +12,7 @@ export default function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeSection, setActiveSection] = useState('introduction');
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [preloadedImages, setPreloadedImages] = useState(new Set());
   const navbarRef = useRef(null);
-
-  // Map of all SVG resources
-  const svgMap = useMemo(() => ({
-    introduction: { light: gaza1Light, dark: gaza1Dark },
-    chapter1: { light: gaza2Light, dark: gaza2Dark },
-    chapter2: { light: gaza3Light, dark: gaza3Dark },
-    chapter3: { light: gaza4Light, dark: gaza4Dark },
-    chapter4: { light: gaza5Light, dark: gaza5Dark }
-  }), []);
-
-  // Preload images asynchronously
-  useEffect(() => {
-    const preloadImage = (src) => {
-      return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve(src);
-        img.onerror = reject;
-        img.src = src;
-      });
-    };
-
-    // Preload all SVG images in the background
-    const allImages = Object.values(svgMap).flatMap(section => [section.light, section.dark]);
-    
-    Promise.all(allImages.map(src => preloadImage(src)))
-      .then(loaded => {
-        setPreloadedImages(new Set(loaded));
-      })
-      .catch(err => console.warn('Some images failed to preload:', err));
-  }, [svgMap]);
-
-  // Get current SVG based on active section and theme
-  const currentGazaSvg = useMemo(() => {
-    const section = svgMap[activeSection] || svgMap.introduction;
-    return isDark ? section.dark : section.light;
-  }, [activeSection, isDark, svgMap]);
-
-  // Get current Israel SVG based on theme
-  const currentIsraelSvg = useMemo(() => {
-    return isDark ? israelDark : israelLight;
-  }, [isDark]);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -132,8 +79,7 @@ export default function App() {
   const navbarShadow = '0 8px 24px rgba(0, 0, 0, 0.5)';
   const navbarBgColor = isDark ? 'rgba(37, 40, 42, 0.85)' : 'rgba(217, 217, 214, 0.85)';
 
-  const gazaMap_width_left = 500;
-  const gazaMap_width_right = 300;
+  
   return (
 
 
@@ -148,107 +94,7 @@ export default function App() {
       padding: 0,
       overflowX: 'hidden',
       position: 'relative'
-    }}>
-      {/* Gaza Map overlay on left side - changes based on activeSection and theme */}
-      <Box
-        sx={{
-          position: 'fixed',
-          left: 0,
-          top: 0,
-          width: { xs: '250px', sm: '350px', md: '450px', lg: `${gazaMap_width_left}px` },
-          height: '100vh',
-          backgroundImage: `url(${currentGazaSvg})`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'left center',
-          opacity: { xs: 0.3, md: 0.5, lg: 1 },
-          pointerEvents: 'none',
-          zIndex: 0,
-          display: { xs: 'none', md: 'block' },
-          transform: 'rotate(-45deg)',
-          transition: 'background-image 0.3s ease'
-        }}
-      />
-      {/* Israel Map overlay on right side */}
-      <Box
-        sx={{
-          position: 'fixed',
-          right: 100,
-          top: 0,
-          width: { xs: '250px', sm: '350px', md: '450px', lg: `${gazaMap_width_left/2.2}px` },
-          height: '100vh',
-          backgroundImage: `url(${currentIsraelSvg})`,
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'right center',
-          opacity: { xs: 0.3, md: 0.5, lg: 1 },
-          pointerEvents: 'none',
-          zIndex: 0,
-          display: { xs: 'none', md: 'block' },
-          transform: 'rotate(0deg)',
-          transition: 'background-image 0.3s ease'
-        }}
-      />
-      {/* Gaza Map label - only visible in first section */}
-      {activeSection === 'introduction' && (
-        <Box
-          sx={{
-            position: 'fixed',
-            left: -20,
-            top: '90vh',
-            width: { xs: '250px', sm: '350px', md: '450px', lg: '500px' },
-            display: { xs: 'none', md: 'flex' },
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 100,
-            pointerEvents: 'none',
-            padding: '20px',
-          }}
-        >
-          <Typography
-            sx={{
-               fontSize: '0.6rem',
-              color: textColor,
-              fontStyle: 'italic',
-              fontWeight: 500,
-              lineHeight: 1.5,
-              textAlign: 'center'
-            }}
-          >
-              This map shows the increasing destruction in Gaza caused by Israel
-            </Typography>
-        </Box>
-      )}
-      {/* Israel Map label - only visible in first section */}
-      {activeSection === 'introduction' && (
-        <Box
-          sx={{
-            position: 'fixed',
-            right: -40,
-            top: '90vh',
-            width: { xs: '250px', sm: '350px', md: '450px', lg: '500px' },
-            display: { xs: 'none', md: 'flex' },
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 100,
-            pointerEvents: 'none',
-            padding: '20px',
-          }}
-        >
-          <Typography
-            sx={{
-               fontSize: '0.6rem',
-              color: textColor,
-              fontStyle: 'italic',
-              fontWeight: 500,
-              lineHeight: 1.5,
-              textAlign: 'center'
-            }}
-          >
-            This map shows the increasing destruction in Israel caused by the State of Palestine
-          </Typography>
-        </Box>
-      )}
+    }}>     
       <AppBar 
         position="fixed" 
         ref={navbarRef}
@@ -454,14 +300,15 @@ export default function App() {
           id="chapter1" 
           sx={{ 
             minHeight: 'auto', 
-            display: 'flex', 
+            display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             scrollMarginTop: '8vh',
             padding: '2vh 4vw 10vh 4vw'
           }}
         >
-          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' } }}>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' }, marginBottom: 4 }}>
             <Typography 
               variant="h2" 
               gutterBottom 
@@ -481,7 +328,7 @@ export default function App() {
                 lineHeight: 1.8, 
                 color: textColor,
                 fontWeight: 300,
-                marginBottom: 4,
+                marginBottom: 0,
                 marginLeft: 'auto',
                 marginRight: 'auto'
               }}
@@ -494,9 +341,9 @@ export default function App() {
               Questa prima sezione con due visualizzazioni serve per dare un contesto storico al conflitto.
               Numero Visualizzazioni: 2 (line chart + ridge plot).
             </Typography>
-            <Box sx={{ width: '100%' }}>
-              <MyChart />
-            </Box>
+          </Box>
+          <Box sx={{ width: '100%', minWidth: '100%' }}>
+            <MyChart />
           </Box>
         </Box>
 
@@ -505,14 +352,15 @@ export default function App() {
           id="chapter2" 
           sx={{ 
             minHeight: 'auto', 
-            display: 'flex', 
+            display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             scrollMarginTop: '8vh',
             padding: '2vh 4vw 12vh 4vw'
           }}
         >
-          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' } }}>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' }, marginBottom: 4 }}>
             <Typography 
               variant="h2" 
               gutterBottom 
@@ -531,7 +379,8 @@ export default function App() {
                 fontSize: '1.1rem', 
                 lineHeight: 1.8, 
                 color: textColor,
-                fontWeight: 300
+                fontWeight: 300,
+                marginBottom: 0
               }}
             >
               Qua mostrerò l'andamento demografico di Palestina e Israele nel tempo (2000-2025) e lo confronterò con il tasso di mortalità.
@@ -542,9 +391,9 @@ export default function App() {
               Lo scopo di questo capitolo è per mostrare le differenze tra i due popoli in termini di demografia e tasso di mortalità, per capire se ci sono elementi che possano far pensare a un genocidio.
               Numero Visualizzazioni: 1 pyramid chart (o boxplot) con scelta del dataset e dell'anno.
             </Typography>
-            <Box sx={{ width: '100%' }}>
-              <MyChart />
-            </Box>
+          </Box>
+          <Box sx={{ width: '100%', minWidth: '100%' }}>
+            <MyChart />
           </Box>
         </Box>
 
@@ -553,14 +402,15 @@ export default function App() {
           id="chapter3" 
           sx={{ 
             minHeight: 'auto', 
-            display: 'flex', 
+            display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             scrollMarginTop: '8vh',
             padding: '2vh 4vw 12vh 4vw'
           }}
         >
-          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' } }}>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' }, marginBottom: 4 }}>
             <Typography 
               variant="h2" 
               gutterBottom 
@@ -579,7 +429,8 @@ export default function App() {
                 fontSize: '1.1rem', 
                 lineHeight: 1.8, 
                 color: textColor,
-                fontWeight: 300
+                fontWeight: 300,
+                marginBottom: 0
               }}
             >
               Non sono sicuro di cosa mettere qui, vorrei mostrare i tipi di eventi che accadono nei due paesi e il numero di essi, ma non vorrei ripetere il primo capitolo.
@@ -588,9 +439,9 @@ export default function App() {
               Lo scopo di questa sezione è di mostrare le differenze dei tipi di eventi che accadono nei due paesi, per vedere se la violenza è "equamente" distribuita o se c'è un tipo di evento predominante in uno dei due paesi.
               Numero Visualizzazioni: 1 alluvional o grouped bar chart.
             </Typography>
-            <Box sx={{ width: '100%' }}>
-              <MyChart />
-            </Box>
+          </Box>
+          <Box sx={{ width: '100%', minWidth: '100%' }}>
+            <MyChart />
           </Box>
         </Box>
 
@@ -599,14 +450,15 @@ export default function App() {
           id="chapter4" 
           sx={{ 
             minHeight: 'auto', 
-            display: 'flex', 
+            display: 'flex',
+            flexDirection: 'column',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             scrollMarginTop: '8vh',
             padding: '2vh 4vw 12vh 4vw'
           }}
         >
-          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' } }}>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' }, marginBottom: 4 }}>
             <Typography 
               variant="h2" 
               gutterBottom 
@@ -625,7 +477,8 @@ export default function App() {
                 fontSize: '1.1rem', 
                 lineHeight: 1.8, 
                 color: textColor,
-                fontWeight: 300
+                fontWeight: 300,
+                marginBottom: 0
               }}
             >
               In questa sezione vorrei mostrare la qualità di vita nei due paesi nel periodo di tempo considerato (2000-2025).
@@ -635,9 +488,9 @@ export default function App() {
               Lo scopo di questa sezione è di mostrare come la qualità di vita sia cambiata nei due paesi durante il conflitto, per vedere se ci sono differenze significative tra i due paesi.
               Numero Visualizzazioni: 1 small multiples di barchart o line chart.
             </Typography>
-            <Box sx={{ width: '100%' }}>
-              <MyChart />
-            </Box>
+          </Box>
+          <Box sx={{ width: '100%', minWidth: '100%' }}>
+            <MyChart />
           </Box>
         </Box>
       </Box>
@@ -655,10 +508,10 @@ export default function App() {
           transition: 'color 0.3s ease, box-shadow 0.3s ease'
         }}
       >
-        <Typography variant="body2" sx={{ fontSize: '0.95rem', mb: 1 }}>
+        <Typography variant="body2" sx={{ fontSize: '0.95rem', mb: 1, textAlign: 'center' }}>
           A.Y. 2025-2026 Data Visualization Project - Università di Genova
         </Typography>
-        <Typography variant="body2" sx={{ fontSize: '0.85rem', mb: 1 }}>
+        <Typography variant="body2" sx={{ fontSize: '0.85rem', mb: 1, textAlign: 'center' }}>
           Created by Matteo Ferrari
         </Typography>
       

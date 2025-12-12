@@ -28,8 +28,8 @@ export default function MyChart() {
       if (!ref.current) return;
       
       // Make the chart responsive - use more of container width on mobile
-      const containerWidth = ref.current.parentElement.offsetWidth;
-      const width = Math.min(600, containerWidth);
+      const containerWidth = 1000
+      const width = Math.min(1000, containerWidth);
       // Ensure minimum height to prevent negative heights
       const height = Math.max(250, Math.min(300, width * 0.5));
       
