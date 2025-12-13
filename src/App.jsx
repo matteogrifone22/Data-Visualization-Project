@@ -76,6 +76,7 @@ export default function App() {
   const textColor = isDark ? '#D9D9D6' : '#25282A';
   const navbarTextColor = isDark ? '#D9D9D6' : '#25282A';
   const linkHoverColor = isDark ? '#F1C400' : '#F4633A';
+  const borderColor = isDark ? '#F1C400' : '#F4633A';
   const navbarShadow = '0 8px 24px rgba(0, 0, 0, 0.5)';
   const navbarBgColor = isDark ? 'rgba(37, 40, 42, 0.85)' : 'rgba(217, 217, 214, 0.85)';
 
@@ -106,9 +107,9 @@ export default function App() {
           maxWidth: { xs: '95%', md: '90%' },
           borderRadius: '50px',
           backgroundColor: navbarBgColor,
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
-          border: '1px solid rgba(255, 255, 255, 0.18)',
+          backdropFilter: 'blur(4px)',
+          WebkitBackdropFilter: 'blur(4px)',
+          border: '2px solid ' + borderColor,
           zIndex: 1300,
           boxShadow: navbarShadow,
           padding: '0 8px',
@@ -531,7 +532,7 @@ export default function App() {
             LinkedIn
           </Link>
           <Typography variant="body2" sx={{ fontSize: '0.85rem', opacity: 0.5 }}>
-            -
+            •
           </Typography>
           <Link 
             href="https://github.com/matteogrifone22" 
