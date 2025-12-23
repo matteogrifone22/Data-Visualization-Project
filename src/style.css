@@ -34,12 +34,14 @@
     /* custom colors for lighter/darker reds */
     --color-unige-red-light: #f56154;
     --color-unige-red-dark: #6c081e;
+
+    /* custom colors for Israel and Palestine */
+    --color-Israel: var(--color-giurisprudenza);
+    --color-Palestine: var(--color-scienze-mfn);
 }
 
-@layer base {
-    h1, h2, h3, h4, h5, h6 {
-        @apply font-serif;
-    }
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
 }
 
 :root {
@@ -58,6 +60,26 @@
   --color-unige-light-blue: #199BFC;
   --color-unige-dark: #25282A;
   --color-unige-gray: #D9D9D6;
+
+  /* Scientific areas - explicit hex values so CSS vars resolve properly */
+  --color-giurisprudenza: #0061A0;
+  --color-scienze-mfn: #007C58;
+  --color-scienze-politiche: #00A7B5;
+  --color-lingue-culture: #A4BCC2;
+  --color-lettere-filosofia: #B79A81;
+  --color-economia: #F1C400;
+  --color-architettura-design: #F4633A;
+  --color-medicina: #EF3340;
+  --color-scienze-formazione: #9B3259;
+  --color-ingegneria: #574676;
+  --color-farmacia: #E0A4A1;
+
+  /* Country aliases - now resolve to actual colors above */
+  --color-Israel: #0061A0;
+  --color-Palestine: #007C58;
+
+  /* Universal text content width (as % of viewport) */
+  --content-width: 45vw;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -271,6 +293,12 @@ button:focus-visible {
   font-weight: 300;
 }
 
+/* Ensure bold text renders clearly inside body copy */
+b,
+strong {
+  font-weight: 700;
+}
+
 /* Justify all body copy */
 .MuiTypography-body1,
 .MuiTypography-body2,
@@ -348,4 +376,56 @@ button:focus-visible {
 .scroll-to-top.visible {
   opacity: 1;
   visibility: visible;
+}
+
+/* Chart series colors bound to CSS variables */
+.series--Israel { stroke: var(--color-Israel); fill: none; }
+.series--Palestine { stroke: var(--color-Palestine); fill: none; }
+.dot--Israel { fill: var(--color-Israel); }
+.dot--Palestine { fill: var(--color-Palestine); }
+.legend-swatch--Israel { fill: var(--color-Israel); }
+.legend-swatch--Palestine { fill: var(--color-Palestine); }
+.legend-text { fill: var(--text-primary); }
+/* Chart Tooltip Styles */
+.chart-tooltip {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 10px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  font-family: var(--default-font-family);
+}
+
+.tooltip-date {
+  font-weight: 600;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--text-primary);
+  padding-bottom: 6px;
+}
+
+.tooltip-entry {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.tooltip-square {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.tooltip-country {
+  flex: 1;
+  min-width: 60px;
+}
+
+.tooltip-fatalities {
+  font-weight: 500;
+  text-align: right;
+  min-width: 40px;
 }

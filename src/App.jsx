@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab } from '@mui/ma
 import { DarkMode, LightMode } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import MyChart from './components/MyChart';
+import Chapter1Chart from './components/Chapter1Chart';
 
 
 import { rgb } from 'd3';
@@ -17,6 +18,18 @@ export default function App() {
   const toggleTheme = () => {
     setIsDark(!isDark);
   };
+
+  useEffect(() => {
+    // Sync CSS variable theme classes on :root so var(--...) works
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add('dark-theme');
+      root.classList.remove('light-theme');
+    } else {
+      root.classList.add('light-theme');
+      root.classList.remove('dark-theme');
+    }
+  }, [isDark]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,7 +54,7 @@ export default function App() {
           break;
         }
       }
-      
+
       // If at very top of page, always show first section
       if (window.scrollY < 100) {
         currentSection = sections[0];
@@ -80,26 +93,26 @@ export default function App() {
   const navbarShadow = '0 8px 24px rgba(0, 0, 0, 0.5)';
   const navbarBgColor = isDark ? 'rgba(37, 40, 42, 0.85)' : 'rgba(217, 217, 214, 0.85)';
 
-  
+
   return (
 
 
 
-    <Box sx={{ 
-      backgroundColor: bgColor, 
-      color: textColor, 
-      minHeight: '100vh', 
+    <Box sx={{
+      backgroundColor: bgColor,
+      color: textColor,
+      minHeight: '100vh',
       width: '100%',
       maxWidth: '100vw',
       margin: 0,
       padding: 0,
       overflowX: 'hidden',
       position: 'relative'
-    }}>     
-      <AppBar 
-        position="fixed" 
+    }}>
+      <AppBar
+        position="fixed"
         ref={navbarRef}
-        sx={{ 
+        sx={{
           top: 20,
           left: '50%',
           transform: 'translateX(-50%)',
@@ -117,11 +130,11 @@ export default function App() {
         }}
       >
         <Toolbar sx={{ gap: { xs: 0.8, md: 2 }, padding: { xs: '8px 8px', md: '8px 24px' }, justifyContent: 'space-between' }}>
-          
-          <Link 
-            href="#introduction" 
+
+          <Link
+            href="#introduction"
             onClick={(e) => scrollToSection(e, 'introduction')}
-            sx={{ 
+            sx={{
               color: activeSection === 'introduction' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
               fontSize: { xs: '0.8rem', md: '0.95rem' },
@@ -139,10 +152,10 @@ export default function App() {
               Intro
             </Box>
           </Link>
-          <Link 
-            href="#chapter1" 
+          <Link
+            href="#chapter1"
             onClick={(e) => scrollToSection(e, 'chapter1')}
-            sx={{ 
+            sx={{
               color: activeSection === 'chapter1' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
               fontSize: { xs: '0.8rem', md: '0.95rem' },
@@ -160,10 +173,10 @@ export default function App() {
               Ch 1
             </Box>
           </Link>
-          <Link 
-            href="#chapter2" 
+          <Link
+            href="#chapter2"
             onClick={(e) => scrollToSection(e, 'chapter2')}
-            sx={{ 
+            sx={{
               color: activeSection === 'chapter2' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
               fontSize: { xs: '0.8rem', md: '0.95rem' },
@@ -181,10 +194,10 @@ export default function App() {
               Ch 2
             </Box>
           </Link>
-          <Link 
-            href="#chapter3" 
+          <Link
+            href="#chapter3"
             onClick={(e) => scrollToSection(e, 'chapter3')}
-            sx={{ 
+            sx={{
               color: activeSection === 'chapter3' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
               fontSize: { xs: '0.8rem', md: '0.95rem' },
@@ -202,10 +215,10 @@ export default function App() {
               Ch 3
             </Box>
           </Link>
-          <Link 
-            href="#chapter4" 
+          <Link
+            href="#chapter4"
             onClick={(e) => scrollToSection(e, 'chapter4')}
-            sx={{ 
+            sx={{
               color: activeSection === 'chapter4' ? linkHoverColor : navbarTextColor,
               textDecoration: 'none',
               fontSize: { xs: '0.8rem', md: '0.95rem' },
@@ -239,8 +252,8 @@ export default function App() {
               '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
               '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
               '&& .MuiTouchRipple-root': { display: 'none' },
-              '&:hover': { 
-                color: linkHoverColor, 
+              '&:hover': {
+                color: linkHoverColor,
                 transform: 'rotate(20deg)',
                 backgroundColor: 'transparent !important'
               }
@@ -251,25 +264,25 @@ export default function App() {
         </Toolbar>
       </AppBar>
 
-      <Box sx={{  transition: 'background-color 0.3s ease, color 0.3s ease' }}>
+      <Box sx={{ transition: 'background-color 0.3s ease, color 0.3s ease' }}>
         {/* Title Section */}
-        <Box 
-          id="introduction" 
-          sx={{ 
+        <Box
+          id="introduction"
+          sx={{
             minHeight: 'auto',
-            display: 'flex', 
+            display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             scrollMarginTop: '8vh',
             padding: '16vh 4vw 10vh 4vw'
           }}
         >
-          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' } }}>
-            <Typography 
-              variant="h2" 
-              gutterBottom 
-              sx={{ 
-                color: textColor, 
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))' }}>
+            <Typography
+              variant="h1"
+              gutterBottom
+              sx={{
+                color: textColor,
                 fontWeight: 700,
                 marginBottom: 4,
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
@@ -277,30 +290,86 @@ export default function App() {
             >
               War or Genocide?
             </Typography>
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                fontSize: '1.1rem', 
-                lineHeight: 1.8, 
+
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
-                marginBottom: 4,
-                marginLeft: 'auto',
-                marginRight: 'auto'
+                marginBottom: 3
               }}
             >
-              Introduzione con definizione di Guerra e Genocidio + spiegazione dataset usato e spiegazione del progetto.
-              probabilmente userò acled, our world in data e world population prospect dataset.
-              Allunghiamo un po' questo testo per avere un placeholder più realistico e vedere come si comporta il layout con più contenuto.
-              </Typography>
+              This data visualization project examines the ongoing conflict between Israel and Palestine
+              through a strictly data-driven approach. Rather than presenting opinions or predefined
+              narratives, the analysis relies exclusively on quantitative data.
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 4
+              }}
+            >
+              The purpose is not to provide a definitive answer, but to leave the interpretation to the user.
+              By exploring patterns, trends, and measurable evidence, each viewer is invited to reflect on
+              whether the observed events align more closely with the concept of <i>war</i> or <i>genocide</i>.
+            </Typography>
+
+            <Typography
+              variant="body2"
+              sx={{
+                fontSize: '1rem',
+                lineHeight: 1.7,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 2
+              }}
+            >
+              To ensure clarity, the following definitions are provided by the{' '}
+              <Link
+                href="https://dictionary.cambridge.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  color: textColor,
+                  textDecoration: 'none',
+                  fontWeight: 600,
+                  '&:hover': { color: linkHoverColor }
+                }}
+              >
+                Cambridge Dictionary
+              </Link>.
+            </Typography>
+
+            <Typography
+              variant="body2"
+              sx={{ fontSize: '1.1rem', color: textColor, marginBottom: 1 }}
+            >
+              <b>War</b>: <i>armed fighting between two or more countries or groups.</i>
+            </Typography>
+
+            <Typography
+              variant="body2"
+              sx={{ fontSize: '1.1rem', color: textColor }}
+            >
+              <b>Genocide</b>: <i>the crime of intentionally destroying part or all of a national, ethnic,
+              racial, or religious group, by killing people or by other methods.</i>
+            </Typography>
           </Box>
         </Box>
 
+
         {/* Chart 1 Section */}
-        <Box 
-          id="chapter1" 
-          sx={{ 
-            minHeight: 'auto', 
+        <Box
+          id="chapter1"
+          sx={{
+            minHeight: 'auto',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -309,12 +378,12 @@ export default function App() {
             padding: '2vh 4vw 10vh 4vw'
           }}
         >
-          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' }, marginBottom: 4 }}>
-            <Typography 
-              variant="h2" 
-              gutterBottom 
-              sx={{ 
-                color: textColor, 
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
+            <Typography
+              variant="h2"
+              gutterBottom
+              sx={{
+                color: textColor,
                 fontWeight: 700,
                 marginBottom: 4,
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
@@ -322,11 +391,11 @@ export default function App() {
             >
               Events and fatalities over time
             </Typography>
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                fontSize: '1.1rem', 
-                lineHeight: 1.8, 
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
                 marginBottom: 0,
@@ -344,15 +413,15 @@ export default function App() {
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <MyChart />
+            <Chapter1Chart isDark={isDark} />
           </Box>
         </Box>
 
         {/* Chapter 2 Section */}
-        <Box 
-          id="chapter2" 
-          sx={{ 
-            minHeight: 'auto', 
+        <Box
+          id="chapter2"
+          sx={{
+            minHeight: 'auto',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -361,12 +430,12 @@ export default function App() {
             padding: '2vh 4vw 12vh 4vw'
           }}
         >
-          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' }, marginBottom: 4 }}>
-            <Typography 
-              variant="h2" 
-              gutterBottom 
-              sx={{ 
-                color: textColor, 
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
+            <Typography
+              variant="h2"
+              gutterBottom
+              sx={{
+                color: textColor,
                 fontWeight: 700,
                 marginBottom: 3,
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
@@ -374,11 +443,11 @@ export default function App() {
             >
               Demographics and fatalities or mortality rate over time
             </Typography>
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                fontSize: '1.1rem', 
-                lineHeight: 1.8, 
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
                 marginBottom: 0
@@ -399,10 +468,10 @@ export default function App() {
         </Box>
 
         {/* Chapter 3 Section */}
-        <Box 
-          id="chapter3" 
-          sx={{ 
-            minHeight: 'auto', 
+        <Box
+          id="chapter3"
+          sx={{
+            minHeight: 'auto',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -411,12 +480,12 @@ export default function App() {
             padding: '2vh 4vw 12vh 4vw'
           }}
         >
-          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' }, marginBottom: 4 }}>
-            <Typography 
-              variant="h2" 
-              gutterBottom 
-              sx={{ 
-                color: textColor, 
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
+            <Typography
+              variant="h2"
+              gutterBottom
+              sx={{
+                color: textColor,
                 fontWeight: 700,
                 marginBottom: 3,
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
@@ -424,11 +493,11 @@ export default function App() {
             >
               Types of events
             </Typography>
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                fontSize: '1.1rem', 
-                lineHeight: 1.8, 
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
                 marginBottom: 0
@@ -447,10 +516,10 @@ export default function App() {
         </Box>
 
         {/* Chapter 4 Section */}
-        <Box 
-          id="chapter4" 
-          sx={{ 
-            minHeight: 'auto', 
+        <Box
+          id="chapter4"
+          sx={{
+            minHeight: 'auto',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -459,12 +528,12 @@ export default function App() {
             padding: '2vh 4vw 12vh 4vw'
           }}
         >
-          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: { xs: '95%', md: '40%' }, marginBottom: 4 }}>
-            <Typography 
-              variant="h2" 
-              gutterBottom 
-              sx={{ 
-                color: textColor, 
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
+            <Typography
+              variant="h2"
+              gutterBottom
+              sx={{
+                color: textColor,
                 fontWeight: 700,
                 marginBottom: 3,
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
@@ -472,11 +541,11 @@ export default function App() {
             >
               Life during the conflict
             </Typography>
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                fontSize: '1.1rem', 
-                lineHeight: 1.8, 
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
                 marginBottom: 0
@@ -497,9 +566,9 @@ export default function App() {
       </Box>
 
       {/* Footer */}
-      <Box 
+      <Box
         component="footer"
-        sx={{ 
+        sx={{
           position: 'relative',
           backgroundColor: rgb(0, 0, 0, 0),
           opacity: 1,
@@ -515,13 +584,13 @@ export default function App() {
         <Typography variant="body2" sx={{ fontSize: '0.85rem', mb: 1, textAlign: 'center' }}>
           Created by Matteo Ferrari
         </Typography>
-      
+
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 2 }}>
-          <Link 
-            href="https://www.linkedin.com/in/mfmatteoferrari/" 
-            target="_blank" 
+          <Link
+            href="https://www.linkedin.com/in/mfmatteoferrari/"
+            target="_blank"
             rel="noopener noreferrer"
-            sx={{ 
+            sx={{
               color: navbarTextColor,
               textDecoration: 'none',
               fontSize: '0.85rem',
@@ -534,11 +603,11 @@ export default function App() {
           <Typography variant="body2" sx={{ fontSize: '0.85rem', opacity: 0.5 }}>
             •
           </Typography>
-          <Link 
-            href="https://github.com/matteogrifone22" 
-            target="_blank" 
+          <Link
+            href="https://github.com/matteogrifone22"
+            target="_blank"
             rel="noopener noreferrer"
-            sx={{ 
+            sx={{
               color: navbarTextColor,
               textDecoration: 'none',
               fontSize: '0.85rem',
