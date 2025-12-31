@@ -449,7 +449,8 @@ export function Chapter1RidgeChart({ isDark = true }) {
         // Fetch data - CSV with columns: WEEK, country, event_type, events
         const fetchData = async () => {
             try {
-                const response = await fetch('/src/Dataset/events_per_week.csv');
+                const url = new URL('../Dataset/events_per_week.csv', import.meta.url).href;
+                const response = await fetch(url);
                 const text = await response.text();
                 
                 const rows = text.trim().split('\n').slice(1);

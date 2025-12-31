@@ -1,0 +1,1568 @@
+WEEK,country,event_type,events
+2023-01-07,Israel,Protests,18
+2023-01-07,Israel,Strategic developments,1
+2023-01-07,Palestine,Battles,28
+2023-01-07,Palestine,Explosions/Remote violence,9
+2023-01-07,Palestine,Protests,11
+2023-01-07,Palestine,Riots,81
+2023-01-07,Palestine,Strategic developments,39
+2023-01-07,Palestine,Violence against civilians,9
+2023-01-14,Israel,Protests,27
+2023-01-14,Israel,Riots,3
+2023-01-14,Israel,Strategic developments,2
+2023-01-14,Palestine,Battles,27
+2023-01-14,Palestine,Explosions/Remote violence,8
+2023-01-14,Palestine,Protests,10
+2023-01-14,Palestine,Riots,70
+2023-01-14,Palestine,Strategic developments,41
+2023-01-14,Palestine,Violence against civilians,13
+2023-01-21,Israel,Explosions/Remote violence,1
+2023-01-21,Israel,Protests,29
+2023-01-21,Israel,Strategic developments,5
+2023-01-21,Israel,Violence against civilians,1
+2023-01-21,Palestine,Battles,37
+2023-01-21,Palestine,Explosions/Remote violence,6
+2023-01-21,Palestine,Protests,28
+2023-01-21,Palestine,Riots,140
+2023-01-21,Palestine,Strategic developments,21
+2023-01-21,Palestine,Violence against civilians,13
+2023-01-28,Israel,Explosions/Remote violence,1
+2023-01-28,Israel,Protests,39
+2023-01-28,Israel,Riots,1
+2023-01-28,Israel,Strategic developments,4
+2023-01-28,Palestine,Battles,36
+2023-01-28,Palestine,Explosions/Remote violence,7
+2023-01-28,Palestine,Protests,20
+2023-01-28,Palestine,Riots,168
+2023-01-28,Palestine,Strategic developments,23
+2023-01-28,Palestine,Violence against civilians,15
+2023-02-04,Israel,Protests,60
+2023-02-04,Israel,Riots,2
+2023-02-04,Israel,Strategic developments,2
+2023-02-04,Israel,Violence against civilians,1
+2023-02-04,Palestine,Battles,30
+2023-02-04,Palestine,Explosions/Remote violence,2
+2023-02-04,Palestine,Protests,8
+2023-02-04,Palestine,Riots,45
+2023-02-04,Palestine,Strategic developments,14
+2023-02-04,Palestine,Violence against civilians,11
+2023-02-11,Israel,Explosions/Remote violence,1
+2023-02-11,Israel,Protests,43
+2023-02-11,Israel,Strategic developments,4
+2023-02-11,Palestine,Battles,26
+2023-02-11,Palestine,Explosions/Remote violence,8
+2023-02-11,Palestine,Protests,25
+2023-02-11,Palestine,Riots,98
+2023-02-11,Palestine,Strategic developments,25
+2023-02-11,Palestine,Violence against civilians,4
+2023-02-18,Israel,Explosions/Remote violence,1
+2023-02-18,Israel,Protests,89
+2023-02-18,Israel,Riots,2
+2023-02-18,Israel,Strategic developments,2
+2023-02-18,Palestine,Battles,29
+2023-02-18,Palestine,Explosions/Remote violence,7
+2023-02-18,Palestine,Protests,57
+2023-02-18,Palestine,Riots,122
+2023-02-18,Palestine,Strategic developments,34
+2023-02-18,Palestine,Violence against civilians,7
+2023-02-25,Israel,Protests,79
+2023-02-25,Israel,Riots,3
+2023-02-25,Israel,Strategic developments,1
+2023-02-25,Palestine,Battles,29
+2023-02-25,Palestine,Explosions/Remote violence,4
+2023-02-25,Palestine,Protests,32
+2023-02-25,Palestine,Riots,165
+2023-02-25,Palestine,Strategic developments,40
+2023-02-25,Palestine,Violence against civilians,14
+2023-03-04,Israel,Explosions/Remote violence,2
+2023-03-04,Israel,Protests,110
+2023-03-04,Israel,Riots,3
+2023-03-04,Israel,Strategic developments,3
+2023-03-04,Israel,Violence against civilians,2
+2023-03-04,Palestine,Battles,30
+2023-03-04,Palestine,Explosions/Remote violence,4
+2023-03-04,Palestine,Protests,38
+2023-03-04,Palestine,Riots,107
+2023-03-04,Palestine,Strategic developments,23
+2023-03-04,Palestine,Violence against civilians,14
+2023-03-11,Israel,Battles,1
+2023-03-11,Israel,Explosions/Remote violence,1
+2023-03-11,Israel,Protests,103
+2023-03-11,Israel,Riots,5
+2023-03-11,Israel,Strategic developments,2
+2023-03-11,Palestine,Battles,19
+2023-03-11,Palestine,Explosions/Remote violence,3
+2023-03-11,Palestine,Protests,20
+2023-03-11,Palestine,Riots,69
+2023-03-11,Palestine,Strategic developments,15
+2023-03-11,Palestine,Violence against civilians,12
+2023-03-18,Israel,Explosions/Remote violence,2
+2023-03-18,Israel,Protests,110
+2023-03-18,Israel,Riots,8
+2023-03-18,Israel,Strategic developments,2
+2023-03-18,Palestine,Battles,20
+2023-03-18,Palestine,Explosions/Remote violence,4
+2023-03-18,Palestine,Protests,30
+2023-03-18,Palestine,Riots,74
+2023-03-18,Palestine,Strategic developments,18
+2023-03-18,Palestine,Violence against civilians,13
+2023-03-25,Israel,Protests,101
+2023-03-25,Israel,Riots,11
+2023-03-25,Israel,Strategic developments,3
+2023-03-25,Palestine,Battles,35
+2023-03-25,Palestine,Explosions/Remote violence,2
+2023-03-25,Palestine,Protests,13
+2023-03-25,Palestine,Riots,76
+2023-03-25,Palestine,Strategic developments,12
+2023-03-25,Palestine,Violence against civilians,12
+2023-04-01,Israel,Battles,2
+2023-04-01,Israel,Explosions/Remote violence,7
+2023-04-01,Israel,Protests,53
+2023-04-01,Israel,Riots,19
+2023-04-01,Israel,Strategic developments,2
+2023-04-01,Israel,Violence against civilians,2
+2023-04-01,Palestine,Battles,55
+2023-04-01,Palestine,Explosions/Remote violence,10
+2023-04-01,Palestine,Protests,22
+2023-04-01,Palestine,Riots,118
+2023-04-01,Palestine,Strategic developments,15
+2023-04-01,Palestine,Violence against civilians,20
+2023-04-08,Israel,Protests,46
+2023-04-08,Israel,Riots,3
+2023-04-08,Israel,Strategic developments,1
+2023-04-08,Palestine,Battles,16
+2023-04-08,Palestine,Explosions/Remote violence,2
+2023-04-08,Palestine,Protests,15
+2023-04-08,Palestine,Riots,78
+2023-04-08,Palestine,Strategic developments,10
+2023-04-08,Palestine,Violence against civilians,9
+2023-04-15,Israel,Protests,53
+2023-04-15,Israel,Strategic developments,1
+2023-04-15,Israel,Violence against civilians,2
+2023-04-15,Palestine,Battles,8
+2023-04-15,Palestine,Protests,16
+2023-04-15,Palestine,Riots,42
+2023-04-15,Palestine,Strategic developments,22
+2023-04-15,Palestine,Violence against civilians,14
+2023-04-22,Israel,Protests,51
+2023-04-22,Israel,Riots,3
+2023-04-22,Israel,Violence against civilians,3
+2023-04-22,Palestine,Battles,11
+2023-04-22,Palestine,Protests,17
+2023-04-22,Palestine,Riots,60
+2023-04-22,Palestine,Strategic developments,22
+2023-04-22,Palestine,Violence against civilians,11
+2023-04-29,Israel,Explosions/Remote violence,4
+2023-04-29,Israel,Protests,62
+2023-04-29,Israel,Riots,3
+2023-04-29,Israel,Strategic developments,2
+2023-04-29,Israel,Violence against civilians,1
+2023-04-29,Palestine,Battles,34
+2023-04-29,Palestine,Explosions/Remote violence,6
+2023-04-29,Palestine,Protests,30
+2023-04-29,Palestine,Riots,85
+2023-04-29,Palestine,Strategic developments,22
+2023-04-29,Palestine,Violence against civilians,17
+2023-05-06,Israel,Explosions/Remote violence,32
+2023-05-06,Israel,Protests,50
+2023-05-06,Israel,Riots,3
+2023-05-06,Israel,Strategic developments,2
+2023-05-06,Israel,Violence against civilians,2
+2023-05-06,Palestine,Battles,18
+2023-05-06,Palestine,Explosions/Remote violence,126
+2023-05-06,Palestine,Protests,18
+2023-05-06,Palestine,Riots,85
+2023-05-06,Palestine,Strategic developments,25
+2023-05-06,Palestine,Violence against civilians,5
+2023-05-13,Israel,Explosions/Remote violence,7
+2023-05-13,Israel,Protests,45
+2023-05-13,Israel,Riots,1
+2023-05-13,Israel,Strategic developments,3
+2023-05-13,Palestine,Battles,14
+2023-05-13,Palestine,Explosions/Remote violence,36
+2023-05-13,Palestine,Protests,15
+2023-05-13,Palestine,Riots,73
+2023-05-13,Palestine,Strategic developments,23
+2023-05-13,Palestine,Violence against civilians,6
+2023-05-20,Israel,Protests,51
+2023-05-20,Israel,Riots,1
+2023-05-20,Israel,Strategic developments,1
+2023-05-20,Palestine,Battles,19
+2023-05-20,Palestine,Explosions/Remote violence,6
+2023-05-20,Palestine,Protests,16
+2023-05-20,Palestine,Riots,68
+2023-05-20,Palestine,Strategic developments,36
+2023-05-20,Palestine,Violence against civilians,9
+2023-05-27,Israel,Protests,62
+2023-05-27,Israel,Riots,2
+2023-05-27,Israel,Strategic developments,1
+2023-05-27,Israel,Violence against civilians,3
+2023-05-27,Palestine,Battles,20
+2023-05-27,Palestine,Explosions/Remote violence,1
+2023-05-27,Palestine,Protests,20
+2023-05-27,Palestine,Riots,84
+2023-05-27,Palestine,Strategic developments,29
+2023-05-27,Palestine,Violence against civilians,12
+2023-06-03,Israel,Battles,1
+2023-06-03,Israel,Protests,73
+2023-06-03,Israel,Riots,4
+2023-06-03,Israel,Strategic developments,3
+2023-06-03,Israel,Violence against civilians,1
+2023-06-03,Palestine,Battles,28
+2023-06-03,Palestine,Explosions/Remote violence,2
+2023-06-03,Palestine,Protests,16
+2023-06-03,Palestine,Riots,80
+2023-06-03,Palestine,Strategic developments,27
+2023-06-03,Palestine,Violence against civilians,9
+2023-06-10,Israel,Protests,61
+2023-06-10,Israel,Riots,3
+2023-06-10,Israel,Strategic developments,3
+2023-06-10,Palestine,Battles,19
+2023-06-10,Palestine,Explosions/Remote violence,1
+2023-06-10,Palestine,Protests,9
+2023-06-10,Palestine,Riots,50
+2023-06-10,Palestine,Strategic developments,25
+2023-06-10,Palestine,Violence against civilians,6
+2023-06-17,Israel,Protests,65
+2023-06-17,Israel,Riots,4
+2023-06-17,Israel,Strategic developments,3
+2023-06-17,Palestine,Battles,27
+2023-06-17,Palestine,Explosions/Remote violence,4
+2023-06-17,Palestine,Protests,25
+2023-06-17,Palestine,Riots,160
+2023-06-17,Palestine,Strategic developments,26
+2023-06-17,Palestine,Violence against civilians,4
+2023-06-24,Israel,Protests,37
+2023-06-24,Israel,Riots,5
+2023-06-24,Palestine,Battles,15
+2023-06-24,Palestine,Explosions/Remote violence,1
+2023-06-24,Palestine,Protests,9
+2023-06-24,Palestine,Riots,75
+2023-06-24,Palestine,Strategic developments,17
+2023-06-24,Palestine,Violence against civilians,4
+2023-07-01,Israel,Protests,84
+2023-07-01,Israel,Riots,9
+2023-07-01,Israel,Strategic developments,3
+2023-07-01,Israel,Violence against civilians,2
+2023-07-01,Palestine,Battles,30
+2023-07-01,Palestine,Explosions/Remote violence,14
+2023-07-01,Palestine,Protests,29
+2023-07-01,Palestine,Riots,182
+2023-07-01,Palestine,Strategic developments,16
+2023-07-01,Palestine,Violence against civilians,13
+2023-07-08,Israel,Protests,103
+2023-07-08,Israel,Riots,9
+2023-07-08,Israel,Strategic developments,1
+2023-07-08,Israel,Violence against civilians,1
+2023-07-08,Palestine,Battles,16
+2023-07-08,Palestine,Explosions/Remote violence,1
+2023-07-08,Palestine,Protests,11
+2023-07-08,Palestine,Riots,76
+2023-07-08,Palestine,Strategic developments,21
+2023-07-08,Palestine,Violence against civilians,13
+2023-07-15,Israel,Protests,142
+2023-07-15,Israel,Riots,6
+2023-07-15,Israel,Strategic developments,3
+2023-07-15,Palestine,Battles,23
+2023-07-15,Palestine,Explosions/Remote violence,3
+2023-07-15,Palestine,Protests,13
+2023-07-15,Palestine,Riots,77
+2023-07-15,Palestine,Strategic developments,18
+2023-07-15,Palestine,Violence against civilians,17
+2023-07-22,Israel,Battles,1
+2023-07-22,Israel,Protests,70
+2023-07-22,Israel,Riots,9
+2023-07-22,Israel,Strategic developments,6
+2023-07-22,Palestine,Battles,19
+2023-07-22,Palestine,Explosions/Remote violence,4
+2023-07-22,Palestine,Protests,13
+2023-07-22,Palestine,Riots,72
+2023-07-22,Palestine,Strategic developments,28
+2023-07-22,Palestine,Violence against civilians,6
+2023-07-29,Israel,Protests,37
+2023-07-29,Israel,Strategic developments,2
+2023-07-29,Palestine,Battles,18
+2023-07-29,Palestine,Explosions/Remote violence,1
+2023-07-29,Palestine,Protests,14
+2023-07-29,Palestine,Riots,69
+2023-07-29,Palestine,Strategic developments,23
+2023-07-29,Palestine,Violence against civilians,7
+2023-08-05,Israel,Battles,1
+2023-08-05,Israel,Protests,49
+2023-08-05,Israel,Violence against civilians,1
+2023-08-05,Palestine,Battles,16
+2023-08-05,Palestine,Explosions/Remote violence,6
+2023-08-05,Palestine,Protests,8
+2023-08-05,Palestine,Riots,67
+2023-08-05,Palestine,Strategic developments,18
+2023-08-05,Palestine,Violence against civilians,7
+2023-08-12,Israel,Battles,1
+2023-08-12,Israel,Protests,43
+2023-08-12,Israel,Riots,3
+2023-08-12,Israel,Strategic developments,4
+2023-08-12,Palestine,Battles,24
+2023-08-12,Palestine,Explosions/Remote violence,2
+2023-08-12,Palestine,Protests,11
+2023-08-12,Palestine,Riots,62
+2023-08-12,Palestine,Strategic developments,25
+2023-08-12,Palestine,Violence against civilians,6
+2023-08-19,Israel,Protests,34
+2023-08-19,Israel,Riots,3
+2023-08-19,Israel,Strategic developments,4
+2023-08-19,Israel,Violence against civilians,1
+2023-08-19,Palestine,Battles,16
+2023-08-19,Palestine,Explosions/Remote violence,7
+2023-08-19,Palestine,Protests,25
+2023-08-19,Palestine,Riots,88
+2023-08-19,Palestine,Strategic developments,21
+2023-08-19,Palestine,Violence against civilians,12
+2023-08-26,Israel,Protests,45
+2023-08-26,Israel,Riots,3
+2023-08-26,Israel,Strategic developments,4
+2023-08-26,Israel,Violence against civilians,1
+2023-08-26,Palestine,Battles,30
+2023-08-26,Palestine,Explosions/Remote violence,5
+2023-08-26,Palestine,Protests,20
+2023-08-26,Palestine,Riots,79
+2023-08-26,Palestine,Strategic developments,22
+2023-08-26,Palestine,Violence against civilians,7
+2023-09-02,Israel,Protests,37
+2023-09-02,Israel,Riots,3
+2023-09-02,Palestine,Battles,19
+2023-09-02,Palestine,Explosions/Remote violence,8
+2023-09-02,Palestine,Protests,14
+2023-09-02,Palestine,Riots,67
+2023-09-02,Palestine,Strategic developments,15
+2023-09-02,Palestine,Violence against civilians,11
+2023-09-09,Israel,Explosions/Remote violence,1
+2023-09-09,Israel,Protests,29
+2023-09-09,Israel,Riots,4
+2023-09-09,Israel,Strategic developments,1
+2023-09-09,Israel,Violence against civilians,1
+2023-09-09,Palestine,Battles,15
+2023-09-09,Palestine,Explosions/Remote violence,10
+2023-09-09,Palestine,Protests,19
+2023-09-09,Palestine,Riots,84
+2023-09-09,Palestine,Strategic developments,26
+2023-09-09,Palestine,Violence against civilians,15
+2023-09-16,Israel,Explosions/Remote violence,1
+2023-09-16,Israel,Protests,19
+2023-09-16,Israel,Riots,1
+2023-09-16,Israel,Strategic developments,1
+2023-09-16,Palestine,Battles,32
+2023-09-16,Palestine,Explosions/Remote violence,8
+2023-09-16,Palestine,Protests,13
+2023-09-16,Palestine,Riots,99
+2023-09-16,Palestine,Strategic developments,16
+2023-09-16,Palestine,Violence against civilians,13
+2023-09-23,Israel,Explosions/Remote violence,4
+2023-09-23,Israel,Protests,44
+2023-09-23,Israel,Riots,3
+2023-09-23,Israel,Strategic developments,2
+2023-09-23,Israel,Violence against civilians,2
+2023-09-23,Palestine,Battles,26
+2023-09-23,Palestine,Explosions/Remote violence,16
+2023-09-23,Palestine,Protests,10
+2023-09-23,Palestine,Riots,83
+2023-09-23,Palestine,Strategic developments,20
+2023-09-23,Palestine,Violence against civilians,5
+2023-09-30,Israel,Protests,34
+2023-09-30,Israel,Riots,2
+2023-09-30,Israel,Strategic developments,1
+2023-09-30,Israel,Violence against civilians,3
+2023-09-30,Palestine,Battles,21
+2023-09-30,Palestine,Explosions/Remote violence,6
+2023-09-30,Palestine,Protests,14
+2023-09-30,Palestine,Riots,90
+2023-09-30,Palestine,Strategic developments,7
+2023-09-30,Palestine,Violence against civilians,18
+2023-10-07,Israel,Battles,112
+2023-10-07,Israel,Explosions/Remote violence,103
+2023-10-07,Israel,Strategic developments,38
+2023-10-07,Israel,Violence against civilians,65
+2023-10-07,Palestine,Battles,74
+2023-10-07,Palestine,Explosions/Remote violence,230
+2023-10-07,Palestine,Protests,23
+2023-10-07,Palestine,Riots,295
+2023-10-07,Palestine,Strategic developments,35
+2023-10-07,Palestine,Violence against civilians,95
+2023-10-14,Israel,Battles,6
+2023-10-14,Israel,Explosions/Remote violence,114
+2023-10-14,Israel,Protests,9
+2023-10-14,Israel,Riots,2
+2023-10-14,Israel,Strategic developments,64
+2023-10-14,Israel,Violence against civilians,4
+2023-10-14,Palestine,Battles,52
+2023-10-14,Palestine,Explosions/Remote violence,222
+2023-10-14,Palestine,Protests,57
+2023-10-14,Palestine,Riots,217
+2023-10-14,Palestine,Strategic developments,77
+2023-10-14,Palestine,Violence against civilians,53
+2023-10-21,Israel,Battles,4
+2023-10-21,Israel,Explosions/Remote violence,53
+2023-10-21,Israel,Protests,5
+2023-10-21,Israel,Strategic developments,64
+2023-10-21,Palestine,Battles,52
+2023-10-21,Palestine,Explosions/Remote violence,284
+2023-10-21,Palestine,Protests,43
+2023-10-21,Palestine,Riots,169
+2023-10-21,Palestine,Strategic developments,107
+2023-10-21,Palestine,Violence against civilians,49
+2023-10-28,Israel,Battles,2
+2023-10-28,Israel,Explosions/Remote violence,98
+2023-10-28,Israel,Protests,8
+2023-10-28,Israel,Riots,2
+2023-10-28,Israel,Strategic developments,48
+2023-10-28,Israel,Violence against civilians,2
+2023-10-28,Palestine,Battles,102
+2023-10-28,Palestine,Explosions/Remote violence,314
+2023-10-28,Palestine,Protests,54
+2023-10-28,Palestine,Riots,211
+2023-10-28,Palestine,Strategic developments,72
+2023-10-28,Palestine,Violence against civilians,43
+2023-11-04,Israel,Battles,4
+2023-11-04,Israel,Explosions/Remote violence,59
+2023-11-04,Israel,Protests,15
+2023-11-04,Israel,Riots,1
+2023-11-04,Israel,Strategic developments,26
+2023-11-04,Palestine,Battles,107
+2023-11-04,Palestine,Explosions/Remote violence,308
+2023-11-04,Palestine,Protests,19
+2023-11-04,Palestine,Riots,142
+2023-11-04,Palestine,Strategic developments,42
+2023-11-04,Palestine,Violence against civilians,34
+2023-11-11,Israel,Battles,2
+2023-11-11,Israel,Explosions/Remote violence,71
+2023-11-11,Israel,Protests,14
+2023-11-11,Israel,Riots,1
+2023-11-11,Israel,Strategic developments,37
+2023-11-11,Palestine,Battles,99
+2023-11-11,Palestine,Explosions/Remote violence,286
+2023-11-11,Palestine,Protests,20
+2023-11-11,Palestine,Riots,105
+2023-11-11,Palestine,Strategic developments,32
+2023-11-11,Palestine,Violence against civilians,38
+2023-11-18,Israel,Explosions/Remote violence,80
+2023-11-18,Israel,Protests,17
+2023-11-18,Israel,Strategic developments,37
+2023-11-18,Israel,Violence against civilians,1
+2023-11-18,Palestine,Battles,74
+2023-11-18,Palestine,Explosions/Remote violence,275
+2023-11-18,Palestine,Protests,13
+2023-11-18,Palestine,Riots,89
+2023-11-18,Palestine,Strategic developments,33
+2023-11-18,Palestine,Violence against civilians,32
+2023-11-25,Israel,Explosions/Remote violence,11
+2023-11-25,Israel,Protests,8
+2023-11-25,Israel,Strategic developments,22
+2023-11-25,Israel,Violence against civilians,2
+2023-11-25,Palestine,Battles,39
+2023-11-25,Palestine,Explosions/Remote violence,69
+2023-11-25,Palestine,Protests,9
+2023-11-25,Palestine,Riots,110
+2023-11-25,Palestine,Strategic developments,63
+2023-11-25,Palestine,Violence against civilians,43
+2023-12-02,Israel,Explosions/Remote violence,82
+2023-12-02,Israel,Protests,15
+2023-12-02,Israel,Strategic developments,38
+2023-12-02,Palestine,Battles,114
+2023-12-02,Palestine,Explosions/Remote violence,278
+2023-12-02,Palestine,Protests,6
+2023-12-02,Palestine,Riots,62
+2023-12-02,Palestine,Strategic developments,37
+2023-12-02,Palestine,Violence against civilians,24
+2023-12-09,Israel,Battles,8
+2023-12-09,Israel,Explosions/Remote violence,55
+2023-12-09,Israel,Protests,10
+2023-12-09,Israel,Strategic developments,24
+2023-12-09,Palestine,Battles,83
+2023-12-09,Palestine,Explosions/Remote violence,265
+2023-12-09,Palestine,Protests,14
+2023-12-09,Palestine,Riots,99
+2023-12-09,Palestine,Strategic developments,32
+2023-12-09,Palestine,Violence against civilians,27
+2023-12-16,Israel,Battles,10
+2023-12-16,Israel,Explosions/Remote violence,48
+2023-12-16,Israel,Protests,6
+2023-12-16,Israel,Strategic developments,22
+2023-12-16,Palestine,Battles,105
+2023-12-16,Palestine,Explosions/Remote violence,258
+2023-12-16,Palestine,Protests,11
+2023-12-16,Palestine,Riots,98
+2023-12-16,Palestine,Strategic developments,26
+2023-12-16,Palestine,Violence against civilians,19
+2023-12-23,Israel,Battles,12
+2023-12-23,Israel,Explosions/Remote violence,40
+2023-12-23,Israel,Protests,8
+2023-12-23,Israel,Strategic developments,29
+2023-12-23,Palestine,Battles,94
+2023-12-23,Palestine,Explosions/Remote violence,257
+2023-12-23,Palestine,Protests,11
+2023-12-23,Palestine,Riots,60
+2023-12-23,Palestine,Strategic developments,27
+2023-12-23,Palestine,Violence against civilians,25
+2023-12-30,Israel,Battles,7
+2023-12-30,Israel,Explosions/Remote violence,37
+2023-12-30,Israel,Protests,6
+2023-12-30,Israel,Strategic developments,18
+2023-12-30,Palestine,Battles,95
+2023-12-30,Palestine,Explosions/Remote violence,261
+2023-12-30,Palestine,Protests,20
+2023-12-30,Palestine,Riots,73
+2023-12-30,Palestine,Strategic developments,26
+2023-12-30,Palestine,Violence against civilians,18
+2024-01-06,Israel,Battles,7
+2024-01-06,Israel,Explosions/Remote violence,41
+2024-01-06,Israel,Protests,11
+2024-01-06,Israel,Strategic developments,23
+2024-01-06,Palestine,Battles,92
+2024-01-06,Palestine,Explosions/Remote violence,249
+2024-01-06,Palestine,Protests,9
+2024-01-06,Palestine,Riots,54
+2024-01-06,Palestine,Strategic developments,35
+2024-01-06,Palestine,Violence against civilians,26
+2024-01-13,Israel,Battles,11
+2024-01-13,Israel,Explosions/Remote violence,40
+2024-01-13,Israel,Protests,19
+2024-01-13,Israel,Riots,1
+2024-01-13,Israel,Strategic developments,10
+2024-01-13,Israel,Violence against civilians,1
+2024-01-13,Palestine,Battles,83
+2024-01-13,Palestine,Explosions/Remote violence,256
+2024-01-13,Palestine,Protests,4
+2024-01-13,Palestine,Riots,85
+2024-01-13,Palestine,Strategic developments,44
+2024-01-13,Palestine,Violence against civilians,23
+2024-01-20,Israel,Battles,5
+2024-01-20,Israel,Explosions/Remote violence,22
+2024-01-20,Israel,Protests,32
+2024-01-20,Israel,Strategic developments,6
+2024-01-20,Palestine,Battles,69
+2024-01-20,Palestine,Explosions/Remote violence,226
+2024-01-20,Palestine,Protests,1
+2024-01-20,Palestine,Riots,64
+2024-01-20,Palestine,Strategic developments,38
+2024-01-20,Palestine,Violence against civilians,30
+2024-01-27,Israel,Battles,11
+2024-01-27,Israel,Explosions/Remote violence,38
+2024-01-27,Israel,Protests,28
+2024-01-27,Israel,Riots,4
+2024-01-27,Israel,Strategic developments,9
+2024-01-27,Palestine,Battles,76
+2024-01-27,Palestine,Explosions/Remote violence,230
+2024-01-27,Palestine,Riots,50
+2024-01-27,Palestine,Strategic developments,37
+2024-01-27,Palestine,Violence against civilians,26
+2024-02-03,Israel,Battles,9
+2024-02-03,Israel,Explosions/Remote violence,35
+2024-02-03,Israel,Protests,22
+2024-02-03,Israel,Riots,8
+2024-02-03,Israel,Strategic developments,6
+2024-02-03,Israel,Violence against civilians,1
+2024-02-03,Palestine,Battles,70
+2024-02-03,Palestine,Explosions/Remote violence,244
+2024-02-03,Palestine,Protests,10
+2024-02-03,Palestine,Riots,62
+2024-02-03,Palestine,Strategic developments,42
+2024-02-03,Palestine,Violence against civilians,26
+2024-02-10,Israel,Battles,4
+2024-02-10,Israel,Explosions/Remote violence,36
+2024-02-10,Israel,Protests,40
+2024-02-10,Israel,Riots,2
+2024-02-10,Israel,Strategic developments,5
+2024-02-10,Israel,Violence against civilians,2
+2024-02-10,Palestine,Battles,44
+2024-02-10,Palestine,Explosions/Remote violence,174
+2024-02-10,Palestine,Protests,12
+2024-02-10,Palestine,Riots,76
+2024-02-10,Palestine,Strategic developments,28
+2024-02-10,Palestine,Violence against civilians,36
+2024-02-17,Israel,Battles,3
+2024-02-17,Israel,Explosions/Remote violence,32
+2024-02-17,Israel,Protests,39
+2024-02-17,Israel,Riots,4
+2024-02-17,Israel,Strategic developments,6
+2024-02-17,Palestine,Battles,43
+2024-02-17,Palestine,Explosions/Remote violence,264
+2024-02-17,Palestine,Protests,8
+2024-02-17,Palestine,Riots,99
+2024-02-17,Palestine,Strategic developments,31
+2024-02-17,Palestine,Violence against civilians,16
+2024-02-24,Israel,Battles,6
+2024-02-24,Israel,Explosions/Remote violence,37
+2024-02-24,Israel,Protests,26
+2024-02-24,Israel,Riots,4
+2024-02-24,Israel,Strategic developments,10
+2024-02-24,Israel,Violence against civilians,2
+2024-02-24,Palestine,Battles,55
+2024-02-24,Palestine,Explosions/Remote violence,225
+2024-02-24,Palestine,Protests,14
+2024-02-24,Palestine,Riots,77
+2024-02-24,Palestine,Strategic developments,20
+2024-02-24,Palestine,Violence against civilians,21
+2024-03-02,Israel,Battles,3
+2024-03-02,Israel,Explosions/Remote violence,37
+2024-03-02,Israel,Protests,40
+2024-03-02,Israel,Riots,3
+2024-03-02,Israel,Strategic developments,8
+2024-03-02,Palestine,Battles,48
+2024-03-02,Palestine,Explosions/Remote violence,246
+2024-03-02,Palestine,Protests,13
+2024-03-02,Palestine,Riots,62
+2024-03-02,Palestine,Strategic developments,23
+2024-03-02,Palestine,Violence against civilians,35
+2024-03-09,Israel,Battles,8
+2024-03-09,Israel,Explosions/Remote violence,45
+2024-03-09,Israel,Protests,23
+2024-03-09,Israel,Riots,3
+2024-03-09,Israel,Strategic developments,5
+2024-03-09,Palestine,Battles,39
+2024-03-09,Palestine,Explosions/Remote violence,233
+2024-03-09,Palestine,Protests,9
+2024-03-09,Palestine,Riots,70
+2024-03-09,Palestine,Strategic developments,27
+2024-03-09,Palestine,Violence against civilians,28
+2024-03-16,Israel,Battles,12
+2024-03-16,Israel,Explosions/Remote violence,36
+2024-03-16,Israel,Protests,27
+2024-03-16,Israel,Riots,6
+2024-03-16,Israel,Strategic developments,9
+2024-03-16,Israel,Violence against civilians,1
+2024-03-16,Palestine,Battles,43
+2024-03-16,Palestine,Explosions/Remote violence,234
+2024-03-16,Palestine,Protests,3
+2024-03-16,Palestine,Riots,62
+2024-03-16,Palestine,Strategic developments,28
+2024-03-16,Palestine,Violence against civilians,18
+2024-03-23,Israel,Battles,7
+2024-03-23,Israel,Explosions/Remote violence,41
+2024-03-23,Israel,Protests,16
+2024-03-23,Israel,Riots,4
+2024-03-23,Israel,Strategic developments,8
+2024-03-23,Palestine,Battles,62
+2024-03-23,Palestine,Explosions/Remote violence,231
+2024-03-23,Palestine,Protests,10
+2024-03-23,Palestine,Riots,59
+2024-03-23,Palestine,Strategic developments,21
+2024-03-23,Palestine,Violence against civilians,23
+2024-03-30,Israel,Battles,6
+2024-03-30,Israel,Explosions/Remote violence,37
+2024-03-30,Israel,Protests,34
+2024-03-30,Israel,Riots,7
+2024-03-30,Israel,Strategic developments,7
+2024-03-30,Israel,Violence against civilians,1
+2024-03-30,Palestine,Battles,60
+2024-03-30,Palestine,Explosions/Remote violence,201
+2024-03-30,Palestine,Protests,14
+2024-03-30,Palestine,Riots,82
+2024-03-30,Palestine,Strategic developments,35
+2024-03-30,Palestine,Violence against civilians,15
+2024-04-06,Israel,Battles,1
+2024-04-06,Israel,Explosions/Remote violence,30
+2024-04-06,Israel,Protests,28
+2024-04-06,Israel,Riots,4
+2024-04-06,Israel,Strategic developments,4
+2024-04-06,Israel,Violence against civilians,2
+2024-04-06,Palestine,Battles,37
+2024-04-06,Palestine,Explosions/Remote violence,189
+2024-04-06,Palestine,Protests,10
+2024-04-06,Palestine,Riots,50
+2024-04-06,Palestine,Strategic developments,18
+2024-04-06,Palestine,Violence against civilians,14
+2024-04-13,Israel,Battles,10
+2024-04-13,Israel,Explosions/Remote violence,42
+2024-04-13,Israel,Protests,17
+2024-04-13,Israel,Riots,3
+2024-04-13,Israel,Strategic developments,16
+2024-04-13,Palestine,Battles,22
+2024-04-13,Palestine,Explosions/Remote violence,170
+2024-04-13,Palestine,Protests,5
+2024-04-13,Palestine,Riots,65
+2024-04-13,Palestine,Strategic developments,25
+2024-04-13,Palestine,Violence against civilians,27
+2024-04-20,Israel,Explosions/Remote violence,38
+2024-04-20,Israel,Protests,27
+2024-04-20,Israel,Riots,2
+2024-04-20,Israel,Strategic developments,7
+2024-04-20,Israel,Violence against civilians,5
+2024-04-20,Palestine,Battles,53
+2024-04-20,Palestine,Explosions/Remote violence,233
+2024-04-20,Palestine,Protests,10
+2024-04-20,Palestine,Riots,71
+2024-04-20,Palestine,Strategic developments,14
+2024-04-20,Palestine,Violence against civilians,22
+2024-04-27,Israel,Battles,5
+2024-04-27,Israel,Explosions/Remote violence,25
+2024-04-27,Israel,Protests,18
+2024-04-27,Israel,Riots,3
+2024-04-27,Israel,Strategic developments,3
+2024-04-27,Israel,Violence against civilians,1
+2024-04-27,Palestine,Battles,27
+2024-04-27,Palestine,Explosions/Remote violence,219
+2024-04-27,Palestine,Protests,9
+2024-04-27,Palestine,Riots,76
+2024-04-27,Palestine,Strategic developments,25
+2024-04-27,Palestine,Violence against civilians,16
+2024-05-04,Israel,Battles,3
+2024-05-04,Israel,Explosions/Remote violence,60
+2024-05-04,Israel,Protests,32
+2024-05-04,Israel,Riots,7
+2024-05-04,Israel,Strategic developments,8
+2024-05-04,Palestine,Battles,48
+2024-05-04,Palestine,Explosions/Remote violence,242
+2024-05-04,Palestine,Protests,7
+2024-05-04,Palestine,Riots,69
+2024-05-04,Palestine,Strategic developments,46
+2024-05-04,Palestine,Violence against civilians,10
+2024-05-11,Israel,Explosions/Remote violence,66
+2024-05-11,Israel,Protests,33
+2024-05-11,Israel,Riots,5
+2024-05-11,Israel,Strategic developments,10
+2024-05-11,Palestine,Battles,69
+2024-05-11,Palestine,Explosions/Remote violence,219
+2024-05-11,Palestine,Protests,10
+2024-05-11,Palestine,Riots,104
+2024-05-11,Palestine,Strategic developments,41
+2024-05-11,Palestine,Violence against civilians,15
+2024-05-18,Israel,Battles,7
+2024-05-18,Israel,Explosions/Remote violence,57
+2024-05-18,Israel,Protests,30
+2024-05-18,Israel,Riots,5
+2024-05-18,Israel,Strategic developments,13
+2024-05-18,Israel,Violence against civilians,2
+2024-05-18,Palestine,Battles,53
+2024-05-18,Palestine,Explosions/Remote violence,230
+2024-05-18,Palestine,Protests,5
+2024-05-18,Palestine,Riots,78
+2024-05-18,Palestine,Strategic developments,33
+2024-05-18,Palestine,Violence against civilians,17
+2024-05-25,Israel,Explosions/Remote violence,61
+2024-05-25,Israel,Protests,48
+2024-05-25,Israel,Riots,7
+2024-05-25,Israel,Strategic developments,4
+2024-05-25,Israel,Violence against civilians,7
+2024-05-25,Palestine,Battles,71
+2024-05-25,Palestine,Explosions/Remote violence,238
+2024-05-25,Palestine,Protests,15
+2024-05-25,Palestine,Riots,114
+2024-05-25,Palestine,Strategic developments,49
+2024-05-25,Palestine,Violence against civilians,25
+2024-06-01,Israel,Explosions/Remote violence,70
+2024-06-01,Israel,Protests,37
+2024-06-01,Israel,Riots,5
+2024-06-01,Israel,Strategic developments,12
+2024-06-01,Israel,Violence against civilians,1
+2024-06-01,Palestine,Battles,51
+2024-06-01,Palestine,Explosions/Remote violence,226
+2024-06-01,Palestine,Protests,8
+2024-06-01,Palestine,Riots,79
+2024-06-01,Palestine,Strategic developments,47
+2024-06-01,Palestine,Violence against civilians,10
+2024-06-08,Israel,Battles,4
+2024-06-08,Israel,Explosions/Remote violence,85
+2024-06-08,Israel,Protests,18
+2024-06-08,Israel,Riots,1
+2024-06-08,Israel,Strategic developments,13
+2024-06-08,Palestine,Battles,41
+2024-06-08,Palestine,Explosions/Remote violence,187
+2024-06-08,Palestine,Protests,14
+2024-06-08,Palestine,Riots,66
+2024-06-08,Palestine,Strategic developments,25
+2024-06-08,Palestine,Violence against civilians,13
+2024-06-15,Israel,Battles,1
+2024-06-15,Israel,Explosions/Remote violence,29
+2024-06-15,Israel,Protests,33
+2024-06-15,Israel,Riots,5
+2024-06-15,Israel,Strategic developments,11
+2024-06-15,Israel,Violence against civilians,1
+2024-06-15,Palestine,Battles,35
+2024-06-15,Palestine,Explosions/Remote violence,181
+2024-06-15,Palestine,Protests,1
+2024-06-15,Palestine,Riots,61
+2024-06-15,Palestine,Strategic developments,25
+2024-06-15,Palestine,Violence against civilians,9
+2024-06-22,Israel,Battles,1
+2024-06-22,Israel,Explosions/Remote violence,40
+2024-06-22,Israel,Protests,40
+2024-06-22,Israel,Riots,4
+2024-06-22,Israel,Strategic developments,24
+2024-06-22,Israel,Violence against civilians,2
+2024-06-22,Palestine,Battles,53
+2024-06-22,Palestine,Explosions/Remote violence,208
+2024-06-22,Palestine,Protests,3
+2024-06-22,Palestine,Riots,71
+2024-06-22,Palestine,Strategic developments,66
+2024-06-22,Palestine,Violence against civilians,29
+2024-06-29,Israel,Battles,5
+2024-06-29,Israel,Explosions/Remote violence,77
+2024-06-29,Israel,Protests,32
+2024-06-29,Israel,Riots,2
+2024-06-29,Israel,Strategic developments,2
+2024-06-29,Israel,Violence against civilians,1
+2024-06-29,Palestine,Battles,50
+2024-06-29,Palestine,Explosions/Remote violence,203
+2024-06-29,Palestine,Protests,4
+2024-06-29,Palestine,Riots,83
+2024-06-29,Palestine,Strategic developments,43
+2024-06-29,Palestine,Violence against civilians,16
+2024-07-06,Israel,Battles,1
+2024-07-06,Israel,Explosions/Remote violence,55
+2024-07-06,Israel,Protests,58
+2024-07-06,Israel,Riots,6
+2024-07-06,Israel,Strategic developments,16
+2024-07-06,Israel,Violence against civilians,2
+2024-07-06,Palestine,Battles,45
+2024-07-06,Palestine,Explosions/Remote violence,225
+2024-07-06,Palestine,Protests,4
+2024-07-06,Palestine,Riots,88
+2024-07-06,Palestine,Strategic developments,75
+2024-07-06,Palestine,Violence against civilians,21
+2024-07-13,Israel,Battles,1
+2024-07-13,Israel,Explosions/Remote violence,70
+2024-07-13,Israel,Protests,46
+2024-07-13,Israel,Riots,3
+2024-07-13,Israel,Strategic developments,11
+2024-07-13,Israel,Violence against civilians,1
+2024-07-13,Palestine,Battles,38
+2024-07-13,Palestine,Explosions/Remote violence,178
+2024-07-13,Palestine,Protests,12
+2024-07-13,Palestine,Riots,73
+2024-07-13,Palestine,Strategic developments,41
+2024-07-13,Palestine,Violence against civilians,26
+2024-07-20,Israel,Battles,2
+2024-07-20,Israel,Explosions/Remote violence,56
+2024-07-20,Israel,Protests,25
+2024-07-20,Israel,Riots,1
+2024-07-20,Israel,Strategic developments,11
+2024-07-20,Israel,Violence against civilians,1
+2024-07-20,Palestine,Battles,44
+2024-07-20,Palestine,Explosions/Remote violence,183
+2024-07-20,Palestine,Protests,9
+2024-07-20,Palestine,Riots,78
+2024-07-20,Palestine,Strategic developments,61
+2024-07-20,Palestine,Violence against civilians,36
+2024-07-27,Israel,Battles,1
+2024-07-27,Israel,Explosions/Remote violence,46
+2024-07-27,Israel,Protests,34
+2024-07-27,Israel,Riots,7
+2024-07-27,Israel,Strategic developments,5
+2024-07-27,Israel,Violence against civilians,3
+2024-07-27,Palestine,Battles,51
+2024-07-27,Palestine,Explosions/Remote violence,229
+2024-07-27,Palestine,Protests,15
+2024-07-27,Palestine,Riots,102
+2024-07-27,Palestine,Strategic developments,47
+2024-07-27,Palestine,Violence against civilians,23
+2024-08-03,Israel,Battles,2
+2024-08-03,Israel,Explosions/Remote violence,71
+2024-08-03,Israel,Protests,24
+2024-08-03,Israel,Riots,4
+2024-08-03,Israel,Strategic developments,7
+2024-08-03,Israel,Violence against civilians,3
+2024-08-03,Palestine,Battles,45
+2024-08-03,Palestine,Explosions/Remote violence,208
+2024-08-03,Palestine,Protests,13
+2024-08-03,Palestine,Riots,93
+2024-08-03,Palestine,Strategic developments,46
+2024-08-03,Palestine,Violence against civilians,22
+2024-08-10,Israel,Battles,2
+2024-08-10,Israel,Explosions/Remote violence,76
+2024-08-10,Israel,Protests,21
+2024-08-10,Israel,Riots,2
+2024-08-10,Israel,Strategic developments,6
+2024-08-10,Israel,Violence against civilians,1
+2024-08-10,Palestine,Battles,43
+2024-08-10,Palestine,Explosions/Remote violence,241
+2024-08-10,Palestine,Protests,9
+2024-08-10,Palestine,Riots,92
+2024-08-10,Palestine,Strategic developments,54
+2024-08-10,Palestine,Violence against civilians,28
+2024-08-17,Israel,Explosions/Remote violence,102
+2024-08-17,Israel,Protests,25
+2024-08-17,Israel,Riots,3
+2024-08-17,Israel,Strategic developments,6
+2024-08-17,Palestine,Battles,53
+2024-08-17,Palestine,Explosions/Remote violence,235
+2024-08-17,Palestine,Protests,6
+2024-08-17,Palestine,Riots,64
+2024-08-17,Palestine,Strategic developments,47
+2024-08-17,Palestine,Violence against civilians,16
+2024-08-24,Israel,Battles,1
+2024-08-24,Israel,Explosions/Remote violence,56
+2024-08-24,Israel,Protests,23
+2024-08-24,Israel,Riots,2
+2024-08-24,Israel,Strategic developments,21
+2024-08-24,Palestine,Battles,46
+2024-08-24,Palestine,Explosions/Remote violence,241
+2024-08-24,Palestine,Protests,8
+2024-08-24,Palestine,Riots,79
+2024-08-24,Palestine,Strategic developments,46
+2024-08-24,Palestine,Violence against civilians,24
+2024-08-31,Israel,Explosions/Remote violence,51
+2024-08-31,Israel,Protests,125
+2024-08-31,Israel,Riots,10
+2024-08-31,Israel,Strategic developments,12
+2024-08-31,Palestine,Battles,37
+2024-08-31,Palestine,Explosions/Remote violence,186
+2024-08-31,Palestine,Protests,10
+2024-08-31,Palestine,Riots,77
+2024-08-31,Palestine,Strategic developments,40
+2024-08-31,Palestine,Violence against civilians,25
+2024-09-07,Israel,Explosions/Remote violence,53
+2024-09-07,Israel,Protests,38
+2024-09-07,Israel,Riots,4
+2024-09-07,Israel,Strategic developments,15
+2024-09-07,Palestine,Battles,31
+2024-09-07,Palestine,Explosions/Remote violence,171
+2024-09-07,Palestine,Protests,5
+2024-09-07,Palestine,Riots,79
+2024-09-07,Palestine,Strategic developments,57
+2024-09-07,Palestine,Violence against civilians,22
+2024-09-14,Israel,Explosions/Remote violence,74
+2024-09-14,Israel,Protests,24
+2024-09-14,Israel,Riots,1
+2024-09-14,Israel,Strategic developments,20
+2024-09-14,Palestine,Battles,27
+2024-09-14,Palestine,Explosions/Remote violence,166
+2024-09-14,Palestine,Protests,5
+2024-09-14,Palestine,Riots,74
+2024-09-14,Palestine,Strategic developments,53
+2024-09-14,Palestine,Violence against civilians,21
+2024-09-21,Israel,Battles,2
+2024-09-21,Israel,Explosions/Remote violence,146
+2024-09-21,Israel,Protests,24
+2024-09-21,Israel,Riots,4
+2024-09-21,Israel,Strategic developments,40
+2024-09-21,Israel,Violence against civilians,1
+2024-09-21,Palestine,Battles,26
+2024-09-21,Palestine,Explosions/Remote violence,189
+2024-09-21,Palestine,Protests,8
+2024-09-21,Palestine,Riots,84
+2024-09-21,Palestine,Strategic developments,53
+2024-09-21,Palestine,Violence against civilians,20
+2024-09-28,Israel,Explosions/Remote violence,150
+2024-09-28,Israel,Protests,8
+2024-09-28,Israel,Riots,3
+2024-09-28,Israel,Strategic developments,42
+2024-09-28,Israel,Violence against civilians,1
+2024-09-28,Palestine,Battles,23
+2024-09-28,Palestine,Explosions/Remote violence,197
+2024-09-28,Palestine,Protests,6
+2024-09-28,Palestine,Riots,70
+2024-09-28,Palestine,Strategic developments,42
+2024-09-28,Palestine,Violence against civilians,29
+2024-10-05,Israel,Explosions/Remote violence,145
+2024-10-05,Israel,Protests,16
+2024-10-05,Israel,Strategic developments,52
+2024-10-05,Israel,Violence against civilians,2
+2024-10-05,Palestine,Battles,46
+2024-10-05,Palestine,Explosions/Remote violence,220
+2024-10-05,Palestine,Protests,11
+2024-10-05,Palestine,Riots,104
+2024-10-05,Palestine,Strategic developments,43
+2024-10-05,Palestine,Violence against civilians,34
+2024-10-12,Israel,Battles,1
+2024-10-12,Israel,Explosions/Remote violence,141
+2024-10-12,Israel,Protests,4
+2024-10-12,Israel,Riots,1
+2024-10-12,Israel,Strategic developments,54
+2024-10-12,Israel,Violence against civilians,3
+2024-10-12,Palestine,Battles,32
+2024-10-12,Palestine,Explosions/Remote violence,199
+2024-10-12,Palestine,Protests,7
+2024-10-12,Palestine,Riots,92
+2024-10-12,Palestine,Strategic developments,49
+2024-10-12,Palestine,Violence against civilians,35
+2024-10-19,Israel,Explosions/Remote violence,179
+2024-10-19,Israel,Protests,10
+2024-10-19,Israel,Strategic developments,48
+2024-10-19,Palestine,Battles,28
+2024-10-19,Palestine,Explosions/Remote violence,202
+2024-10-19,Palestine,Protests,18
+2024-10-19,Palestine,Riots,89
+2024-10-19,Palestine,Strategic developments,47
+2024-10-19,Palestine,Violence against civilians,26
+2024-10-26,Israel,Explosions/Remote violence,120
+2024-10-26,Israel,Protests,15
+2024-10-26,Israel,Riots,3
+2024-10-26,Israel,Strategic developments,28
+2024-10-26,Israel,Violence against civilians,2
+2024-10-26,Palestine,Battles,33
+2024-10-26,Palestine,Explosions/Remote violence,225
+2024-10-26,Palestine,Protests,5
+2024-10-26,Palestine,Riots,91
+2024-10-26,Palestine,Strategic developments,57
+2024-10-26,Palestine,Violence against civilians,28
+2024-11-02,Israel,Battles,1
+2024-11-02,Israel,Explosions/Remote violence,98
+2024-11-02,Israel,Protests,40
+2024-11-02,Israel,Riots,6
+2024-11-02,Israel,Strategic developments,38
+2024-11-02,Israel,Violence against civilians,1
+2024-11-02,Palestine,Battles,39
+2024-11-02,Palestine,Explosions/Remote violence,205
+2024-11-02,Palestine,Protests,8
+2024-11-02,Palestine,Riots,79
+2024-11-02,Palestine,Strategic developments,55
+2024-11-02,Palestine,Violence against civilians,22
+2024-11-09,Israel,Battles,1
+2024-11-09,Israel,Explosions/Remote violence,132
+2024-11-09,Israel,Protests,8
+2024-11-09,Israel,Strategic developments,41
+2024-11-09,Palestine,Battles,47
+2024-11-09,Palestine,Explosions/Remote violence,201
+2024-11-09,Palestine,Protests,8
+2024-11-09,Palestine,Riots,77
+2024-11-09,Palestine,Strategic developments,50
+2024-11-09,Palestine,Violence against civilians,23
+2024-11-16,Israel,Battles,1
+2024-11-16,Israel,Explosions/Remote violence,122
+2024-11-16,Israel,Protests,18
+2024-11-16,Israel,Strategic developments,28
+2024-11-16,Israel,Violence against civilians,2
+2024-11-16,Palestine,Battles,40
+2024-11-16,Palestine,Explosions/Remote violence,198
+2024-11-16,Palestine,Protests,2
+2024-11-16,Palestine,Riots,77
+2024-11-16,Palestine,Strategic developments,57
+2024-11-16,Palestine,Violence against civilians,13
+2024-11-23,Israel,Explosions/Remote violence,77
+2024-11-23,Israel,Protests,24
+2024-11-23,Israel,Strategic developments,19
+2024-11-23,Israel,Violence against civilians,1
+2024-11-23,Palestine,Battles,37
+2024-11-23,Palestine,Explosions/Remote violence,176
+2024-11-23,Palestine,Protests,8
+2024-11-23,Palestine,Riots,70
+2024-11-23,Palestine,Strategic developments,58
+2024-11-23,Palestine,Violence against civilians,16
+2024-11-30,Israel,Battles,1
+2024-11-30,Israel,Explosions/Remote violence,2
+2024-11-30,Israel,Protests,17
+2024-11-30,Israel,Strategic developments,2
+2024-11-30,Palestine,Battles,33
+2024-11-30,Palestine,Explosions/Remote violence,186
+2024-11-30,Palestine,Protests,9
+2024-11-30,Palestine,Riots,67
+2024-11-30,Palestine,Strategic developments,48
+2024-11-30,Palestine,Violence against civilians,18
+2024-12-07,Israel,Battles,1
+2024-12-07,Israel,Explosions/Remote violence,5
+2024-12-07,Israel,Protests,20
+2024-12-07,Israel,Strategic developments,7
+2024-12-07,Israel,Violence against civilians,2
+2024-12-07,Palestine,Battles,33
+2024-12-07,Palestine,Explosions/Remote violence,169
+2024-12-07,Palestine,Protests,3
+2024-12-07,Palestine,Riots,77
+2024-12-07,Palestine,Strategic developments,59
+2024-12-07,Palestine,Violence against civilians,9
+2024-12-14,Israel,Explosions/Remote violence,4
+2024-12-14,Israel,Protests,27
+2024-12-14,Israel,Strategic developments,3
+2024-12-14,Palestine,Battles,31
+2024-12-14,Palestine,Explosions/Remote violence,185
+2024-12-14,Palestine,Protests,11
+2024-12-14,Palestine,Riots,78
+2024-12-14,Palestine,Strategic developments,58
+2024-12-14,Palestine,Violence against civilians,10
+2024-12-21,Israel,Explosions/Remote violence,6
+2024-12-21,Israel,Protests,19
+2024-12-21,Israel,Riots,1
+2024-12-21,Israel,Strategic developments,4
+2024-12-21,Israel,Violence against civilians,1
+2024-12-21,Palestine,Battles,37
+2024-12-21,Palestine,Explosions/Remote violence,174
+2024-12-21,Palestine,Protests,8
+2024-12-21,Palestine,Riots,70
+2024-12-21,Palestine,Strategic developments,58
+2024-12-21,Palestine,Violence against civilians,10
+2024-12-28,Israel,Explosions/Remote violence,5
+2024-12-28,Israel,Protests,33
+2024-12-28,Israel,Riots,1
+2024-12-28,Israel,Strategic developments,12
+2024-12-28,Palestine,Battles,26
+2024-12-28,Palestine,Explosions/Remote violence,174
+2024-12-28,Palestine,Protests,1
+2024-12-28,Palestine,Riots,55
+2024-12-28,Palestine,Strategic developments,43
+2024-12-28,Palestine,Violence against civilians,18
+2025-01-04,Israel,Explosions/Remote violence,3
+2025-01-04,Israel,Protests,36
+2025-01-04,Israel,Riots,3
+2025-01-04,Israel,Strategic developments,5
+2025-01-04,Palestine,Battles,34
+2025-01-04,Palestine,Explosions/Remote violence,206
+2025-01-04,Palestine,Protests,2
+2025-01-04,Palestine,Riots,109
+2025-01-04,Palestine,Strategic developments,56
+2025-01-04,Palestine,Violence against civilians,20
+2025-01-11,Israel,Explosions/Remote violence,2
+2025-01-11,Israel,Protests,30
+2025-01-11,Israel,Riots,3
+2025-01-11,Israel,Strategic developments,4
+2025-01-11,Palestine,Battles,25
+2025-01-11,Palestine,Explosions/Remote violence,179
+2025-01-11,Palestine,Protests,2
+2025-01-11,Palestine,Riots,89
+2025-01-11,Palestine,Strategic developments,62
+2025-01-11,Palestine,Violence against civilians,17
+2025-01-18,Israel,Protests,19
+2025-01-18,Israel,Riots,5
+2025-01-18,Israel,Strategic developments,5
+2025-01-18,Israel,Violence against civilians,2
+2025-01-18,Palestine,Battles,24
+2025-01-18,Palestine,Explosions/Remote violence,64
+2025-01-18,Palestine,Protests,2
+2025-01-18,Palestine,Riots,114
+2025-01-18,Palestine,Strategic developments,43
+2025-01-18,Palestine,Violence against civilians,33
+2025-01-25,Israel,Protests,24
+2025-01-25,Israel,Riots,3
+2025-01-25,Israel,Strategic developments,4
+2025-01-25,Palestine,Battles,22
+2025-01-25,Palestine,Explosions/Remote violence,23
+2025-01-25,Palestine,Protests,2
+2025-01-25,Palestine,Riots,84
+2025-01-25,Palestine,Strategic developments,48
+2025-01-25,Palestine,Violence against civilians,28
+2025-02-01,Israel,Protests,11
+2025-02-01,Israel,Riots,1
+2025-02-01,Israel,Strategic developments,1
+2025-02-01,Palestine,Battles,20
+2025-02-01,Palestine,Explosions/Remote violence,26
+2025-02-01,Palestine,Protests,3
+2025-02-01,Palestine,Riots,70
+2025-02-01,Palestine,Strategic developments,37
+2025-02-01,Palestine,Violence against civilians,23
+2025-02-08,Israel,Protests,28
+2025-02-08,Israel,Riots,4
+2025-02-08,Israel,Strategic developments,2
+2025-02-08,Palestine,Battles,29
+2025-02-08,Palestine,Explosions/Remote violence,28
+2025-02-08,Palestine,Protests,1
+2025-02-08,Palestine,Riots,77
+2025-02-08,Palestine,Strategic developments,64
+2025-02-08,Palestine,Violence against civilians,39
+2025-02-15,Israel,Explosions/Remote violence,1
+2025-02-15,Israel,Protests,21
+2025-02-15,Israel,Riots,1
+2025-02-15,Israel,Strategic developments,3
+2025-02-15,Palestine,Battles,11
+2025-02-15,Palestine,Explosions/Remote violence,43
+2025-02-15,Palestine,Protests,2
+2025-02-15,Palestine,Riots,101
+2025-02-15,Palestine,Strategic developments,43
+2025-02-15,Palestine,Violence against civilians,50
+2025-02-22,Israel,Protests,15
+2025-02-22,Israel,Riots,1
+2025-02-22,Israel,Violence against civilians,1
+2025-02-22,Palestine,Battles,10
+2025-02-22,Palestine,Explosions/Remote violence,32
+2025-02-22,Palestine,Protests,2
+2025-02-22,Palestine,Riots,75
+2025-02-22,Palestine,Strategic developments,48
+2025-02-22,Palestine,Violence against civilians,52
+2025-03-01,Israel,Protests,21
+2025-03-01,Israel,Riots,3
+2025-03-01,Israel,Strategic developments,1
+2025-03-01,Israel,Violence against civilians,1
+2025-03-01,Palestine,Battles,4
+2025-03-01,Palestine,Explosions/Remote violence,54
+2025-03-01,Palestine,Protests,2
+2025-03-01,Palestine,Riots,70
+2025-03-01,Palestine,Strategic developments,45
+2025-03-01,Palestine,Violence against civilians,42
+2025-03-08,Israel,Protests,15
+2025-03-08,Israel,Riots,1
+2025-03-08,Israel,Violence against civilians,1
+2025-03-08,Palestine,Battles,10
+2025-03-08,Palestine,Explosions/Remote violence,62
+2025-03-08,Palestine,Protests,4
+2025-03-08,Palestine,Riots,109
+2025-03-08,Palestine,Strategic developments,37
+2025-03-08,Palestine,Violence against civilians,39
+2025-03-15,Israel,Explosions/Remote violence,1
+2025-03-15,Israel,Protests,32
+2025-03-15,Israel,Riots,4
+2025-03-15,Israel,Strategic developments,9
+2025-03-15,Palestine,Battles,5
+2025-03-15,Palestine,Explosions/Remote violence,164
+2025-03-15,Palestine,Protests,1
+2025-03-15,Palestine,Riots,63
+2025-03-15,Palestine,Strategic developments,51
+2025-03-15,Palestine,Violence against civilians,34
+2025-03-22,Israel,Explosions/Remote violence,3
+2025-03-22,Israel,Protests,32
+2025-03-22,Israel,Riots,7
+2025-03-22,Israel,Strategic developments,10
+2025-03-22,Israel,Violence against civilians,1
+2025-03-22,Palestine,Battles,2
+2025-03-22,Palestine,Explosions/Remote violence,204
+2025-03-22,Palestine,Protests,6
+2025-03-22,Palestine,Riots,79
+2025-03-22,Palestine,Strategic developments,48
+2025-03-22,Palestine,Violence against civilians,39
+2025-03-29,Israel,Explosions/Remote violence,2
+2025-03-29,Israel,Protests,12
+2025-03-29,Israel,Riots,3
+2025-03-29,Israel,Strategic developments,5
+2025-03-29,Palestine,Battles,6
+2025-03-29,Palestine,Explosions/Remote violence,189
+2025-03-29,Palestine,Protests,2
+2025-03-29,Palestine,Riots,66
+2025-03-29,Palestine,Strategic developments,84
+2025-03-29,Palestine,Violence against civilians,42
+2025-04-05,Israel,Explosions/Remote violence,4
+2025-04-05,Israel,Protests,18
+2025-04-05,Israel,Strategic developments,4
+2025-04-05,Palestine,Battles,9
+2025-04-05,Palestine,Explosions/Remote violence,171
+2025-04-05,Palestine,Protests,6
+2025-04-05,Palestine,Riots,85
+2025-04-05,Palestine,Strategic developments,70
+2025-04-05,Palestine,Violence against civilians,28
+2025-04-12,Israel,Explosions/Remote violence,2
+2025-04-12,Israel,Protests,9
+2025-04-12,Israel,Riots,1
+2025-04-12,Israel,Strategic developments,9
+2025-04-12,Palestine,Battles,4
+2025-04-12,Palestine,Explosions/Remote violence,218
+2025-04-12,Palestine,Protests,12
+2025-04-12,Palestine,Riots,103
+2025-04-12,Palestine,Strategic developments,80
+2025-04-12,Palestine,Violence against civilians,27
+2025-04-19,Israel,Explosions/Remote violence,2
+2025-04-19,Israel,Protests,16
+2025-04-19,Israel,Riots,1
+2025-04-19,Israel,Strategic developments,6
+2025-04-19,Palestine,Battles,10
+2025-04-19,Palestine,Explosions/Remote violence,204
+2025-04-19,Palestine,Protests,7
+2025-04-19,Palestine,Riots,67
+2025-04-19,Palestine,Strategic developments,85
+2025-04-19,Palestine,Violence against civilians,48
+2025-04-26,Israel,Explosions/Remote violence,2
+2025-04-26,Israel,Protests,27
+2025-04-26,Israel,Riots,12
+2025-04-26,Israel,Strategic developments,13
+2025-04-26,Palestine,Battles,8
+2025-04-26,Palestine,Explosions/Remote violence,215
+2025-04-26,Palestine,Protests,3
+2025-04-26,Palestine,Riots,72
+2025-04-26,Palestine,Strategic developments,47
+2025-04-26,Palestine,Violence against civilians,34
+2025-05-03,Israel,Explosions/Remote violence,3
+2025-05-03,Israel,Protests,13
+2025-05-03,Israel,Riots,4
+2025-05-03,Israel,Strategic developments,8
+2025-05-03,Palestine,Battles,10
+2025-05-03,Palestine,Explosions/Remote violence,196
+2025-05-03,Palestine,Protests,4
+2025-05-03,Palestine,Riots,67
+2025-05-03,Palestine,Strategic developments,58
+2025-05-03,Palestine,Violence against civilians,46
+2025-05-10,Israel,Explosions/Remote violence,2
+2025-05-10,Israel,Protests,56
+2025-05-10,Israel,Riots,2
+2025-05-10,Israel,Strategic developments,6
+2025-05-10,Palestine,Battles,12
+2025-05-10,Palestine,Explosions/Remote violence,201
+2025-05-10,Palestine,Protests,10
+2025-05-10,Palestine,Riots,90
+2025-05-10,Palestine,Strategic developments,58
+2025-05-10,Palestine,Violence against civilians,39
+2025-05-17,Israel,Explosions/Remote violence,3
+2025-05-17,Israel,Protests,17
+2025-05-17,Israel,Riots,4
+2025-05-17,Israel,Strategic developments,9
+2025-05-17,Israel,Violence against civilians,1
+2025-05-17,Palestine,Battles,11
+2025-05-17,Palestine,Explosions/Remote violence,249
+2025-05-17,Palestine,Protests,8
+2025-05-17,Palestine,Riots,119
+2025-05-17,Palestine,Strategic developments,99
+2025-05-17,Palestine,Violence against civilians,45
+2025-05-24,Israel,Protests,38
+2025-05-24,Israel,Riots,4
+2025-05-24,Israel,Strategic developments,4
+2025-05-24,Palestine,Battles,16
+2025-05-24,Palestine,Explosions/Remote violence,228
+2025-05-24,Palestine,Protests,10
+2025-05-24,Palestine,Riots,105
+2025-05-24,Palestine,Strategic developments,98
+2025-05-24,Palestine,Violence against civilians,43
+2025-05-31,Israel,Explosions/Remote violence,3
+2025-05-31,Israel,Protests,20
+2025-05-31,Israel,Riots,4
+2025-05-31,Israel,Strategic developments,9
+2025-05-31,Palestine,Battles,12
+2025-05-31,Palestine,Explosions/Remote violence,240
+2025-05-31,Palestine,Protests,1
+2025-05-31,Palestine,Riots,64
+2025-05-31,Palestine,Strategic developments,74
+2025-05-31,Palestine,Violence against civilians,52
+2025-06-07,Israel,Explosions/Remote violence,5
+2025-06-07,Israel,Protests,43
+2025-06-07,Israel,Riots,1
+2025-06-07,Israel,Strategic developments,14
+2025-06-07,Palestine,Battles,20
+2025-06-07,Palestine,Explosions/Remote violence,202
+2025-06-07,Palestine,Riots,63
+2025-06-07,Palestine,Strategic developments,74
+2025-06-07,Palestine,Violence against civilians,54
+2025-06-14,Israel,Explosions/Remote violence,67
+2025-06-14,Israel,Protests,5
+2025-06-14,Israel,Strategic developments,42
+2025-06-14,Palestine,Battles,10
+2025-06-14,Palestine,Explosions/Remote violence,178
+2025-06-14,Palestine,Protests,2
+2025-06-14,Palestine,Riots,67
+2025-06-14,Palestine,Strategic developments,61
+2025-06-14,Palestine,Violence against civilians,59
+2025-06-21,Israel,Explosions/Remote violence,17
+2025-06-21,Israel,Protests,21
+2025-06-21,Israel,Riots,1
+2025-06-21,Israel,Strategic developments,18
+2025-06-21,Palestine,Battles,17
+2025-06-21,Palestine,Explosions/Remote violence,168
+2025-06-21,Palestine,Protests,2
+2025-06-21,Palestine,Riots,69
+2025-06-21,Palestine,Strategic developments,69
+2025-06-21,Palestine,Violence against civilians,62
+2025-06-28,Israel,Explosions/Remote violence,2
+2025-06-28,Israel,Protests,37
+2025-06-28,Israel,Riots,2
+2025-06-28,Israel,Strategic developments,6
+2025-06-28,Palestine,Battles,9
+2025-06-28,Palestine,Explosions/Remote violence,207
+2025-06-28,Palestine,Protests,2
+2025-06-28,Palestine,Riots,81
+2025-06-28,Palestine,Strategic developments,109
+2025-06-28,Palestine,Violence against civilians,49
+2025-07-05,Israel,Explosions/Remote violence,2
+2025-07-05,Israel,Protests,42
+2025-07-05,Israel,Riots,1
+2025-07-05,Israel,Strategic developments,7
+2025-07-05,Palestine,Battles,10
+2025-07-05,Palestine,Explosions/Remote violence,226
+2025-07-05,Palestine,Protests,3
+2025-07-05,Palestine,Riots,92
+2025-07-05,Palestine,Strategic developments,87
+2025-07-05,Palestine,Violence against civilians,48
+2025-07-12,Israel,Explosions/Remote violence,2
+2025-07-12,Israel,Protests,38
+2025-07-12,Israel,Riots,3
+2025-07-12,Israel,Strategic developments,7
+2025-07-12,Palestine,Battles,12
+2025-07-12,Palestine,Explosions/Remote violence,211
+2025-07-12,Palestine,Protests,3
+2025-07-12,Palestine,Riots,73
+2025-07-12,Palestine,Strategic developments,81
+2025-07-12,Palestine,Violence against civilians,52
+2025-07-19,Israel,Battles,1
+2025-07-19,Israel,Explosions/Remote violence,4
+2025-07-19,Israel,Protests,32
+2025-07-19,Israel,Riots,11
+2025-07-19,Israel,Strategic developments,5
+2025-07-19,Palestine,Battles,10
+2025-07-19,Palestine,Explosions/Remote violence,169
+2025-07-19,Palestine,Protests,24
+2025-07-19,Palestine,Riots,71
+2025-07-19,Palestine,Strategic developments,75
+2025-07-19,Palestine,Violence against civilians,61
+2025-07-26,Israel,Explosions/Remote violence,2
+2025-07-26,Israel,Protests,58
+2025-07-26,Israel,Riots,2
+2025-07-26,Israel,Strategic developments,8
+2025-07-26,Palestine,Battles,7
+2025-07-26,Palestine,Explosions/Remote violence,150
+2025-07-26,Palestine,Protests,11
+2025-07-26,Palestine,Riots,84
+2025-07-26,Palestine,Strategic developments,60
+2025-07-26,Palestine,Violence against civilians,54
+2025-08-02,Israel,Battles,1
+2025-08-02,Israel,Explosions/Remote violence,2
+2025-08-02,Israel,Protests,58
+2025-08-02,Israel,Riots,9
+2025-08-02,Israel,Strategic developments,5
+2025-08-02,Palestine,Battles,3
+2025-08-02,Palestine,Explosions/Remote violence,162
+2025-08-02,Palestine,Protests,19
+2025-08-02,Palestine,Riots,73
+2025-08-02,Palestine,Strategic developments,79
+2025-08-02,Palestine,Violence against civilians,59
+2025-08-09,Israel,Explosions/Remote violence,2
+2025-08-09,Israel,Protests,53
+2025-08-09,Israel,Riots,2
+2025-08-09,Israel,Strategic developments,5
+2025-08-09,Palestine,Battles,5
+2025-08-09,Palestine,Explosions/Remote violence,157
+2025-08-09,Palestine,Protests,8
+2025-08-09,Palestine,Riots,59
+2025-08-09,Palestine,Strategic developments,62
+2025-08-09,Palestine,Violence against civilians,61
+2025-08-16,Israel,Battles,1
+2025-08-16,Israel,Explosions/Remote violence,3
+2025-08-16,Israel,Protests,80
+2025-08-16,Israel,Riots,8
+2025-08-16,Israel,Strategic developments,7
+2025-08-16,Palestine,Battles,2
+2025-08-16,Palestine,Explosions/Remote violence,159
+2025-08-16,Palestine,Protests,14
+2025-08-16,Palestine,Riots,59
+2025-08-16,Palestine,Strategic developments,72
+2025-08-16,Palestine,Violence against civilians,60
+2025-08-23,Israel,Protests,81
+2025-08-23,Israel,Riots,4
+2025-08-23,Israel,Strategic developments,9
+2025-08-23,Palestine,Battles,4
+2025-08-23,Palestine,Explosions/Remote violence,188
+2025-08-23,Palestine,Protests,5
+2025-08-23,Palestine,Riots,64
+2025-08-23,Palestine,Strategic developments,70
+2025-08-23,Palestine,Violence against civilians,61
+2025-08-30,Israel,Explosions/Remote violence,2
+2025-08-30,Israel,Protests,60
+2025-08-30,Israel,Riots,5
+2025-08-30,Israel,Strategic developments,4
+2025-08-30,Palestine,Battles,3
+2025-08-30,Palestine,Explosions/Remote violence,188
+2025-08-30,Palestine,Protests,7
+2025-08-30,Palestine,Riots,66
+2025-08-30,Palestine,Strategic developments,70
+2025-08-30,Palestine,Violence against civilians,56
+2025-09-06,Israel,Explosions/Remote violence,5
+2025-09-06,Israel,Protests,33
+2025-09-06,Israel,Riots,2
+2025-09-06,Israel,Strategic developments,10
+2025-09-06,Israel,Violence against civilians,1
+2025-09-06,Palestine,Battles,5
+2025-09-06,Palestine,Explosions/Remote violence,173
+2025-09-06,Palestine,Protests,5
+2025-09-06,Palestine,Riots,94
+2025-09-06,Palestine,Strategic developments,62
+2025-09-06,Palestine,Violence against civilians,59
+2025-09-13,Israel,Explosions/Remote violence,5
+2025-09-13,Israel,Protests,42
+2025-09-13,Israel,Riots,6
+2025-09-13,Israel,Strategic developments,7
+2025-09-13,Palestine,Battles,9
+2025-09-13,Palestine,Explosions/Remote violence,183
+2025-09-13,Palestine,Protests,7
+2025-09-13,Palestine,Riots,104
+2025-09-13,Palestine,Strategic developments,70
+2025-09-13,Palestine,Violence against civilians,50
+2025-09-20,Israel,Explosions/Remote violence,5
+2025-09-20,Israel,Protests,30
+2025-09-20,Israel,Strategic developments,5
+2025-09-20,Palestine,Battles,16
+2025-09-20,Palestine,Explosions/Remote violence,193
+2025-09-20,Palestine,Protests,5
+2025-09-20,Palestine,Riots,90
+2025-09-20,Palestine,Strategic developments,60
+2025-09-20,Palestine,Violence against civilians,54
+2025-09-27,Israel,Explosions/Remote violence,2
+2025-09-27,Israel,Protests,36
+2025-09-27,Israel,Strategic developments,7
+2025-09-27,Israel,Violence against civilians,1
+2025-09-27,Palestine,Battles,16
+2025-09-27,Palestine,Explosions/Remote violence,212
+2025-09-27,Palestine,Protests,4
+2025-09-27,Palestine,Riots,80
+2025-09-27,Palestine,Strategic developments,57
+2025-09-27,Palestine,Violence against civilians,56
+2025-10-04,Israel,Explosions/Remote violence,1
+2025-10-04,Israel,Protests,54
+2025-10-04,Israel,Riots,3
+2025-10-04,Israel,Strategic developments,6
+2025-10-04,Palestine,Battles,4
+2025-10-04,Palestine,Explosions/Remote violence,173
+2025-10-04,Palestine,Protests,8
+2025-10-04,Palestine,Riots,139
+2025-10-04,Palestine,Strategic developments,51
+2025-10-04,Palestine,Violence against civilians,53
+2025-10-11,Israel,Battles,1
+2025-10-11,Israel,Protests,11
+2025-10-11,Israel,Riots,1
+2025-10-11,Israel,Strategic developments,1
+2025-10-11,Palestine,Battles,13
+2025-10-11,Palestine,Explosions/Remote violence,31
+2025-10-11,Palestine,Protests,3
+2025-10-11,Palestine,Riots,126
+2025-10-11,Palestine,Strategic developments,42
+2025-10-11,Palestine,Violence against civilians,68
+2025-10-18,Israel,Protests,16
+2025-10-18,Israel,Riots,6
+2025-10-18,Israel,Strategic developments,1
+2025-10-18,Palestine,Battles,4
+2025-10-18,Palestine,Explosions/Remote violence,46
+2025-10-18,Palestine,Protests,4
+2025-10-18,Palestine,Riots,111
+2025-10-18,Palestine,Strategic developments,65
+2025-10-18,Palestine,Violence against civilians,39
+2025-10-25,Israel,Protests,25
+2025-10-25,Israel,Riots,1
+2025-10-25,Israel,Strategic developments,6
+2025-10-25,Israel,Violence against civilians,1
+2025-10-25,Palestine,Battles,5
+2025-10-25,Palestine,Explosions/Remote violence,93
+2025-10-25,Palestine,Protests,3
+2025-10-25,Palestine,Riots,120
+2025-10-25,Palestine,Strategic developments,68
+2025-10-25,Palestine,Violence against civilians,38
+2025-11-01,Israel,Protests,16
+2025-11-01,Israel,Riots,1
+2025-11-01,Israel,Strategic developments,4
+2025-11-01,Israel,Violence against civilians,1
+2025-11-01,Palestine,Battles,2
+2025-11-01,Palestine,Explosions/Remote violence,65
+2025-11-01,Palestine,Protests,5
+2025-11-01,Palestine,Riots,117
+2025-11-01,Palestine,Strategic developments,80
+2025-11-01,Palestine,Violence against civilians,32
+2025-11-08,Israel,Protests,17
+2025-11-08,Israel,Riots,3
+2025-11-08,Israel,Strategic developments,3
+2025-11-08,Palestine,Battles,7
+2025-11-08,Palestine,Explosions/Remote violence,57
+2025-11-08,Palestine,Protests,4
+2025-11-08,Palestine,Riots,103
+2025-11-08,Palestine,Strategic developments,69
+2025-11-08,Palestine,Violence against civilians,32
+2025-11-15,Israel,Protests,24
+2025-11-15,Israel,Riots,2
+2025-11-15,Israel,Strategic developments,5
+2025-11-15,Palestine,Battles,6
+2025-11-15,Palestine,Explosions/Remote violence,91
+2025-11-15,Palestine,Protests,7
+2025-11-15,Palestine,Riots,104
+2025-11-15,Palestine,Strategic developments,53
+2025-11-15,Palestine,Violence against civilians,33
+2025-11-22,Israel,Protests,21
+2025-11-22,Israel,Riots,4
+2025-11-22,Israel,Strategic developments,4
+2025-11-22,Palestine,Battles,10
+2025-11-22,Palestine,Explosions/Remote violence,87
+2025-11-22,Palestine,Protests,5
+2025-11-22,Palestine,Riots,114
+2025-11-22,Palestine,Strategic developments,67
+2025-11-22,Palestine,Violence against civilians,43
+2025-11-29,Israel,Protests,24
+2025-11-29,Israel,Riots,3
+2025-11-29,Israel,Strategic developments,2
+2025-11-29,Palestine,Battles,7
+2025-11-29,Palestine,Explosions/Remote violence,91
+2025-11-29,Palestine,Protests,7
+2025-11-29,Palestine,Riots,124
+2025-11-29,Palestine,Strategic developments,57
+2025-11-29,Palestine,Violence against civilians,41
+2025-12-06,Israel,Protests,14
+2025-12-06,Israel,Riots,1
+2025-12-06,Israel,Strategic developments,3
+2025-12-06,Palestine,Battles,3
+2025-12-06,Palestine,Explosions/Remote violence,78
+2025-12-06,Palestine,Protests,2
+2025-12-06,Palestine,Riots,91
+2025-12-06,Palestine,Strategic developments,61
+2025-12-06,Palestine,Violence against civilians,42
