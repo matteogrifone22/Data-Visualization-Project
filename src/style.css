@@ -75,8 +75,8 @@ h1, h2, h3, h4, h5, h6 {
   --color-farmacia: #E0A4A1;
 
   /* Country aliases - now resolve to actual colors above */
-  --color-Israel: #0061A0;
-  --color-Palestine: #007C58;
+  --color-Israel: #0038B8;
+  --color-Palestine: #149954;
 
   /* Universal text content width (as % of viewport) */
   --content-width: 45vw;
@@ -428,4 +428,51 @@ strong {
   font-weight: 500;
   text-align: right;
   min-width: 40px;
+}
+
+/* Themed checkbox for filters */
+.theme-checkbox {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--color-link-hover);
+  border-radius: 3px;
+  background-color: var(--bg-secondary);
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.theme-checkbox:hover {
+  border-color: var(--color-link-hover);
+}
+
+.theme-checkbox:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.theme-checkbox:active {
+  outline: none;
+  box-shadow: none;
+}
+
+.theme-checkbox:checked {
+  background-color: var(--color-link-hover);
+  border-color: var(--color-link-hover);
+}
+
+.theme-checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px;
+  height: 8px;
+  transform: translate(-50%, -60%) rotate(45deg);
+  border: 2px solid var(--bg-primary);
+  border-top: 0;
+  border-left: 0;
 }

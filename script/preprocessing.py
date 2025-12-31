@@ -49,3 +49,13 @@ fatalities_per_month = (
 
 
 fatalities_per_month.to_csv(r'C:\Users\mfmat\Documents\Magistrale\SecondoAnno\DV\Data-Visualization-Project\src\Dataset\fatalities_per_month.csv', index=False)
+
+
+# Ridgeplot dataset
+# weekly events and events type per country 
+events_per_week = (
+    df_less_weeks.groupby(["WEEK", "COUNTRY", "EVENT_TYPE"])["EVENTS"]
+    .sum()
+    .reset_index()
+).rename(columns={"COUNTRY": "country", "EVENTS": "events", "EVENT_TYPE": "event_type"})
+events_per_week.to_csv(r'C:\Users\mfmat\Documents\Magistrale\SecondoAnno\DV\Data-Visualization-Project\src\Dataset\events_per_week.csv', index=False)

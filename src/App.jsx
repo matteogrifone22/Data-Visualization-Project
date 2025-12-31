@@ -3,7 +3,7 @@ import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab } from '@mui/ma
 import { DarkMode, LightMode } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import MyChart from './components/MyChart';
-import Chapter1Chart from './components/Chapter1Chart';
+import { Chapter1LineChart, Chapter1RidgeChart } from './components/Chapter1Charts';
 
 
 import { rgb } from 'd3';
@@ -413,7 +413,10 @@ export default function App() {
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <Chapter1Chart isDark={isDark} />
+            <Chapter1LineChart isDark={isDark} />
+          </Box>
+          <Box sx={{ width: '100%', minWidth: '100%', marginTop: 6 }}>
+            <Chapter1RidgeChart isDark={isDark} />
           </Box>
         </Box>
 
