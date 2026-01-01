@@ -8,10 +8,46 @@ export function Chapter1LineChart({ isDark = true }) {
     const selectedCountryRef = useRef(null);
     const animationPlayedRef = useRef(false);
     const allCirclesRef = useRef([]);
+    const [dataLoaded, setDataLoaded] = useState(false);
 
+    // Load data once
     useEffect(() => {
         let isMounted = true;
         const parseDate = d3.timeParse('%Y-%m');
+
+        const load = async () => {
+            if (dataRef.current.length === 0) {
+                const url = new URL('../Dataset/fatalities_per_month.csv', import.meta.url).href;
+                const rows = await d3.csv(url, (d) => {
+                    const date = parseDate(d.MONTH);
+                    const fatalities = Number(d.fatalities);
+                    const country = d.country;
+                    if (!date || !Number.isFinite(fatalities)) return null;
+                    if (country !== 'Israel' && country !== 'Palestine') return null;
+                    return { date, country, fatalities };
+                });
+
+                if (!isMounted) return;
+                dataRef.current = rows.filter(Boolean).sort((a, b) => a.date - b.date);
+                setDataLoaded(true);
+            } else {
+                setDataLoaded(true);
+            }
+        };
+
+        load();
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
+
+    useEffect(() => {
+        if (!dataLoaded) return;
+
+        // Reset animation when chart is shown
+        animationPlayedRef.current = false;
+
         const formatDate = d3.timeFormat('%B %Y');
 
         const render = () => {
@@ -328,46 +364,7 @@ export function Chapter1LineChart({ isDark = true }) {
                 .text('Monthly fatalities');
         };
 
-        const load = async () => {
-            if (dataRef.current.length === 0) {
-                const url = new URL('../Dataset/fatalities_per_month.csv', import.meta.url).href;
-                const rows = await d3.csv(url, (d) => {
-                    const date = parseDate(d.MONTH);
-                    const fatalities = Number(d.fatalities);
-                    const country = d.country;
-                    if (!date || !Number.isFinite(fatalities)) return null;
-                    if (country !== 'Israel' && country !== 'Palestine') return null;
-                    return { date, country, fatalities };
-                });
-
-                if (!isMounted) return;
-                dataRef.current = rows.filter(Boolean).sort((a, b) => a.date - b.date);
-            }
-            render();
-
-            // After render completes, check if already in view and trigger animation
-            if (wrapperRef.current && !animationPlayedRef.current) {
-                const rect = wrapperRef.current.getBoundingClientRect();
-                if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-                    animationPlayedRef.current = true;
-                    d3.select(svgRef.current)
-                        .selectAll('path[data-country]')
-                        .transition()
-                        .duration(1500)
-                        .attr('stroke-dashoffset', 0);
-
-                    setTimeout(() => {
-                        d3.select(svgRef.current)
-                            .selectAll('circle')
-                            .transition()
-                            .duration(300)
-                            .style('opacity', 1);
-                    }, 1500);
-                }
-            }
-        };
-
-        load();
+        render();
 
         // Setup Intersection Observer to trigger animation when chart comes into view
         const observerOptions = {
@@ -420,13 +417,12 @@ export function Chapter1LineChart({ isDark = true }) {
         document.addEventListener('click', handleDocumentClick);
 
         return () => {
-            isMounted = false;
             observer.disconnect();
             resizeObserver?.disconnect();
             window.removeEventListener('resize', render);
             document.removeEventListener('click', handleDocumentClick);
         };
-    }, []);
+    }, [dataLoaded]);
 
     return (
         <div ref={wrapperRef} style={{ width: '100%', maxWidth: '100%', overflow: 'visible', position: 'relative' }}>

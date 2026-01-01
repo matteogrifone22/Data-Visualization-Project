@@ -140,14 +140,14 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color:var(--color-unige-dark);
+    background-color:var(--color-unige-gray);
   }
   a:hover {
-    color: #747bff;
+    color: var(--color-link-hover);
   }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--color-unige-gray);
   }
 }
 
@@ -195,20 +195,20 @@ button:focus-visible {
 
 /* Theme Variables */
 :root.light-theme {
-  --bg-primary: #D9D9D6;
-  --bg-secondary: rgba(217, 217, 214, 0.85);
-  --text-primary: #25282A;
-  --text-navbar: #25282A;
-  --color-link-hover: #F4633A;
+  --bg-primary: var(--color-unige-gray);
+  --bg-secondary: var(--color-unige-gray);
+  --text-primary: var(--color-unige-dark);
+  --text-navbar: var(--color-unige-dark);
+  --color-link-hover: var(--color-architettura-design);
   --navbar-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
 }
 
 :root.dark-theme {
-  --bg-primary: #25282A;
-  --bg-secondary: rgba(37, 40, 42, 0.85);
-  --text-primary: #D9D9D6;
-  --text-navbar: #D9D9D6;
-  --color-link-hover: #F1C400;
+  --bg-primary: var(--color-unige-dark);
+  --bg-secondary: var(--color-unige-dark);
+  --text-primary: var(--color-unige-gray);
+  --text-navbar: var(--color-unige-gray);
+  --color-link-hover: var(--color-unige-yellow);
   --navbar-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
@@ -475,4 +475,45 @@ strong {
   border: 2px solid var(--bg-primary);
   border-top: 0;
   border-left: 0;
+}
+/* Selector button style */
+.selector-button {
+  padding: 8px 16px;
+  background-color: transparent;
+  color: var(--color-link-hover);
+  border: 1px solid var(--color-link-hover);
+  border-radius: 4px;
+  cursor: 'pointer';
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.selector-button:hover {
+  opacity: 0.8;
+  border-color: var(--color-link-hover);
+}
+
+.selector-button:focus {
+  outline: none;
+  box-shadow: none;
+  border-color: var(--color-link-hover);
+}
+
+.selector-button:focus-visible {
+  outline: none;
+  box-shadow: none;
+  border-color: var(--color-link-hover);
+}
+
+.selector-button:active {
+  outline: none;
+  box-shadow: none;
+  border-color: var(--color-link-hover);
+}
+
+.selector-button.active {
+  background-color: var(--color-link-hover);
+  color: var(--bg-primary);
 }

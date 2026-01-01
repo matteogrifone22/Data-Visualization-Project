@@ -13,6 +13,7 @@ export default function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeSection, setActiveSection] = useState('introduction');
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [chapter1ChartType, setChapter1ChartType] = useState('line');
   const navbarRef = useRef(null);
 
   const toggleTheme = () => {
@@ -412,11 +413,23 @@ export default function App() {
               Numero Visualizzazioni: 2 (line chart + ridge plot).
             </Typography>
           </Box>
-          <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <Chapter1LineChart isDark={isDark} />
+          <Box sx={{ width: '100%', minWidth: '100%', display: 'flex', justifyContent: 'center', gap: 2, marginTop: 4, marginBottom: 4 }}>
+            <button
+              onClick={() => setChapter1ChartType('line')}
+              className={`selector-button ${chapter1ChartType === 'line' ? 'active' : ''}`}
+            >
+              Monthly Fatalities (Line Chart)
+            </button>
+            <button
+              onClick={() => setChapter1ChartType('ridge')}
+              className={`selector-button ${chapter1ChartType === 'ridge' ? 'active' : ''}`}
+            >
+              Events per Week (Ridge Plot)
+            </button>
           </Box>
-          <Box sx={{ width: '100%', minWidth: '100%', marginTop: 6 }}>
-            <Chapter1RidgeChart isDark={isDark} />
+          <Box sx={{ width: '100%', minWidth: '100%' }}>
+            {chapter1ChartType === 'line' && <Chapter1LineChart key="line-chart" isDark={isDark} />}
+            {chapter1ChartType === 'ridge' && <Chapter1RidgeChart key="ridge-chart" isDark={isDark} />}
           </Box>
         </Box>
 
