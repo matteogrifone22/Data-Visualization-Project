@@ -4,6 +4,7 @@ import { DarkMode, LightMode } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import MyChart from './components/MyChart';
 import { Chapter1LineChart, Chapter1RidgeChart } from './components/Chapter1Charts';
+import { Chapter2ViolinBoxPlot } from './components/Chapter2Charts';
 
 
 import { rgb } from 'd3';
@@ -479,7 +480,7 @@ export default function App() {
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <MyChart />
+            <Chapter2ViolinBoxPlot isDark={isDark} />
           </Box>
         </Box>
 
