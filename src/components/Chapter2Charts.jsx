@@ -475,4 +475,4 @@ export function Chapter2ViolinBoxPlot({ isDark = true }) {
   );
 }
 
-
+export default Chapter2ViolinBoxPlot;
