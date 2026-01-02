@@ -83,3 +83,20 @@ for i in range(0, 101, 5):
 grouped_columns = ["Country", "Year"] + [f"{i}-{i+4}" for i in range(0, 100, 5)]
 df_mortality_grouped = df_mortality_grouped[grouped_columns]
 df_mortality_grouped.to_csv(r'C:\Users\mfmat\Documents\Magistrale\SecondoAnno\DV\Data-Visualization-Project\src\Dataset\mortality_rate_grouped.csv', index=False)
+
+# Sankey diagram dataset
+# sub_event_type per event per event type per country
+
+events_sankey = (
+    df_less_weeks.groupby(["COUNTRY", "EVENT_TYPE", "SUB_EVENT_TYPE"])["EVENTS"]
+    .sum()
+    .reset_index()
+).rename(
+    columns={
+        "COUNTRY": "country",
+        "EVENT_TYPE": "event_type",
+        "SUB_EVENT_TYPE": "sub_event_type",
+        "EVENTS": "events",
+    }
+)  
+events_sankey.to_csv(r'C:\Users\mfmat\Documents\Magistrale\SecondoAnno\DV\Data-Visualization-Project\src\Dataset\events_sankey.csv', index=False)

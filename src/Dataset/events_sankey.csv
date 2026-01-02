@@ -1,0 +1,44 @@
+country,event_type,sub_event_type,events
+Israel,Battles,Armed clash,323
+Israel,Battles,Government regains territory,1
+Israel,Battles,Non-state actor overtakes territory,1
+Israel,Explosions/Remote violence,Air/drone strike,384
+Israel,Explosions/Remote violence,Remote explosive/landmine/IED,8
+Israel,Explosions/Remote violence,Shelling/artillery/missile attack,3881
+Israel,Explosions/Remote violence,Suicide bomb,3
+Israel,Protests,Excessive force against protesters,4
+Israel,Protests,Peaceful protest,4872
+Israel,Protests,Protest with intervention,489
+Israel,Riots,Mob violence,65
+Israel,Riots,Violent demonstration,399
+Israel,Strategic developments,Agreement,6
+Israel,Strategic developments,Arrests,9
+Israel,Strategic developments,Change to group/activity,14
+Israel,Strategic developments,Disrupted weapons use,1353
+Israel,Strategic developments,Headquarters or base established,1
+Israel,Strategic developments,Looting/property destruction,103
+Israel,Strategic developments,Other,171
+Israel,Violence against civilians,Abduction/forced disappearance,12
+Israel,Violence against civilians,Attack,157
+Israel,Violence against civilians,Sexual violence,3
+Palestine,Battles,Armed clash,4902
+Palestine,Battles,Non-state actor overtakes territory,1
+Palestine,Explosions/Remote violence,Air/drone strike,12795
+Palestine,Explosions/Remote violence,Grenade,233
+Palestine,Explosions/Remote violence,Remote explosive/landmine/IED,649
+Palestine,Explosions/Remote violence,Shelling/artillery/missile attack,8035
+Palestine,Protests,Excessive force against protesters,24
+Palestine,Protests,Peaceful protest,1600
+Palestine,Protests,Protest with intervention,88
+Palestine,Riots,Mob violence,12740
+Palestine,Riots,Violent demonstration,742
+Palestine,Strategic developments,Agreement,2
+Palestine,Strategic developments,Arrests,163
+Palestine,Strategic developments,Change to group/activity,415
+Palestine,Strategic developments,Disrupted weapons use,251
+Palestine,Strategic developments,Headquarters or base established,3
+Palestine,Strategic developments,Looting/property destruction,4649
+Palestine,Strategic developments,Other,1382
+Palestine,Violence against civilians,Abduction/forced disappearance,13
+Palestine,Violence against civilians,Attack,4215
+Palestine,Violence against civilians,Sexual violence,2

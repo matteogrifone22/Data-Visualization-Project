@@ -5,6 +5,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import MyChart from './components/MyChart';
 import { Chapter1LineChart, Chapter1RidgeChart } from './components/Chapter1Charts';
 import Chapter2ViolinBoxPlot from './components/Chapter2Charts';
+import EventsSankeyDiagram from './components/Chapter3Charts';
 
 
 import { rgb } from 'd3';
@@ -528,7 +529,7 @@ export default function App() {
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <MyChart />
+            <EventsSankeyDiagram isDark={isDark} />
           </Box>
         </Box>
 
