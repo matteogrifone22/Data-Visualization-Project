@@ -543,49 +543,51 @@ strong {
 
 .chapter2-range {
   flex: 1;
-  accent-color: var(--color-link-hover);
   height: 6px;
   -webkit-appearance: none;
   appearance: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-/* WebKit/Blink (Chrome, Safari, Edge) - Track */
-.chapter2-range::-webkit-slider-track {
-  height: 6px;
-  background: var(--color-link-hover);
   border-radius: 3px;
+  cursor: pointer;
+  --range-progress: 0%;
+  background: linear-gradient(
+    to right,
+    var(--color-link-hover) 0%,
+    var(--color-link-hover) var(--range-progress),
+    rgba(128, 128, 128, 0.3) var(--range-progress),
+    rgba(128, 128, 128, 0.3) 100%
+  );
 }
 
-/* WebKit/Blink (Chrome, Safari, Edge) - Thumb */
 .chapter2-range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 1px solid var(--color-link-hover);
+  border: 2px solid var(--color-link-hover);
   background: var(--bg-primary);
   cursor: pointer;
-  margin-top: -5px;
 }
 
-/* Firefox - Track */
-.chapter2-range::-moz-range-track {
-  height: 6px;
-  background: var(--color-link-hover);
-  border-radius: 3px;
-}
-
-/* Firefox - Thumb */
 .chapter2-range::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 1px solid var(--color-link-hover);
+  border: 2px solid var(--color-link-hover);
   background: var(--bg-primary);
   cursor: pointer;
+}
+
+.chapter2-range::-moz-range-track {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(128, 128, 128, 0.3);
+}
+
+.chapter2-range::-moz-range-progress {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-link-hover);
 }
 
 .chapter2-icon-button {

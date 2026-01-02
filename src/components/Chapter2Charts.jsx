@@ -370,6 +370,11 @@ export function Chapter2ViolinBoxPlot({ isDark = true }) {
   const minYear = yearsRef.current[0];
   const maxYear = yearsRef.current[yearsRef.current.length - 1];
 
+  // Calculate progress percentage for the slider
+  const progressPercent = minYear && maxYear && year
+    ? ((year - minYear) / (maxYear - minYear)) * 100
+    : 0;
+
   const compareMetrics = [
     { key: "median", label: "Median age (weighted)" },
     { key: "mean", label: "Mean age (weighted)" },
@@ -426,6 +431,7 @@ export function Chapter2ViolinBoxPlot({ isDark = true }) {
           step={1}
           value={year ?? minYear ?? 0}
           onChange={(e) => setYear(Number(e.target.value))}
+          style={{ '--range-progress': `${progressPercent}%` }}
         />
         <span className="chapter2-year-value">{year ?? "–"}</span>
       </div>
