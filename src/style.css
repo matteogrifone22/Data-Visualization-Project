@@ -430,6 +430,92 @@ strong {
   min-width: 40px;
 }
 
+/* Small Multiple Tooltip Styles */
+.tooltip-title {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--text-primary);
+  opacity: 1;
+}
+
+.tooltip-subtitle {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.tooltip-country-section {
+  margin-top: 12px;
+}
+
+.tooltip-country-name {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.tooltip-metric-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 4px;
+  font-weight: 600;
+}
+
+.tooltip-label {
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.tooltip-value {
+  text-align: right;
+}
+
+.tooltip-trend {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--text-primary);
+  opacity: 0.8;
+  font-size: 11px;
+}
+
+.tooltip-trend-label {
+  color: var(--text-secondary);
+}
+
+.tooltip-trend-value {
+  font-weight: 600;
+}
+
+.tooltip-no-data {
+  margin-top: 4px;
+  color: var(--text-secondary);
+  font-style: italic;
+  opacity: 0.6;
+}
+
+.chart-disclaimer {
+  margin-top: 16px;
+  color: var(--text-primary);
+  font-size: 13px;
+  line-height: 1.45;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.chart-disclaimer p {
+  margin: 6px 0;
+}
+
+.chart-disclaimer p:first-child {
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
 /* Themed checkbox for filters */
 .theme-checkbox {
   -webkit-appearance: none;

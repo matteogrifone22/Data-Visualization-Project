@@ -6,6 +6,7 @@ import MyChart from './components/MyChart';
 import { Chapter1LineChart, Chapter1RidgeChart } from './components/Chapter1Charts';
 import Chapter2ViolinBoxPlot from './components/Chapter2Charts';
 import EventsSankeyDiagram from './components/Chapter3Charts';
+import SmallMultipleChart from './components/Chapter4Charts';
 
 
 import { rgb } from 'd3';
@@ -569,16 +570,11 @@ export default function App() {
                 marginBottom: 0
               }}
             >
-              In questa sezione vorrei mostrare la qualità di vita nei due paesi nel periodo di tempo considerato (2000-2025).
-              Potrei usare dati sull'accesso a servizi essenziali (acqua, elettricità, sanità) o dati economici (PIL pro capite, tasso di disoccupazione).
-              Il dataset di Our World in Data potrebbe essere utile per questo scopo, ma i dati trovati finora sono fino al 2023.
-              Il grafico usato non è ancora stato scelto ma potrebbe essere uno small multiples di barchart o line chart.
-              Lo scopo di questa sezione è di mostrare come la qualità di vita sia cambiata nei due paesi durante il conflitto, per vedere se ci sono differenze significative tra i due paesi.
-              Numero Visualizzazioni: 1 small multiples di barchart o line chart.
+              This section shows the quality of life in both countries from 2000 to 2024. The charts below compare key indicators between Israel and Palestine, including GDP per capita, access to safe drinking water, sanitation services, and food insecurity levels. These metrics provide insight into the living conditions and development disparities between the two regions during this period.
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <MyChart />
+            <SmallMultipleChart isDark={isDark} />
           </Box>
         </Box>
       </Box>
