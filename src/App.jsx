@@ -7,7 +7,7 @@ import { Chapter1LineChart, Chapter1RidgeChart } from './components/Chapter1Char
 import Chapter2ViolinBoxPlot from './components/Chapter2Charts';
 import EventsSankeyDiagram from './components/Chapter3Charts';
 import SmallMultipleChart from './components/Chapter4Charts';
-
+import GeoChart from './components/Chapter5Charts';
 
 import { rgb } from 'd3';
 
@@ -45,7 +45,7 @@ export default function App() {
       setScrollProgress(progress);
 
       // Determine active section based on which section is most visible
-      const sections = ['introduction', 'chapter1', 'chapter2', 'chapter3', 'chapter4'];
+      const sections = ['introduction', 'chapter1', 'chapter2', 'chapter3', 'chapter4', 'chapter5'];
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
       let currentSection = sections[0];
@@ -238,6 +238,27 @@ export default function App() {
             </Box>
             <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
               Ch 4
+            </Box>
+          </Link>
+          <Link
+            href="#chapter5"
+            onClick={(e) => scrollToSection(e, 'chapter5')}
+            sx={{
+              color: activeSection === 'chapter5' ? linkHoverColor : navbarTextColor,
+              textDecoration: 'none',
+              fontSize: { xs: '0.8rem', md: '0.95rem' },
+              cursor: 'pointer',
+              transition: 'color 0.3s ease',
+              fontFamily: 'var(--font-serif)',
+              fontWeight: activeSection === 'chapter5' ? 700 : 600,
+              '&:hover': { color: linkHoverColor, opacity: 1 }
+            }}
+          >
+            <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
+              Chapter 5
+            </Box>
+            <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
+              Ch 5
             </Box>
           </Link>
           <IconButton
@@ -575,6 +596,49 @@ export default function App() {
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
             <SmallMultipleChart isDark={isDark} />
+          </Box>
+        </Box>
+
+        {/* Chapter 5 Section */}
+        <Box
+          id="chapter5"
+          sx={{
+            minHeight: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            scrollMarginTop: '8vh',
+            padding: '2vh 4vw 12vh 4vw'
+          }}
+        >
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
+            <Typography
+              variant="h2"
+              gutterBottom
+              sx={{
+                color: textColor,
+                fontWeight: 700,
+                marginBottom: 3,
+                fontSize: { xs: '2.5rem', md: '3.5rem' }
+              }}
+            >
+              Geospatial overview
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+              }}
+            >
+              A geochart visualization showing the spatial distribution of food system and health care incidents across the Gaza Strip. Explore where and when these events occurred, with detailed information about each incident.
+            </Typography>
+          </Box>
+          <Box sx={{ width: '100%', minWidth: '100%' }}>
+            <GeoChart isDark={isDark} />
           </Box>
         </Box>
       </Box>

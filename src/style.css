@@ -608,8 +608,8 @@ strong {
 .chapter2-controls {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-top: 10px;
+  gap: 6px;
+  margin-top: 4px;
   color: var(--text-primary);
   font-weight: 600;
 }
@@ -619,12 +619,13 @@ strong {
 }
 
 .chapter2-year-label {
-  min-width: 52px;
+  min-width: 45px;
 }
 
 .chapter2-year-value {
-  width: 64px;
+  width: 85px;
   text-align: right;
+  white-space: nowrap;
 }
 
 .chapter2-range {
