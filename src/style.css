@@ -193,7 +193,7 @@ button:focus-visible {
   --bg-secondary: var(--color-unige-gray);
   --text-primary: var(--color-unige-dark);
   --text-navbar: var(--color-unige-dark);
-  --color-link-hover: var(--color-scienze-formazione);
+  --color-link-hover: var(--color-ingegneria);
   --color-details: var(--color-scienze-formazione);
   --navbar-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   --color-Israel: var(--color-Israel-light);
@@ -221,7 +221,8 @@ button:focus-visible {
   width: 95%;
   max-width: 90%;
   box-shadow: var(--navbar-shadow);
-  background-color: rgba(217, 217, 214, 0.85);
+  background-color: var(--bg-secondary);
+  background-color: color-mix(in srgb, var(--bg-secondary) 88%, transparent);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   border: 2px solid var(--color-details);
@@ -229,10 +230,6 @@ button:focus-visible {
   padding: 0 8px;
   z-index: 1300;
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
-}
-
-:root.dark-theme .navbar-container {
-  background-color: rgba(37, 40, 42, 0.85);
 }
 
 @media (max-width: 600px) {
@@ -414,6 +411,28 @@ strong {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   font-size: 12px;
   font-family: var(--default-font-family);
+}
+
+/* Territory Map */
+.territory-map-svg {
+  width: 100%;
+  height: clamp(420px, 70vh, 780px);
+  display: block;
+  margin: 0 auto;
+}
+
+.territory-map-tooltip {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 10px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  font-family: var(--default-font-family);
+  transition: opacity 0.2s ease;
 }
 
 .tooltip-date {

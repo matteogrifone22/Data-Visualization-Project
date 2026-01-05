@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab } from '@mui/ma
 import { DarkMode, LightMode } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import MyChart from './components/MyChart';
+import TerritoryMap from './components/TerritoryMap';
 import { Chapter1LineChart, Chapter1RidgeChart } from './components/Chapter1Charts';
 import Chapter2ViolinBoxPlot from './components/Chapter2Charts';
 import EventsSankeyDiagram from './components/Chapter3Charts';
@@ -386,6 +387,23 @@ export default function App() {
               <b>Genocide</b>: <i>the crime of intentionally destroying part or all of a national, ethnic,
               racial, or religious group, by killing people or by other methods.</i>
             </Typography>
+
+            {/* Territory Map */}
+            <Box sx={{ marginTop: 6, marginBottom: 2 }}>
+              <Typography
+                variant="h3"
+                gutterBottom
+                sx={{
+                  color: textColor,
+                  fontWeight: 700,
+                  marginBottom: 3,
+                  fontSize: { xs: '1.5rem', md: '2rem' }
+                }}
+              >
+                Geographic Context
+              </Typography>
+              <TerritoryMap isDark={isDark} />
+            </Box>
           </Box>
         </Box>
 

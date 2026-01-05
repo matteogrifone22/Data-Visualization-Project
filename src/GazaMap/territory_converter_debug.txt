@@ -1,0 +1,26 @@
+TERRITORY CONVERTER DEBUG INFO
+============================================================
+
+ISRAEL DATA
+------------------------------------------------------------
+Features: 351
+CRS: EPSG:4326
+Geometry types: ['MultiPolygon']
+Columns: ['admin_level', 'name', 'name_en', 'population', 'hasc', 'geometry']
+Info:
+None
+
+PALESTINE DATA
+------------------------------------------------------------
+Features: 1
+CRS: EPSG:4326
+Geometry types: ['MultiPolygon']
+Columns: ['iso2', 'iso3', 'adm0_name', 'adm0_name1', 'adm0_name2', 'adm0_name3', 'adm0_pcode', 'valid_on', 'valid_to', 'version', 'area_sqkm', 'lang', 'lang1', 'lang2', 'lang3', 'center_lat', 'center_lon', 'geometry']
+Info:
+None
+
+BOUNDS
+------------------------------------------------------------
+Min/Max Lon: 34.21877333399999, 35.8950234
+Min/Max Lat: 29.4533796, 33.3356317
+Center: [35.056898366999995, 31.39450565]
