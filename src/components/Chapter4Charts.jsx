@@ -54,15 +54,15 @@ export function SmallMultipleChart({ isDark = true }) {
 
             // Dynamic margins based on selection state
             const margin = selectedChart !== null
-                ? { top: 50, right: 0, bottom: 35, left: 240 }  // More space for selected view
-                : { top: 50, right: 40, bottom: 35, left: 40 }; // Normal 2x2 grid view
+                ? { top: 50, right: 0, bottom: 35, left: 260 }  // More space for selected view
+                : { top: 50, right: 40, bottom: 35, left: 60 }; // Normal 2x2 grid view
 
             // Define metrics for small multiples
             const metrics = [
-                { key: 'gdp', label: 'GDP per Capita (PPP)', unit: '$', format: d3.format(',.0f') },
-                { key: 'drinkingWater', label: 'Safe Drinking Water Access', unit: '%', format: d3.format('.1f') },
-                { key: 'sanitation', label: 'Safe Sanitation Access', unit: '%', format: d3.format('.1f') },
-                { key: 'foodInsecurity', label: 'Food Insecurity', unit: '%', format: d3.format('.1f') }
+                { key: 'gdp', label: 'GDP per Capita ($)', unit: '$', format: d3.format(',.0f') },
+                { key: 'drinkingWater', label: 'Safe Drinking Water Access (%)', unit: '%', format: d3.format('.1f') },
+                { key: 'sanitation', label: 'Safe Sanitation Access (%)', unit: '%', format: d3.format('.1f') },
+                { key: 'foodInsecurity', label: 'Food Insecurity (%)', unit: '%', format: d3.format('.1f') }
             ];
 
             const svg = d3
@@ -167,10 +167,26 @@ export function SmallMultipleChart({ isDark = true }) {
                     .domain(d3.extent(metricData, d => d.year))
                     .range([0, currentWidth]);
 
-                const yExtent = d3.extent(metricData, d => d[metric.key]);
-                const yPadding = (yExtent[1] - yExtent[0]) * 0.1;
+                // Special handling for percentage metrics: different scales based on view mode
+                let yDomain;
+                if (metric.key === 'foodInsecurity' || metric.key === 'drinkingWater' || metric.key === 'sanitation') {
+                    // Percentage metrics: 0-100 in grid view, auto-scale in zoomed view
+                    if (isSelected) {
+                        const yExtent = d3.extent(metricData, d => d[metric.key]);
+                        const yPadding = (yExtent[1] - yExtent[0]) * 0.1;
+                        yDomain = [yExtent[0] - yPadding, yExtent[1] + yPadding];
+                    } else {
+                        yDomain = [0, 100];
+                    }
+                } else {
+                    // Other metrics: auto-scale based on data
+                    const yExtent = d3.extent(metricData, d => d[metric.key]);
+                    const yPadding = (yExtent[1] - yExtent[0]) * 0.1;
+                    yDomain = [yExtent[0] - yPadding, yExtent[1] + yPadding];
+                }
+
                 const yScale = d3.scaleLinear()
-                    .domain([yExtent[0] - yPadding, yExtent[1] + yPadding])
+                    .domain(yDomain)
                     .nice()
                     .range([currentHeight, 0]);
 
@@ -204,8 +220,16 @@ export function SmallMultipleChart({ isDark = true }) {
 
                 // Y-axis
                 const yAxis = d3.axisLeft(yScale)
-                    .ticks(4)
-                    .tickFormat(d => metric.format(d));
+                    .ticks(5)
+                    .tickFormat(d => {
+                        const formatted = metric.format(d);
+                        if (metric.key === 'gdp') {
+                            return `${formatted}$`;
+                        } else if (metric.key === 'drinkingWater' || metric.key === 'sanitation' || metric.key === 'foodInsecurity') {
+                            return `${formatted}%`;
+                        }
+                        return formatted;
+                    });
 
                 g.append('g')
                     .call(yAxis)
@@ -251,7 +275,7 @@ export function SmallMultipleChart({ isDark = true }) {
                         g.selectAll('circle')
                             .transition()
                             .duration(100)
-                            .attr('r', d => d.year === year ? 4.5 : 2.5)
+                            .attr('r', d => d.year === year ? 9 : 5)
                             .style('opacity', d => d.year === year ? 1 : 0.8);
 
                         // Create tooltip content for both countries
@@ -324,7 +348,7 @@ export function SmallMultipleChart({ isDark = true }) {
                         g.selectAll('circle')
                             .transition()
                             .duration(100)
-                            .attr('r', 2.5)
+                            .attr('r', 5)
                             .style('opacity', 0.8);
 
                         tooltip
@@ -350,7 +374,7 @@ export function SmallMultipleChart({ isDark = true }) {
                         .datum(countryData)
                         .attr('fill', 'none')
                         .attr('stroke', getColor(country))
-                        .attr('stroke-width', 1.5)
+                        .attr('stroke-width', 5)
                         .attr('stroke-linejoin', 'round')
                         .attr('stroke-linecap', 'round')
                         .attr('d', line);
@@ -362,10 +386,10 @@ export function SmallMultipleChart({ isDark = true }) {
                         .attr('class', `point-${country.replace(/\s+/g, '-')}`)
                         .attr('cx', d => xScale(d.year))
                         .attr('cy', d => yScale(d[metric.key]))
-                        .attr('r', 2.5)
+                        .attr('r', 5)
                         .attr('fill', getColor(country))
                         .attr('stroke', isDark ? '#1a1a1a' : '#fff')
-                        .attr('stroke-width', 1)
+                        .attr('stroke-width', 1.5)
                         .style('opacity', 0.8)
                         .style('pointer-events', 'none');
                 });
@@ -373,7 +397,7 @@ export function SmallMultipleChart({ isDark = true }) {
 
             // Add legend
             const legend = svg.append('g')
-                .attr('transform', `translate(${width - margin.right - 100}, ${margin.top - 15})`);
+                .attr('transform', `translate(${width - margin.right - 50}, ${margin.top - 35})`);
 
             countries.forEach((country, i) => {
                 const legendItem = legend.append('g')
@@ -385,7 +409,7 @@ export function SmallMultipleChart({ isDark = true }) {
                     .attr('y1', 0)
                     .attr('y2', 0)
                     .attr('stroke', getColor(country))
-                    .attr('stroke-width', 1.5);
+                    .attr('stroke-width', 2.5);
 
                 legendItem.append('text')
                     .attr('x', 20)

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab } from '@mui/material';
 import { DarkMode, LightMode } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
@@ -23,7 +23,7 @@ export default function App() {
     setIsDark(!isDark);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Sync CSS variable theme classes on :root so var(--...) works
     const root = document.documentElement;
     if (isDark) {
@@ -92,8 +92,8 @@ export default function App() {
   const bgColor = isDark ? '#25282A' : '#D9D9D6';
   const textColor = isDark ? '#D9D9D6' : '#25282A';
   const navbarTextColor = isDark ? '#D9D9D6' : '#25282A';
-  const linkHoverColor = isDark ? '#F1C400' : '#F4633A';
-  const borderColor = isDark ? '#F1C400' : '#F4633A';
+  const linkHoverColor = 'var(--color-details)';
+  const borderColor = 'var(--color-details)';
   const navbarShadow = '0 8px 24px rgba(0, 0, 0, 0.5)';
   const navbarBgColor = isDark ? 'rgba(37, 40, 42, 0.85)' : 'rgba(217, 217, 214, 0.85)';
 
@@ -126,7 +126,7 @@ export default function App() {
           backgroundColor: navbarBgColor,
           backdropFilter: 'blur(4px)',
           WebkitBackdropFilter: 'blur(4px)',
-          border: '2px solid ' + borderColor,
+          border: '2px solid var(--color-details)',
           zIndex: 1300,
           boxShadow: navbarShadow,
           padding: '0 8px',
@@ -437,18 +437,20 @@ export default function App() {
               Numero Visualizzazioni: 2 (line chart + ridge plot).
             </Typography>
           </Box>
-          <Box sx={{ width: '100%', minWidth: '100%', display: 'flex', justifyContent: 'center', gap: 2, marginTop: 4, marginBottom: 4 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, marginTop: 4, marginBottom: 4 }}>
             <button
               onClick={() => setChapter1ChartType('line')}
-              className={`selector-button ${chapter1ChartType === 'line' ? 'active' : ''}`}
+              className={`selection-button ${chapter1ChartType === 'line' ? 'active' : ''}`}
+              style={{ fontSize: '14px', padding: '6px 10px', minWidth: '150px' }}
             >
-              Monthly Fatalities (Line Chart)
+              Monthly Fatalities<br/>(Line Chart)
             </button>
             <button
               onClick={() => setChapter1ChartType('ridge')}
-              className={`selector-button ${chapter1ChartType === 'ridge' ? 'active' : ''}`}
+              className={`selection-button ${chapter1ChartType === 'ridge' ? 'active' : ''}`}
+              style={{ fontSize: '14px', padding: '6px 10px', minWidth: '150px' }}
             >
-              Events per Week (Ridge Plot)
+              Events per Week<br/>(Ridge Plot)
             </button>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
@@ -701,6 +703,7 @@ export default function App() {
       {/* Scroll to Top Button */}
       <Fab
         onClick={scrollToTop}
+        disableRipple
         sx={{
           position: 'fixed',
           bottom: 30,
@@ -711,11 +714,19 @@ export default function App() {
           visibility: showScrollTop ? 'visible' : 'hidden',
           transition: 'opacity 0.3s ease, visibility 0.3s ease, color 0.3s ease, transform 0.3s ease, background-color 0.3s ease',
           transform: showScrollTop ? 'scale(1)' : 'scale(0.8)',
+          outline: 'none !important',
+          border: 'none !important',
           '&:hover': {
-            backgroundColor: isDark ? '#F1C400' : '#F4633A',
+            backgroundColor: 'var(--color-details)',
             transform: 'scale(1.1)',
-            boxShadow: isDark ? '0 8px 24px rgba(241, 196, 0, 0.4)' : '0 8px 24px rgba(244, 99, 58, 0.4)'
+            boxShadow: '0 8px 24px color-mix(in srgb, var(--color-details) 45%, transparent)'
           },
+          '&:focus, &:focusVisible, &:active': {
+            outline: 'none !important',
+            boxShadow: 'none !important',
+            border: 'none !important'
+          },
+          '& .MuiTouchRipple-root': { display: 'none' },
           zIndex: 1200
         }}
       >

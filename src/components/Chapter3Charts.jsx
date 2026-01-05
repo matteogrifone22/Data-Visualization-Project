@@ -249,10 +249,15 @@ export function EventsSankeyDiagram({ isDark = true }) {
       return;
     }
 
-    // Color scale - simpler, more intuitive approach
+    // Theme-aware colors; use CSS vars for live updates and fallbacks for mixing math
     const countryColors = {
-      Israel: isDark ? "#0061A0" : "#0038B8",
-      Palestine: isDark ? "#007C58" : "#149954"
+      Israel: "var(--color-Israel)",
+      Palestine: "var(--color-Palestine)"
+    };
+
+    const blendColors = {
+      Israel: isDark ? "#99B8FF" : "#0034AD",
+      Palestine: isDark ? "#1CD475" : "#074024"
     };
 
     const getNodeColor = (node) => {
@@ -282,8 +287,8 @@ export function EventsSankeyDiagram({ isDark = true }) {
       
       // Mix colors based on contribution ratio
       const israelRatio = israelFlow / totalFlow;
-      const israelColor = d3.color(countryColors.Israel);
-      const palestineColor = d3.color(countryColors.Palestine);
+      const israelColor = d3.color(blendColors.Israel);
+      const palestineColor = d3.color(blendColors.Palestine);
       
       // Interpolate between the two colors
       return d3.interpolateRgb(palestineColor, israelColor)(israelRatio);

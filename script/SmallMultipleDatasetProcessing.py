@@ -11,6 +11,8 @@ os.makedirs(output_dir, exist_ok=True)
 # Countries to filter
 COUNTRIES = ['Israel', 'Palestine', 'State of Palestine', 'West Bank and Gaza']
 
+start_year = 2018
+
 def process_gdp():
     """Process GDP dataset"""
     df = pd.read_csv(os.path.join(dataset_dir, 'GDP.csv'))
@@ -42,6 +44,9 @@ def process_gdp():
     # Convert year to int and remove empty values
     df_long['Year'] = df_long['Year'].astype(int)
     df_long = df_long.dropna(subset=['GDP_per_capita'])
+    
+    # Filter by start_year
+    df_long = df_long[df_long['Year'] >= start_year]
     
     df_long.to_csv(os.path.join(output_dir, 'GDP_processed.csv'), index=False)
     print(f"GDP processed: {len(df_long)} rows")
@@ -78,6 +83,9 @@ def process_drinking_water():
     # Convert year to int and remove empty values
     df_long['Year'] = df_long['Year'].astype(int)
     df_long = df_long.dropna(subset=['Drinking_Water_Access_Percent'])
+    
+    # Filter by start_year
+    df_long = df_long[df_long['Year'] >= start_year]
     
     # Round percentage to 1 decimal place
     df_long['Drinking_Water_Access_Percent'] = df_long['Drinking_Water_Access_Percent'].round(1)
@@ -117,6 +125,9 @@ def process_sanitation():
     # Convert year to int and remove empty values
     df_long['Year'] = df_long['Year'].astype(int)
     df_long = df_long.dropna(subset=['Sanitation_Access_Percent'])
+    
+    # Filter by start_year
+    df_long = df_long[df_long['Year'] >= start_year]
     
     # Round percentage to 1 decimal place
     df_long['Sanitation_Access_Percent'] = df_long['Sanitation_Access_Percent'].round(1)
@@ -163,6 +174,9 @@ def process_food_insecurity():
     # Convert year to int and remove empty values
     df_long['Year'] = df_long['Year'].astype(int)
     df_long = df_long.dropna(subset=['Food_Insecurity_Percent'])
+    
+    # Filter by start_year
+    df_long = df_long[df_long['Year'] >= start_year]
     
     # Round percentage to 1 decimal place
     df_long['Food_Insecurity_Percent'] = df_long['Food_Insecurity_Percent'].round(1)

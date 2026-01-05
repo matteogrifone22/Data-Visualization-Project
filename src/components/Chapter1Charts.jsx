@@ -898,31 +898,15 @@ export function Chapter1RidgeChart({ isDark = true }) {
                 <div style={{ marginBottom: '15px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                     <button
                         onClick={handleSelectAll}
-                        style={{
-                            padding: '4px 8px',
-                            backgroundColor: 'transparent',
-                            color: 'var(--color-link-hover)',
-                            border: '1px solid var(--color-link-hover)',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            fontSize: '11px',
-                            fontWeight: '500',
-                        }}
+                        className="control-button"
+                        style={{ fontSize: '11px', padding: '4px 8px' }}
                     >
                         Select All
                     </button>
                     <button
                         onClick={handleClearAll}
-                        style={{
-                            padding: '4px 8px',
-                            backgroundColor: 'transparent',
-                            color: 'var(--color-link-hover)',
-                            border: '1px solid var(--color-link-hover)',
-                            borderRadius: '4px',
-                            cursor: 'pointer',
-                            fontSize: '11px',
-                            fontWeight: '500',
-                        }}
+                        className="control-button"
+                        style={{ fontSize: '11px', padding: '4px 8px' }}
                     >
                         Clear All
                     </button>
