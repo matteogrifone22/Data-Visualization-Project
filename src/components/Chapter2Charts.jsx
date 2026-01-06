@@ -366,6 +366,19 @@ export function Chapter2ViolinBoxPlot({ isDark = true }) {
     });
 
     countryGroups.exit().remove();
+
+    // Add resize observer
+    const resizeObserver = new ResizeObserver(() => {
+      // Trigger re-render by forcing state update
+      setCurrentStats(prev => [...prev]);
+    });
+    if (wrapperRef.current) {
+      resizeObserver.observe(wrapperRef.current);
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, [data, year, isDark, showCompare]);
 
   const minYear = yearsRef.current[0];

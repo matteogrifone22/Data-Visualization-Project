@@ -449,7 +449,23 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
     graph.nodes.forEach(d => {
       const name = d.name || d.id;
       const nodeHeight = d.y1 - d.y0;
-      const isLeft = d.x0 < width / 2;
+      
+      // Determine position: countries (left col) → right side, event types (center col) → left side, sub-events (right col) → left side
+      const isCountry = d.id === "Israel" || d.id === "Palestine";
+      const isSubEvent = d.id.includes("|");
+      const isEventType = !isCountry && !isSubEvent;
+      
+      let labelX, textAnchor;
+      if (isCountry) {
+        // Countries: label on the right of the rectangle
+        labelX = d.x1 + 6;
+        textAnchor = "start";
+      } else {
+        // Event types and sub-events: label on the left of the rectangle
+        labelX = d.x0 - 6;
+        textAnchor = "end";
+      }
+      
       const fontSize = nodeHeight < 15 ? 9 : 11;
       const maxLength = 35;
       const displayName = name.length > maxLength ? name.substring(0, maxLength - 3) + "..." : name;
@@ -457,18 +473,18 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       labelData.push({
         node: d,
         name: displayName,
-        x: isLeft ? d.x1 + 6 : d.x0 - 6,
+        x: labelX,
         y: (d.y1 + d.y0) / 2,
-        isLeft: isLeft,
+        textAnchor: textAnchor,
         fontSize: fontSize,
         originalY: (d.y1 + d.y0) / 2
       });
     });
     
     // Second pass: adjust positions to avoid overlaps
-    // Group labels by side (left/right)
-    const leftLabels = labelData.filter(d => d.isLeft).sort((a, b) => a.originalY - b.originalY);
-    const rightLabels = labelData.filter(d => !d.isLeft).sort((a, b) => a.originalY - b.originalY);
+    // Group labels by their text-anchor direction (right-aligned vs left-aligned)
+    const rightAnchoredLabels = labelData.filter(d => d.textAnchor === "end").sort((a, b) => a.originalY - b.originalY);
+    const leftAnchoredLabels = labelData.filter(d => d.textAnchor === "start").sort((a, b) => a.originalY - b.originalY);
     
     const adjustLabels = (labels) => {
       const minSpacing = 14; // Minimum vertical spacing between labels
@@ -495,8 +511,8 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       }
     };
     
-    adjustLabels(leftLabels);
-    adjustLabels(rightLabels);
+    adjustLabels(rightAnchoredLabels);
+    adjustLabels(leftAnchoredLabels);
     
     // Third pass: render labels with adjusted positions
     nodeGroups.each(function(d) {
@@ -507,11 +523,12 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       // Draw connection line if label was moved significantly
       const displacement = Math.abs(labelInfo.y - labelInfo.originalY);
       if (displacement > 5) {
+        const isCountry = d.id === "Israel" || d.id === "Palestine";
         group
           .append("line")
           .attr("class", "label-line")
           .attr("data-node-type", d.id === "Israel" || d.id === "Palestine" ? "country" : d.id.includes("|") ? "subevent" : "eventtype")
-          .attr("x1", labelInfo.isLeft ? d.x1 : d.x0)
+          .attr("x1", isCountry ? d.x1 : d.x0)
           .attr("y1", labelInfo.originalY)
           .attr("x2", labelInfo.x)
           .attr("y2", labelInfo.y)
@@ -528,7 +545,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
         .attr("x", labelInfo.x)
         .attr("y", labelInfo.y)
         .attr("dy", "0.35em")
-        .attr("text-anchor", labelInfo.isLeft ? "start" : "end")
+        .attr("text-anchor", labelInfo.textAnchor)
         .attr("font-size", labelInfo.fontSize)
         .attr("font-weight", 500)
         .attr("fill", "var(--text-primary)")
@@ -646,8 +663,21 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       observer.observe(wrapperRef.current);
     }
 
+    // Add resize observer
+    const resizeObserver = new ResizeObserver(() => {
+      if (data && svgRef.current && wrapperRef.current) {
+        // Re-trigger render
+        const event = new Event('resize');
+        window.dispatchEvent(event);
+      }
+    });
+    if (wrapperRef.current) {
+      resizeObserver.observe(wrapperRef.current);
+    }
+
     return () => {
       observer.disconnect();
+      resizeObserver.disconnect();
     };
   }, [data, isDark, isMonochromacy]);
 

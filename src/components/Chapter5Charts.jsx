@@ -224,6 +224,22 @@ const GeoChart = ({ isDark, isMonochromacy = false }) => {
             d3.selectAll('.chart-tooltip').remove();
         };
 
+        // Add resize observer
+        const resizeObserver = new ResizeObserver(() => {
+            if (mapContainerRef.current) {
+                // Re-trigger render
+                const event = new Event('resize');
+                window.dispatchEvent(event);
+            }
+        });
+        if (mapContainerRef.current) {
+            resizeObserver.observe(mapContainerRef.current);
+        }
+
+        return () => {
+            resizeObserver.disconnect();
+        };
+
     }, [isDark, isMonochromacy, selectedType, zoomLevel, panOffset, viewMode, selectedDate]);
 
     // Animation effect

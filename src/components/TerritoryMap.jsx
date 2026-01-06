@@ -145,6 +145,24 @@ export default function TerritoryMap({ isDark, isMonochromacy = false }) {
     applyColors(200); // Smooth transition on theme change
   }, [isDark, isMonochromacy]);
 
+  // Add resize observer
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => {
+      if (svgRef.current) {
+        // Re-trigger render by dispatching resize event
+        const event = new Event('resize');
+        window.dispatchEvent(event);
+      }
+    });
+    if (svgRef.current) {
+      resizeObserver.observe(svgRef.current.parentElement || svgRef.current);
+    }
+
+    return () => {
+      resizeObserver.disconnect();
+    };
+  }, []);
+
   return (
     <>
       <svg ref={svgRef} className="territory-map-svg"></svg>

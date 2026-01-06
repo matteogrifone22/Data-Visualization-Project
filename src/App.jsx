@@ -20,7 +20,11 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [chapter1ChartType, setChapter1ChartType] = useState('line');
   const [emailCopied, setEmailCopied] = useState(false);
+  const [isMobileBlocked, setIsMobileBlocked] = useState(false);
+  const [useShortLabels, setUseShortLabels] = useState(false);
   const navbarRef = useRef(null);
+  const toolbarRef = useRef(null);
+  const mobileBlockedRef = useRef(false);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -55,6 +59,39 @@ export default function App() {
       }
     }
   }, [isDark, isMonochromacy]);
+
+  useEffect(() => {
+    const WIDTH_ON = 830;
+    const WIDTH_OFF = 870;
+
+    const update = () => {
+      const w = window.innerWidth || document.documentElement.clientWidth;
+      const currentlyBlocked = mobileBlockedRef.current;
+      const shouldBlock = currentlyBlocked ? w < WIDTH_OFF : w < WIDTH_ON;
+      if (shouldBlock !== mobileBlockedRef.current) {
+        mobileBlockedRef.current = shouldBlock;
+        setIsMobileBlocked(shouldBlock);
+      }
+    };
+
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  useEffect(() => {
+    const updateLabels = () => {
+      const w = window.innerWidth || document.documentElement.clientWidth;
+      setUseShortLabels(w < 1195);
+    };
+
+    updateLabels();
+    window.addEventListener('resize', updateLabels);
+
+    return () => {
+      window.removeEventListener('resize', updateLabels);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -125,10 +162,33 @@ export default function App() {
   const navbarBgColor = 'var(--bg-primary)';
 
 
+  if (isMobileBlocked) {
+    return (
+      <Box
+        sx={{
+          minHeight: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'var(--bg-primary)',
+          color: 'var(--text-primary)',
+          padding: '24px',
+          textAlign: 'center'
+        }}
+      >
+        <Box sx={{ maxWidth: 520, border: '1px solid var(--color-details)', borderRadius: '12px', padding: '24px 20px', boxShadow: '0 12px 32px rgba(0,0,0,0.18)', backgroundColor: 'var(--bg-secondary)' }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, marginBottom: '10px' }}>
+            Desktop Experience Required
+          </Typography>
+          <Typography sx={{ fontSize: '15px', lineHeight: 1.5 }}>
+            This data visualization is optimized for larger screens. Please visit from a desktop or widen your window to explore the content.
+          </Typography>
+        </Box>
+      </Box>
+    );
+  }
+
   return (
-
-
-
     <Box sx={{
       backgroundColor: bgColor,
       color: textColor,
@@ -160,7 +220,17 @@ export default function App() {
           transition: 'box-shadow 0.3s ease, background-color 0.3s ease'
         }}
       >
-        <Toolbar sx={{ gap: { xs: 0.8, md: 2 }, padding: { xs: '8px 8px', md: '8px 24px' }, justifyContent: 'space-between' }}>
+        <Toolbar
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            rowGap: { xs: 0.75, md: 1 },
+            columnGap: { xs: 0.6, md: 1.5 },
+            padding: { xs: '8px 10px', md: '8px 24px' },
+            justifyContent: 'center'
+          }}
+          ref={toolbarRef}
+        >
 
           <Link
             href="#introduction"
@@ -176,12 +246,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
-              War or Genocide?
-            </Box>
-            <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
-              Intro
-            </Box>
+            Intro
           </Link>
           <Link
             href="#chapter1"
@@ -197,12 +262,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
-              Chapter 1
-            </Box>
-            <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
-              Ch 1
-            </Box>
+            {useShortLabels ? 'Ch 1' : 'Chapter 1'}
           </Link>
           <Link
             href="#chapter2"
@@ -218,12 +278,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
-              Chapter 2
-            </Box>
-            <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
-              Ch 2
-            </Box>
+            {useShortLabels ? 'Ch 2' : 'Chapter 2'}
           </Link>
           <Link
             href="#chapter3"
@@ -239,12 +294,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
-              Chapter 3
-            </Box>
-            <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
-              Ch 3
-            </Box>
+            {useShortLabels ? 'Ch 3' : 'Chapter 3'}
           </Link>
           <Link
             href="#chapter4"
@@ -260,12 +310,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
-              Chapter 4
-            </Box>
-            <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
-              Ch 4
-            </Box>
+            {useShortLabels ? 'Ch 4' : 'Chapter 4'}
           </Link>
           <Link
             href="#chapter5"
@@ -281,63 +326,58 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            <Box component="span" sx={{ display: { xs: 'none', md: 'inline' } }}>
-              Chapter 5
-            </Box>
-            <Box component="span" sx={{ display: { xs: 'inline', md: 'none' } }}>
-              Ch 5
-            </Box>
+            {useShortLabels ? 'Ch 5' : 'Chapter 5'}
           </Link>
-          <IconButton
-            onClick={toggleTheme}
-            disableRipple
-            disableFocusRipple
-            disableTouchRipple
-            sx={{
-              color: navbarTextColor,
-              ml: 1,
-              transition: 'transform 0.3s ease, color 0.3s ease',
-              outline: 'none !important',
-              boxShadow: 'none !important',
-              '&:before, &:after': { display: 'none' },
-              '&:active': { backgroundColor: 'transparent !important' },
-              '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
-              '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
-              '&& .MuiTouchRipple-root': { display: 'none' },
-              '&:hover': {
-                color: linkHoverColor,
-                transform: 'rotate(20deg)',
-                backgroundColor: 'transparent !important'
-              }
-            }}
-          >
-            {isDark ? <LightMode /> : <DarkMode />}
-          </IconButton>
-          <IconButton
-            onClick={toggleMonochromacy}
-            disableRipple
-            disableFocusRipple
-            disableTouchRipple
-            sx={{
-              color: navbarTextColor,
-              ml: 0.5,
-              transition: 'transform 0.3s ease, color 0.3s ease',
-              outline: 'none !important',
-              boxShadow: 'none !important',
-              '&:before, &:after': { display: 'none' },
-              '&:active': { backgroundColor: 'transparent !important' },
-              '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
-              '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
-              '&& .MuiTouchRipple-root': { display: 'none' },
-              '&:hover': {
-                color: linkHoverColor,
-                transform: 'scale(1.15)',
-                backgroundColor: 'transparent !important'
-              }
-            }}
-          >
-            {isMonochromacy ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
+          <Box sx={{ display: 'flex', gap: { xs: 0.6, md: 1 }, flexShrink: 0 }}>
+            <IconButton
+              onClick={toggleTheme}
+              disableRipple
+              disableFocusRipple
+              disableTouchRipple
+              sx={{
+                color: navbarTextColor,
+                transition: 'transform 0.3s ease, color 0.3s ease',
+                outline: 'none !important',
+                boxShadow: 'none !important',
+                '&:before, &:after': { display: 'none' },
+                '&:active': { backgroundColor: 'transparent !important' },
+                '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+                '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+                '&& .MuiTouchRipple-root': { display: 'none' },
+                '&:hover': {
+                  color: linkHoverColor,
+                  transform: 'rotate(20deg)',
+                  backgroundColor: 'transparent !important'
+                }
+              }}
+            >
+              {isDark ? <LightMode /> : <DarkMode />}
+            </IconButton>
+            <IconButton
+              onClick={toggleMonochromacy}
+              disableRipple
+              disableFocusRipple
+              disableTouchRipple
+              sx={{
+                color: navbarTextColor,
+                transition: 'transform 0.3s ease, color 0.3s ease',
+                outline: 'none !important',
+                boxShadow: 'none !important',
+                '&:before, &:after': { display: 'none' },
+                '&:active': { backgroundColor: 'transparent !important' },
+                '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+                '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+                '&& .MuiTouchRipple-root': { display: 'none' },
+                '&:hover': {
+                  color: linkHoverColor,
+                  transform: 'scale(1.15)',
+                  backgroundColor: 'transparent !important'
+                }
+              }}
+            >
+              {isMonochromacy ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
 
