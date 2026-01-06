@@ -8,6 +8,7 @@ export function SmallMultipleChart({ isDark = true }) {
     const [dataLoaded, setDataLoaded] = useState(false);
     const [selectedChart, setSelectedChart] = useState(null);
     const animationPlayedRef = useRef(false);
+    const prevSelectedChartRef = useRef(null);
 
     // Load data once
     useEffect(() => {
@@ -45,8 +46,11 @@ export function SmallMultipleChart({ isDark = true }) {
     useEffect(() => {
         if (!dataLoaded) return;
 
-        // Reset animation when chart is shown or selection changes
-        animationPlayedRef.current = false;
+        // Reset animation only when layout changes (selectedChart toggles) or first render
+        if (prevSelectedChartRef.current !== selectedChart) {
+            animationPlayedRef.current = false;
+            prevSelectedChartRef.current = selectedChart;
+        }
 
         const render = () => {
             const data = dataRef.current;
@@ -104,7 +108,7 @@ export function SmallMultipleChart({ isDark = true }) {
             const getColor = (country) => {
                 if (country === 'Israel') return 'var(--color-Israel)';
                 if (country === 'Palestine') return 'var(--color-Palestine)';
-                return isDark ? '#999' : '#666';
+                return 'var(--color-details)';
             };
 
             // Create small multiples
@@ -199,7 +203,7 @@ export function SmallMultipleChart({ isDark = true }) {
                     .attr('x', currentWidth / 2)
                     .attr('y', -10)
                     .attr('text-anchor', 'middle')
-                    .attr('fill', isDark ? '#fff' : '#000')
+                    .attr('fill', 'var(--text-primary)')
                     .style('font-size', '13px')
                     .style('font-weight', '600')
                     .text(metric.label);
@@ -320,13 +324,13 @@ export function SmallMultipleChart({ isDark = true }) {
 
                                     if (roundedChange === 0) {
                                         arrow = '→';
-                                        changeColor = isDark ? '#94a3b8' : '#64748b';
+                                        changeColor = 'var(--color-neutral)';
                                     } else if (change > 0) {
                                         arrow = '↑';
-                                        changeColor = isDark ? '#4ade80' : '#16a34a';
+                                        changeColor = 'var(--color-positive)';
                                     } else {
                                         arrow = '↓';
-                                        changeColor = isDark ? '#f87171' : '#dc2626';
+                                        changeColor = 'var(--color-negative)';
                                     }
 
                                     content += `
@@ -407,7 +411,7 @@ export function SmallMultipleChart({ isDark = true }) {
                         .attr('cy', d => yScale(d[metric.key]))
                         .attr('r', 5)
                         .attr('fill', getColor(country))
-                        .attr('stroke', isDark ? '#1a1a1a' : '#fff')
+                        .attr('stroke', 'var(--bg-primary)')
                         .attr('stroke-width', 1.5)
                         .attr('data-country', country)
                         .attr('data-chart-idx', idx)
@@ -435,7 +439,7 @@ export function SmallMultipleChart({ isDark = true }) {
                 legendItem.append('text')
                     .attr('x', 20)
                     .attr('y', 3)
-                    .attr('fill', isDark ? '#fff' : '#000')
+                    .attr('fill', 'var(--text-primary)')
                     .style('font-size', '12px')
                     .text(country);
             });

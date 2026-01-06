@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { sankey, sankeyLinkHorizontal, sankeyLeft } from "d3-sankey";
 
-export function EventsSankeyDiagram({ isDark = true }) {
+export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
   const svgRef = useRef(null);
   const wrapperRef = useRef(null);
   const animationPlayedRef = useRef(false);
@@ -57,11 +57,11 @@ export function EventsSankeyDiagram({ isDark = true }) {
       .attr("class", "sankey-tooltip")
       .style("position", "absolute")
       .style("visibility", "hidden")
-      .style("background", isDark ? "rgba(30, 30, 30, 0.95)" : "rgba(255, 255, 255, 0.95)")
-      .style("color", isDark ? "#fff" : "#25282A")
+      .style("background", "var(--bg-secondary)")
+      .style("color", "var(--text-primary)")
       .style("padding", "10px 12px")
       .style("border-radius", "6px")
-      .style("border", `1px solid ${isDark ? "#555" : "#ddd"}`)
+      .style("border", "1px solid var(--color-details)")
       .style("font-size", "12px")
       .style("pointer-events", "none")
       .style("z-index", "1000")
@@ -253,15 +253,21 @@ export function EventsSankeyDiagram({ isDark = true }) {
       return;
     }
 
-    // Theme-aware colors; use CSS vars for live updates and fallbacks for mixing math
-    const countryColors = {
-      Israel: "var(--color-Israel)",
-      Palestine: "var(--color-Palestine)"
+    const readCssColor = (variable, fallback) => {
+      const value = getComputedStyle(document.documentElement).getPropertyValue(variable);
+      return value ? value.trim() : fallback;
     };
 
+    // Theme-aware colors; pull from CSS vars so monochromacy/regular themes stay in sync
+    const countryColors = {
+      Israel: readCssColor("--color-Israel", "var(--color-Israel)"),
+      Palestine: readCssColor("--color-Palestine", "var(--color-Palestine)")
+    };
+
+    // Use the same base colors for blending; if you want lighter/darker variants, adjust CSS vars instead
     const blendColors = {
-      Israel: isDark ? "#99B8FF" : "#0034AD",
-      Palestine: isDark ? "#1CD475" : "#074024"
+      Israel: countryColors.Israel,
+      Palestine: countryColors.Palestine
     };
 
     const getNodeColor = (node) => {
@@ -286,7 +292,7 @@ export function EventsSankeyDiagram({ isDark = true }) {
       
       const totalFlow = israelFlow + palestineFlow;
       if (totalFlow === 0) {
-        return isDark ? "#888" : "#666";
+        return "var(--color-details)";
       }
       
       // Mix colors based on contribution ratio
@@ -301,7 +307,7 @@ export function EventsSankeyDiagram({ isDark = true }) {
     const getLinkColor = (link) => {
       // Color links by the originating country
       const color = countryColors[link.country];
-      return color || (isDark ? "#646cff" : "#535bf2");
+      return color || "var(--color-details)";
     };
 
     // Draw links
@@ -378,7 +384,7 @@ export function EventsSankeyDiagram({ isDark = true }) {
       .attr("height", (d) => d.y1 - d.y0)
       .attr("width", (d) => d.x1 - d.x0)
       .attr("fill", (d) => getNodeColor(d))
-      .attr("stroke", isDark ? "#fff" : "#000")
+      .attr("stroke", "var(--text-primary)")
       .attr("stroke-width", 0.5)
       .style("opacity", animationPlayedRef.current ? 1 : 0)
       .style("cursor", "pointer")
@@ -405,7 +411,7 @@ export function EventsSankeyDiagram({ isDark = true }) {
           });
           
           if (israelCount > 0 || palestineCount > 0) {
-            tooltipContent += `<div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid ${isDark ? '#555' : '#ddd'};">`;
+            tooltipContent += `<div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--color-details);">`;
             if (israelCount > 0) {
               const pct = ((israelCount / d.value) * 100).toFixed(1);
               tooltipContent += `<div style="margin-bottom: 3px;"><span style="color: ${countryColors.Israel};">●</span> Israel: ${israelCount.toLocaleString()} (${pct}%)</div>`;
@@ -509,7 +515,7 @@ export function EventsSankeyDiagram({ isDark = true }) {
           .attr("y1", labelInfo.originalY)
           .attr("x2", labelInfo.x)
           .attr("y2", labelInfo.y)
-          .attr("stroke", isDark ? "#888" : "#666")
+          .attr("stroke", "var(--color-details)")
           .attr("stroke-width", 0.5)
           .attr("stroke-dasharray", "2,2")
           .style("opacity", animationPlayedRef.current ? 0.5 : 0);
@@ -525,7 +531,7 @@ export function EventsSankeyDiagram({ isDark = true }) {
         .attr("text-anchor", labelInfo.isLeft ? "start" : "end")
         .attr("font-size", labelInfo.fontSize)
         .attr("font-weight", 500)
-        .attr("fill", isDark ? "#fff" : "#25282A")
+        .attr("fill", "var(--text-primary)")
         .style("text-shadow", isDark 
           ? "0 0 3px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.5)" 
           : "0 0 3px rgba(255,255,255,0.9), 0 0 6px rgba(255,255,255,0.6)")
@@ -539,7 +545,7 @@ export function EventsSankeyDiagram({ isDark = true }) {
       .attr("x", width / 2)
       .attr("y", 20)
       .attr("text-anchor", "middle")
-      .attr("fill", isDark ? "#fff" : "#25282A")
+      .attr("fill", "var(--text-primary)")
       .attr("font-size", 16)
       .attr("font-weight", 700)
       .text("Event Types Flow: Country → Event Type → Sub-Event Type");
@@ -643,7 +649,7 @@ export function EventsSankeyDiagram({ isDark = true }) {
     return () => {
       observer.disconnect();
     };
-  }, [data, isDark]);
+  }, [data, isDark, isMonochromacy]);
 
   return (
     <div ref={wrapperRef} style={{ width: "100%", margin: "0 auto" }}>

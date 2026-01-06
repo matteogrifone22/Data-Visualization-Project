@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 import geojsonUrl from '../GazaMap/unified_territories.geojson?url';
 
-export default function TerritoryMap({ isDark }) {
+export default function TerritoryMap({ isDark, isMonochromacy = false }) {
   const svgRef = useRef(null);
   const geojsonDataRef = useRef(null);
   const projectionRef = useRef(null);
@@ -46,9 +46,9 @@ export default function TerritoryMap({ isDark }) {
         const path = d3.geoPath().projection(projection);
 
         // Get theme colors upfront
-        const israelColor = readCssColor('--color-Israel', isDark ? '#1F62FF' : '#0038B8');
-        const palestineColor = readCssColor('--color-Palestine', isDark ? '#00A352' : '#007A3D');
-        const neutralFill = readCssColor('--bg-secondary', isDark ? '#2d3036' : '#f4f4f4');
+        const israelColor = readCssColor('--color-Israel', 'var(--color-Israel)');
+        const palestineColor = readCssColor('--color-Palestine', 'var(--color-Palestine)');
+        const neutralFill = readCssColor('--bg-secondary', 'var(--bg-secondary)');
 
         const colorScale = d3.scaleOrdinal()
           .domain(['Israel', 'Palestine'])
@@ -112,9 +112,9 @@ export default function TerritoryMap({ isDark }) {
     if (!svgRef.current) return;
     const svg = d3.select(svgRef.current);
 
-    const israelColor = readCssColor('--color-Israel', isDark ? '#1F62FF' : '#0038B8');
-    const palestineColor = readCssColor('--color-Palestine', isDark ? '#00A352' : '#007A3D');
-    const neutralFill = readCssColor('--bg-secondary', isDark ? '#2d3036' : '#f4f4f4');
+    const israelColor = readCssColor('--color-Israel', 'var(--color-Israel)');
+    const palestineColor = readCssColor('--color-Palestine', 'var(--color-Palestine)');
+    const neutralFill = readCssColor('--bg-secondary', 'var(--bg-secondary)');
 
     const colorScale = d3.scaleOrdinal()
       .domain(['Israel', 'Palestine'])
@@ -143,7 +143,7 @@ export default function TerritoryMap({ isDark }) {
   // Update colors on theme change (fast)
   useEffect(() => {
     applyColors(200); // Smooth transition on theme change
-  }, [isDark]);
+  }, [isDark, isMonochromacy]);
 
   return (
     <>

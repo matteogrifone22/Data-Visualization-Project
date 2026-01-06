@@ -3,7 +3,7 @@ import * as d3 from 'd3';
 import gazaBoundaries from '../GazaMap/GazaStrip_MunicipalBoundaries_new.json';
 import incidentsData from '../Dataset/processed/Combined_Incidents_GeoChart.csv?raw';
 
-const GeoChart = ({ isDark }) => {
+const GeoChart = ({ isDark, isMonochromacy = false }) => {
     const svgRef = useRef();
     const wrapperRef = useRef();
     const mapContainerRef = useRef();
@@ -86,8 +86,8 @@ const GeoChart = ({ isDark }) => {
             .data(gazaBoundaries.features)
             .join('path')
             .attr('d', pathGenerator)
-            .attr('fill', isDark ? '#444' : '#e0e0e0')
-            .attr('stroke', isDark ? '#666' : '#999')
+            .attr('fill', 'var(--bg-secondary)')
+            .attr('stroke', 'var(--text-primary)')
             .attr('stroke-width', 1.5);
 
         // Color scale for incident types - theme-aware with CSS variables
@@ -98,7 +98,7 @@ const GeoChart = ({ isDark }) => {
         };
 
         // Use theme variable directly so colors always follow the active CSS theme
-        const themeColor = readCssColor('--color-details', '#3b82f6');
+        const themeColor = readCssColor('--color-details', 'var(--color-details)');
 
         const colorScale = d3.scaleOrdinal()
             .domain(['Food System', 'Health Care'])
@@ -224,7 +224,7 @@ const GeoChart = ({ isDark }) => {
             d3.selectAll('.chart-tooltip').remove();
         };
 
-    }, [isDark, selectedType, zoomLevel, panOffset, viewMode, selectedDate]);
+    }, [isDark, isMonochromacy, selectedType, zoomLevel, panOffset, viewMode, selectedDate]);
 
     // Animation effect
     useEffect(() => {

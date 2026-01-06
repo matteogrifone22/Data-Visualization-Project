@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab } from '@mui/material';
-import { DarkMode, LightMode } from '@mui/icons-material';
+import { DarkMode, LightMode, Visibility, VisibilityOff } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import MyChart from './components/MyChart';
 import TerritoryMap from './components/TerritoryMap';
@@ -14,6 +14,7 @@ import { rgb } from 'd3';
 
 export default function App() {
   const [isDark, setIsDark] = useState(true);
+  const [isMonochromacy, setIsMonochromacy] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeSection, setActiveSection] = useState('introduction');
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -25,17 +26,35 @@ export default function App() {
     setIsDark(!isDark);
   };
 
+  const toggleMonochromacy = () => {
+    setIsMonochromacy(!isMonochromacy);
+  };
+
   useLayoutEffect(() => {
     // Sync CSS variable theme classes on :root so var(--...) works
     const root = document.documentElement;
-    if (isDark) {
-      root.classList.add('dark-theme');
-      root.classList.remove('light-theme');
+
+    // Clear all theme-related classes first to avoid overlaps
+    root.classList.remove('monochromacy-dark-mode', 'monochromacy-light-mode', 'dark-theme', 'light-theme');
+
+    if (isMonochromacy) {
+      // Apply monochromacy theme based on isDark state
+      if (isDark) {
+        // Dark UI should use the black-on-white monochrome palette
+        root.classList.add('monochromacy-light-mode');
+      } else {
+        // Light UI should use the white-on-black monochrome palette
+        root.classList.add('monochromacy-dark-mode');
+      }
     } else {
-      root.classList.add('light-theme');
-      root.classList.remove('dark-theme');
+      // Apply regular theme
+      if (isDark) {
+        root.classList.add('dark-theme');
+      } else {
+        root.classList.add('light-theme');
+      }
     }
-  }, [isDark]);
+  }, [isDark, isMonochromacy]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -97,13 +116,13 @@ export default function App() {
     setTimeout(() => setEmailCopied(false), 2000);
   };
 
-  const bgColor = isDark ? '#25282A' : '#D9D9D6';
-  const textColor = isDark ? '#D9D9D6' : '#25282A';
-  const navbarTextColor = isDark ? '#D9D9D6' : '#25282A';
-  const linkHoverColor = 'var(--color-details)';
+  const bgColor = 'var(--bg-primary)';
+  const textColor = 'var(--text-primary)';
+  const navbarTextColor = 'var(--text-navbar)';
+  const linkHoverColor = 'var(--color-link-hover)';
   const borderColor = 'var(--color-details)';
-  const navbarShadow = '0 8px 24px rgba(0, 0, 0, 0.5)';
-  const navbarBgColor = isDark ? 'rgba(37, 40, 42, 0.85)' : 'rgba(217, 217, 214, 0.85)';
+  const navbarShadow = 'var(--navbar-shadow)';
+  const navbarBgColor = 'var(--bg-primary)';
 
 
   return (
@@ -294,6 +313,31 @@ export default function App() {
           >
             {isDark ? <LightMode /> : <DarkMode />}
           </IconButton>
+          <IconButton
+            onClick={toggleMonochromacy}
+            disableRipple
+            disableFocusRipple
+            disableTouchRipple
+            sx={{
+              color: navbarTextColor,
+              ml: 0.5,
+              transition: 'transform 0.3s ease, color 0.3s ease',
+              outline: 'none !important',
+              boxShadow: 'none !important',
+              '&:before, &:after': { display: 'none' },
+              '&:active': { backgroundColor: 'transparent !important' },
+              '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+              '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+              '&& .MuiTouchRipple-root': { display: 'none' },
+              '&:hover': {
+                color: linkHoverColor,
+                transform: 'scale(1.15)',
+                backgroundColor: 'transparent !important'
+              }
+            }}
+          >
+            {isMonochromacy ? <VisibilityOff /> : <Visibility />}
+          </IconButton>
         </Toolbar>
       </AppBar>
 
@@ -409,7 +453,7 @@ export default function App() {
               >
                 Geographic Context
               </Typography>
-              <TerritoryMap isDark={isDark} />
+              <TerritoryMap isDark={isDark} isMonochromacy={isMonochromacy} />
             </Box>
           </Box>
         </Box>
@@ -578,7 +622,7 @@ export default function App() {
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <EventsSankeyDiagram isDark={isDark} />
+              <EventsSankeyDiagram isDark={isDark} isMonochromacy={isMonochromacy} />
           </Box>
         </Box>
 
@@ -665,7 +709,7 @@ export default function App() {
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <GeoChart isDark={isDark} />
+              <GeoChart isDark={isDark} isMonochromacy={isMonochromacy} />
           </Box>
         </Box>
       </Box>
@@ -795,7 +839,7 @@ export default function App() {
           bottom: 30,
           right: 30,
           backgroundColor: linkHoverColor,
-          color: isDark ? '#25282A' : '#ffffff',
+          color: 'var(--bg-primary)',
           opacity: showScrollTop ? 1 : 0,
           visibility: showScrollTop ? 'visible' : 'hidden',
           transition: 'opacity 0.3s ease, visibility 0.3s ease, color 0.3s ease, transform 0.3s ease, background-color 0.3s ease',

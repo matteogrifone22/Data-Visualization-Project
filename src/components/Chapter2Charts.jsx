@@ -334,7 +334,7 @@ export function Chapter2ViolinBoxPlot({ isDark = true }) {
 
         group
           .select(".median")
-          .attr("stroke", isDark ? "#fdfdfd" : "#111")
+          .attr("stroke", "var(--text-primary)")
           .attr("stroke-width", 2.4)
           .transition(transition)
           .attr("x1", -boxWidth / 2)

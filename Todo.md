@@ -8,3 +8,5 @@
 - [x] Aggiungere animazioni di caricamento
 - [ ] Aggiungere Guida all'uso per ogni grafico
 - [ ] Capire come gestire mobile
+- [x] Favicon personalizzata
+- [x] Colorblind mode

@@ -75,11 +75,18 @@ h1, h2, h3, h4, h5, h6 {
   --color-Israel-dark: #1F62FF;
   --color-Israel-light: #0038B8;
   
+  
   --color-Palestine-dark: #00A352;
   --color-Palestine-light: #007A3D;
+  
   /* Theme-aware country colors used by charts */
   --color-Israel: var(--color-Israel-dark);
   --color-Palestine: var(--color-Palestine-dark);
+
+  /* Semantic accents */
+  --color-positive: #16a34a;
+  --color-negative: #dc2626;
+  --color-neutral: #94a3b8;
 
   /* Universal text content width (as % of viewport) */
   --content-width: 45vw;
@@ -88,6 +95,8 @@ h1, h2, h3, h4, h5, h6 {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+ 
 }
 
 html {
@@ -211,6 +220,37 @@ button:focus-visible {
   --color-Israel: var(--color-Israel-dark);
   --color-Palestine: var(--color-Palestine-dark);
 }
+
+:root.monochromacy-dark-mode {
+  --bg-primary: #ffffff;
+  --bg-secondary: #ffffff;
+  --text-primary: #161616;
+  --text-navbar: #161616;
+  --color-link-hover: #7e7e7e;
+  --color-details: #7e7e7e;
+  --navbar-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --color-Israel: #282828;
+  --color-Palestine: #a2a2a2;
+  --color-positive: #7e7e7e;
+  --color-negative: #7e7e7e;
+  --color-neutral: #7e7e7e;
+}
+
+:root.monochromacy-light-mode {
+  --bg-primary: #000000;
+  --bg-secondary: #000000;
+  --text-primary: #ffffff;
+  --text-navbar: #ffffff;
+  --color-link-hover: #9f9f9f;
+  --color-details: #9f9f9f;
+  --navbar-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --color-Israel: #5f5e5e;
+  --color-Palestine: #cfcfcf;
+  --color-positive: #9f9f9f;
+  --color-negative: #9f9f9f;
+  --color-neutral: #9f9f9f;
+}
+
 
 /* Navbar Styles */
 .navbar-container {
