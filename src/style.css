@@ -193,7 +193,7 @@ button:focus-visible {
   --bg-secondary: var(--color-unige-gray);
   --text-primary: var(--color-unige-dark);
   --text-navbar: var(--color-unige-dark);
-  --color-link-hover: var(--color-ingegneria);
+  --color-link-hover: var(--color-scienze-formazione);
   --color-details: var(--color-scienze-formazione);
   --navbar-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   --color-Israel: var(--color-Israel-light);

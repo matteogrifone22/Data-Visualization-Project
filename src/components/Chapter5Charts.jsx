@@ -98,7 +98,7 @@ const GeoChart = ({ isDark }) => {
         };
 
         // Use theme variable directly so colors always follow the active CSS theme
-        const themeColor = readCssColor('--color-details', '#574676');
+        const themeColor = readCssColor('--color-details', '#3b82f6');
 
         const colorScale = d3.scaleOrdinal()
             .domain(['Food System', 'Health Care'])
@@ -216,7 +216,7 @@ const GeoChart = ({ isDark }) => {
             .attr('y', height - 10)
             .attr('font-size', '12px')
             .attr('font-weight', '600')
-            .attr('fill', isDark ? '#D9D9D6' : '#25282A')
+            .attr('fill', 'var(--text-primary)')
             .text(`Total incidents: ${incidents.length}`);
 
         // Cleanup

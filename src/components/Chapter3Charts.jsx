@@ -5,10 +5,12 @@ import { sankey, sankeyLinkHorizontal, sankeyLeft } from "d3-sankey";
 export function EventsSankeyDiagram({ isDark = true }) {
   const svgRef = useRef(null);
   const wrapperRef = useRef(null);
+  const animationPlayedRef = useRef(false);
   const [data, setData] = useState(null);
 
   // Load dataset
   useEffect(() => {
+    animationPlayedRef.current = false;
     const load = async () => {
       const url = new URL("../Dataset/events_sankey.csv", import.meta.url).href;
       const rows = await d3.csv(url);
@@ -94,7 +96,8 @@ export function EventsSankeyDiagram({ isDark = true }) {
         source: countryId,
         target: eventTypeId,
         value: d.events,
-        country: d.country
+        country: d.country,
+        side: "left"
       });
 
       // Link: Event Type -> Sub-event Type
@@ -102,7 +105,8 @@ export function EventsSankeyDiagram({ isDark = true }) {
         source: eventTypeId,
         target: subEventId,
         value: d.events,
-        country: d.country
+        country: d.country,
+        side: "right"
       });
     });
 
@@ -313,6 +317,13 @@ export function EventsSankeyDiagram({ isDark = true }) {
       .attr("fill", "none")
       .attr("opacity", 0.4)
       .attr("class", "sankey-link")
+      .attr("data-side", (d) => d.side)
+      .style("stroke-dasharray", function() {
+        return animationPlayedRef.current ? 0 : this.getTotalLength();
+      })
+      .style("stroke-dashoffset", function() {
+        return animationPlayedRef.current ? 0 : this.getTotalLength();
+      })
       .on("mouseenter", function (event, d) {
         d3.select(this).attr("opacity", 0.7);
         const sourceName = d.source.name || d.source.id;
@@ -347,11 +358,21 @@ export function EventsSankeyDiagram({ isDark = true }) {
       .attr("class", "nodes")
       .selectAll("g")
       .data(graph.nodes)
-      .join("g");
+      .join("g")
+      .attr("data-node-type", (d) => {
+        if (d.id === "Israel" || d.id === "Palestine") return "country";
+        if (d.id.includes("|")) return "subevent";
+        return "eventtype";
+      });
 
     nodeGroups
       .append("rect")
       .attr("class", "node-rect")
+      .attr("data-node-type", (d) => {
+        if (d.id === "Israel" || d.id === "Palestine") return "country";
+        if (d.id.includes("|")) return "subevent";
+        return "eventtype";
+      })
       .attr("x", (d) => d.x0)
       .attr("y", (d) => d.y0)
       .attr("height", (d) => d.y1 - d.y0)
@@ -359,6 +380,7 @@ export function EventsSankeyDiagram({ isDark = true }) {
       .attr("fill", (d) => getNodeColor(d))
       .attr("stroke", isDark ? "#fff" : "#000")
       .attr("stroke-width", 0.5)
+      .style("opacity", animationPlayedRef.current ? 1 : 0)
       .style("cursor", "pointer")
       .on("mouseenter", function (event, d) {
         d3.select(this).attr("stroke-width", 2);
@@ -481,6 +503,8 @@ export function EventsSankeyDiagram({ isDark = true }) {
       if (displacement > 5) {
         group
           .append("line")
+          .attr("class", "label-line")
+          .attr("data-node-type", d.id === "Israel" || d.id === "Palestine" ? "country" : d.id.includes("|") ? "subevent" : "eventtype")
           .attr("x1", labelInfo.isLeft ? d.x1 : d.x0)
           .attr("y1", labelInfo.originalY)
           .attr("x2", labelInfo.x)
@@ -488,11 +512,13 @@ export function EventsSankeyDiagram({ isDark = true }) {
           .attr("stroke", isDark ? "#888" : "#666")
           .attr("stroke-width", 0.5)
           .attr("stroke-dasharray", "2,2")
-          .attr("opacity", 0.5);
+          .style("opacity", animationPlayedRef.current ? 0.5 : 0);
       }
       
       group
         .append("text")
+        .attr("class", "node-label")
+        .attr("data-node-type", d.id === "Israel" || d.id === "Palestine" ? "country" : d.id.includes("|") ? "subevent" : "eventtype")
         .attr("x", labelInfo.x)
         .attr("y", labelInfo.y)
         .attr("dy", "0.35em")
@@ -503,6 +529,7 @@ export function EventsSankeyDiagram({ isDark = true }) {
         .style("text-shadow", isDark 
           ? "0 0 3px rgba(0,0,0,0.8), 0 0 6px rgba(0,0,0,0.5)" 
           : "0 0 3px rgba(255,255,255,0.9), 0 0 6px rgba(255,255,255,0.6)")
+        .style("opacity", animationPlayedRef.current ? 1 : 0)
         .text(labelInfo.name);
     });
 
@@ -517,6 +544,105 @@ export function EventsSankeyDiagram({ isDark = true }) {
       .attr("font-weight", 700)
       .text("Event Types Flow: Country → Event Type → Sub-Event Type");
 
+    // Add scroll-triggered animation (100% visible)
+    const observerOptions = {
+      threshold: 1.0 // Trigger only when 100% visible
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !animationPlayedRef.current) {
+          animationPlayedRef.current = true;
+
+          // STEP 1: Country rectangles appear
+          d3.select(svgRef.current)
+            .selectAll(".node-rect[data-node-type='country']")
+            .transition()
+            .duration(400)
+            .ease(d3.easeQuadInOut)
+            .style("opacity", 1);
+
+          // STEP 1b: Country labels appear
+          d3.select(svgRef.current)
+            .selectAll(".node-label[data-node-type='country']")
+            .transition()
+            .duration(400)
+            .ease(d3.easeQuadInOut)
+            .style("opacity", 1);
+
+          // STEP 2: Country -> Event Type flow draws
+          d3.select(svgRef.current)
+            .selectAll(".sankey-link[data-side='left']")
+            .transition()
+            .delay(400)
+            .duration(800)
+            .ease(d3.easeLinear)
+            .style("stroke-dashoffset", 0);
+
+          // STEP 3: Event Type rectangles appear (when left flow completes)
+          d3.select(svgRef.current)
+            .selectAll(".node-rect[data-node-type='eventtype']")
+            .transition()
+            .delay(1200)
+            .duration(400)
+            .ease(d3.easeQuadInOut)
+            .style("opacity", 1);
+
+          // STEP 3b: Event Type labels appear
+          d3.select(svgRef.current)
+            .selectAll(".node-label[data-node-type='eventtype']")
+            .transition()
+            .delay(1200)
+            .duration(400)
+            .ease(d3.easeQuadInOut)
+            .style("opacity", 1);
+
+          // STEP 4: Event Type -> Sub-Event Type flow draws (delayed for event type to spawn easily)
+          d3.select(svgRef.current)
+            .selectAll(".sankey-link[data-side='right']")
+            .transition()
+            .delay(1800)
+            .duration(1000)
+            .ease(d3.easeLinear)
+            .style("stroke-dashoffset", 0);
+
+          // STEP 5: Sub-Event rectangles appear (when right flow completes)
+          d3.select(svgRef.current)
+            .selectAll(".node-rect[data-node-type='subevent']")
+            .transition()
+            .delay(2800)
+            .duration(400)
+            .ease(d3.easeQuadInOut)
+            .style("opacity", 1);
+
+          // STEP 5b: Sub-Event labels appear
+          d3.select(svgRef.current)
+            .selectAll(".node-label[data-node-type='subevent']")
+            .transition()
+            .delay(2800)
+            .duration(400)
+            .ease(d3.easeQuadInOut)
+            .style("opacity", 1);
+
+          // Animate label connection lines
+          d3.select(svgRef.current)
+            .selectAll(".label-line")
+            .transition()
+            .delay(2800)
+            .duration(400)
+            .ease(d3.easeQuadInOut)
+            .style("opacity", 0.5);
+        }
+      });
+    }, observerOptions);
+
+    if (wrapperRef.current) {
+      observer.observe(wrapperRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
   }, [data, isDark]);
 
   return (

@@ -7,6 +7,7 @@ export function SmallMultipleChart({ isDark = true }) {
     const dataRef = useRef([]);
     const [dataLoaded, setDataLoaded] = useState(false);
     const [selectedChart, setSelectedChart] = useState(null);
+    const animationPlayedRef = useRef(false);
 
     // Load data once
     useEffect(() => {
@@ -43,6 +44,9 @@ export function SmallMultipleChart({ isDark = true }) {
 
     useEffect(() => {
         if (!dataLoaded) return;
+
+        // Reset animation when chart is shown or selection changes
+        animationPlayedRef.current = false;
 
         const render = () => {
             const data = dataRef.current;
@@ -268,6 +272,9 @@ export function SmallMultipleChart({ isDark = true }) {
                         setSelectedChart(selectedChart === idx ? null : idx);
                     })
                     .on('mousemove', function (event) {
+                        // Disable hover interactions until animation completes
+                        if (!animationPlayedRef.current) return;
+
                         const [mouseX] = d3.pointer(event, this);
                         const year = Math.round(xScale.invert(mouseX));
 
@@ -344,6 +351,9 @@ export function SmallMultipleChart({ isDark = true }) {
                             .style('top', `${event.pageY - 12}px`);
                     })
                     .on('mouseleave', function () {
+                        // Disable hover interactions until animation completes
+                        if (!animationPlayedRef.current) return;
+
                         // Reset all dots to normal size
                         g.selectAll('circle')
                             .transition()
@@ -370,14 +380,23 @@ export function SmallMultipleChart({ isDark = true }) {
                     if (countryData.length === 0) return;
 
                     // Line path
-                    g.append('path')
+                    const pathElement = g.append('path')
                         .datum(countryData)
                         .attr('fill', 'none')
                         .attr('stroke', getColor(country))
                         .attr('stroke-width', 5)
                         .attr('stroke-linejoin', 'round')
                         .attr('stroke-linecap', 'round')
-                        .attr('d', line);
+                        .attr('d', line)
+                        .attr('data-country', country)
+                        .attr('data-chart-idx', idx);
+
+                    // Setup animation: set stroke-dasharray to make line invisible initially
+                    const pathNode = pathElement.node();
+                    const pathLength = pathNode.getTotalLength();
+                    pathElement
+                        .attr('stroke-dasharray', pathLength)
+                        .attr('stroke-dashoffset', animationPlayedRef.current ? 0 : pathLength);
 
                     // Add points for visual reference
                     g.selectAll(`.point-${country.replace(/\s+/g, '-')}`)
@@ -390,7 +409,9 @@ export function SmallMultipleChart({ isDark = true }) {
                         .attr('fill', getColor(country))
                         .attr('stroke', isDark ? '#1a1a1a' : '#fff')
                         .attr('stroke-width', 1.5)
-                        .style('opacity', 0.8)
+                        .attr('data-country', country)
+                        .attr('data-chart-idx', idx)
+                        .style('opacity', animationPlayedRef.current ? 0.8 : 0)
                         .style('pointer-events', 'none');
                 });
             });
@@ -422,6 +443,38 @@ export function SmallMultipleChart({ isDark = true }) {
 
         render();
 
+        // Setup Intersection Observer to trigger animation when chart comes into view
+        const observerOptions = {
+            threshold: 1.0 // Trigger when fully visible
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting && !animationPlayedRef.current) {
+                    animationPlayedRef.current = true;
+                    // Trigger line animation for all small multiples
+                    d3.select(svgRef.current)
+                        .selectAll('path[data-country]')
+                        .transition()
+                        .duration(1500)
+                        .attr('stroke-dashoffset', 0);
+
+                    // Trigger circles animation after lines finish
+                    setTimeout(() => {
+                        d3.select(svgRef.current)
+                            .selectAll('circle[data-country]')
+                            .transition()
+                            .duration(300)
+                            .style('opacity', 0.8);
+                    }, 1500);
+                }
+            });
+        }, observerOptions);
+
+        if (wrapperRef.current) {
+            observer.observe(wrapperRef.current);
+        }
+
         const handleResize = () => {
             render();
         };
@@ -429,6 +482,7 @@ export function SmallMultipleChart({ isDark = true }) {
         window.addEventListener('resize', handleResize);
 
         return () => {
+            observer.disconnect();
             window.removeEventListener('resize', handleResize);
             d3.select('body').selectAll('.chart-tooltip').remove();
         };

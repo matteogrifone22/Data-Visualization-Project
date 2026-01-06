@@ -280,6 +280,7 @@ export function Chapter2ViolinBoxPlot({ isDark = true }) {
       const capWidth = Math.min(26, boxWidth * 0.7);
 
       const group = d3.select(this);
+
       group
         .select(".violin")
         .datum(density)
