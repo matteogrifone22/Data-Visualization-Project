@@ -73,7 +73,7 @@ const ageMidpoint = (str) => {
 };
 
 // Named export expected by imports
-export function Chapter2ViolinBoxPlot({ isDark = true }) {
+export function ViolinBoxPlot({ isDark = true }) {
   const svgRef = useRef(null);
   const wrapperRef = useRef(null);
   const yearsRef = useRef([]);
@@ -495,4 +495,4 @@ export function Chapter2ViolinBoxPlot({ isDark = true }) {
   );
 }
 
-export default Chapter2ViolinBoxPlot;
+export default ViolinBoxPlot;

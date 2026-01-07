@@ -275,33 +275,22 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       if (node.id === "Israel" || node.id === "Palestine") {
         return countryColors[node.id];
       }
-      
-      // For event types and sub-events, use a neutral gradient based on total flow
-      // Calculate contribution from each country
+
+      // For event types and sub-events, color by dominant incoming country
       const incomingLinks = graph.links.filter(l => l.target === node);
       let israelFlow = 0;
       let palestineFlow = 0;
-      
+
       incomingLinks.forEach(link => {
-        if (link.country === "Israel") {
-          israelFlow += link.value;
-        } else if (link.country === "Palestine") {
-          palestineFlow += link.value;
-        }
+        if (link.country === "Israel") israelFlow += link.value;
+        if (link.country === "Palestine") palestineFlow += link.value;
       });
-      
-      const totalFlow = israelFlow + palestineFlow;
-      if (totalFlow === 0) {
-        return "var(--color-details)";
-      }
-      
-      // Mix colors based on contribution ratio
-      const israelRatio = israelFlow / totalFlow;
-      const israelColor = d3.color(blendColors.Israel);
-      const palestineColor = d3.color(blendColors.Palestine);
-      
-      // Interpolate between the two colors
-      return d3.interpolateRgb(palestineColor, israelColor)(israelRatio);
+
+      if (israelFlow === 0 && palestineFlow === 0) return "var(--color-details)";
+      if (israelFlow > palestineFlow) return countryColors.Israel;
+      if (palestineFlow > israelFlow) return countryColors.Palestine;
+      // Tie: use neutral accent
+      return "var(--color-details)";
     };
 
     const getLinkColor = (link) => {

@@ -2,13 +2,13 @@ import { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab } from '@mui/material';
 import { DarkMode, LightMode, Visibility, VisibilityOff } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import MyChart from './components/MyChart';
 import TerritoryMap from './components/TerritoryMap';
-import { Chapter1LineChart, Chapter1RidgeChart } from './components/Chapter1Charts';
-import Chapter2ViolinBoxPlot from './components/Chapter2Charts';
-import EventsSankeyDiagram from './components/Chapter3Charts';
-import SmallMultipleChart from './components/Chapter4Charts';
-import GeoChart from './components/Chapter5Charts';
+import LineChart from './components/LineChart';
+import RidgeChart  from './components/RidgePlot';
+import ViolinBoxPlot from './components/ViolinBoxPlot';
+import EventsSankeyDiagram from './components/SankeyDiagram';
+import SmallMultipleChart from './components/SmallMultiples';
+import GeoChart from './components/GeoMap';
 
 import { rgb } from 'd3';
 
@@ -18,7 +18,6 @@ export default function App() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeSection, setActiveSection] = useState('introduction');
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [chapter1ChartType, setChapter1ChartType] = useState('line');
   const [emailCopied, setEmailCopied] = useState(false);
   const [isMobileBlocked, setIsMobileBlocked] = useState(false);
   const [useShortLabels, setUseShortLabels] = useState(false);
@@ -103,7 +102,7 @@ export default function App() {
       setScrollProgress(progress);
 
       // Determine active section based on which section is most visible
-      const sections = ['introduction', 'chapter1', 'chapter2', 'chapter3', 'chapter4', 'chapter5'];
+      const sections = ['introduction', 'chapter1', 'chapter2', 'chapter3', 'chapter4', 'chapter5', 'chapter6'];
       const scrollPosition = window.scrollY + window.innerHeight / 2;
 
       let currentSection = sections[0];
@@ -246,7 +245,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            Intro
+            War or Genocide?
           </Link>
           <Link
             href="#chapter1"
@@ -327,6 +326,22 @@ export default function App() {
             }}
           >
             {useShortLabels ? 'Ch 5' : 'Chapter 5'}
+          </Link>
+          <Link
+            href="#chapter6"
+            onClick={(e) => scrollToSection(e, 'chapter6')}
+            sx={{
+              color: activeSection === 'chapter6' ? linkHoverColor : navbarTextColor,
+              textDecoration: 'none',
+              fontSize: { xs: '0.8rem', md: '0.95rem' },
+              cursor: 'pointer',
+              transition: 'color 0.3s ease',
+              fontFamily: 'var(--font-serif)',
+              fontWeight: activeSection === 'chapter6' ? 700 : 600,
+              '&:hover': { color: linkHoverColor, opacity: 1 }
+            }}
+          >
+            {useShortLabels ? 'Ch 6' : 'Chapter 6'}
           </Link>
           <Box sx={{ display: 'flex', gap: { xs: 0.6, md: 1 }, flexShrink: 0 }}>
             <IconButton
@@ -499,7 +514,7 @@ export default function App() {
         </Box>
 
 
-        {/* Chart 1 Section */}
+        {/* Chapter 1 Section - Small Multiples */}
         <Box
           id="chapter1"
           sx={{
@@ -519,11 +534,11 @@ export default function App() {
               sx={{
                 color: textColor,
                 fontWeight: 700,
-                marginBottom: 4,
+                marginBottom: 3,
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
               }}
             >
-              Events and fatalities over time
+              Life during the conflict
             </Typography>
             <Typography
               variant="body1"
@@ -532,43 +547,18 @@ export default function App() {
                 lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
-                marginBottom: 0,
-                marginLeft: 'auto',
-                marginRight: 'auto'
+                marginBottom: 0
               }}
             >
-              In questa sezione mostrerò gli eventi e le morti per Palestina e Israele dal 2000 al 2025.
-              Il dataset usato sarà ACLED (agglomerated data-middle east).
-              L'obiettivo è vedere se ci sono differenze significative tra i due paesi in termini di eventi e morti.
-              Verrà usato probabilmente un line chart con due linee (una per paese) e punti dati evidenziati per le fatalities.
-              Verrà usato un ridge plot per mostrare la distribuzione degli eventi nel tempo, con possibilità di filtrare per tipo di evento (battaglia, violenza politica, ecc) da capire se con uno small multiples o con un menù a tendina.
-              Questa prima sezione con due visualizzazioni serve per dare un contesto storico al conflitto.
-              Numero Visualizzazioni: 2 (line chart + ridge plot).
+              This section shows the quality of life in both countries from 2000 to 2024. The charts below compare key indicators between Israel and Palestine, including GDP per capita, access to safe drinking water, sanitation services, and food insecurity levels. These metrics provide insight into the living conditions and development disparities between the two regions during this period.
             </Typography>
           </Box>
-          <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, marginTop: 4, marginBottom: 4 }}>
-            <button
-              onClick={() => setChapter1ChartType('line')}
-              className={`selection-button ${chapter1ChartType === 'line' ? 'active' : ''}`}
-              style={{ fontSize: '14px', padding: '6px 10px', minWidth: '150px' }}
-            >
-              Monthly Fatalities<br/>(Line Chart)
-            </button>
-            <button
-              onClick={() => setChapter1ChartType('ridge')}
-              className={`selection-button ${chapter1ChartType === 'ridge' ? 'active' : ''}`}
-              style={{ fontSize: '14px', padding: '6px 10px', minWidth: '150px' }}
-            >
-              Events per Week<br/>(Ridge Plot)
-            </button>
-          </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            {chapter1ChartType === 'line' && <Chapter1LineChart key="line-chart" isDark={isDark} />}
-            {chapter1ChartType === 'ridge' && <Chapter1RidgeChart key="ridge-chart" isDark={isDark} />}
+            <SmallMultipleChart isDark={isDark} />
           </Box>
         </Box>
 
-        {/* Chapter 2 Section */}
+        {/* Chapter 2 Section - Violin & Box Plot */}
         <Box
           id="chapter2"
           sx={{
@@ -614,11 +604,11 @@ export default function App() {
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <Chapter2ViolinBoxPlot isDark={isDark} />
+            <ViolinBoxPlot isDark={isDark} />
           </Box>
         </Box>
 
-        {/* Chapter 3 Section */}
+        {/* Chapter 3 Section - Sankey Diagram */}
         <Box
           id="chapter3"
           sx={{
@@ -666,7 +656,7 @@ export default function App() {
           </Box>
         </Box>
 
-        {/* Chapter 4 Section */}
+        {/* Chapter 4 Section - Ridge Plot */}
         <Box
           id="chapter4"
           sx={{
@@ -690,7 +680,7 @@ export default function App() {
                 fontSize: { xs: '2.5rem', md: '3.5rem' }
               }}
             >
-              Life during the conflict
+              Weekly events distribution
             </Typography>
             <Typography
               variant="body1"
@@ -702,17 +692,61 @@ export default function App() {
                 marginBottom: 0
               }}
             >
-              This section shows the quality of life in both countries from 2000 to 2024. The charts below compare key indicators between Israel and Palestine, including GDP per capita, access to safe drinking water, sanitation services, and food insecurity levels. These metrics provide insight into the living conditions and development disparities between the two regions during this period.
+              This ridge plot shows the distribution of events per week over time for Israel and Palestine. Select event types from the sidebar to filter the visualization and see how different types of events evolved throughout the conflict.
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <SmallMultipleChart isDark={isDark} />
+            <RidgeChart isDark={isDark} />
           </Box>
         </Box>
 
-        {/* Chapter 5 Section */}
+        {/* Chapter 5 Section - Line Chart */}
         <Box
           id="chapter5"
+          sx={{
+            minHeight: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            scrollMarginTop: '8vh',
+            padding: '2vh 4vw 12vh 4vw'
+          }}
+        >
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
+            <Typography
+              variant="h2"
+              gutterBottom
+              sx={{
+                color: textColor,
+                fontWeight: 700,
+                marginBottom: 3,
+                fontSize: { xs: '2.5rem', md: '3.5rem' }
+              }}
+            >
+              Monthly fatalities over time
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 0
+              }}
+            >
+              This line chart tracks monthly fatalities in Israel and Palestine from 2023 to 2025. Hover over the chart to see detailed information for each month, and click on a country name or line to focus on that specific data.
+            </Typography>
+          </Box>
+          <Box sx={{ width: '100%', minWidth: '100%' }}>
+            <LineChart isDark={isDark} />
+          </Box>
+        </Box>
+
+        {/* Chapter 6 Section - Geochart */}
+        <Box
+          id="chapter6"
           sx={{
             minHeight: 'auto',
             display: 'flex',
@@ -792,6 +826,24 @@ export default function App() {
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
               <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
             </svg>
+          </Link>
+          <Link
+            href="#/datasets"
+            rel="noopener noreferrer"
+            sx={{
+              color: navbarTextColor,
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              transition: 'color 0.3s ease',
+              '&:hover': { color: linkHoverColor }
+            }}
+            aria-label="Datasets and Sources"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M4 6a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm0 8a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z"/>
+            </svg>
+            <span style={{ marginLeft: 8 }}>Datasets</span>
           </Link>
           <Link
             href="https://github.com/matteogrifone22"
