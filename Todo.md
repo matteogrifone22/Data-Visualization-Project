@@ -10,3 +10,14 @@
 - [x] Capire come gestire mobile
 - [x] Favicon personalizzata
 - [x] Colorblind mode
+
+
+Story flow:
+
+War or Genocide?
+Intro già fatta
+Dataset 
+Mappa dei territori
+
+
+Inizio story line

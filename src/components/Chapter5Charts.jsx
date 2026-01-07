@@ -2,6 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import gazaBoundaries from '../GazaMap/GazaStrip_MunicipalBoundaries_new.json';
 import incidentsData from '../Dataset/processed/Combined_Incidents_GeoChart.csv?raw';
+// Clustered damage sites (500m radius)
+const damageSitesUrl = new URL('../GazaMap/Damage_Sites_clusters_500m.geojson', import.meta.url).href;
 
 const GeoChart = ({ isDark, isMonochromacy = false }) => {
     const svgRef = useRef();
@@ -15,10 +17,20 @@ const GeoChart = ({ isDark, isMonochromacy = false }) => {
     const [dateRange, setDateRange] = useState({ min: null, max: null });
     const [isPlaying, setIsPlaying] = useState(false);
     const [isCumulative, setIsCumulative] = useState(false); // New cumulative state
+    const [damageSitesData, setDamageSitesData] = useState(null);
+    const [datasetMode, setDatasetMode] = useState('incidents'); // 'incidents' or 'damage'
     const animationInterval = useRef(null);
 
     useEffect(() => {
         if (!svgRef.current || !mapContainerRef.current || !gazaBoundaries) return;
+        
+        // Re-read theme color on every render to ensure it's current
+        const readCssColor = (variable, fallback) => {
+            if (typeof window === "undefined") return fallback;
+            const value = window.getComputedStyle(document.documentElement).getPropertyValue(variable);
+            return value ? value.trim() : fallback;
+        };
+        const themeColor = readCssColor('--color-details', '#FF6B6B');
 
         const width = mapContainerRef.current.offsetWidth || 900;
         const height = 400;
@@ -90,16 +102,7 @@ const GeoChart = ({ isDark, isMonochromacy = false }) => {
             .attr('stroke', 'var(--text-primary)')
             .attr('stroke-width', 1.5);
 
-        // Color scale for incident types - theme-aware with CSS variables
-        const readCssColor = (variable, fallback) => {
-            if (typeof window === "undefined") return fallback;
-            const value = window.getComputedStyle(document.documentElement).getPropertyValue(variable);
-            return value ? value.trim() : fallback;
-        };
-
-        // Use theme variable directly so colors always follow the active CSS theme
-        const themeColor = readCssColor('--color-details', 'var(--color-details)');
-
+        // Color scale for incident types
         const colorScale = d3.scaleOrdinal()
             .domain(['Food System', 'Health Care'])
             .range([themeColor, themeColor]);  // Both categories use the same theme color
@@ -156,68 +159,160 @@ const GeoChart = ({ isDark, isMonochromacy = false }) => {
             }
         }
 
-        // Draw incident points
-        const points = mapGroup.append('g')
-            .attr('class', 'incidents')
-            .selectAll('circle')
-            .data(incidents)
-            .join('circle')
-            .attr('cx', d => {
-                const coords = projection([d.longitude, d.latitude]);
-                return coords ? coords[0] : null;
-            })
-            .attr('cy', d => {
-                const coords = projection([d.longitude, d.latitude]);
-                return coords ? coords[1] : null;
-            })
-            .attr('r', 4)
-            .attr('fill', d => colorScale(d.type))
-            .attr('fill-opacity', 0.6)
-            .style('cursor', 'pointer')
-            .on('mouseover', function(event, d) {
-                d3.select(this)
-                    .transition()
-                    .duration(200)
-                    .attr('r', 6)
-                    .attr('fill-opacity', 1);
+        // Draw incident points (only show when incidents mode is selected)
+        if (datasetMode === 'incidents') {
+            const points = mapGroup.append('g')
+                .attr('class', 'incidents')
+                .selectAll('circle')
+                .data(incidents)
+                .join('circle')
+                .attr('cx', d => {
+                    const coords = projection([d.longitude, d.latitude]);
+                    return coords ? coords[0] : null;
+                })
+                .attr('cy', d => {
+                    const coords = projection([d.longitude, d.latitude]);
+                    return coords ? coords[1] : null;
+                })
+                .attr('r', 4)
+                .attr('fill', d => colorScale(d.type))
+                .attr('fill-opacity', 0.6)
+                .style('cursor', 'pointer')
+                .on('mouseover', function(event, d) {
+                    d3.select(this)
+                        .transition()
+                        .duration(200)
+                        .attr('r', 6)
+                        .attr('fill-opacity', 1);
 
-                tooltip
-                    .style('visibility', 'visible')
-                    .style('opacity', '1')
-                    .html(`
-                        <strong>${d.type}</strong><br/>
-                        <strong>Date:</strong> ${d.date}<br/>
-                        <strong>Location:</strong> ${d.latitude.toFixed(4)}, ${d.longitude.toFixed(4)}<br/>
-                        ${d.perpetrator ? `<strong>Perpetrator:</strong> ${d.perpetrator}<br/>` : ''}
-                        ${d.weapon ? `<strong>Weapon:</strong> ${d.weapon}<br/>` : ''}
-                        ${d.description ? `<div style="margin-top:6px;font-size:12px;">${d.description.slice(0, 150)}${d.description.length > 150 ? '...' : ''}</div>` : ''}
-                    `);
-            })
-            .on('mousemove', event => {
-                tooltip
-                    .style('top', (event.pageY - 10) + 'px')
-                    .style('left', (event.pageX + 10) + 'px');
-            })
-            .on('mouseout', function() {
-                d3.select(this)
-                    .transition()
-                    .duration(200)
-                    .attr('r', 4)
-                    .attr('fill-opacity', 0.6);
+                    tooltip
+                        .style('visibility', 'visible')
+                        .style('opacity', '1')
+                        .html(`
+                            <strong>${d.type}</strong><br/>
+                            <strong>Date:</strong> ${d.date}<br/>
+                            <strong>Location:</strong> ${d.latitude.toFixed(4)}, ${d.longitude.toFixed(4)}<br/>
+                            ${d.perpetrator ? `<strong>Perpetrator:</strong> ${d.perpetrator}<br/>` : ''}
+                            ${d.weapon ? `<strong>Weapon:</strong> ${d.weapon}<br/>` : ''}
+                            ${d.description ? `<div style="margin-top:6px;font-size:12px;">${d.description.slice(0, 150)}${d.description.length > 150 ? '...' : ''}</div>` : ''}
+                        `);
+                })
+                .on('mousemove', event => {
+                    tooltip
+                        .style('top', (event.pageY - 10) + 'px')
+                        .style('left', (event.pageX + 10) + 'px');
+                })
+                .on('mouseout', function() {
+                    d3.select(this)
+                        .transition()
+                        .duration(200)
+                        .attr('r', 4)
+                        .attr('fill-opacity', 0.6);
 
-                tooltip
-                    .style('visibility', 'hidden')
-                    .style('opacity', '0');
-            });
+                    tooltip
+                        .style('visibility', 'hidden')
+                        .style('opacity', '0');
+                });
 
-        // Add point count display in bottom-left
-        mapGroup.append('text')
-            .attr('x', 10)
-            .attr('y', height - 10)
-            .attr('font-size', '12px')
-            .attr('font-weight', '600')
-            .attr('fill', 'var(--text-primary)')
-            .text(`Total incidents: ${incidents.length}`);
+            // Add point count display in bottom-left
+            mapGroup.append('text')
+                .attr('x', 10)
+                .attr('y', height - 10)
+                .attr('font-size', '12px')
+                .attr('font-weight', '600')
+                .attr('fill', 'var(--text-primary)')
+                .text(`Total incidents: ${incidents.length}`);
+        }
+
+        // Overlay clustered damage sites as circles (only show when damage mode is selected)
+        if (datasetMode === 'damage') {
+            if (!damageSitesData) {
+                fetch(damageSitesUrl)
+                    .then(r => r.json())
+                    .then(json => setDamageSitesData(json))
+                    .catch(() => {/* ignore */});
+            }
+
+            if (damageSitesData && damageSitesData.features) {
+                // Helper to convert geographic radius to pixel radius
+                const getPixelRadius = (lon, lat, radiusMeters) => {
+                    // Convert meters to approximate degrees at this latitude
+                    // At Gaza's latitude (~31.5°), 1 degree longitude ≈ 95km
+                    const metersPerDegreeLon = 111000 * Math.cos(lat * Math.PI / 180);
+                    const radiusDegreesLon = radiusMeters / metersPerDegreeLon;
+                    
+                    // Project center and offset point
+                    const center = projection([lon, lat]);
+                    const offset = projection([lon + radiusDegreesLon, lat]);
+                    
+                    if (!center || !offset) return 3;
+                    
+                    // Calculate pixel distance
+                    return Math.max(2, offset[0] - center[0]);
+                };
+
+                // Render damage sites as circles with proper radius
+                mapGroup.append('g')
+                    .attr('class', 'damage-sites')
+                    .selectAll('circle')
+                    .data(damageSitesData.features)
+                    .join('circle')
+                    .attr('cx', d => {
+                        const coords = projection(d.geometry.coordinates);
+                        return coords ? coords[0] : null;
+                    })
+                    .attr('cy', d => {
+                        const coords = projection(d.geometry.coordinates);
+                        return coords ? coords[1] : null;
+                    })
+                    .attr('r', d => {
+                        // Radius = sqrt(count) * 10m - matches Python script, scales proportionally
+                        const radiusMeters = Math.sqrt(d.properties.count) * 10;
+                        return getPixelRadius(
+                            d.geometry.coordinates[0],
+                            d.geometry.coordinates[1],
+                            radiusMeters
+                        );
+                    })
+                    .attr('fill', themeColor)
+                    .attr('fill-opacity', 0.6)
+                    .attr('stroke', themeColor)
+                    .attr('stroke-width', 1.5)
+                    .attr('stroke-opacity', 0.9)
+                    .style('cursor', 'pointer')
+                    .on('mouseover', function(event, d) {
+                        d3.select(this)
+                            .attr('fill-opacity', 0.85)
+                            .attr('stroke-width', 2);
+                        const radiusMeters = Math.sqrt(d.properties.count) * 10;
+                        tooltip
+                            .style('visibility', 'visible')
+                            .style('opacity', '1')
+                            .html(`<strong>Damage area</strong><br/>Buildings: ${d.properties.count}<br/>Area radius: ${Math.round(radiusMeters)}m`);
+                    })
+                    .on('mousemove', event => {
+                        tooltip
+                            .style('top', (event.pageY - 10) + 'px')
+                            .style('left', (event.pageX + 10) + 'px');
+                    })
+                    .on('mouseout', function() {
+                        d3.select(this)
+                            .attr('fill-opacity', 0.6)
+                            .attr('stroke-width', 1.5);
+                        tooltip.style('visibility', 'hidden');
+                    });
+
+                // Add total destroyed buildings counter in bottom-left
+                const totalBuildings = damageSitesData.features.reduce((sum, f) => sum + f.properties.count, 0);
+                mapGroup.append('text')
+                    .attr('x', 10)
+                    .attr('y', height - 10)
+                    .attr('font-size', '12px')
+                    .attr('font-weight', '600')
+                    .attr('fill', 'var(--text-primary)')
+                    .text(`Total destroyed buildings: ${totalBuildings.toLocaleString()}`);
+            }
+        }
 
         // Cleanup
         return () => {
@@ -240,7 +335,7 @@ const GeoChart = ({ isDark, isMonochromacy = false }) => {
             resizeObserver.disconnect();
         };
 
-    }, [isDark, isMonochromacy, selectedType, zoomLevel, panOffset, viewMode, selectedDate]);
+    }, [isDark, isMonochromacy, selectedType, zoomLevel, panOffset, viewMode, selectedDate, damageSitesData, datasetMode]);
 
     // Animation effect
     useEffect(() => {
@@ -285,7 +380,27 @@ const GeoChart = ({ isDark, isMonochromacy = false }) => {
         <div ref={wrapperRef} style={{ width: '100%', minHeight: '500px', position: 'relative', display: 'flex', gap: '12px' }}>
             {/* Controls on the left */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '120px' }}>
-                {/* Category Filter with View Mode Toggle Below */}
+                {/* Dataset Selector */}
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: '6px' }}>
+                    <label style={{ fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)' }}>Dataset</label>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: '6px' }}>
+                        <button
+                            onClick={() => setDatasetMode('incidents')}
+                            className={`selection-button ${datasetMode === 'incidents' ? 'active' : ''}`}
+                        >
+                            Incidents
+                        </button>
+                        <button
+                            onClick={() => setDatasetMode('damage')}
+                            className={`selection-button ${datasetMode === 'damage' ? 'active' : ''}`}
+                        >
+                            Damage Sites
+                        </button>
+                    </div>
+                </div>
+
+                {/* Category Filter with View Mode Toggle Below - Only show for Incidents */}
+                {datasetMode === 'incidents' && (
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: '6px' }}>
                     <label style={{ fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)' }}>Category</label>
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: '6px' }}>
@@ -325,6 +440,7 @@ const GeoChart = ({ isDark, isMonochromacy = false }) => {
                         </div>
                     </div>
                 </div>
+                )}
             </div>
 
             {/* Map area on the right - starts at same height as category buttons */}
@@ -397,8 +513,8 @@ const GeoChart = ({ isDark, isMonochromacy = false }) => {
                 
                 <svg ref={svgRef} style={{ width: '100%', height: '400px' }} />
 
-                {/* Timeline Controls - Below the map */}
-                {viewMode === 'daily' && dateRange.min && dateRange.max && (
+                {/* Timeline Controls - Below the map (show only for incidents) */}
+                {datasetMode === 'incidents' && viewMode === 'daily' && dateRange.min && dateRange.max && (
                     <div className="chapter2-controls">
                         <button
                             className="chapter2-icon-button"
@@ -454,4 +570,4 @@ const GeoChart = ({ isDark, isMonochromacy = false }) => {
     );
 };
 
-export default GeoChart;
+export default GeoChart

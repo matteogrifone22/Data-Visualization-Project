@@ -1,3 +1,5 @@
+# Ignore extremely large raw data not meant for the repo
+src/GazaMap/Damage_Sites_GazaStrip_20251011.geojson
 # Logs
 logs
 *.log
