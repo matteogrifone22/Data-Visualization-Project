@@ -151,8 +151,13 @@ function DonutChart() {
     }, [animationPlayed]);
 
     return (
-        <div ref={wrapperRef} style={{ width: 340, height: 340, margin: '0 auto' }}>
-            <svg ref={svgRef} style={{ width: '100%', height: '100%', display: 'block' }} />
+        <div style={{ width: 340, margin: '0 auto', textAlign: 'center' }}>
+            <div style={{ fontWeight: 700, fontSize: 20, marginBottom: 8, color: 'var(--text-primary)' }}>
+                Fatalities Distribution: Gaza vs Israel
+            </div>
+            <div ref={wrapperRef} style={{ width: 340, height: 340, margin: '0 auto' }}>
+                <svg ref={svgRef} style={{ width: '100%', height: '100%', display: 'block' }} />
+            </div>
         </div>
     );
 }

@@ -118,12 +118,27 @@ export function ViolinBoxPlot({ isDark = true }) {
     const handle = setInterval(() => {
       setYear((prev) => {
         const idx = yearsRef.current.indexOf(prev);
-        const next = yearsRef.current[(idx + 1) % yearsRef.current.length];
-        return next;
+        if (idx === yearsRef.current.length - 1) {
+          setIsPlaying(false); // Stop animation at last year
+          return prev;
+        }
+        return yearsRef.current[idx + 1];
       });
     }, 900);
     return () => clearInterval(handle);
   }, [isPlaying, year]);
+
+  // If play is pressed at the end, restart from the beginning
+  useEffect(() => {
+    if (
+      isPlaying &&
+      year === yearsRef.current[yearsRef.current.length - 1]
+    ) {
+      setYear(yearsRef.current[0]);
+    }
+    // Only run when play is pressed or year changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPlaying]);
 
   // Draw whenever data, year, theme, or compare state changes
   useEffect(() => {
@@ -447,7 +462,6 @@ export function ViolinBoxPlot({ isDark = true }) {
           onChange={(e) => setYear(Number(e.target.value))}
           style={{ '--range-progress': `${progressPercent}%` }}
         />
-        <span className="chapter2-year-value">{year ?? "–"}</span>
       </div>
       {showCompare && currentStats.length > 0 && (
         <div className="chapter2-compare-overlay">

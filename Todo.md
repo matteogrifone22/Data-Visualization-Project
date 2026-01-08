@@ -2,7 +2,7 @@
 
 - [x] Usare variabili css per colori
 - [x] riorganizzare flusso pagina
-- [ ] fare i testi  PROSSIMA COSA DA FARE
+- [x] fare i testi
 - [ ] Aggiungere pagina dataset
 - [ ] Ripensare allo stile dei bottoni/slider
 - [x] Aggiungere icone ai bottoni social
@@ -13,9 +13,9 @@
 - [x] Colorblind mode
 - [x] Logica colori rettangoli sankey
 - [x] Usare Gaza dove serve (ultimi 3 plot)
-- [ ] ridurre anni boxplot
+- [x] ridurre anni boxplot
 - [ ] fixare tooltip geomap
-- [ ] Aggiungere donut chart per ripartizione vittime per paese
+- [x] Aggiungere donut chart per ripartizione vittime per paese
 
 
 Story flow:

@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { HashRouter, Routes, Route } from 'react-router-dom'
 import './style.css'
 import App from './App.jsx'
-import Datasets from './pages/Datasets.jsx'
+import Datasets from './Datasets.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

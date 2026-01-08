@@ -73,6 +73,9 @@ Israel,1951,1.931,0.241,0.147,0.089,0.055,0.036,0.025,0.019,0.015,0.013,0.013,0.
 """
 
 # Mortality rate dataset
+# consider only 2018-2023 years
+df_mortality = df_mortality[df_mortality["Year"].between(2018, 2023)]
+
 # merge range ages in groups of 5
 age_columns = [str(i) for i in range(0, 101)] + ["100+"]
 df_mortality_grouped = df_mortality.copy()

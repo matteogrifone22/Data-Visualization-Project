@@ -209,6 +209,7 @@ export default function App() {
           transform: 'translateX(-50%)',
           width: { xs: '95%', md: 'auto' },
           maxWidth: { xs: '95%', md: '90%' },
+          minWidth: '700px',
           borderRadius: '50px',
           // Semi-transparent background for glass effect
           backgroundColor: 'color-mix(in srgb, var(--bg-secondary) 88%, transparent)',
@@ -225,11 +226,15 @@ export default function App() {
         <Toolbar
           sx={{
             display: 'flex',
-            flexWrap: 'wrap',
+            flexWrap: 'nowrap', // Prevent wrapping
+            overflow: 'hidden', // Hide overflowed content
+            textOverflow: 'ellipsis', // Show ellipsis if overflow
+            whiteSpace: 'nowrap', // Force single line
             rowGap: { xs: 0.75, md: 1 },
             columnGap: { xs: 0.6, md: 1.5 },
             padding: { xs: '8px 10px', md: '8px 24px' },
-            justifyContent: 'center'
+            justifyContent: 'center',
+            minWidth: 0 // Allow shrinking
           }}
           ref={toolbarRef}
         >
@@ -264,7 +269,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            {useShortLabels ? 'Ch 1' : 'Life'}
+            {useShortLabels ? 'Life' : 'Life'}
           </Link>
           <Link
             href="#chapter2"
@@ -280,7 +285,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            {useShortLabels ? 'Ch 2' : 'Mortality'}
+            {useShortLabels ? 'Mortality' : 'Mortality'}
           </Link>
           <Link
             href="#chapter3"
@@ -296,7 +301,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            {useShortLabels ? 'Ch 3' : 'Events'}
+            {useShortLabels ? 'Events' : 'Events'}
           </Link>
           <Link
             href="#chapter4"
@@ -312,7 +317,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            {useShortLabels ? 'Ch 4' : 'Timeline'}
+            {useShortLabels ? 'Timeline' : 'Timeline'}
           </Link>
           <Link
             href="#chapter5"
@@ -328,7 +333,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            {useShortLabels ? 'Ch 5' : 'Fatalities'}
+            {useShortLabels ? 'Fatalities' : 'Fatalities'}
           </Link>
           <Link
             href="#chapter6"
@@ -344,7 +349,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            {useShortLabels ? 'Ch 6' : 'Map'}
+            {useShortLabels ? 'Map' : 'Map'}
           </Link>
           <Box sx={{ display: 'flex', gap: { xs: 0.6, md: 1 }, flexShrink: 0 }}>
             <IconButton
@@ -972,7 +977,7 @@ export default function App() {
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <DonutChart isDark={isDark} />
+            <LineChart isDark={isDark} />
           </Box>
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
             <Typography
@@ -1000,6 +1005,26 @@ export default function App() {
             >
               In contrast, the line for Gaza displays a sustained and markedly higher number of fatalities after October 2023. The increase continues over time, indicating that most deaths in this period occurred in the Gaza Strip.
             </Typography>
+            
+          </Box>
+          <Box sx={{ width: '100%', minWidth: '100%' }}>
+            <DonutChart isDark={isDark} />
+          </Box>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
+  
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 0
+              }}
+            >
+              This visualization show the proportion of fatalities between Israel and Gaza highlighting the differences between the two country.
+            </Typography>
+            
           </Box>
         </Box>
 
