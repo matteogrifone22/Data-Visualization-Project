@@ -107,9 +107,8 @@ const GeoChart = ({ isDark, isMonochromacy = false }) => {
             .domain(['Food System', 'Health Care'])
             .range([themeColor, themeColor]);  // Both categories use the same theme color
 
-        // Create tooltip
-        const tooltip = d3.select('body')
-            .append('div')
+        // Reference the persistent tooltip div
+        const tooltip = d3.select('body').selectAll('.chart-tooltip').data([null]).join('div')
             .attr('class', 'chart-tooltip')
             .style('position', 'absolute')
             .style('visibility', 'hidden')

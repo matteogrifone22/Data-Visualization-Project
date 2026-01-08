@@ -4,10 +4,11 @@ import { DarkMode, LightMode, Visibility, VisibilityOff } from '@mui/icons-mater
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TerritoryMap from './components/TerritoryMap';
 import LineChart from './components/LineChart';
-import RidgeChart  from './components/RidgePlot';
+import RidgeChart from './components/RidgePlot';
 import ViolinBoxPlot from './components/ViolinBoxPlot';
 import EventsSankeyDiagram from './components/SankeyDiagram';
 import SmallMultipleChart from './components/SmallMultiples';
+import DonutChart from './components/DonutChart';
 import GeoChart from './components/GeoMap';
 
 import { rgb } from 'd3';
@@ -209,10 +210,12 @@ export default function App() {
           width: { xs: '95%', md: 'auto' },
           maxWidth: { xs: '95%', md: '90%' },
           borderRadius: '50px',
-          backgroundColor: navbarBgColor,
+          // Semi-transparent background for glass effect
+          backgroundColor: 'color-mix(in srgb, var(--bg-secondary) 88%, transparent)',
           backdropFilter: 'blur(4px)',
           WebkitBackdropFilter: 'blur(4px)',
-          border: '2px solid var(--color-details)',
+          // Remove colored border
+          border: 'none',
           zIndex: 1300,
           boxShadow: navbarShadow,
           padding: '0 8px',
@@ -261,7 +264,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            {useShortLabels ? 'Ch 1' : 'Chapter 1'}
+            {useShortLabels ? 'Ch 1' : 'Life'}
           </Link>
           <Link
             href="#chapter2"
@@ -277,7 +280,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            {useShortLabels ? 'Ch 2' : 'Chapter 2'}
+            {useShortLabels ? 'Ch 2' : 'Mortality'}
           </Link>
           <Link
             href="#chapter3"
@@ -293,7 +296,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            {useShortLabels ? 'Ch 3' : 'Chapter 3'}
+            {useShortLabels ? 'Ch 3' : 'Events'}
           </Link>
           <Link
             href="#chapter4"
@@ -309,7 +312,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            {useShortLabels ? 'Ch 4' : 'Chapter 4'}
+            {useShortLabels ? 'Ch 4' : 'Timeline'}
           </Link>
           <Link
             href="#chapter5"
@@ -325,7 +328,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            {useShortLabels ? 'Ch 5' : 'Chapter 5'}
+            {useShortLabels ? 'Ch 5' : 'Fatalities'}
           </Link>
           <Link
             href="#chapter6"
@@ -341,7 +344,7 @@ export default function App() {
               '&:hover': { color: linkHoverColor, opacity: 1 }
             }}
           >
-            {useShortLabels ? 'Ch 6' : 'Chapter 6'}
+            {useShortLabels ? 'Ch 6' : 'Map'}
           </Link>
           <Box sx={{ display: 'flex', gap: { xs: 0.6, md: 1 }, flexShrink: 0 }}>
             <IconButton
@@ -406,10 +409,12 @@ export default function App() {
             alignItems: 'center',
             justifyContent: 'center',
             scrollMarginTop: '8vh',
-            padding: '16vh 4vw 10vh 4vw'
+            padding: '20vh 4vw 2vh 4vw'
           }}
         >
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))' }}>
+
+            {/* Main Title */}
             <Typography
               variant="h1"
               gutterBottom
@@ -423,10 +428,11 @@ export default function App() {
               War or Genocide?
             </Typography>
 
+            {/* Intro Paragraph */}
             <Typography
               variant="body1"
               sx={{
-                fontSize: '1.1rem',
+                fontSize: '1.05rem',
                 lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
@@ -441,7 +447,7 @@ export default function App() {
             <Typography
               variant="body1"
               sx={{
-                fontSize: '1.1rem',
+                fontSize: '1.05rem',
                 lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
@@ -453,6 +459,7 @@ export default function App() {
               whether the observed events align more closely with the concept of <i>war</i> or <i>genocide</i>.
             </Typography>
 
+            {/* Definitions */}
             <Typography
               variant="body2"
               sx={{
@@ -481,38 +488,126 @@ export default function App() {
 
             <Typography
               variant="body2"
-              sx={{ fontSize: '1.1rem', color: textColor, marginBottom: 1 }}
+              sx={{ fontSize: '1.05rem', color: textColor, marginBottom: 1 }}
             >
               <b>War</b>: <i>armed fighting between two or more countries or groups.</i>
             </Typography>
 
             <Typography
               variant="body2"
-              sx={{ fontSize: '1.1rem', color: textColor }}
+              sx={{ fontSize: '1.05rem', color: textColor }}
             >
               <b>Genocide</b>: <i>the crime of intentionally destroying part or all of a national, ethnic,
-              racial, or religious group, by killing people or by other methods.</i>
+                racial, or religious group, by killing people or by other methods.</i>
             </Typography>
 
-            {/* Territory Map */}
-            <Box sx={{ marginTop: 6, marginBottom: 2 }}>
-              <Typography
-                variant="h3"
-                gutterBottom
-                sx={{
-                  color: textColor,
-                  fontWeight: 700,
-                  marginBottom: 3,
-                  fontSize: { xs: '1.5rem', md: '2rem' }
-                }}
-              >
-                Geographic Context
-              </Typography>
-              <TerritoryMap isDark={isDark} isMonochromacy={isMonochromacy} />
+            {/* Territories Section + Map */}
+            <Box sx={{ marginTop: 4, marginBottom: 2 }}>
+              <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
+                <Typography
+                  variant="subtitle1"
+                  gutterBottom
+                  sx={{
+                    color: textColor,
+                    fontWeight: 600,
+                    marginBottom: 2,
+                    fontSize: { xs: '1.25rem', md: '1.6rem' }
+                  }}
+                >
+                  Understanding the territories
+                </Typography>
+
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.05rem',
+                    lineHeight: 1.8,
+                    color: textColor,
+                    fontWeight: 300,
+                    marginBottom: 2
+                  }}
+                >
+                  The map below shows the territories of the{" "}
+                  <Box component="span" sx={{ color: 'var(--color-Israel)', fontWeight: 600 }}>State of Israel</Box>
+                  {" "}and the {" "}
+                  <Box component="span" sx={{ color: 'var(--color-Palestine)', fontWeight: 600 }}>State of Palestine</Box>.
+                  {" "}<br />The Palestinian territory is composed of two main areas:
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.05rem',
+                    lineHeight: 1.8,
+                    color: textColor,
+                    fontWeight: 300,
+                    marginBottom: 1
+                  }}
+                >
+                  <Box component="span" sx={{ color: 'var(--color-Palestine)', fontWeight: 700 }}>West Bank</Box>
+                  {" "}- A land area largely under Israeli control, but claimed by the State of Palestine.
+
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.05rem',
+                    lineHeight: 1.8,
+                    color: textColor,
+                    fontWeight: 300,
+                    marginBottom: 0
+                  }}
+                >
+
+                  <Box component="span" sx={{ color: 'var(--color-Palestine)', fontWeight: 700 }}>Gaza Strip</Box>
+                  {" "}- A coastal enclave that is central to recent developments in the conflict.
+                </Typography>
+
+                <Box sx={{ width: '100%', minWidth: '100%' }}>
+                  <TerritoryMap isDark={isDark} isMonochromacy={isMonochromacy} />
+                </Box>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.05rem',
+                    lineHeight: 1.8,
+                    color: textColor,
+                    fontWeight: 300,
+                    marginBottom: 2
+                  }}
+                >
+                  In the first part of the visualizations, the focus is placed on the State of Palestine as a whole. This choice, together with the limited availability of 2025 data, may smooth or underrepresent the extent of the impact of recent events in the Gaza Strip.
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: '1.05rem',
+                    lineHeight: 1.8,
+                    color: textColor,
+                    fontWeight: 300,
+                    marginBottom: 0
+                  }}
+                >
+                  In the final visualizations, thanks to
+                  <Link
+                    href="#/datasets"
+                    rel="noopener noreferrer"
+                    sx={{
+                      color: textColor,
+                      textDecoration: 'none',
+                      fontWeight: 600,
+                      '&:hover': { color: linkHoverColor }
+                    }}
+                  >
+                    {" "}ACLED data
+                  </Link>
+                  , it becomes possible to distinguish between the West Bank and the Gaza Strip, allowing for a more specific analysis focused on Gaza.
+                </Typography>
+              </Box>
+
+
             </Box>
           </Box>
         </Box>
-
 
         {/* Chapter 1 Section - Small Multiples */}
         <Box
@@ -524,7 +619,7 @@ export default function App() {
             alignItems: 'center',
             justifyContent: 'flex-start',
             scrollMarginTop: '8vh',
-            padding: '2vh 4vw 10vh 4vw'
+            padding: '3vh 4vw 10vh 4vw'
           }}
         >
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
@@ -535,26 +630,82 @@ export default function App() {
                 color: textColor,
                 fontWeight: 700,
                 marginBottom: 3,
-                fontSize: { xs: '2.5rem', md: '3.5rem' }
+                fontSize: { xs: '2rem', md: '2.8rem' }
               }}
             >
-              Life during the conflict
+              Quality of life indicators
             </Typography>
             <Typography
               variant="body1"
               sx={{
-                fontSize: '1.1rem',
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 1
+              }}
+            >
+              This section compares selected indicators related to quality of life in Israel and Palestine.
+              Rather than focusing only on violent events, these metrics help describe the broader living conditions in the two territories.
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 1
+              }}
+            >
+              The visualizations below include: GDP per capita (PPP), percentage of access to safely managed drinking water, percentage of access to safely managed sanitation services, and the percentage of moderate or severe food insecurity. Together, they provide an overview of economic well-being, basic infrastructure, and access to essential resources.
+            </Typography>
+
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 1
+              }}
+            >
+              These indicators do not explain the causes of the differences, but they highlight structural inequalities that exist between the two populations.
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
                 lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
                 marginBottom: 0
               }}
             >
-              This section shows the quality of life in both countries from 2000 to 2024. The charts below compare key indicators between Israel and Palestine, including GDP per capita, access to safe drinking water, sanitation services, and food insecurity levels. These metrics provide insight into the living conditions and development disparities between the two regions during this period.
+              The data used for these charts refer to the years 2018-2024. The time window reflects the most recent years for which comparable indicators are available for both Israel and Palestine.
+
             </Typography>
+
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
             <SmallMultipleChart isDark={isDark} />
+          </Box>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 0, marginTop: 6 }}>
+
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 0
+              }}
+            >
+              The contrast shown across indicators is consistent: Israel reports significantly higher economic output per person and wider access to water and sanitation services, while Palestine shows substantially higher levels of food insecurity. These gaps form the background against which the later event-based visualizations are interpreted.
+            </Typography>
           </Box>
         </Box>
 
@@ -568,7 +719,7 @@ export default function App() {
             alignItems: 'center',
             justifyContent: 'flex-start',
             scrollMarginTop: '8vh',
-            padding: '2vh 4vw 12vh 4vw'
+            padding: '3vh 4vw 12vh 4vw'
           }}
         >
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
@@ -579,32 +730,51 @@ export default function App() {
                 color: textColor,
                 fontWeight: 700,
                 marginBottom: 3,
-                fontSize: { xs: '2.5rem', md: '3.5rem' }
+                fontSize: { xs: '2rem', md: '2.8rem' }
               }}
             >
-              Demographics and fatalities or mortality rate over time
+              Mortality by age group
             </Typography>
             <Typography
               variant="body1"
               sx={{
-                fontSize: '1.1rem',
+                fontSize: '1.05rem',
                 lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
                 marginBottom: 0
               }}
             >
-              Qua mostrerò l'andamento demografico di Palestina e Israele nel tempo (2000-2025) e lo confronterò con il tasso di mortalità.
-              Per farlo userò il dataset World Population Prospects della UN.
-              I grafici usati saranno due pyramid charts per mostrare la distribuzione della popolazione per età e sesso in due anni diversi (2000 e 2025), o un boxplot per mostrare la distribuzione della popolazione nel tempo.
-              Aggiungerò la possibilità di scegliere tra dataset (popolazione totale, tasso di mortalità, morti totali) e la possibilità di scegliere l'anno di riferimento per i pyramid charts con un animazione tra gli anni selezionati.
-              i due paesi saranno mostrati affiancati per facilitare il confronto.
-              Lo scopo di questo capitolo è per mostrare le differenze tra i due popoli in termini di demografia e tasso di mortalità, per capire se ci sono elementi che possano far pensare a un genocidio.
-              Numero Visualizzazioni: 1 pyramid chart (o boxplot) con scelta del dataset e dell'anno.
-            </Typography>
+              This section examines mortality in Israel and Palestine, focusing on the years 2018 to 2023. By looking at the ages at which deaths occur, it is possible to understand the demographic impact of living conditions and conflict.              </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
             <ViolinBoxPlot isDark={isDark} />
+          </Box>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 0, marginTop: 6 }}>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 1
+              }}
+            >
+              The visualization highlights a clear contrast between the two populations. In Palestine, a larger share of deaths occurs at younger ages, particularly among children, while in Israel, mortality is concentrated in older age groups.
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 0
+              }}
+            >
+              These patterns do not provide information on specific causes of death, but they highlight demographic differences and the broader human impact of structural inequalities, complementing other indicators of living conditions presented earlier.
+            </Typography>
           </Box>
         </Box>
 
@@ -618,7 +788,7 @@ export default function App() {
             alignItems: 'center',
             justifyContent: 'flex-start',
             scrollMarginTop: '8vh',
-            padding: '2vh 4vw 12vh 4vw'
+            padding: '3vh 4vw 12vh 4vw'
           }}
         >
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
@@ -629,30 +799,64 @@ export default function App() {
                 color: textColor,
                 fontWeight: 700,
                 marginBottom: 3,
-                fontSize: { xs: '2.5rem', md: '3.5rem' }
+                fontSize: { xs: '2rem', md: '2.8rem' }
               }}
             >
-              Types of events
+              Distribution of Events
             </Typography>
             <Typography
               variant="body1"
               sx={{
-                fontSize: '1.1rem',
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 1
+              }}
+            >
+              After introducing differences in quality of life between Israel and Palestine to provide a basis for comparison, the focus now shifts to the Gaza Strip to analyze recent developments in the conflict, which began on October 7, 2023, and is still ongoing.
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
                 lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
                 marginBottom: 0
               }}
             >
-              Non sono sicuro di cosa mettere qui, vorrei mostrare i tipi di eventi che accadono nei due paesi e il numero di essi, ma non vorrei ripetere il primo capitolo.
-              Un Alluvional o un grouped bar chart potrebbe andare bene per mostrare il numero di eventi per tipo (battaglia, violenza politica, ecc) per i due paesi.
-              Potrebbe essere interessante una mappa, ma non penso di avere dati geografici sufficienti per farlo.
-              Lo scopo di questa sezione è di mostrare le differenze dei tipi di eventi che accadono nei due paesi, per vedere se la violenza è "equamente" distribuita o se c'è un tipo di evento predominante in uno dei due paesi.
-              Numero Visualizzazioni: 1 alluvional o grouped bar chart.
+              This visualization presents the number and types of events that occurred in both territories from 2023 to 2025. The events are categorized in event types and subevent types which are all displayed in the diagram.
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-              <EventsSankeyDiagram isDark={isDark} isMonochromacy={isMonochromacy} />
+            <EventsSankeyDiagram isDark={isDark} isMonochromacy={isMonochromacy} />
+          </Box>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 1
+              }}
+            >
+              Most events during this period occurred in Gaza, particularly those related to violence.
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 0
+              }}
+            >
+              The two categories in which Israel recorded more events than Gaza are protests and riots.
+            </Typography>
           </Box>
         </Box>
 
@@ -666,7 +870,7 @@ export default function App() {
             alignItems: 'center',
             justifyContent: 'flex-start',
             scrollMarginTop: '8vh',
-            padding: '2vh 4vw 12vh 4vw'
+            padding: '3vh 4vw 12vh 4vw'
           }}
         >
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
@@ -677,26 +881,54 @@ export default function App() {
                 color: textColor,
                 fontWeight: 700,
                 marginBottom: 3,
-                fontSize: { xs: '2.5rem', md: '3.5rem' }
+                fontSize: { xs: '2rem', md: '2.8rem' }
               }}
             >
-              Weekly events distribution
+              Temporal Distribution of Events
             </Typography>
             <Typography
               variant="body1"
               sx={{
-                fontSize: '1.1rem',
+                fontSize: '1.05rem',
                 lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
                 marginBottom: 0
               }}
             >
-              This ridge plot shows the distribution of events per week over time for Israel and Palestine. Select event types from the sidebar to filter the visualization and see how different types of events evolved throughout the conflict.
+              This visualization shows how events in Gaza and Israel, previously analyzed, are distributed over time, from January 2023 to December 2025.
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
             <RidgeChart isDark={isDark} />
+          </Box>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 0
+              }}
+            >
+              The chart shows that October 7, 2023, the day of the Hamas attack on Israel (
+              <Link
+                href="https://dictionary.cambridge.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+                sx={{
+                  color: textColor,
+                  textDecoration: 'none',
+                  fontWeight: 600,
+                  '&:hover': { color: linkHoverColor }
+                }}
+              >
+                October 7 attacks, Wikipedia
+              </Link>
+              ), represents a key point in the timeline of events. Before this date, there is a peak in violence in the Gaza Strip around May 6, 2023, while most of the remaining period appears relatively quieter. After October 7, however, the chart displays a strong increase in violent events in both territories, particularly in the Gaza Strip. These episodes of violence continued, with the exception of a calmer period between January and March 2025, until October, when they began to decrease again.
+            </Typography>
           </Box>
         </Box>
 
@@ -710,7 +942,7 @@ export default function App() {
             alignItems: 'center',
             justifyContent: 'flex-start',
             scrollMarginTop: '8vh',
-            padding: '2vh 4vw 12vh 4vw'
+            padding: '3vh 4vw 12vh 4vw'
           }}
         >
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
@@ -721,26 +953,53 @@ export default function App() {
                 color: textColor,
                 fontWeight: 700,
                 marginBottom: 3,
-                fontSize: { xs: '2.5rem', md: '3.5rem' }
+                fontSize: { xs: '2rem', md: '2.8rem' }
               }}
             >
-              Monthly fatalities over time
+              Fatalities over time
             </Typography>
             <Typography
               variant="body1"
               sx={{
-                fontSize: '1.1rem',
+                fontSize: '1.05rem',
                 lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
                 marginBottom: 0
               }}
             >
-              This line chart tracks monthly fatalities in Israel and Palestine from 2023 to 2025. Hover over the chart to see detailed information for each month, and click on a country name or line to focus on that specific data.
+              This visualization presents the evolution of fatalities resulting from the previously analyzed events. In the ACLED dataset, no distinction is made between civilian and military deaths, all fatalities are counted in the same category.
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <LineChart isDark={isDark} />
+            <DonutChart isDark={isDark} />
+          </Box>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 1
+              }}
+            >
+              The chart shows a clear peak in fatalities in Israel in October 2023, associated with the Hamas attack, while the values in the remaining period remain close to zero, with few exceptions.
+
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 0
+              }}
+            >
+              In contrast, the line for Gaza displays a sustained and markedly higher number of fatalities after October 2023. The increase continues over time, indicating that most deaths in this period occurred in the Gaza Strip.
+            </Typography>
           </Box>
         </Box>
 
@@ -754,7 +1013,7 @@ export default function App() {
             alignItems: 'center',
             justifyContent: 'flex-start',
             scrollMarginTop: '8vh',
-            padding: '2vh 4vw 12vh 4vw'
+            padding: '3vh 4vw 12vh 4vw'
           }}
         >
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
@@ -765,25 +1024,65 @@ export default function App() {
                 color: textColor,
                 fontWeight: 700,
                 marginBottom: 3,
-                fontSize: { xs: '2.5rem', md: '3.5rem' }
+                fontSize: { xs: '2rem', md: '2.8rem' }
               }}
             >
-              Geospatial overview
+              Interactive Map
             </Typography>
             <Typography
               variant="body1"
               sx={{
-                fontSize: '1.1rem',
+                fontSize: '1.05rem',
                 lineHeight: 1.8,
                 color: textColor,
                 fontWeight: 300,
               }}
             >
-              A geochart visualization showing the spatial distribution of food system and health care incidents across the Gaza Strip. Explore where and when these events occurred, with detailed information about each incident.
+              This interactive map allows the exploration of two different datasets related to Gaza Strip. The first shows incidents connected to the health-care and the food system.
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+              }}
+            >
+              The second displays the locations of damaged buildings.
+              Due to the large number of recorded observations, points on the map have been clustered by spatial proximity. This results in a reduction in geographical precision, but significantly improves performance and readability.
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-              <GeoChart isDark={isDark} isMonochromacy={isMonochromacy} />
+            <GeoChart isDark={isDark} isMonochromacy={isMonochromacy} />
+          </Box>
+          <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
+
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: '1.05rem',
+                lineHeight: 1.8,
+                color: textColor,
+                fontWeight: 300,
+                marginBottom: 4
+              }}
+            >
+              This project has presented a series of data-driven visualizations to explore the current conflict in the Gaza Strip, providing the context necessary to reflect on the following question:
+            </Typography>
+            <Typography
+              variant="h1"
+              gutterBottom
+              sx={{
+                color: textColor,
+                fontWeight: 700,
+                marginBottom: 4,
+                fontSize: { xs: '2.5rem', md: '3.5rem' }
+              }}
+            >
+              War or Genocide?
+            </Typography>
+            
           </Box>
         </Box>
       </Box>
@@ -824,7 +1123,7 @@ export default function App() {
             aria-label="LinkedIn Profile"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
             </svg>
           </Link>
           <Link
@@ -841,7 +1140,7 @@ export default function App() {
             aria-label="Datasets and Sources"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M4 6a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm0 8a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z"/>
+              <path d="M4 6a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm0 8a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z" />
             </svg>
             <span style={{ marginLeft: 8 }}>Datasets</span>
           </Link>
@@ -860,7 +1159,7 @@ export default function App() {
             aria-label="GitHub Profile"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
             </svg>
           </Link>
           <Link
@@ -878,7 +1177,7 @@ export default function App() {
             aria-label="GitHub Repository"
           >
             <svg width="24" height="24" viewBox="0 0 16 16" fill="currentColor">
-              <path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z"/>
+              <path d="M2 2.5A2.5 2.5 0 014.5 0h8.75a.75.75 0 01.75.75v12.5a.75.75 0 01-.75.75h-2.5a.75.75 0 110-1.5h1.75v-2h-8a1 1 0 00-.714 1.7.75.75 0 01-1.072 1.05A2.495 2.495 0 012 11.5v-9zm10.5-1V9h-8c-.356 0-.694.074-1 .208V2.5a1 1 0 011-1h8zM5 12.25v3.25a.25.25 0 00.4.2l1.45-1.087a.25.25 0 01.3 0L8.6 15.7a.25.25 0 00.4-.2v-3.25a.25.25 0 00-.25-.25h-3.5a.25.25 0 00-.25.25z" />
             </svg>
           </Link>
           <Box
@@ -896,7 +1195,7 @@ export default function App() {
             title={emailCopied ? 'Email copied!' : 'Click to copy email'}
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
             </svg>
             {emailCopied && (
               <Typography
@@ -954,6 +1253,6 @@ export default function App() {
       >
         <KeyboardArrowUpIcon />
       </Fab>
-    </Box>
+    </Box >
   );
 }

@@ -8,6 +8,7 @@ export function SmallMultipleChart({ isDark = true }) {
     const [dataLoaded, setDataLoaded] = useState(false);
     const [selectedChart, setSelectedChart] = useState(null);
     const animationPlayedRef = useRef(false);
+    const isAnimatingRef = useRef(false);
     const prevSelectedChartRef = useRef(null);
 
     // Load data once
@@ -58,11 +59,11 @@ export function SmallMultipleChart({ isDark = true }) {
 
             const containerWidth = wrapperRef.current.getBoundingClientRect().width || 800;
             const width = 1100;
-            const height = 600;
+            const height = 500;
 
             // Dynamic margins based on selection state
             const margin = selectedChart !== null
-                ? { top: 50, right: 0, bottom: 35, left: 260 }  // More space for selected view
+                ? { top: 50, right: 20, bottom: 35, left: 260 }  // More space for selected view
                 : { top: 50, right: 40, bottom: 35, left: 60 }; // Normal 2x2 grid view
 
             // Define metrics for small multiples
@@ -276,8 +277,8 @@ export function SmallMultipleChart({ isDark = true }) {
                         setSelectedChart(selectedChart === idx ? null : idx);
                     })
                     .on('mousemove', function (event) {
-                        // Disable hover interactions until animation completes
-                        if (!animationPlayedRef.current) return;
+                        // Disable hover interactions during animations
+                        if (!animationPlayedRef.current || isAnimatingRef.current) return;
 
                         const [mouseX] = d3.pointer(event, this);
                         const year = Math.round(xScale.invert(mouseX));
@@ -355,8 +356,8 @@ export function SmallMultipleChart({ isDark = true }) {
                             .style('top', `${event.pageY - 12}px`);
                     })
                     .on('mouseleave', function () {
-                        // Disable hover interactions until animation completes
-                        if (!animationPlayedRef.current) return;
+                        // Disable hover interactions during animations
+                        if (!animationPlayedRef.current || isAnimatingRef.current) return;
 
                         // Reset all dots to normal size
                         g.selectAll('circle')
@@ -456,6 +457,7 @@ export function SmallMultipleChart({ isDark = true }) {
             entries.forEach((entry) => {
                 if (entry.isIntersecting && !animationPlayedRef.current) {
                     animationPlayedRef.current = true;
+                    isAnimatingRef.current = true;
                     // Trigger line animation for all small multiples
                     d3.select(svgRef.current)
                         .selectAll('path[data-country]')
@@ -470,6 +472,11 @@ export function SmallMultipleChart({ isDark = true }) {
                             .transition()
                             .duration(300)
                             .style('opacity', 0.8);
+                        
+                        // Re-enable interactions after animation completes
+                        setTimeout(() => {
+                            isAnimatingRef.current = false;
+                        }, 300);
                     }, 1500);
                 }
             });
@@ -494,12 +501,6 @@ export function SmallMultipleChart({ isDark = true }) {
 
     return (
         <div ref={wrapperRef} style={{ width: '100%', maxWidth: '1100px', height: 'auto', margin: '0 auto' }}>
-            <div className="chart-disclaimer">
-                <p>Data disclaimer</p>
-                <p>
-                    Palestine data are published as “West Bank and Gaza”, so the values shown here aggregate both areas and do not represent the Gaza Strip alone. The food insecurity indicator is reported as a three-year average; therefore, short-term shocks, including those affecting Gaza in the most recent years, may be smoothed and are not fully captured.
-                </p>
-            </div>
             <svg ref={svgRef} style={{ width: '100%', height: 'auto', display: 'block' }} />
         </div>
     );

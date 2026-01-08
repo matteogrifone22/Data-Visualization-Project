@@ -1,4 +1,25 @@
 country,event_type,sub_event_type,events
+Gaza,Battles,Armed clash,1672
+Gaza,Battles,Non-state actor overtakes territory,1
+Gaza,Explosions/Remote violence,Air/drone strike,12738
+Gaza,Explosions/Remote violence,Grenade,3
+Gaza,Explosions/Remote violence,Remote explosive/landmine/IED,323
+Gaza,Explosions/Remote violence,Shelling/artillery/missile attack,7961
+Gaza,Protests,Excessive force against protesters,6
+Gaza,Protests,Peaceful protest,185
+Gaza,Protests,Protest with intervention,5
+Gaza,Riots,Mob violence,4
+Gaza,Riots,Violent demonstration,70
+Gaza,Strategic developments,Agreement,2
+Gaza,Strategic developments,Arrests,28
+Gaza,Strategic developments,Change to group/activity,313
+Gaza,Strategic developments,Disrupted weapons use,28
+Gaza,Strategic developments,Headquarters or base established,3
+Gaza,Strategic developments,Looting/property destruction,1595
+Gaza,Strategic developments,Other,606
+Gaza,Violence against civilians,Abduction/forced disappearance,2
+Gaza,Violence against civilians,Attack,825
+Gaza,Violence against civilians,Sexual violence,1
 Israel,Battles,Armed clash,323
 Israel,Battles,Government regains territory,1
 Israel,Battles,Non-state actor overtakes territory,1
@@ -21,24 +42,3 @@ Israel,Strategic developments,Other,171
 Israel,Violence against civilians,Abduction/forced disappearance,12
 Israel,Violence against civilians,Attack,157
 Israel,Violence against civilians,Sexual violence,3
-Palestine,Battles,Armed clash,4902
-Palestine,Battles,Non-state actor overtakes territory,1
-Palestine,Explosions/Remote violence,Air/drone strike,12795
-Palestine,Explosions/Remote violence,Grenade,233
-Palestine,Explosions/Remote violence,Remote explosive/landmine/IED,649
-Palestine,Explosions/Remote violence,Shelling/artillery/missile attack,8035
-Palestine,Protests,Excessive force against protesters,24
-Palestine,Protests,Peaceful protest,1600
-Palestine,Protests,Protest with intervention,88
-Palestine,Riots,Mob violence,12740
-Palestine,Riots,Violent demonstration,742
-Palestine,Strategic developments,Agreement,2
-Palestine,Strategic developments,Arrests,163
-Palestine,Strategic developments,Change to group/activity,415
-Palestine,Strategic developments,Disrupted weapons use,251
-Palestine,Strategic developments,Headquarters or base established,3
-Palestine,Strategic developments,Looting/property destruction,4649
-Palestine,Strategic developments,Other,1382
-Palestine,Violence against civilians,Abduction/forced disappearance,13
-Palestine,Violence against civilians,Attack,4215
-Palestine,Violence against civilians,Sexual violence,2

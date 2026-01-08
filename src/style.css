@@ -261,7 +261,7 @@ button:focus-visible {
   width: 95%;
   max-width: 90%;
   box-shadow: var(--navbar-shadow);
-  background-color: var(--bg-secondary);
+  /* Semi-transparent background to enable glass blur effect */
   background-color: color-mix(in srgb, var(--bg-secondary) 88%, transparent);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -270,6 +270,46 @@ button:focus-visible {
   padding: 0 8px;
   z-index: 1300;
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+.navbar-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 0.75rem;
+  column-gap: 1rem;
+  padding: 8px 24px;
+  justify-content: center;
+}
+
+.navbar-icon {
+  color: var(--text-navbar);
+  transition: transform 0.3s ease, color 0.3s ease;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Hide MUI ripple within navbar icons */
+.navbar-icon .MuiTouchRipple-root {
+  display: none !important;
+}
+
+.navbar-icon:focus,
+.navbar-icon:focus-visible,
+.navbar-icon:active {
+  background-color: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.navbar-icon:hover {
+  color: var(--color-details);
+}
+
+.navbar-icon.theme-toggle:hover {
+  transform: rotate(20deg);
+}
+
+.navbar-icon.monochromacy-toggle:hover {
+  transform: scale(1.15);
 }
 
 @media (max-width: 600px) {
@@ -946,4 +986,10 @@ strong {
 
 .selection-button.active:focus {
   border-color: var(--color-link-hover);
+}
+
+.tooltip-country-breakdown {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--text-primary);
 }

@@ -10,7 +10,7 @@ export function LineChart({ isDark = true }) {
     const allCirclesRef = useRef([]);
     const [dataLoaded, setDataLoaded] = useState(false);
 
-    // Load data once
+    // Load data once, keep event_type for tooltip breakdown
     useEffect(() => {
         let isMounted = true;
         const parseDate = d3.timeParse('%Y-%m');
@@ -22,9 +22,10 @@ export function LineChart({ isDark = true }) {
                     const date = parseDate(d.MONTH);
                     const fatalities = Number(d.fatalities);
                     const country = d.country;
+                    const event_type = d.event_type ? d.event_type.trim() : undefined;
                     if (!date || !Number.isFinite(fatalities)) return null;
-                    if (country !== 'Israel' && country !== 'Palestine') return null;
-                    return { date, country, fatalities };
+                    if (country !== 'Israel' && country !== 'Gaza') return null;
+                    return { date, country, fatalities, event_type };
                 });
 
                 if (!isMounted) return;
@@ -51,7 +52,22 @@ export function LineChart({ isDark = true }) {
         const formatDate = d3.timeFormat('%B %Y');
 
         const render = () => {
-            const data = dataRef.current;
+            // Aggregate fatalities by country and date (sum all event types)
+            const rawData = dataRef.current;
+            const aggregatedByCountry = d3.rollup(
+                rawData,
+                v => d3.sum(v, d => d.fatalities),
+                d => d.country,
+                d => d.date
+            );
+            // Flatten for plotting
+            const data = [];
+            for (const [country, dateMap] of aggregatedByCountry) {
+                for (const [date, fatalities] of dateMap) {
+                    data.push({ country, date, fatalities });
+                }
+            }
+            data.sort((a, b) => a.date - b.date);
             if (!svgRef.current || !wrapperRef.current || data.length === 0) return;
 
             const tooltip = d3
@@ -113,7 +129,7 @@ export function LineChart({ isDark = true }) {
 
             const getColor = (country) => {
                 if (country === 'Israel') return 'var(--color-Israel)';
-                if (country === 'Palestine') return 'var(--color-Palestine)';
+                if (country === 'Gaza') return 'var(--color-Palestine)';
                 return 'var(--text-primary)';
             };
 
@@ -278,21 +294,34 @@ export function LineChart({ isDark = true }) {
                 const targetDate = uniqueDates[nearestIndex];
                 if (!targetDate) return;
 
+                // For each country, get the fatalities and breakdown by event_type for this date
                 const entries = [];
                 for (const [country, series] of seriesByCountry.entries()) {
                     const idx = bisectSeries(series, targetDate);
                     const datum = series[idx];
                     if (!datum) continue;
-                    entries.push({ country, datum });
+                    // Find all raw rows for this country and date
+                    const rawRows = dataRef.current.filter(d => d.country === country && +d.date === +targetDate);
+                    const total = d3.sum(rawRows, d => d.fatalities);
+                    // Group by event_type
+                    const byType = d3.rollup(
+                        rawRows,
+                        v => d3.sum(v, d => d.fatalities),
+                        d => d.event_type || 'Unknown'
+                    );
+                    const breakdown = Array.from(byType.entries())
+                        .map(([event_type, value]) => ({
+                            event_type,
+                            value,
+                            pct: total > 0 ? (value / total) * 100 : 0
+                        }))
+                        .filter(b => b.value > 0)
+                        .sort((a, b) => b.value - a.value);
+                    entries.push({ country, datum, breakdown });
                 }
-                entries.sort((a, b) => (a.country === 'Palestine' ? -1 : 1) - (b.country === 'Palestine' ? -1 : 1));
+                entries.sort((a, b) => (a.country === 'Gaza' ? -1 : 1) - (b.country === 'Gaza' ? -1 : 1));
 
-                // Filter out non-selected countries when one is selected
-                const filteredEntries = selectedCountryRef.current
-                    ? entries.filter(e => e.country === selectedCountryRef.current)
-                    : entries;
-
-                if (filteredEntries.length === 0) {
+                if (entries.length === 0) {
                     focusLayer.style('display', 'none');
                     return;
                 }
@@ -302,7 +331,7 @@ export function LineChart({ isDark = true }) {
 
                 focusLayer
                     .selectAll('circle')
-                    .data(filteredEntries, (d) => d.country)
+                    .data(entries, (d) => d.country)
                     .join(
                         (enter) =>
                             enter
@@ -320,17 +349,22 @@ export function LineChart({ isDark = true }) {
                 const tooltipHtml = `
                     <div class="tooltip-date">${formatDate(targetDate)}</div>
                     ${entries.map((e) => {
-                    const isSelected = selectedCountryRef.current === e.country;
-                    const isOther = selectedCountryRef.current && selectedCountryRef.current !== e.country;
-                    const squareOpacity = isOther ? 0.2 : 1;
-                    return `
+                        return `
                         <div class="tooltip-entry">
-                            <span class="tooltip-square" style="background-color: ${getColor(e.country)}; opacity: ${squareOpacity}"></span>
+                            <span class="tooltip-square" style="background-color: ${getColor(e.country)};"></span>
                             <span class="tooltip-country">${e.country}</span>
                             <span class="tooltip-fatalities">${e.datum.fatalities}</span>
                         </div>
-                    `;
-                }).join('')}
+                        <div class="tooltip-country-breakdown">
+                            ${e.breakdown.map(b => `
+                                <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+                                    <span>${b.event_type}</span>
+                                    <span style="font-weight:700;">${b.value} (${b.pct.toFixed(1)}%)</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        `;
+                    }).join('')}
                 `;
 
                 tooltip

@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 
 export function RidgeChart({ isDark = true }) {
+        // Track if any original country was 'Gaza' for legend/tooltip display
+        const originalCountryRef = useRef({ hasGaza: false });
     const svgRef = useRef(null);
     const wrapperRef = useRef(null);
     const dataRef = useRef([]);
@@ -18,7 +20,7 @@ export function RidgeChart({ isDark = true }) {
                 const url = new URL('../Dataset/events_per_week.csv', import.meta.url).href;
                 const response = await fetch(url);
                 const text = await response.text();
-                
+
                 const rows = text.trim().split('\n').slice(1);
                 const parsed = rows.map((row) => {
                     const [week, country, event_type, events] = row.split(',');
@@ -32,11 +34,11 @@ export function RidgeChart({ isDark = true }) {
 
                 if (isMounted) {
                     dataRef.current = parsed;
-                    
+
                     // Extract unique event types
                     const eventTypes = Array.from(new Set(parsed.map(d => d.event_type))).sort();
                     setAvailableEventTypes(eventTypes);
-                    
+
                     // Set all event types as selected by default
                     setSelectedEventTypes(new Set(eventTypes));
                 }
@@ -134,8 +136,8 @@ export function RidgeChart({ isDark = true }) {
             if (!globalMaxWeekly) globalMaxWeekly = 1;
 
             const getColor = (country) => {
+                if (country === 'Gaza') return 'var(--color-Palestine)';
                 if (country === 'Israel') return 'var(--color-Israel)';
-                if (country === 'Palestine') return 'var(--color-Palestine)';
                 return 'var(--text-primary)';
             };
 
@@ -162,13 +164,15 @@ export function RidgeChart({ isDark = true }) {
                     .domain([0, globalMaxWeekly])
                     .range([0, maxRidgeHeightPx]);
 
-                const baselineY = height - margin.bottom - innerHeight * 0.3;
+                const baselineY = height - margin.bottom - innerHeight * 0.2;
 
-                // Ensure Israel is drawn after Palestine (in front)
-                const drawOrder = ['Palestine', 'Israel'];
+                // Ensure Israel is drawn after Gaza (in front)
+                // Draw order: Gaza, then Israel
+                const drawOrder = ['Gaza', 'Israel'];
+                const uniqueCountries = Array.from(new Set(countries));
                 const orderedCountries = [
-                    ...drawOrder.filter((c) => countries.includes(c)),
-                    ...countries.filter((c) => !drawOrder.includes(c))
+                    ...drawOrder.filter((c) => uniqueCountries.includes(c)),
+                    ...uniqueCountries.filter((c) => !drawOrder.includes(c))
                 ];
 
                 for (const country of orderedCountries) {
@@ -227,7 +231,7 @@ export function RidgeChart({ isDark = true }) {
             const formatDate = d3.timeFormat('%b %d, %Y');
             const bisectDate = d3.bisector((d) => d).center;
 
-            const countriesForTooltip = ['Palestine', 'Israel'];
+            const countriesForTooltip = ['Gaza', 'Israel'];
 
             const updateTooltip = (event) => {
                 if (weeks.length === 0) return;
@@ -238,10 +242,11 @@ export function RidgeChart({ isDark = true }) {
                 if (!targetWeek) return;
 
                 const entries = [];
-                for (const country of countriesForTooltip) {
-                    const selectedMap = aggregatedByCountry.get(country) || new Map();
-                    const totalMap = aggregatedAll.get(country) || new Map();
-                    const typeNested = aggregatedByCountryType.get(country) || new Map();
+                for (const displayCountry of countriesForTooltip) {
+                    const dataCountry = displayCountry;
+                    const selectedMap = aggregatedByCountry.get(dataCountry) || new Map();
+                    const totalMap = aggregatedAll.get(dataCountry) || new Map();
+                    const typeNested = aggregatedByCountryType.get(dataCountry) || new Map();
                     const typeMap = typeNested.get(targetWeek) || new Map();
 
                     const selectedCount = selectedMap.get(targetWeek) || 0;
@@ -253,7 +258,7 @@ export function RidgeChart({ isDark = true }) {
                         return { eventType: et, value: val, pct };
                     });
 
-                    entries.push({ country, selectedCount, totalCount, typeBreakdown });
+                    entries.push({ country: displayCountry, selectedCount, totalCount, typeBreakdown });
                 }
 
                 focusLayer.style('display', null);
@@ -308,8 +313,8 @@ export function RidgeChart({ isDark = true }) {
                 .append('line')
                 .attr('x1', margin.left)
                 .attr('x2', width - margin.right)
-                .attr('y1', height - margin.bottom - innerHeight * 0.3)
-                .attr('y2', height - margin.bottom - innerHeight * 0.3)
+                .attr('y1', height - margin.bottom - innerHeight * 0.2)
+                .attr('y2', height - margin.bottom - innerHeight * 0.2)
                 .attr('stroke', 'var(--text-primary)')
                 .attr('stroke-opacity', 0.3)
                 .attr('stroke-width', 1.5);
@@ -330,8 +335,7 @@ export function RidgeChart({ isDark = true }) {
                 .attr('y', height - 12)
                 .attr('text-anchor', 'middle')
                 .style('fill', 'var(--text-primary)')
-                .style('font-size', '12px')
-                .text('Time');
+                .style('font-size', '12px');
 
             // Top-left chart label (like line chart)
             svg
@@ -341,15 +345,16 @@ export function RidgeChart({ isDark = true }) {
                 .attr('font-size', 12)
                 .attr('font-weight', 600)
                 .style('fill', 'var(--text-primary)')
-                .text('Weekly events (selected types)');
+                .text('Events timeline (2023-2025)');
 
             // Legend - always show for both countries
             const legendX = width - margin.right - 140;
             const legendY = margin.top + 10;
-            const legendCountries = ['Palestine', 'Israel'];
+            // Legend: always show 'Gaza' and 'Israel'
+            const legendCountries = ['Gaza', 'Israel'];
 
             for (let i = 0; i < legendCountries.length; i++) {
-                const country = legendCountries[i];
+                const displayCountry = legendCountries[i];
                 svg
                     .append('rect')
                     .attr('x', legendX)
@@ -357,9 +362,9 @@ export function RidgeChart({ isDark = true }) {
                     .attr('width', 12)
                     .attr('height', 12)
                     .attr('rx', 2)
-                    .style('fill', getColor(country))
+                    .style('fill', getColor(displayCountry))
                     .style('fill-opacity', 0.6)
-                    .style('stroke', getColor(country))
+                    .style('stroke', getColor(displayCountry))
                     .style('stroke-width', 1);
 
                 svg
@@ -368,7 +373,7 @@ export function RidgeChart({ isDark = true }) {
                     .attr('y', legendY + i * 20 + 10)
                     .style('fill', 'var(--text-primary)')
                     .style('font-size', '11px')
-                    .text(country);
+                    .text(displayCountry);
             }
 
             // Show message when no event types selected

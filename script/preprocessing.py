@@ -22,8 +22,13 @@ output_dir = Path.cwd().parent / "src" / "Dataset"
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)
 
-# keep only Palestine and Israel data
-df = df[(df["COUNTRY"] == "Palestine") | (df["COUNTRY"] == "Israel")]
+
+# keep only admin1 "Gaza Strip" for Palestine and all for Israel
+df = df[(df["COUNTRY"] == "Israel") | ((df["COUNTRY"] == "Palestine") & (df["ADMIN1"] == "Gaza Strip"))]
+# Change Palestine name in Gaza
+df["COUNTRY"] = df["COUNTRY"].replace({"Palestine": "Gaza"})
+
+
 
 
 # # Only keep events from 2020 onwards
@@ -44,11 +49,10 @@ print(
 # monthly Fatalities per country
 df_less_weeks["MONTH"] = df_less_weeks["WEEK"].dt.to_period("M")
 fatalities_per_month = (
-    df_less_weeks.groupby(["MONTH", "COUNTRY"])["FATALITIES"]
+    df_less_weeks.groupby(["MONTH", "COUNTRY", "EVENT_TYPE"])["FATALITIES"]
     .sum()
     .reset_index()
-).rename(columns={"COUNTRY": "country", "FATALITIES": "fatalities"})
-
+).rename(columns={"COUNTRY": "country", "FATALITIES": "fatalities", "EVENT_TYPE": "event_type"})
 
 fatalities_per_month.to_csv(r'C:\Users\mfmat\Documents\Magistrale\SecondoAnno\DV\Data-Visualization-Project\src\Dataset\fatalities_per_month.csv', index=False)
 

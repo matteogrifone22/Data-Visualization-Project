@@ -18,7 +18,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
 
       // Parse data
       const parsed = rows.map((d) => ({
-        country: d.country,
+        country: d.country === "Palestine" ? "Gaza" : d.country,
         eventType: d.event_type,
         subEventType: d.sub_event_type,
         events: +d.events
@@ -29,6 +29,20 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
 
     load();
   }, []);
+
+  // Aggregate links to avoid duplicate flows
+  function aggregateLinks(links) {
+    const map = new Map();
+    links.forEach(link => {
+      const key = `${link.source}|${link.target}|${link.country}|${link.side}`;
+      if (!map.has(key)) {
+        map.set(key, { ...link });
+      } else {
+        map.get(key).value += link.value;
+      }
+    });
+    return Array.from(map.values());
+  }
 
   // Render Sankey diagram
   useEffect(() => {
@@ -42,7 +56,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
     const height = containerHeight;
 
     d3.select(svgRef.current).selectAll("*").remove();
-    d3.select(wrapperRef.current).selectAll(".sankey-tooltip").remove();
+    d3.select('body').selectAll('.chart-tooltip').remove();
 
     const svg = d3
       .select(svgRef.current)
@@ -50,22 +64,19 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       .attr("height", height)
       .attr("viewBox", [0, 0, width, height]);
 
-    // Create tooltip
-    const tooltip = d3
-      .select(wrapperRef.current)
-      .append("div")
-      .attr("class", "sankey-tooltip")
-      .style("position", "absolute")
-      .style("visibility", "hidden")
-      .style("background", "var(--bg-secondary)")
-      .style("color", "var(--text-primary)")
-      .style("padding", "10px 12px")
-      .style("border-radius", "6px")
-      .style("border", "1px solid var(--color-details)")
-      .style("font-size", "12px")
-      .style("pointer-events", "none")
-      .style("z-index", "1000")
-      .style("box-shadow", "0 2px 8px rgba(0,0,0,0.15)");
+    // Create tooltip (universal style, appended to body)
+    const tooltip = d3.select('body')
+      .selectAll('.chart-tooltip')
+      .data([null])
+      .join('div')
+      .attr('class', 'chart-tooltip')
+      .attr('role', 'tooltip')
+      .style('position', 'absolute')
+      .style('pointer-events', 'none')
+      .style('z-index', 10)
+      .style('opacity', 0)
+      .style('visibility', 'hidden')
+      .style('transition', 'opacity 120ms ease, visibility 120ms ease');
 
     // Build nodes and links for Sankey
     // Structure: Country (left) -> Event Type (middle) -> Sub-Event Type (right)
@@ -87,16 +98,16 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       const subEventId = `${d.eventType}|${d.subEventType}`;
 
       // Ensure nodes exist
-      getNode(countryId, d.country);
+      getNode(countryId === "Palestine" ? "Gaza" : countryId, d.country === "Palestine" ? "Gaza" : d.country);
       getNode(eventTypeId, d.eventType);
       getNode(subEventId, d.subEventType);
 
       // Link: Country -> Event Type
       links.push({
-        source: countryId,
+        source: (countryId === "Palestine" ? "Gaza" : countryId),
         target: eventTypeId,
         value: d.events,
-        country: d.country,
+        country: d.country === "Palestine" ? "Gaza" : d.country,
         side: "left"
       });
 
@@ -109,7 +120,8 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
         side: "right"
       });
     });
-
+    // Aggregate links to merge duplicates
+    const aggregatedLinks = aggregateLinks(links);
     const nodes = Array.from(nodesMap.values());
 
     console.log('Nodes:', nodes);
@@ -117,6 +129,8 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
 
     // Custom sort function to group sub-events with their parent events
     const nodeSort = (a, b) => {
+      
+      
       // Get parent event type for sub-events
       const getParent = (node) => {
         if (node.id.includes("|")) {
@@ -153,7 +167,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
     try {
       graph = sankeyGenerator({
         nodes: nodes.map(d => ({ ...d })),
-        links: links.map(d => ({ ...d }))
+        links: aggregatedLinks.map(d => ({ ...d }))
       });
       
       // Post-process: adjust spacing for left and center columns to match right column height
@@ -165,7 +179,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       
       // Categorize nodes by column position
       graph.nodes.forEach(node => {
-        if (node.id === "Israel" || node.id === "Palestine") {
+        if (node.id === "Israel" || node.id === "Gaza") {
           columnNodes.left.push(node);
         } else if (node.id.includes("|")) {
           columnNodes.right.push(node);
@@ -267,13 +281,14 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
     // Use the same base colors for blending; if you want lighter/darker variants, adjust CSS vars instead
     const blendColors = {
       Israel: countryColors.Israel,
-      Palestine: countryColors.Palestine
+      Gaza: countryColors.Palestine
     };
 
     const getNodeColor = (node) => {
       // Color country nodes by their country
-      if (node.id === "Israel" || node.id === "Palestine") {
-        return countryColors[node.id];
+      const id = node.id === "Gaza" ? "Palestine" : node.id;
+      if (id === "Israel" || id === "Palestine") {
+        return countryColors[id];
       }
 
       // For event types and sub-events, color by dominant incoming country
@@ -283,7 +298,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
 
       incomingLinks.forEach(link => {
         if (link.country === "Israel") israelFlow += link.value;
-        if (link.country === "Palestine") palestineFlow += link.value;
+        if (link.country === "Gaza") palestineFlow += link.value;
       });
 
       if (israelFlow === 0 && palestineFlow === 0) return "var(--color-details)";
@@ -295,7 +310,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
 
     const getLinkColor = (link) => {
       // Color links by the originating country
-      const color = countryColors[link.country];
+      const color = countryColors[link.country === "Gaza" ? "Palestine" : link.country];
       return color || "var(--color-details)";
     };
 
@@ -324,9 +339,10 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
         const sourceName = d.source.name || d.source.id;
         const targetName = d.target.name || d.target.id;
         tooltip
-          .style("visibility", "visible")
+          .style('opacity', 1)
+          .style('visibility', 'visible')
           .html(`
-            <div style="font-weight: 600; margin-bottom: 6px; color: ${countryColors[d.country]};">
+            <div style="font-weight: 600; margin-bottom: 6px; color: ${countryColors[d.country === 'Gaza' ? 'Palestine' : d.country]};">
               ${d.country}
             </div>
             <div style="margin-bottom: 4px;">
@@ -339,12 +355,12 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       })
       .on("mousemove", function (event) {
         tooltip
-          .style("top", (event.pageY - 10) + "px")
-          .style("left", (event.pageX + 10) + "px");
+          .style('top', (event.pageY - 10) + 'px')
+          .style('left', (event.pageX + 10) + 'px');
       })
       .on("mouseleave", function () {
         d3.select(this).attr("opacity", 0.4);
-        tooltip.style("visibility", "hidden");
+        tooltip.style('opacity', 0).style('visibility', 'hidden');
       });
 
     // Draw nodes
@@ -355,7 +371,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       .data(graph.nodes)
       .join("g")
       .attr("data-node-type", (d) => {
-        if (d.id === "Israel" || d.id === "Palestine") return "country";
+        if (d.id === "Israel" || d.id === "Gaza") return "country";
         if (d.id.includes("|")) return "subevent";
         return "eventtype";
       });
@@ -364,7 +380,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       .append("rect")
       .attr("class", "node-rect")
       .attr("data-node-type", (d) => {
-        if (d.id === "Israel" || d.id === "Palestine") return "country";
+        if (d.id === "Israel" || d.id === "Gaza") return "country";
         if (d.id.includes("|")) return "subevent";
         return "eventtype";
       })
@@ -389,46 +405,44 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
         let tooltipContent = `<div style="font-weight: 600; margin-bottom: 6px; font-size: 13px;">${d.name || d.id}</div>`;
         tooltipContent += `<div style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">${d.value.toLocaleString()} total events</div>`;
         
-        if (d.id !== "Israel" && d.id !== "Palestine") {
+        if (d.id !== "Israel" && d.id !== "Gaza") {
           const incomingLinks = graph.links.filter(l => l.target === d);
           let israelCount = 0;
-          let palestineCount = 0;
+          let gazaCount = 0;
           
           incomingLinks.forEach(link => {
             if (link.country === "Israel") israelCount += link.value;
-            if (link.country === "Palestine") palestineCount += link.value;
+            if (link.country === "Gaza") gazaCount += link.value;
           });
           
-          if (israelCount > 0 || palestineCount > 0) {
-            tooltipContent += `<div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--color-details);">`;
+          if (israelCount > 0 || gazaCount > 0) {
+            tooltipContent += `<div class="tooltip-country-breakdown">`;
             if (israelCount > 0) {
               const pct = ((israelCount / d.value) * 100).toFixed(1);
               tooltipContent += `<div style="margin-bottom: 3px;"><span style="color: ${countryColors.Israel};">●</span> Israel: ${israelCount.toLocaleString()} (${pct}%)</div>`;
             }
-            if (palestineCount > 0) {
-              const pct = ((palestineCount / d.value) * 100).toFixed(1);
-              tooltipContent += `<div><span style="color: ${countryColors.Palestine};">●</span> Palestine: ${palestineCount.toLocaleString()} (${pct}%)</div>`;
+            if (gazaCount > 0) {
+              const pct = ((gazaCount / d.value) * 100).toFixed(1);
+              tooltipContent += `<div><span style="color: ${countryColors.Palestine};">●</span> Gaza: ${gazaCount.toLocaleString()} (${pct}%)</div>`;
             }
             tooltipContent += `</div>`;
           }
         }
         
         tooltip
-          .style("visibility", "visible")
+          .style('opacity', 1)
+          .style('visibility', 'visible')
           .html(tooltipContent);
       })
       .on("mousemove", function (event) {
         tooltip
-          .style("top", (event.pageY - 10) + "px")
-          .style("left", (event.pageX + 10) + "px");
+          .style('top', (event.pageY - 10) + 'px')
+          .style('left', (event.pageX + 10) + 'px');
       })
       .on("mouseleave", function () {
         d3.select(this).attr("stroke-width", 0.5);
-        
-        // Reset all links opacity
         svg.selectAll(".sankey-link").attr("opacity", 0.4);
-        
-        tooltip.style("visibility", "hidden");
+        tooltip.style('opacity', 0).style('visibility', 'hidden');
       });
 
     // Add labels without overlap using collision detection
@@ -440,7 +454,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       const nodeHeight = d.y1 - d.y0;
       
       // Determine position: countries (left col) → right side, event types (center col) → left side, sub-events (right col) → left side
-      const isCountry = d.id === "Israel" || d.id === "Palestine";
+      const isCountry = d.id === "Israel" || d.id === "Gaza";
       const isSubEvent = d.id.includes("|");
       const isEventType = !isCountry && !isSubEvent;
       
@@ -512,11 +526,11 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       // Draw connection line if label was moved significantly
       const displacement = Math.abs(labelInfo.y - labelInfo.originalY);
       if (displacement > 5) {
-        const isCountry = d.id === "Israel" || d.id === "Palestine";
+        const isCountry = d.id === "Israel" || d.id === "Gaza";
         group
           .append("line")
           .attr("class", "label-line")
-          .attr("data-node-type", d.id === "Israel" || d.id === "Palestine" ? "country" : d.id.includes("|") ? "subevent" : "eventtype")
+          .attr("data-node-type", d.id === "Israel" || d.id === "Gaza" ? "country" : d.id.includes("|") ? "subevent" : "eventtype")
           .attr("x1", isCountry ? d.x1 : d.x0)
           .attr("y1", labelInfo.originalY)
           .attr("x2", labelInfo.x)
@@ -530,7 +544,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       group
         .append("text")
         .attr("class", "node-label")
-        .attr("data-node-type", d.id === "Israel" || d.id === "Palestine" ? "country" : d.id.includes("|") ? "subevent" : "eventtype")
+        .attr("data-node-type", d.id === "Israel" || d.id === "Gaza" ? "country" : d.id.includes("|") ? "subevent" : "eventtype")
         .attr("x", labelInfo.x)
         .attr("y", labelInfo.y)
         .attr("dy", "0.35em")
@@ -554,7 +568,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       .attr("fill", "var(--text-primary)")
       .attr("font-size", 16)
       .attr("font-weight", 700)
-      .text("Event Types Flow: Country → Event Type → Sub-Event Type");
+      .text("Events Categories (2023-2025)");
 
     // Add scroll-triggered animation (100% visible)
     const observerOptions = {

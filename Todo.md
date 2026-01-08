@@ -12,7 +12,10 @@
 - [x] Favicon personalizzata
 - [x] Colorblind mode
 - [x] Logica colori rettangoli sankey
-- [ ] Usare Gaza dove serve (ultimi 3 plot) + filtri eventi linechart
+- [x] Usare Gaza dove serve (ultimi 3 plot)
+- [ ] ridurre anni boxplot
+- [ ] fixare tooltip geomap
+- [ ] Aggiungere donut chart per ripartizione vittime per paese
 
 
 Story flow:
