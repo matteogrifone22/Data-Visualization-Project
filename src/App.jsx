@@ -400,6 +400,22 @@ export default function App() {
             >
               {isMonochromacy ? <VisibilityOff /> : <Visibility />}
             </IconButton>
+            <Link
+            href="#/datasets"
+            rel="noopener noreferrer"
+            sx={{
+              color: navbarTextColor,
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              transition: 'color 0.3s ease',
+              '&:hover': { color: linkHoverColor }
+            }}
+            aria-label="Datasets and Sources"
+          >
+            
+            <strong>Data</strong>
+          </Link>
           </Box>
         </Toolbar>
       </AppBar>
@@ -766,7 +782,7 @@ export default function App() {
                 marginBottom: 1
               }}
             >
-              The visualization highlights a clear contrast between the two populations. In Palestine, a larger share of deaths occurs at younger ages, particularly among children, while in Israel, mortality is concentrated in older age groups.
+              The visualization reveals a marked contrast between the two populations. In Palestine, a substantial proportion of deaths occurs at younger ages, especially among children, whereas in Israel mortality is predominantly concentrated among older individuals. In 2023, which includes the first three months of the Gaza Strip conflict, the chart exhibits a sharp decline in statistical values. This should be interpreted as a meaningful signal.
             </Typography>
             <Typography
               variant="body1"
@@ -848,19 +864,7 @@ export default function App() {
                 marginBottom: 1
               }}
             >
-              Most events during this period occurred in Gaza, particularly those related to violence.
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                fontSize: '1.05rem',
-                lineHeight: 1.8,
-                color: textColor,
-                fontWeight: 300,
-                marginBottom: 0
-              }}
-            >
-              The two categories in which Israel recorded more events than Gaza are protests and riots.
+              The visualization clearly shows that the Gaza Strip has experienced a greater number of events than Israel, particularly those classified as the most violent and dangerous. Israel records many peaceful protests and incidents of explosions/remote violence, but when looking specifically at explosions, only about 17% of the total occur in Israel, while the remaining majority take place in Gaza.
             </Typography>
           </Box>
         </Box>
@@ -901,7 +905,7 @@ export default function App() {
                 marginBottom: 0
               }}
             >
-              This visualization shows how events in Gaza and Israel, previously analyzed, are distributed over time, from January 2023 to December 2025.
+              This visualization shows how events are distributed over time, with the possibility to choose which types of events to display.
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
@@ -932,7 +936,7 @@ export default function App() {
               >
                 October 7 attacks, Wikipedia
               </Link>
-              ), represents a key point in the timeline of events. Before this date, there is a peak in violence in the Gaza Strip around May 6, 2023, while most of the remaining period appears relatively quieter. After October 7, however, the chart displays a strong increase in violent events in both territories, particularly in the Gaza Strip. These episodes of violence continued, with the exception of a calmer period between January and March 2025, until October, when they began to decrease again.
+              ), represents a key point in the timeline of events. Before this date, there is a peak in violence in the Gaza Strip around May 6, 2023, while most of the remaining period appears relatively quieter. After October 7, however, the chart displays a strong increase in violent events in both territories, particularly in the Gaza Strip, where Israeli airstrikes are concentrated. These episodes of violence continued, with the exception of a calmer period between January and March 2025, until October, when they began to decrease again.
             </Typography>
           </Box>
         </Box>
@@ -1005,13 +1009,13 @@ export default function App() {
             >
               In contrast, the line for Gaza displays a sustained and markedly higher number of fatalities after October 2023. The increase continues over time, indicating that most deaths in this period occurred in the Gaza Strip.
             </Typography>
-            
+
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
             <DonutChart isDark={isDark} />
           </Box>
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
-  
+
             <Typography
               variant="body1"
               sx={{
@@ -1022,9 +1026,9 @@ export default function App() {
                 marginBottom: 0
               }}
             >
-              This visualization show the proportion of fatalities between Israel and Gaza highlighting the differences between the two country.
+              This view provides a clearer and more striking perspective on the distribution of fatalities in both countries.
             </Typography>
-            
+
           </Box>
         </Box>
 
@@ -1107,7 +1111,7 @@ export default function App() {
             >
               War or Genocide?
             </Typography>
-            
+
           </Box>
         </Box>
       </Box>
@@ -1151,24 +1155,7 @@ export default function App() {
               <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
             </svg>
           </Link>
-          <Link
-            href="#/datasets"
-            rel="noopener noreferrer"
-            sx={{
-              color: navbarTextColor,
-              textDecoration: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              transition: 'color 0.3s ease',
-              '&:hover': { color: linkHoverColor }
-            }}
-            aria-label="Datasets and Sources"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M4 6a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm0 8a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2z" />
-            </svg>
-            <span style={{ marginLeft: 8 }}>Datasets</span>
-          </Link>
+          
           <Link
             href="https://github.com/matteogrifone22"
             target="_blank"

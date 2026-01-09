@@ -523,30 +523,14 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
       const labelInfo = labelData.find(l => l.node === d);
       if (!labelInfo) return;
       
-      // Draw connection line if label was moved significantly
-      const displacement = Math.abs(labelInfo.y - labelInfo.originalY);
-      if (displacement > 5) {
-        const isCountry = d.id === "Israel" || d.id === "Gaza";
-        group
-          .append("line")
-          .attr("class", "label-line")
-          .attr("data-node-type", d.id === "Israel" || d.id === "Gaza" ? "country" : d.id.includes("|") ? "subevent" : "eventtype")
-          .attr("x1", isCountry ? d.x1 : d.x0)
-          .attr("y1", labelInfo.originalY)
-          .attr("x2", labelInfo.x)
-          .attr("y2", labelInfo.y)
-          .attr("stroke", "var(--color-details)")
-          .attr("stroke-width", 0.5)
-          .attr("stroke-dasharray", "2,2")
-          .style("opacity", animationPlayedRef.current ? 0.5 : 0);
-      }
+      // Removed label connection lines
       
       group
         .append("text")
         .attr("class", "node-label")
         .attr("data-node-type", d.id === "Israel" || d.id === "Gaza" ? "country" : d.id.includes("|") ? "subevent" : "eventtype")
         .attr("x", labelInfo.x)
-        .attr("y", labelInfo.y)
+        .attr("y", (d.y0 + d.y1) / 2)
         .attr("dy", "0.35em")
         .attr("text-anchor", labelInfo.textAnchor)
         .attr("font-size", labelInfo.fontSize)

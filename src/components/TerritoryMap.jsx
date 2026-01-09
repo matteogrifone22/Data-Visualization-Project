@@ -57,17 +57,58 @@ export default function TerritoryMap({ isDark, isMonochromacy = false }) {
         // Create a group for the map features
         const g = svg.append('g');
 
+        // Tooltip div
+
         // Bind data and create paths WITH colors immediately
         g.selectAll('path')
-          .data(geojsonData.features)
+          .data(geojsonData.features.flatMap((feature, featureIdx) => {
+            // For MultiPolygon, create a separate entry for each polygon ring
+            if (feature.geometry.type === 'MultiPolygon') {
+              return feature.geometry.coordinates.map((poly, polyIdx) => {
+                const lineId = `feature${featureIdx}_poly${polyIdx}`;
+                // Remove the entire feature0_poly0 segment
+                if (lineId === 'feature0_poly0') return null;
+                return {
+                  ...feature,
+                  __lineId: lineId,
+                  __coords: poly[0]
+                };
+              }).filter(Boolean);
+            } else if (feature.geometry.type === 'Polygon') {
+              const lineId = `feature${featureIdx}_poly0`;
+              if (lineId === 'feature0_poly0') return [];
+              return [{
+                ...feature,
+                __lineId: lineId,
+                __coords: feature.geometry.coordinates[0]
+              }];
+            } else {
+              return [{
+                ...feature,
+                __lineId: `feature${featureIdx}_other`,
+                __coords: []
+              }];
+            }
+          }))
           .enter()
           .append('path')
-          .attr('d', path)
+          .attr('d', d => {
+            if (d.geometry.type === 'MultiPolygon') {
+              // d.__coords is a ring (array of [lng, lat]), wrap as [[[...]]]
+              return path({ ...d, geometry: { ...d.geometry, type: 'MultiPolygon', coordinates: [[[...d.__coords]]] } });
+            } else if (d.geometry.type === 'Polygon') {
+              // d.__coords is a ring, wrap as [[...]]
+              return path({ ...d, geometry: { ...d.geometry, type: 'Polygon', coordinates: [[...d.__coords]] } });
+            } else {
+              return null;
+            }
+          })
           .attr('fill', 'transparent')
           .attr('stroke', d => colorScale(d.properties.country))
           .attr('stroke-width', 2)
           .attr('class', 'territory')
-          .attr('data-country', d => d.properties.country);
+          .attr('data-country', d => d.properties.country)
+          // ...existing code...
 
         // Manually placed labels for key territories
         const labelSpecs = [

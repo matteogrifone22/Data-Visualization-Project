@@ -3,19 +3,19 @@
 - [x] Usare variabili css per colori
 - [x] riorganizzare flusso pagina
 - [x] fare i testi
-- [ ] Aggiungere pagina dataset
-- [ ] Ripensare allo stile dei bottoni/slider
 - [x] Aggiungere icone ai bottoni social
 - [x] Aggiungere animazioni di caricamento
-- [ ] Aggiungere Guida all'uso per ogni grafico
 - [x] Capire come gestire mobile
 - [x] Favicon personalizzata
 - [x] Colorblind mode
 - [x] Logica colori rettangoli sankey
 - [x] Usare Gaza dove serve (ultimi 3 plot)
 - [x] ridurre anni boxplot
-- [ ] fixare tooltip geomap
 - [x] Aggiungere donut chart per ripartizione vittime per paese
+- [ ] Aggiungere pagina dataset
+- [ ] Ripensare allo stile dei bottoni/slider
+- [ ] fixare tooltip geomap
+- [ ] Aggiungere Guida all'uso per ogni grafico
 
 
 Story flow:
@@ -49,3 +49,15 @@ Mappa dei territori
 
 
 Inizio story line
+
+
+Dataset:
+
+
+
+
+World bank
+safe drinking access
+safe sanitation acces
+gdp
+food insecurity
