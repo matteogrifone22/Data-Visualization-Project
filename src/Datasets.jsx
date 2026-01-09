@@ -172,7 +172,7 @@ export default function Datasets() {
 
           <Box sx={{ display: 'flex', gap: { xs: 0.6, md: 1 }, flexShrink: 0 }}>
             <Link
-              href="/"
+              href="#/"
               sx={{
                 color: navbarTextColor,
                 textDecoration: 'none',

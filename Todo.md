@@ -13,8 +13,8 @@
 - [x] ridurre anni boxplot
 - [x] Aggiungere donut chart per ripartizione vittime per paese
 - [x] Aggiungere pagina dataset
-- [ ] fixare tooltip geomap
-- [ ] Aggiungere Guida all'uso per ogni grafico
+- [x] fixare tooltip geomap
+- [x] Aggiungere Guida all'uso per ogni grafico
 
 
 Story flow:
