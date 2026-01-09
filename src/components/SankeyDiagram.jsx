@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import { sankey, sankeyLinkHorizontal, sankeyLeft } from "d3-sankey";
+import NearMeIcon from '@mui/icons-material/NearMe';
 
-export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
+export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false, guideActive = false }) {
   const svgRef = useRef(null);
   const wrapperRef = useRef(null);
   const animationPlayedRef = useRef(false);
@@ -51,7 +52,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
     const wrapper = wrapperRef.current;
     const containerWidth = wrapper.offsetWidth || 1000;
     const containerHeight = 600;
-    const margin = { top: 40, right: 200, bottom: 40, left: 200 };
+    const margin = { top: 40, right: 200, bottom: 60, left: 200 };
     const width = containerWidth;
     const height = containerHeight;
 
@@ -669,13 +670,51 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false }) {
   }, [data, isDark, isMonochromacy]);
 
   return (
-    <div ref={wrapperRef} style={{ width: "100%", margin: "0 auto" }}>
+    <div ref={wrapperRef} style={{ width: "100%", margin: "0 auto", position: 'relative', minHeight: 600 }}>
+      {/* Guide banner for onhover tooltip*/}
+      {guideActive && (
+        <div
+          style={{
+            position: 'absolute',
+            left: '18%',
+            top: '22%',
+            zIndex: 21000,
+            display: 'flex',
+            alignItems: 'center',
+            background: 'var(--bg-secondary, #23272f)',
+            color: 'var(--color-details, #90caf9)',
+            borderRadius: 10,
+            padding: '8px 18px',
+            fontSize: '1.08rem',
+            fontWeight: 500,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+            pointerEvents: 'none',
+          }}
+        >
+          <NearMeIcon style={{ fontSize: 22, marginRight: 8, transform: 'scalex(-1)' }} />
+          OnHover tooltip
+        </div>
+      )}
       <svg
         ref={svgRef}
         role="img"
         aria-label="Sankey diagram showing flow of events by type"
         style={{ width: "100%", height: "auto" }}
       />
+      <div style={{
+                position: 'absolute',
+                right: 12,
+                bottom: -30,
+                fontSize: '0.95rem',
+                color: isDark ? 'var(--text-secondary)' : 'var(--text-secondary)',
+                opacity: 0.5,
+                padding: '2px 10px',
+                borderRadius: '12px',
+                fontFamily: 'var(--font-serif)',
+                zIndex: 2
+            }}>
+                Data source: <strong>ACLED</strong>
+            </div>
     </div>
   );
 }

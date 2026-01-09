@@ -127,8 +127,8 @@ export default function Datasets() {
     <Box sx={{
       backgroundColor: bgColor,
       color: textColor,
-      minHeight: '100vh',
       width: '100%',
+      minHeight: '100vh', // keep minHeight for full-page background, but reduce paddings below
     }}>
       {/* AppBar and Toolbar */}
       <AppBar
@@ -245,14 +245,14 @@ export default function Datasets() {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{ height: 80 }} /> {/* Spacer for AppBar */}
+      <Box sx={{ height: 100 }} /> {/* Reduced spacer for AppBar */}
       <Box sx={{
         width: { xs: '100%', md: '700px' },
         maxWidth: '700px',
         minWidth: { xs: '0', md: '360px' },
         margin: '0 auto',
-        paddingTop: '8vh',
-        paddingBottom: '8vh',
+        paddingTop: '2vh',
+        paddingBottom: '2vh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
@@ -267,13 +267,13 @@ export default function Datasets() {
           <Box sx={{
             display: 'flex',
             alignItems: 'center',
-            borderRadius: '24px',
-            p: 4,
-            my: 3,
+            borderRadius: '20px',
+            p: 2.5,
+            my: 1.5,
             background: 'linear-gradient(135deg, var(--bg-secondary) 85%, var(--bg-primary) 100%)',
             maxWidth: 720,
-            justifyContent: 'flex-start',  // logo + contenuto allineati a sinistra dentro il card
-            gap: 4,  // spazio tra logo e contenuto
+            justifyContent: 'flex-start',
+            gap: 3,
             boxShadow: datasetBoxShadow,
             '&:hover': { boxShadow: datasetBoxShadowHover }
           }}>
@@ -304,13 +304,13 @@ export default function Datasets() {
           <Box sx={{
             display: 'flex',
             alignItems: 'center',
-            borderRadius: '24px',
-            p: 4,
-            my: 3,
+            borderRadius: '20px',
+            p: 2.5,
+            my: 1.5,
             background: 'linear-gradient(135deg, var(--bg-secondary) 85%, var(--bg-primary) 100%)',
-            maxWidth: 8000,
-            justifyContent: 'flex-start',  // logo + contenuto allineati a sinistra dentro il card
-            gap: 4,  // spazio tra logo e contenuto
+            maxWidth: 720,
+            justifyContent: 'flex-start',
+            gap: 3,
             boxShadow: datasetBoxShadow,
             '&:hover': { boxShadow: datasetBoxShadowHover }
           }}>
@@ -350,13 +350,13 @@ export default function Datasets() {
           <Box sx={{
             display: 'flex',
             alignItems: 'center',
-            borderRadius: '24px',
-            p: 4,
-            my: 3,
+            borderRadius: '20px',
+            p: 2.5,
+            my: 1.5,
             background: 'linear-gradient(135deg, var(--bg-secondary) 85%, var(--bg-primary) 100%)',
-            maxWidth: 8000,
-            justifyContent: 'flex-start',  // logo + contenuto allineati a sinistra dentro il card
-            gap: 4,  // spazio tra logo e contenuto
+            maxWidth: 720,
+            justifyContent: 'flex-start',
+            gap: 3,
             boxShadow: datasetBoxShadow,
             '&:hover': { boxShadow: datasetBoxShadowHover }
           }}>
@@ -386,13 +386,13 @@ export default function Datasets() {
           <Box sx={{
             display: 'flex',
             alignItems: 'center',
-            borderRadius: '24px',
-            p: 4,
-            my: 3,
+            borderRadius: '20px',
+            p: 2.5,
+            my: 1.5,
             background: 'linear-gradient(135deg, var(--bg-secondary) 85%, var(--bg-primary) 100%)',
-            maxWidth: 8000,
-            justifyContent: 'flex-start',  // logo + contenuto allineati a sinistra dentro il card
-            gap: 4,  // spazio tra logo e contenuto
+            maxWidth: 720,
+            justifyContent: 'flex-start',
+            gap: 3,
             boxShadow: datasetBoxShadow,
             '&:hover': { boxShadow: datasetBoxShadowHover }
           }}>
@@ -429,7 +429,7 @@ export default function Datasets() {
 
 
         </Box>
-        <Box sx={{ mt: 6, textAlign: 'center' }}>
+        <Box sx={{ mt: 2, textAlign: 'center' }}>
           <Link href="#/" sx={{ color: textColor, textDecoration: 'none', '&:hover': { color: linkHoverColor } }}>
             ← Back to main visualization
           </Link>
@@ -443,7 +443,7 @@ export default function Datasets() {
             backgroundColor: 'rgba(0,0,0,0)',
             opacity: 1,
             color: navbarTextColor,
-            padding: '12vh 5vw 6vh 5vw',
+            padding: '3vh 2vw 2vh 2vw',
             textAlign: 'center',
             transition: 'color 0.3s ease, box-shadow 0.3s ease'
           }}

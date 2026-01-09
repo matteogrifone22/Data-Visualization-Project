@@ -1,7 +1,12 @@
+
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
+import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
+import NearMeIcon from '@mui/icons-material/NearMe';
+import ZoomInMapOutlinedIcon from '@mui/icons-material/ZoomInMapOutlined';
+import ZoomOutMapOutlinedIcon from '@mui/icons-material/ZoomOutMapOutlined';
 
-export function SmallMultipleChart({ isDark = true }) {
+export function SmallMultipleChart({ isDark = true, guideActive = false }) {
     const svgRef = useRef(null);
     const wrapperRef = useRef(null);
     const dataRef = useRef([]);
@@ -500,8 +505,82 @@ export function SmallMultipleChart({ isDark = true }) {
     }, [dataLoaded, isDark, selectedChart]);
 
     return (
-        <div ref={wrapperRef} style={{ width: '100%', maxWidth: '1100px', height: 'auto', margin: '0 auto' }}>
-            <svg ref={svgRef} style={{ width: '100%', height: 'auto', display: 'block' }} />
+        <div ref={wrapperRef} style={{ width: '100%', maxWidth: '1100px', height: 'auto', margin: '0 auto', position: 'relative' }}>
+            {/* Chart SVG */}
+            <svg ref={svgRef} style={{ width: '100%', height: 'auto', display: 'block', zIndex: 1 }} />
+
+            {/* Overlayed Guide Elements: Only banners, no opacity or panel */}
+            {guideActive && (
+                <>
+                    <div
+                        style={{
+                            position: 'absolute',
+                            left: '18%',
+                            top: '22%',
+                            zIndex: 21000,
+                            display: 'flex',
+                            alignItems: 'center',
+                            background: 'var(--bg-secondary, #23272f)',
+                            color: 'var(--color-details, #90caf9)',
+                            borderRadius: 10,
+                            padding: '8px 18px',
+                            fontSize: '1.08rem',
+                            fontWeight: 500,
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                            pointerEvents: 'none',
+                        }}
+                    >
+                        <NearMeIcon style={{ fontSize: 22, marginRight: 8, transform: 'scaleX(-1)' }} />
+                        OnHover tooltip
+                    </div>
+                    <div
+                        style={{
+                            position: 'absolute',
+                            left: '68%',
+                            top: '68%',
+                            zIndex: 21000,
+                            display: 'flex',
+                            alignItems: 'center',
+                            background: 'var(--bg-secondary, #23272f)',
+                            color: 'var(--color-details, #90caf9)',
+                            borderRadius: 10,
+                            padding: '8px 18px',
+                            fontSize: '1.08rem',
+                            fontWeight: 500,
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                            pointerEvents: 'none',
+                        }}
+                    >
+                        {selectedChart === null ? (
+                            <>
+                                <ZoomInMapOutlinedIcon style={{ fontSize: 22, marginRight: 8 }} />
+                                Click to zoom a chart
+                            </>
+                        ) : (
+                            <>
+                                <ZoomOutMapOutlinedIcon style={{ fontSize: 22, marginRight: 8 }} />
+                                Click to return to grid view
+                            </>
+                        )}
+                    </div>
+                </>
+            )}
+
+            {/* Data source label */}
+            <div style={{
+                position: 'absolute',
+                right: 12,
+                bottom: -30,
+                fontSize: '0.95rem',
+                color: isDark ? 'var(--text-secondary)' : 'var(--text-secondary)',
+                opacity: 0.5,
+                padding: '2px 10px',
+                borderRadius: '12px',
+                fontFamily: 'var(--font-serif)',
+                zIndex: 2
+            }}>
+                Data source: <strong>World Bank</strong>
+            </div>
         </div>
     );
 }

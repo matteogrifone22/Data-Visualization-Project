@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
-import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab } from '@mui/material';
-import { DarkMode, LightMode, Visibility, VisibilityOff } from '@mui/icons-material';
+import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab, Tooltip, Backdrop } from '@mui/material';
+import { DarkMode, LightMode, Visibility, VisibilityOff, HelpOutline } from '@mui/icons-material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TerritoryMap from './components/TerritoryMap';
 import LineChart from './components/LineChart';
@@ -14,6 +14,52 @@ import GeoChart from './components/GeoMap';
 import { rgb } from 'd3';
 
 export default function App() {
+  const [guideActive, setGuideActive] = useState(false);
+    // Guide overlay content for each plot
+    const getGuideContent = () => {
+      switch (activeSection) {
+        case 'chapter6': // Map
+          return (
+            <Box sx={{ color: 'var(--text-primary)', p: 3, maxWidth: 420, background: 'var(--bg-secondary)', borderRadius: 3, boxShadow: 3, border: '2px solid var(--color-details)' }}>
+              <Typography variant="h6" sx={{ mb: 1, color: 'var(--color-details)' }}>Map Guide</Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                <b>Zoom & Pan:</b> Use your mouse or touchpad to zoom and drag the map.<br/>
+                <b>Incident Icons:</b> Hover for details. Click to focus.<br/>
+                <b>Legend & Filters:</b> Use the controls to filter by type/date.<br/>
+                <b>Animation:</b> Use the play button to animate events over time.<br/>
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'var(--color-details)' }}>
+                Click anywhere to close this guide.
+              </Typography>
+            </Box>
+          );
+        case 'introduction':
+          return (
+            <Box sx={{ color: 'var(--text-primary)', p: 3, maxWidth: 420, background: 'var(--bg-secondary)', borderRadius: 3, boxShadow: 3, border: '2px solid var(--color-details)', textAlign: 'center' }}>
+              <Typography variant="h6" sx={{ mb: 1, color: 'var(--color-details)' }}>Guide</Typography>
+              <Typography variant="body1" sx={{ mb: 2, fontWeight: 500, color: 'var(--text-primary)' }}>
+                This guide will explain how to interact with the charts.<br/>
+                Please inquadrane una.
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'var(--color-details)' }}>
+                Click anywhere to close this guide.
+              </Typography>
+            </Box>
+          );
+        default:
+          return (
+            <Box sx={{ color: 'var(--text-primary)', p: 3, maxWidth: 420, background: 'var(--bg-secondary)', borderRadius: 3, boxShadow: 3, border: '2px solid var(--color-details)' }}>
+              <Typography variant="h6" sx={{ mb: 1, color: 'var(--color-details)' }}>Guide</Typography>
+              <Typography variant="body2" sx={{ mb: 1 }}>
+                This section contains interactive charts. Hover, click, or use controls to explore the data.<br/>
+              </Typography>
+              <Typography variant="body2" sx={{ color: 'var(--color-details)' }}>
+                Click anywhere to close this guide.
+              </Typography>
+            </Box>
+          );
+      }
+    };
   const [isDark, setIsDark] = useState(true);
   const [isMonochromacy, setIsMonochromacy] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -352,6 +398,27 @@ export default function App() {
             {useShortLabels ? 'Map' : 'Map'}
           </Link>
           <Box sx={{ display: 'flex', gap: { xs: 0.6, md: 1 }, flexShrink: 0 }}>
+            <Tooltip title="Show Guide" arrow>
+              <IconButton
+                onClick={() => setGuideActive(true)}
+                disableRipple
+                disableFocusRipple
+                disableTouchRipple
+                sx={{
+                  color: navbarTextColor,
+                  transition: 'color 0.3s ease',
+                  outline: 'none !important',
+                  boxShadow: 'none !important',
+                  '&:hover': {
+                    color: linkHoverColor,
+                    backgroundColor: 'transparent !important'
+                  }
+                }}
+                aria-label="Show Guide"
+              >
+                <HelpOutline />
+              </IconButton>
+            </Tooltip>
             <IconButton
               onClick={toggleTheme}
               disableRipple
@@ -420,6 +487,69 @@ export default function App() {
         </Toolbar>
       </AppBar>
 
+      {/* Guide Overlay - only show on non-chart sections */}
+      {guideActive && (
+        <Backdrop
+          open={guideActive}
+          onClick={() => setGuideActive(false)}
+          sx={{
+            zIndex: 20000,
+            color: 'var(--text-primary)',
+            backgroundColor: 'rgba(0,0,0,0.7)',
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            p: 0,
+            m: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+          }}
+        >
+          <Box
+            onClick={e => e.stopPropagation()}
+            sx={{
+              position: 'absolute',
+              top: '10%',
+              left: '50%',
+              transform: 'translate(-50%, 0)',
+              background: 'var(--bg-secondary, #222)',
+              color: 'var(--text-primary, #fff)',
+              borderRadius: 2,
+              boxShadow: 3,
+              border: '2px solid var(--color-details, #90caf9)',
+              px: 4,
+              py: 3,
+              minWidth: 120,
+              minHeight: 60,
+              zIndex: 20001,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontFamily: 'var(--font-serif)',
+              fontSize: '1.15rem',
+              fontWeight: 600,
+              textAlign: 'center',
+              userSelect: 'none',
+            }}
+          >
+            <span style={{ color: 'var(--color-details, #90caf9)' }}>Guide</span>
+            {activeSection === 'introduction' && (
+              <div style={{ fontSize: '0.95rem', fontWeight: 400, marginTop: 6, color: 'var(--text-primary, #fff)' }}>
+                View the chart to learn how to interact with it
+              </div>
+            )}
+            <div style={{ fontSize: '0.95rem', fontWeight: 400, marginTop: 6, color: 'var(--color-details, #90caf9)' }}>
+              Click anywhere to close
+            </div>
+          </Box>
+        </Backdrop>
+      )}
+
       <Box sx={{ transition: 'background-color 0.3s ease, color 0.3s ease' }}>
         {/* Title Section */}
         <Box
@@ -476,7 +606,7 @@ export default function App() {
               }}
             >
               The purpose is not to provide a definitive answer, but to leave the interpretation to the user.
-              By exploring patterns, trends, and measurable evidence, each viewer is invited to reflect on
+              By exploring patterns, trends and measurable evidence, each viewer is invited to reflect on
               whether the observed events align more closely with the concept of <i>war</i> or <i>genocide</i>.
             </Typography>
 
@@ -596,7 +726,7 @@ export default function App() {
                     marginBottom: 2
                   }}
                 >
-                  In the first part of the visualizations, the focus is placed on the State of Palestine as a whole. This choice, together with the limited availability of 2025 data, may smooth or underrepresent the extent of the impact of recent events in the Gaza Strip.
+                  In the first part of the visualizations, the focus is placed on the State of Palestine as a whole. This choice, together with the limited availability of 2025 data, may smooth or underrepresent the extent of the impact of the recent events in the Gaza Strip.
                 </Typography>
                 <Typography
                   variant="body1"
@@ -705,13 +835,13 @@ export default function App() {
                 marginBottom: 0
               }}
             >
-              The data used for these charts refer to the years 2018-2024. The time window reflects the most recent years for which comparable indicators are available for both Israel and Palestine.
+              The data used for these charts refer to the years from 2018 to 2024. The time window reflects the most recent years for which comparable indicators are available for both Israel and Palestine.
 
             </Typography>
 
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <SmallMultipleChart isDark={isDark} />
+            <SmallMultipleChart isDark={isDark} guideActive={guideActive} />
           </Box>
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 0, marginTop: 6 }}>
 
@@ -766,10 +896,10 @@ export default function App() {
                 marginBottom: 0
               }}
             >
-              This section examines mortality in Israel and Palestine, focusing on the years 2018 to 2023. By looking at the ages at which deaths occur, it is possible to understand the demographic impact of living conditions and conflict.              </Typography>
+              This section examines mortality in Israel and Palestine, focusing on the years from 2018 to 2023. By looking at the ages at which deaths occur, it is possible to understand the demographic impact of living conditions and conflict.              </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <ViolinBoxPlot isDark={isDark} />
+            <ViolinBoxPlot isDark={isDark} guideActive={guideActive} />
           </Box>
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 0, marginTop: 6 }}>
             <Typography
@@ -835,7 +965,7 @@ export default function App() {
                 marginBottom: 1
               }}
             >
-              After introducing differences in quality of life between Israel and Palestine to provide a basis for comparison, the focus now shifts to the Gaza Strip to analyze recent developments in the conflict, which began on October 7, 2023, and is still ongoing.
+              After introducing differences in quality of life between Israel and Palestine to provide a basis for comparison, the focus now shifts to the Gaza Strip to analyze recent developments in the conflict, which began on October 7, 2023 and is still ongoing.
             </Typography>
             <Typography
               variant="body1"
@@ -847,11 +977,11 @@ export default function App() {
                 marginBottom: 0
               }}
             >
-              This visualization presents the number and types of events that occurred in both territories from 2023 to 2025. The events are categorized in event types and subevent types which are all displayed in the diagram.
+              This visualization presents the number and types of events that occurred in both territories from 2023 to 2025. The events are categorized in event types and subevent types which are all displayed in the diagram below.
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <EventsSankeyDiagram isDark={isDark} isMonochromacy={isMonochromacy} />
+            <EventsSankeyDiagram isDark={isDark} isMonochromacy={isMonochromacy} guideActive={guideActive} />
           </Box>
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
             <Typography
@@ -864,7 +994,7 @@ export default function App() {
                 marginBottom: 1
               }}
             >
-              The visualization clearly shows that the Gaza Strip has experienced a greater number of events than Israel, particularly those classified as the most violent and dangerous. Israel records many peaceful protests and incidents of explosions/remote violence, but when looking specifically at explosions, only about 17% of the total occur in Israel, while the remaining majority take place in Gaza.
+              The visualization clearly shows that the Gaza Strip has experienced a greater number of events than Israel, particularly those classified as the most violent and dangerous. Israel records many peaceful protests and incidents of explosions/remote violence, but when looking specifically at explosions, only about 17% of the total occur in Israel, while the remaining majority takes place in Gaza.
             </Typography>
           </Box>
         </Box>
@@ -909,7 +1039,7 @@ export default function App() {
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <RidgeChart isDark={isDark} />
+            <RidgeChart isDark={isDark} guideActive={guideActive} />
           </Box>
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
             <Typography
@@ -981,7 +1111,7 @@ export default function App() {
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <LineChart isDark={isDark} />
+            <LineChart isDark={isDark} guideActive={guideActive} />
           </Box>
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
             <Typography
@@ -1067,7 +1197,7 @@ export default function App() {
                 fontWeight: 300,
               }}
             >
-              This interactive map allows the exploration of two different datasets related to Gaza Strip. The first shows incidents connected to the health-care and the food system.
+              This interactive map allows the exploration of two different datasets related to the Gaza Strip. The first one shows incidents related to the health-care and the food system.
             </Typography>
             <Typography
               variant="body1"
@@ -1078,12 +1208,12 @@ export default function App() {
                 fontWeight: 300,
               }}
             >
-              The second displays the locations of damaged buildings.
-              Due to the large number of recorded observations, points on the map have been clustered by spatial proximity. This results in a reduction in geographical precision, but significantly improves performance and readability.
+              The second one displays the locations of the damaged buildings.
+              Due to the large number of recorded observations, points on the map have been clustered by spatial proximity. This results in a reduction of geographical precision, but significantly improves of performance and readability.
             </Typography>
           </Box>
           <Box sx={{ width: '100%', minWidth: '100%' }}>
-            <GeoChart isDark={isDark} isMonochromacy={isMonochromacy} />
+            <GeoChart isDark={isDark} isMonochromacy={isMonochromacy} guideActive={guideActive} />
           </Box>
           <Box sx={{ textAlign: 'center', width: '100%', maxWidth: 'min(95vw, var(--content-width))', marginBottom: 4 }}>
 
@@ -1097,7 +1227,7 @@ export default function App() {
                 marginBottom: 4
               }}
             >
-              This project has presented a series of data-driven visualizations to explore the current conflict in the Gaza Strip, providing the context necessary to reflect on the following question:
+              This project has presented a series of data-driven visualizations in order to explore the current conflict in the Gaza Strip, providing the context necessary to let you reflect on the following question: what is it really about?
             </Typography>
             <Typography
               variant="h1"

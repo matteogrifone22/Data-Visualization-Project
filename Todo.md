@@ -12,8 +12,7 @@
 - [x] Usare Gaza dove serve (ultimi 3 plot)
 - [x] ridurre anni boxplot
 - [x] Aggiungere donut chart per ripartizione vittime per paese
-- [ ] Aggiungere pagina dataset
-- [ ] Ripensare allo stile dei bottoni/slider
+- [x] Aggiungere pagina dataset
 - [ ] fixare tooltip geomap
 - [ ] Aggiungere Guida all'uso per ogni grafico
 

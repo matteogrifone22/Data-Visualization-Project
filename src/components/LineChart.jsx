@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
+import NearMeIcon from '@mui/icons-material/NearMe';
 
-export function LineChart({ isDark = true }) {
+export function LineChart({ isDark = true, guideActive = false }) {
     const svgRef = useRef(null);
     const wrapperRef = useRef(null);
     const dataRef = useRef([]);
@@ -459,8 +460,69 @@ export function LineChart({ isDark = true }) {
     }, [dataLoaded]);
 
     return (
-        <div ref={wrapperRef} style={{ width: '100%', maxWidth: '100%', overflow: 'visible', position: 'relative' }}>
-            <svg ref={svgRef} style={{ width: '100%', height: 'auto', display: 'block' }} />
+        <div ref={wrapperRef} style={{ width: '100%', maxWidth: '100%', margin: '0 auto', position: 'relative', minHeight: 420 }}>
+            {/* Duplicate guide banners for onhover tooltip, matching SmallMultiples */}
+            {guideActive && (
+                <>
+                    <div
+                        style={{
+                            position: 'absolute',
+                            left: '60%',
+                            top: '170%',
+                            zIndex: 21000,
+                            display: 'flex',
+                            alignItems: 'center',
+                            background: 'var(--bg-secondary, #23272f)',
+                            color: 'var(--color-details, #90caf9)',
+                            borderRadius: 10,
+                            padding: '8px 18px',
+                            fontSize: '1.08rem',
+                            fontWeight: 500,
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                            pointerEvents: 'none',
+                        }}
+                    >
+                        <NearMeIcon style={{ fontSize: 22, marginRight: 8, transform: 'scaleX(-1)' }} />
+                        OnHover tooltip
+                    </div>
+                    <div
+                        style={{
+                            position: 'absolute',
+                            left: '68%',
+                            top: '40%',
+                            zIndex: 21000,
+                            display: 'flex',
+                            alignItems: 'center',
+                            background: 'var(--bg-secondary, #23272f)',
+                            color: 'var(--color-details, #90caf9)',
+                            borderRadius: 10,
+                            padding: '8px 18px',
+                            fontSize: '1.08rem',
+                            fontWeight: 500,
+                            boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                            pointerEvents: 'none',
+                        }}
+                    >
+                        <NearMeIcon style={{ fontSize: 22, marginRight: 8, transform: 'scaleX(-1)' }} />
+                        OnHover tooltip
+                    </div>
+                </>
+            )}
+            <svg ref={svgRef} style={{ width: '100%', height: '100%', display: 'block', zIndex: 1 }} />
+            <div style={{
+                position: 'absolute',
+                right: 12,
+                bottom: -10,
+                fontSize: '0.95rem',
+                color: isDark ? 'var(--text-secondary)' : 'var(--text-secondary)',
+                opacity: 0.5,
+                padding: '2px 10px',
+                borderRadius: '12px',
+                fontFamily: 'var(--font-serif)',
+                zIndex: 2
+            }}>
+                Data source: <strong>ACLED</strong>
+            </div>
         </div>
     );
 }

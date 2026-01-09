@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
+import NearMeIcon from '@mui/icons-material/NearMe';
+import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 
-export function RidgeChart({ isDark = true }) {
+export function RidgeChart({ isDark = true, guideActive = false }) {
         // Track if any original country was 'Gaza' for legend/tooltip display
         const originalCountryRef = useRef({ hasGaza: false });
     const svgRef = useRef(null);
@@ -466,6 +468,7 @@ export function RidgeChart({ isDark = true }) {
                 alignSelf: 'flex-start',
                 position: 'sticky',
                 top: '20px',
+                zIndex: 21000,
             }}>
                 <div style={{ marginBottom: '15px', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>
                     Event Types
@@ -520,8 +523,70 @@ export function RidgeChart({ isDark = true }) {
 
             {/* Chart container */}
             <div ref={wrapperRef} style={{ flex: 1, minWidth: 0, overflow: 'visible', position: 'relative' }}>
-                <svg ref={svgRef} style={{ width: '100%', height: 'auto', display: 'block' }} />
+                {/* Guide banners for onhover tooltip and events selection */}
+                {guideActive && (
+                    <>
+                        <div
+                            style={{
+                                position: 'absolute',
+                                left: '58%',
+                                top: '10%',
+                                zIndex: 21000,
+                                display: 'flex',
+                                alignItems: 'center',
+                                background: 'var(--bg-secondary, #23272f)',
+                                color: 'var(--color-details, #90caf9)',
+                                borderRadius: 10,
+                                padding: '8px 18px',
+                                fontSize: '1.08rem',
+                                fontWeight: 500,
+                                boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                                pointerEvents: 'none',
+                            }}
+                        >
+                            <NearMeIcon style={{ fontSize: 22, marginRight: 8, transform: 'scaleX(-1)' }} />
+                            OnHover tooltip
+                        </div>
+                        <div
+                            style={{
+                                position: 'absolute',
+                                left: '-2%',
+                                top: '30%',
+                                zIndex: 20999,
+                                display: 'flex',
+                                alignItems: 'center',
+                                background: 'var(--bg-secondary, #23272f)',
+                                color: 'var(--color-details, #90caf9)',
+                                borderRadius: 10,
+                                padding: '8px 18px',
+                                fontSize: '1.08rem',
+                                fontWeight: 500,
+                                boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+                                pointerEvents: 'none',
+                            }}
+                        >
+                            <FilterAltOutlinedIcon style={{ fontSize: 22, marginRight: 8 }} />
+                            Events selection
+                        </div>
+                    </>
+                )}
+                <svg ref={svgRef} style={{ width: '100%', height: 420, display: 'block', zIndex: 1 }} />
+            <div style={{
+                position: 'absolute',
+                right: 12,
+                bottom: 0,
+                fontSize: '0.95rem',
+                color: isDark ? 'var(--text-secondary)' : 'var(--text-secondary)',
+                opacity: 0.5,
+                padding: '2px 10px',
+                borderRadius: '12px',
+                fontFamily: 'var(--font-serif)',
+                zIndex: 2
+            }}>
+                Data source: <strong>ACLED</strong>
             </div>
+            </div>
+            
         </div>
     );
 }

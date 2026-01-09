@@ -73,7 +73,7 @@ const ageMidpoint = (str) => {
 };
 
 // Named export expected by imports
-export function ViolinBoxPlot({ isDark = true }) {
+export function ViolinBoxPlot({ isDark = true, guideActive = false }) {
   const svgRef = useRef(null);
   const wrapperRef = useRef(null);
   const yearsRef = useRef([]);
@@ -428,12 +428,75 @@ export function ViolinBoxPlot({ isDark = true }) {
 
   return (
     <div ref={wrapperRef} style={{ width: "100%", margin: "0 auto", position: "relative" }}>
+      {/* Guide banners for compare view and year slider */}
+      {guideActive && (
+        <>
+          <div
+            style={{
+              position: 'absolute',
+              left: '0%',
+              top: '75%',
+              zIndex: 21000,
+              display: 'flex',
+              alignItems: 'center',
+              background: 'var(--bg-secondary, #23272f)',
+              color: 'var(--color-details, #90caf9)',
+              borderRadius: 10,
+              padding: '8px 18px',
+              fontSize: '1.08rem',
+              fontWeight: 500,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+              pointerEvents: 'none',
+            }}
+          >
+            <CompareArrows style={{ fontSize: 22, marginRight: 8 }} />
+            {showCompare ? 'Click to deactivate compare view' : 'Click to activate compare view'}
+          </div>
+          <div
+            style={{
+              position: 'absolute',
+              left: '0%',
+              top: '85%',
+              zIndex: 21000,
+              display: 'flex',
+              alignItems: 'center',
+              background: 'var(--bg-secondary, #23272f)',
+              color: 'var(--color-details, #90caf9)',
+              borderRadius: 10,
+              padding: '8px 18px',
+              fontSize: '1.08rem',
+              fontWeight: 500,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+              pointerEvents: 'none',
+
+            }}
+          >
+            {isPlaying ? <Pause style={{ fontSize: 22, marginRight: 8 }} /> : <PlayArrow style={{ fontSize: 22, marginRight: 8 }} />}
+            {isPlaying ? 'Pause autoplay' : 'Play autoplay'}
+          </div>
+        </>
+      )}
       <svg
         ref={svgRef}
         role="img"
         aria-label="Violin and box plot of mortality by age and country"
         style={{ width: "100%", height: "100%" }}
       />
+      <div style={{
+        position: 'absolute',
+        right: 12,
+        bottom: -30,
+        fontSize: '0.95rem',
+        color: isDark ? 'var(--text-secondary)' : 'var(--text-secondary)',
+        opacity: 0.5,
+
+        padding: '2px 10px',
+        borderRadius: '12px',
+        fontFamily: 'var(--font-serif)',
+        zIndex: 2
+      }}>
+        Data source: <strong>UN World Population Prospect</strong>
+      </div>
       <div className="chapter2-controls">
         <button
           className="chapter2-icon-button"
@@ -441,6 +504,7 @@ export function ViolinBoxPlot({ isDark = true }) {
           aria-pressed={showCompare}
           aria-label={showCompare ? "Hide compare" : "Show compare"}
           title={showCompare ? "Hide compare" : "Show compare"}
+          style={{ zIndex: 21000 }}
         >
           <CompareArrows fontSize="small" />
         </button>
@@ -448,6 +512,7 @@ export function ViolinBoxPlot({ isDark = true }) {
           className="chapter2-icon-button"
           onClick={() => setIsPlaying((p) => !p)}
           aria-label={isPlaying ? "Pause autoplay" : "Play autoplay"}
+          style={{ zIndex: 21000 }}
         >
           {isPlaying ? <Pause fontSize="small" /> : <PlayArrow fontSize="small" />}
         </button>
