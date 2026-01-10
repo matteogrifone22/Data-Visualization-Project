@@ -744,7 +744,7 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                         <div style={{
                             position: 'absolute',
                             right: 12,
-                            bottom: 10,
+                            top: 400,
                             fontSize: '0.95rem',
                             color: isDark ? 'var(--text-secondary)' : 'var(--text-secondary)',
                             opacity: 0.5,
