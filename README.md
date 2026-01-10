@@ -1,16 +1,62 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Data Visualization Project
 
-Currently, two official plugins are available:
+## Reproducibility Documentation
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. Preprocessing Scripts
 
-## React Compiler
+All preprocessing scripts are located in the `script/` folder. These scripts generate and process the datasets used in the visualizations:
+- `preprocessing.py`, `SmallMultipleDatasetProcessing.py`, `GeoChartPreprocessing.py`, `damage_sites_to_clusters.py`, etc.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+**To run a preprocessing script:**
+```sh
+python script/preprocessing.py
+python script/SmallMultipleDatasetProcessing.py
+python script/GeoChartPreprocessing.py
+python script/damage_sites_to_clusters.py --input <input.geojson> --output <output.geojson> --eps 500
+```
+Make sure you have Python 3 and required packages (e.g., pandas, geopandas) installed.
 
-## Expanding the ESLint configuration
+### 2. Serve/Build the Website Locally
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This project uses [Vite](https://vitejs.dev/) and [React](https://react.dev/):
+
+- **Install dependencies:**
+	```sh
+	npm install
+	```
+- **Start development server:**
+	```sh
+	npm run dev
+	```
+- **Build for production:**
+	```sh
+	npm run build
+	```
+- **Preview production build:**
+	```sh
+	npm run preview
+	```
+
+The production build outputs to the `docs/` folder for GitHub Pages hosting.
+
+## Folder Structure & Data Locations
+
+- `script/` — Python scripts for preprocessing and data transformation.
+- `src/`
+	- `components/` — React components for visualizations (GeoMap, DonutChart, etc.)
+	- `Dataset/` — Raw and processed CSV datasets for visualizations.
+		- `processed/` — Preprocessed CSV files ready for use in the app.
+    - `DatasetIcons/` — Icons related to datasets for the dataset page.
+	- `GazaMap/` — GeoJSON and JSON files for map-based visualizations.
+    - `ThemeContext.jsx` — Context for managing theme (dark mode, monochromacy).
+    - `App.jsx` — Main React application component.
+    - `style.css` — Global CSS styles.
+    - `Datasets.jsx` — Dataset information page.
+    - `Footer.jsx` — Footer component.
+
+
+- `docs/` — Static site output for deployment (after build).
+- `public/` — Public assets (icons, etc.).
+
+
