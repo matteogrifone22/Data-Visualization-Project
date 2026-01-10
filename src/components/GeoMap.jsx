@@ -166,6 +166,15 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                     const coords = projection([d.longitude, d.latitude]);
                     return coords && !isNaN(coords[0]) && !isNaN(coords[1]);
                 });
+
+                // Animation mode: highlight new dots with a pulse effect
+                let highlightMonth = null;
+                let highlightYear = null;
+                if (viewMode === 'daily' && selectedDate) {
+                    highlightMonth = selectedDate.getMonth();
+                    highlightYear = selectedDate.getFullYear();
+                }
+
                 const points = mapGroup.append('g')
                     .attr('class', 'incidents')
                     .selectAll('circle')
@@ -179,10 +188,62 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                         const coords = projection([d.longitude, d.latitude]);
                         return coords[1];
                     })
-                    .attr('r', 4)
+                    .attr('r', d => {
+                        if (
+                            highlightMonth !== null &&
+                            d.date instanceof Date &&
+                            d.date.getMonth() === highlightMonth &&
+                            d.date.getFullYear() === highlightYear
+                        ) {
+                            return 7;
+                        }
+                        return 4;
+                    })
                     .attr('fill', d => colorScale(d.type))
-                    .attr('fill-opacity', 0.6)
+                    .attr('fill-opacity', d => {
+                        if (
+                            highlightMonth !== null &&
+                            d.date instanceof Date &&
+                            d.date.getMonth() === highlightMonth &&
+                            d.date.getFullYear() === highlightYear
+                        ) {
+                            return 1;
+                        }
+                        return 0.35;
+                    })
                     .style('cursor', 'pointer');
+
+                // Pulse effect for new dots (both cumulative and non-cumulative)
+                if (highlightMonth !== null) {
+                    points.filter(d =>
+                        d.date instanceof Date &&
+                        d.date.getMonth() === highlightMonth &&
+                        d.date.getFullYear() === highlightYear
+                    )
+                    .each(function() {
+                        d3.select(this)
+                            .transition()
+                            .duration(600)
+                            .attr('r', 13)
+                            .attr('fill-opacity', 0.25)
+                            .transition()
+                            .duration(600)
+                            .attr('r', 7)
+                            .attr('fill-opacity', 1)
+                            .on('end', function repeat() {
+                                d3.select(this)
+                                    .transition()
+                                    .duration(600)
+                                    .attr('r', 13)
+                                    .attr('fill-opacity', 0.25)
+                                    .transition()
+                                    .duration(600)
+                                    .attr('r', 7)
+                                    .attr('fill-opacity', 1)
+                                    .on('end', repeat);
+                            });
+                    });
+                }
 
                 // Attach tooltip handlers only after points are rendered
                 points.on('mouseover', function (event, d) {
@@ -352,38 +413,91 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
         };
     }, [isDark, isMonochromacy, selectedType, zoomLevel, panOffset, viewMode, selectedDate, damageSitesData, datasetMode, dateRange, selectedDate]);
 
-    // Animation effect
+    // Stop animation and clear selectedDate when dataset changes
+    useEffect(() => {
+        if (animationInterval.current) {
+            clearInterval(animationInterval.current);
+            animationInterval.current = null;
+        }
+        setIsPlaying(false);
+        setSelectedDate(null); // Hide the month after animation or dataset change
+    }, [datasetMode]);
+
+    // Animation effect (no loop)
     useEffect(() => {
         if (isPlaying && viewMode === 'daily' && dateRange.min && dateRange.max) {
             animationInterval.current = setInterval(() => {
                 setSelectedDate(prevDate => {
                     if (!prevDate) return dateRange.min;
-
-                    // Move to next month
                     const nextMonth = new Date(prevDate);
                     nextMonth.setMonth(nextMonth.getMonth() + 1);
-
-                    // If we've reached the end, loop back to start
+                    // If we've reached the end, stop animation (no loop)
                     if (nextMonth > dateRange.max) {
-                        return new Date(dateRange.min);
+                        setIsPlaying(false);
+                        return prevDate;
                     }
                     return nextMonth;
                 });
-            }, 1000); // Change month every second
+            }, 1000);
         } else {
             if (animationInterval.current) {
                 clearInterval(animationInterval.current);
                 animationInterval.current = null;
             }
         }
-
         return () => {
-            
             if (animationInterval.current) {
                 clearInterval(animationInterval.current);
             }
         };
     }, [isPlaying, viewMode, dateRange, isCumulative]);
+
+    // Restart play animation and pulse when viewMode or isCumulative changes
+    useEffect(() => {
+        if (viewMode === 'daily' && dateRange.min) {
+            setSelectedDate(dateRange.min);
+            setIsPlaying(false);
+            setTimeout(() => setIsPlaying(true), 0);
+        }
+    }, [viewMode, isCumulative]);
+
+    // Pulse animation for new dots (more opaque)
+    useEffect(() => {
+        setTimeout(() => {
+            if (!svgRef.current) return;
+            const svg = d3.select(svgRef.current);
+            const points = svg.selectAll('g.incidents circle');
+            if (!selectedDate || viewMode !== 'daily') return;
+            const highlightMonth = selectedDate.getMonth();
+            const highlightYear = selectedDate.getFullYear();
+            points.filter(d =>
+                d.date instanceof Date &&
+                d.date.getMonth() === highlightMonth &&
+                d.date.getFullYear() === highlightYear
+            )
+            .interrupt()
+            .transition()
+            .duration(600)
+            .attr('r', 13)
+            .attr('fill-opacity', 0.25)
+            .transition()
+            .duration(600)
+            .attr('r', 7)
+            .attr('fill-opacity', 1)
+            .on('end', function repeat() {
+                d3.select(this)
+                    .transition()
+                    .duration(600)
+                    .attr('r', 13)
+                    .attr('fill-opacity', 0.25)
+                    .transition()
+                    .duration(600)
+                    .attr('r', 7)
+                    .attr('fill-opacity', 1)
+                    .on('end', repeat);
+            });
+        }, 0);
+    }, [viewMode, selectedDate, isCumulative]);
 
     const handleZoomIn = () => setZoomLevel(prev => Math.min(prev * 1.5, 20));
     const handleZoomOut = () => setZoomLevel(prev => Math.max(prev / 1.5, 0.5));
@@ -562,7 +676,7 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                 {datasetMode === null && (
                     <div style={{
                         position: 'absolute',
-                        top: 190,
+                        top: -220,
                         left: 0,
                         width: '100%',
                         height: '100%',
@@ -570,7 +684,7 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         fontSize: '1.2rem',
-                        textcolor: 'var(--color-details)',
+                        color: 'var(--color-details)',
                         minHeight: '400px',
                         fontWeight: 600,
                         zIndex: 10,
