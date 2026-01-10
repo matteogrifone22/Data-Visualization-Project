@@ -692,7 +692,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false, gui
           }}
         >
           <NearMeIcon style={{ fontSize: 22, marginRight: 8, transform: 'scalex(-1)' }} />
-          OnHover tooltip
+          Hover tooltip
         </div>
       )}
       <svg

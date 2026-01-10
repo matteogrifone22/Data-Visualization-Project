@@ -531,7 +531,7 @@ export function SmallMultipleChart({ isDark = true, guideActive = false }) {
                         }}
                     >
                         <NearMeIcon style={{ fontSize: 22, marginRight: 8, transform: 'scaleX(-1)' }} />
-                        OnHover tooltip
+                        Hover tooltip
                     </div>
                     <div
                         style={{

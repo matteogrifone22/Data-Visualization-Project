@@ -407,7 +407,7 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                             minWidth: 180
                         }}>
                             <NearMeIcon style={{ fontSize: 22, marginRight: 8, transform: 'scaleX(-1)' }} />
-                            OnHover tooltip
+                            Hover tooltip
                         </div>
                     )}
                     {/* Zoom controls banner (always visible if map is shown) */}
@@ -512,10 +512,14 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                     </div>
                 )}
             </div>
-            {/* Map area on the right - only show if datasetMode is selected */}
+            {/* Map area on the right - always show the map, overlay a prompt if datasetMode is null */}
             <div style={{ width: '80%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
-                {datasetMode === null ? (
+                {/* Overlay prompt if datasetMode is null */}
+                {datasetMode === null && (
                     <div style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
                         width: '100%',
                         height: '100%',
                         display: 'flex',
@@ -524,12 +528,17 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                         fontSize: '1.2rem',
                         color: 'var(--text-secondary)',
                         minHeight: '400px',
-                        fontWeight: 600
+                        fontWeight: 600,
+                        zIndex: 10,
+                        pointerEvents: 'none',
+                        borderRadius: '16px',
+                        textShadow: '0 1px 3px #000, 0 0px 1px #000'
                     }}>
-                        Please select a dataset to display the map.
+                        Please select a dataset to display the map data.
                     </div>
-                ) : (
-                    <>
+                )}
+                {/* Map and controls always rendered */}
+                <div style={{ position: 'relative', zIndex: 1 }}>
                         <div style={{
                             position: 'absolute',
                             right: 12,
@@ -663,8 +672,7 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                                 </div>
                             )}
                         </div>
-                    </>
-                )}
+                </div>
             </div>
         </div>
     );
