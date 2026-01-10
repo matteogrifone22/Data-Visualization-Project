@@ -172,9 +172,9 @@ export default function Datasets() {
           minWidth: '700px',
           borderRadius: '50px',
           // Semi-transparent background for glass effect
-          backgroundColor: 'color-mix(in srgb, var(--bg-secondary) 88%, transparent)',
-          backdropFilter: 'blur(4px)',
-          WebkitBackdropFilter: 'blur(4px)',
+          backgroundColor: 'color-mix(in srgb, var(--bg-secondary) 70%, transparent)',
+          backdropFilter: 'blur(16px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(16px) saturate(180%)',
           // Remove colored border
           border: 'none',
           zIndex: 1300,
