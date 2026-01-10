@@ -8,6 +8,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false, gui
   const wrapperRef = useRef(null);
   const animationPlayedRef = useRef(false);
   const [data, setData] = useState(null);
+  const [tooltip, setTooltip] = useState({ visible: false, x: 0, y: 0, html: "" });
 
   // Load dataset
   useEffect(() => {
@@ -57,7 +58,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false, gui
     const height = containerHeight;
 
     d3.select(svgRef.current).selectAll("*").remove();
-    d3.select('body').selectAll('.chart-tooltip').remove();
+    // Remove any old tooltips
 
     const svg = d3
       .select(svgRef.current)
@@ -65,19 +66,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false, gui
       .attr("height", height)
       .attr("viewBox", [0, 0, width, height]);
 
-    // Create tooltip (universal style, appended to body)
-    const tooltip = d3.select('body')
-      .selectAll('.chart-tooltip')
-      .data([null])
-      .join('div')
-      .attr('class', 'chart-tooltip')
-      .attr('role', 'tooltip')
-      .style('position', 'absolute')
-      .style('pointer-events', 'none')
-      .style('z-index', 10)
-      .style('opacity', 0)
-      .style('visibility', 'hidden')
-      .style('transition', 'opacity 120ms ease, visibility 120ms ease');
+    // Tooltip will be handled by React state
 
     // Build nodes and links for Sankey
     // Structure: Country (left) -> Event Type (middle) -> Sub-Event Type (right)
@@ -339,10 +328,11 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false, gui
         d3.select(this).attr("opacity", 0.7);
         const sourceName = d.source.name || d.source.id;
         const targetName = d.target.name || d.target.id;
-        tooltip
-          .style('opacity', 1)
-          .style('visibility', 'visible')
-          .html(`
+        setTooltip({
+          visible: true,
+          x: event.clientX + 10,
+          y: event.clientY - 10,
+          html: `
             <div style="font-weight: 600; margin-bottom: 6px; color: ${countryColors[d.country === 'Gaza' ? 'Palestine' : d.country]};">
               ${d.country}
             </div>
@@ -352,16 +342,15 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false, gui
             <div style="font-size: 14px; font-weight: 600;">
               ${d.value.toLocaleString()} events
             </div>
-          `);
+          `
+        });
       })
       .on("mousemove", function (event) {
-        tooltip
-          .style('top', (event.pageY - 10) + 'px')
-          .style('left', (event.pageX + 10) + 'px');
+        setTooltip(t => ({ ...t, x: event.clientX + 10, y: event.clientY - 10 }));
       })
       .on("mouseleave", function () {
         d3.select(this).attr("opacity", 0.4);
-        tooltip.style('opacity', 0).style('visibility', 'hidden');
+        setTooltip(t => ({ ...t, visible: false }));
       });
 
     // Draw nodes
@@ -440,51 +429,51 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false, gui
           .style('top', (event.pageY - 10) + 'px')
           .style('left', (event.pageX + 10) + 'px');
       })
+      .on("mouseenter", function (event, d) {
+        d3.select(this).attr("stroke-width", 2);
+        // Highlight connected links
+        const connectedLinks = graph.links.filter(l => l.source === d || l.target === d);
+        svg.selectAll(".sankey-link")
+          .attr("opacity", link => connectedLinks.includes(link) ? 0.8 : 0.1);
+        // Calculate country contributions for non-country nodes
+        let tooltipContent = `<div style=\"font-weight: 600; margin-bottom: 6px; font-size: 13px;\">${d.name || d.id}</div>`;
+        tooltipContent += `<div style=\"font-size: 14px; font-weight: 600; margin-bottom: 8px;\">${d.value.toLocaleString()} total events</div>`;
+        if (d.id !== "Israel" && d.id !== "Gaza") {
+          const incomingLinks = graph.links.filter(l => l.target === d);
+          let israelCount = 0;
+          let gazaCount = 0;
+          incomingLinks.forEach(link => {
+            if (link.country === "Israel") israelCount += link.value;
+            if (link.country === "Gaza") gazaCount += link.value;
+          });
+          if (israelCount > 0 || gazaCount > 0) {
+            tooltipContent += `<div class=\"tooltip-country-breakdown\">`;
+            if (israelCount > 0) {
+              const pct = ((israelCount / d.value) * 100).toFixed(1);
+              tooltipContent += `<div style=\"margin-bottom: 3px;\"><span style=\"color: ${countryColors.Israel};\">●</span> Israel: ${israelCount.toLocaleString()} (${pct}%)</div>`;
+            }
+            if (gazaCount > 0) {
+              const pct = ((gazaCount / d.value) * 100).toFixed(1);
+              tooltipContent += `<div><span style=\"color: ${countryColors.Palestine};\">●</span> Gaza: ${gazaCount.toLocaleString()} (${pct}%)</div>`;
+            }
+            tooltipContent += `</div>`;
+          }
+        }
+        setTooltip({
+          visible: true,
+          x: event.clientX + 10,
+          y: event.clientY - 10,
+          html: tooltipContent
+        });
+      })
+      .on("mousemove", function (event) {
+        setTooltip(t => ({ ...t, x: event.clientX + 10, y: event.clientY - 10 }));
+      })
       .on("mouseleave", function () {
         d3.select(this).attr("stroke-width", 0.5);
         svg.selectAll(".sankey-link").attr("opacity", 0.4);
-        tooltip.style('opacity', 0).style('visibility', 'hidden');
+        setTooltip(t => ({ ...t, visible: false }));
       });
-
-    // Add labels without overlap using collision detection
-    const labelData = [];
-    
-    // First pass: collect all labels with their positions
-    graph.nodes.forEach(d => {
-      const name = d.name || d.id;
-      const nodeHeight = d.y1 - d.y0;
-      
-      // Determine position: countries (left col) → right side, event types (center col) → left side, sub-events (right col) → left side
-      const isCountry = d.id === "Israel" || d.id === "Gaza";
-      const isSubEvent = d.id.includes("|");
-      const isEventType = !isCountry && !isSubEvent;
-      
-      let labelX, textAnchor;
-      if (isCountry) {
-        // Countries: label on the right of the rectangle
-        labelX = d.x1 + 6;
-        textAnchor = "start";
-      } else {
-        // Event types and sub-events: label on the left of the rectangle
-        labelX = d.x0 - 6;
-        textAnchor = "end";
-      }
-      
-      const fontSize = nodeHeight < 15 ? 9 : 11;
-      const maxLength = 35;
-      const displayName = name.length > maxLength ? name.substring(0, maxLength - 3) + "..." : name;
-      
-      labelData.push({
-        node: d,
-        name: displayName,
-        x: labelX,
-        y: (d.y1 + d.y0) / 2,
-        textAnchor: textAnchor,
-        fontSize: fontSize,
-        originalY: (d.y1 + d.y0) / 2
-      });
-    });
-    
     // Second pass: adjust positions to avoid overlaps
     // Group labels by their text-anchor direction (right-aligned vs left-aligned)
     const rightAnchoredLabels = labelData.filter(d => d.textAnchor === "end").sort((a, b) => a.originalY - b.originalY);
@@ -701,6 +690,32 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false, gui
         aria-label="Sankey diagram showing flow of events by type"
         style={{ width: "100%", height: "auto" }}
       />
+      {/* Tooltip rendered inside wrapper for GitHub Pages compatibility */}
+      {tooltip.visible && (
+        <div
+          className="chart-tooltip"
+          style={{
+            position: 'fixed',
+            left: tooltip.x,
+            top: tooltip.y,
+            pointerEvents: 'none',
+            zIndex: 99999,
+            background: 'rgba(32,32,32,0.97)',
+            color: '#fff',
+            borderRadius: 8,
+            padding: '10px 16px',
+            fontSize: '1rem',
+            fontWeight: 500,
+            boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+            minWidth: 120,
+            maxWidth: 320,
+            opacity: 1,
+            visibility: 'visible',
+            transition: 'opacity 120ms ease, visibility 120ms ease',
+          }}
+          dangerouslySetInnerHTML={{ __html: tooltip.html }}
+        />
+      )}
       <div style={{
                 position: 'absolute',
                 right: 12,
