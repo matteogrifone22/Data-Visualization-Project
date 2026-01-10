@@ -157,38 +157,38 @@ export function RidgeChart({ isDark = true, guideActive = false }) {
                 .style('visibility', 'hidden')
                 .style('transition', 'opacity 120ms ease, visibility 120ms ease');
 
-            // Draw ridge for each country using fixed amplitude normalized by global max
+            // Compute country order for plotting
+            const drawOrder = ['Gaza', 'Israel'];
+            const uniqueCountries = Array.from(new Set(countries));
+            const orderedCountries = [
+                ...drawOrder.filter((c) => uniqueCountries.includes(c)),
+                ...uniqueCountries.filter((c) => !drawOrder.includes(c))
+            ];
+
+            // Y axis (use the same scale for both axis and plot)
+            const yAxis = d3
+                .scaleLinear()
+                .domain([0, globalMaxWeekly])
+                .nice()
+                .range([
+                    height - margin.bottom - innerHeight * 0.2, // baseline (bottom of ridges)
+                    height - margin.bottom - innerHeight * 0.2 - Math.min(400, innerHeight * 0.65) // top of ridges
+                ]);
+
+            // Draw ridge for each country using the yAxis scale for vertical positions
             if (filteredData.length > 0 && weeks.length > 0) {
-                const maxRidgeHeightPx = Math.min(500, innerHeight * 0.8);
-                const yRidge = d3
-                    .scaleLinear()
-                    .domain([0, globalMaxWeekly])
-                    .range([0, maxRidgeHeightPx]);
-
-                const baselineY = height - margin.bottom - innerHeight * 0.2;
-
-                // Ensure Israel is drawn after Gaza (in front)
-                // Draw order: Gaza, then Israel
-                const drawOrder = ['Gaza', 'Israel'];
-                const uniqueCountries = Array.from(new Set(countries));
-                const orderedCountries = [
-                    ...drawOrder.filter((c) => uniqueCountries.includes(c)),
-                    ...uniqueCountries.filter((c) => !drawOrder.includes(c))
-                ];
-
+                const baselineY = yAxis(0);
                 for (const country of orderedCountries) {
                     const weekData = aggregatedByCountry.get(country) || new Map();
                     const series = weeks.map((week) => ({
                         week,
                         value: weekData.get(week) || 0,
                     }));
-                    
                     const area = d3
                         .area()
                         .x((d) => x(d.week))
                         .y0(() => baselineY)
-                        .y1((d) => baselineY - yRidge(d.value));
-
+                        .y1((d) => yAxis(d.value));
                     const pathElement = svg
                         .append('path')
                         .datum(series)
@@ -297,6 +297,7 @@ export function RidgeChart({ isDark = true, guideActive = false }) {
                     .style('top', `${event.pageY - 20}px`);
             };
 
+            // Hide tooltip only if user leaves the chart area
             overlay
                 .on('mouseenter', () => {
                     focusLayer.style('display', null);
@@ -305,29 +306,9 @@ export function RidgeChart({ isDark = true, guideActive = false }) {
                     updateTooltip(event);
                 })
                 .on('mouseleave', () => {
-                    // Do not hide tooltip on mouseleave, only hide focus line
                     focusLayer.style('display', 'none');
-                });
-
-            // Hide tooltip only if user clicks outside the RidgePlot area
-            function handleDocumentClick(e) {
-                const svgRect = svgRef.current.getBoundingClientRect();
-                if (
-                    e.pageX < svgRect.left ||
-                    e.pageX > svgRect.right ||
-                    e.pageY < svgRect.top ||
-                    e.pageY > svgRect.bottom
-                ) {
                     tooltip.style('opacity', 0).style('visibility', 'hidden');
-                }
-            }
-            document.addEventListener('mousedown', handleDocumentClick);
-
-            // Clean up event listener on rerender
-            if (window.__ridgeTooltipCleanup) window.__ridgeTooltipCleanup();
-            window.__ridgeTooltipCleanup = () => {
-                document.removeEventListener('mousedown', handleDocumentClick);
-            };
+                });
 
             // Add baseline
             svg
@@ -410,6 +391,15 @@ export function RidgeChart({ isDark = true, guideActive = false }) {
                     .style('opacity', 0.6)
                     .text('Select at least one event type');
             }
+
+            // Y axis (fix: align y position with ridge plot area)
+            svg
+                .append('g')
+                .attr('transform', `translate(${margin.left},0)`)
+                .call(d3.axisLeft(yAxis).ticks(4).tickSize(-innerWidth).tickSizeOuter(0))
+                .call((g) => g.selectAll('text').style('fill', 'var(--text-primary)'))
+                .call((g) => g.selectAll('.tick line').style('stroke', 'var(--text-primary)').style('stroke-opacity', 0.15))
+                .call((g) => g.select('.domain').style('stroke', 'none'));
 
             // Remove centered title; label added top-left
         };
