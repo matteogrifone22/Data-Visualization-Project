@@ -305,9 +305,29 @@ export function RidgeChart({ isDark = true, guideActive = false }) {
                     updateTooltip(event);
                 })
                 .on('mouseleave', () => {
+                    // Do not hide tooltip on mouseleave, only hide focus line
                     focusLayer.style('display', 'none');
-                    tooltip.style('opacity', 0).style('visibility', 'hidden');
                 });
+
+            // Hide tooltip only if user clicks outside the RidgePlot area
+            function handleDocumentClick(e) {
+                const svgRect = svgRef.current.getBoundingClientRect();
+                if (
+                    e.pageX < svgRect.left ||
+                    e.pageX > svgRect.right ||
+                    e.pageY < svgRect.top ||
+                    e.pageY > svgRect.bottom
+                ) {
+                    tooltip.style('opacity', 0).style('visibility', 'hidden');
+                }
+            }
+            document.addEventListener('mousedown', handleDocumentClick);
+
+            // Clean up event listener on rerender
+            if (window.__ridgeTooltipCleanup) window.__ridgeTooltipCleanup();
+            window.__ridgeTooltipCleanup = () => {
+                document.removeEventListener('mousedown', handleDocumentClick);
+            };
 
             // Add baseline
             svg

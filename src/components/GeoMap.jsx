@@ -108,15 +108,20 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                 .domain(['Food System', 'Health Care'])
                 .range([themeColor, themeColor]);
             // Reference or create the persistent tooltip div ONCE
-            let tooltip = d3.select('body').select('.chart-tooltip');
+            let tooltip = d3.select('body').select('.geomap-tooltip');
             if (tooltip.empty()) {
                 tooltip = d3.select('body').append('div')
-                    .attr('class', 'chart-tooltip')
+                    .attr('class', 'geomap-tooltip')
                     .style('position', 'absolute')
-                    .style('z-index', '9000')
-                    .style('max-width', '400px')
-                    .style('word-wrap', 'break-word')
-                    .style('white-space', 'normal');
+                    .style('z-index', '100')
+                    .style('max-width', null) // Remove inline max-width to allow CSS to control it
+                    .style('word-wrap', null)
+                    .style('white-space', null);
+            } else {
+                // Remove any inline max-width/word-wrap/white-space set previously
+                tooltip.style('max-width', null)
+                       .style('word-wrap', null)
+                       .style('white-space', null);
             }
             // Do not reset/hide tooltip at the start of each render; only hide on mouseout
             // Parse incidents with date

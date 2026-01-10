@@ -493,6 +493,25 @@ strong {
   font-family: var(--default-font-family);
 }
 
+/* Sankey Tooltip Styles */
+.sankey-tooltip {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-size: 13px;
+  font-family: var(--default-font-family);
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  min-width: 120px;
+  max-width: 320px;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 120ms ease, visibility 120ms ease;
+}
+
 /* Territory Map */
 .territory-map-svg {
   width: 100%;
@@ -549,6 +568,22 @@ strong {
 }
 
 /* Small Multiple Tooltip Styles */
+.smallmultiple-tooltip {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 10px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  font-family: var(--default-font-family);
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 120ms ease, visibility 120ms ease;
+}
+
 .tooltip-title {
   font-weight: 700;
   font-size: 13px;
@@ -992,4 +1027,64 @@ strong {
   margin-top: 6px;
   padding-top: 6px;
   border-top: 1px solid var(--text-primary);
+}
+
+/* DonutChart Tooltip Styles */
+.donut-tooltip {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: var(--default-font-family);
+  position: absolute;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  transition: opacity 120ms ease, visibility 120ms ease;
+}
+
+/* GeoMap Tooltip Styles */
+.geomap-tooltip {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 10px 12px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-size: 13px;
+  font-family: var(--default-font-family);
+  position: absolute;
+  pointer-events: none;
+  z-index: 100;
+  min-width: 120px;
+  max-width: 300px; /* fixed max width for wrapping */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 120ms ease, visibility 120ms ease;
+  white-space: pre-line;
+  word-break: break-word;
+  line-height: 1.25;
+}
+
+/* LineChart Tooltip Styles */
+.linechart-tooltip {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  padding: 7px 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+  font-size: 13px;
+  font-family: var(--default-font-family);
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+  min-width: 130px;
+  max-width: 300px;
+  word-break: break-word;
+  white-space: normal;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 120ms ease, visibility 120ms ease;
 }

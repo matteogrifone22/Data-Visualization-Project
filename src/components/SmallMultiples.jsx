@@ -91,12 +91,12 @@ export function SmallMultipleChart({ isDark = true, guideActive = false }) {
             const chartWidth = (width - margin.left - margin.right) / cols - 30;
             const chartHeight = (height - margin.top - margin.bottom) / rows - 30;
 
-            // Create tooltip
+            // Create tooltip (unique class for SmallMultiples)
             const tooltip = d3.select('body')
-                .selectAll('.chart-tooltip')
+                .selectAll('.smallmultiple-tooltip')
                 .data([null])
                 .join('div')
-                .attr('class', 'chart-tooltip')
+                .attr('class', 'smallmultiple-tooltip')
                 .attr('role', 'tooltip')
                 .style('position', 'absolute')
                 .style('pointer-events', 'none')
@@ -499,7 +499,7 @@ export function SmallMultipleChart({ isDark = true, guideActive = false }) {
         return () => {
             observer.disconnect();
             window.removeEventListener('resize', handleResize);
-            d3.select('body').selectAll('.chart-tooltip').remove();
+            d3.select('body').selectAll('.smallmultiple-tooltip').remove();
         };
     }, [dataLoaded, isDark, selectedChart]);
 

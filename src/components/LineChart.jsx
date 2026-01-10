@@ -73,17 +73,11 @@ export function LineChart({ isDark = true, guideActive = false }) {
 
             const tooltip = d3
                 .select('body')
-                .selectAll('.chart-tooltip')
+                .selectAll('.linechart-tooltip')
                 .data([null])
                 .join('div')
-                .attr('class', 'chart-tooltip')
-                .attr('role', 'tooltip')
-                .style('position', 'absolute')
-                .style('pointer-events', 'none')
-                .style('z-index', 10)
-                .style('opacity', 0)
-                .style('visibility', 'hidden')
-                .style('transition', 'opacity 120ms ease, visibility 120ms ease');
+                .attr('class', 'linechart-tooltip')
+                .attr('role', 'tooltip');
 
             const containerWidth = wrapperRef.current.getBoundingClientRect().width || 800;
             const width = Math.max(Math.min(containerWidth, 1100), 360);
@@ -509,6 +503,19 @@ export function LineChart({ isDark = true, guideActive = false }) {
                 </>
             )}
             <svg ref={svgRef} style={{ width: '100%', height: '100%', display: 'block', zIndex: 1 }} />
+            {/* Tooltip rendered inside chart container */}
+            {typeof tooltipState !== 'undefined' && tooltipState.visible && (
+                <div
+                    className="linechart-tooltip"
+                    role="tooltip"
+                    style={{
+                        position: 'absolute',
+                        left: tooltipState.x,
+                        top: tooltipState.y
+                    }}
+                    dangerouslySetInnerHTML={{ __html: tooltipState.html }}
+                />
+            )}
             <div style={{
                 position: 'absolute',
                 right: 12,

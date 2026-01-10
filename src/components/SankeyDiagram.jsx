@@ -717,25 +717,10 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false, gui
       {/* Tooltip rendered inside wrapper for GitHub Pages compatibility */}
       {tooltip.visible && (
         <div
-          className="chart-tooltip"
+          className="sankey-tooltip"
           style={{
-            position: 'fixed',
             left: tooltip.x,
-            top: tooltip.y,
-            pointerEvents: 'none',
-            zIndex: 99999,
-            background: 'rgba(32,32,32,0.97)',
-            color: '#fff',
-            borderRadius: 8,
-            padding: '10px 16px',
-            fontSize: '1rem',
-            fontWeight: 500,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
-            minWidth: 120,
-            maxWidth: 320,
-            opacity: 1,
-            visibility: 'visible',
-            transition: 'opacity 120ms ease, visibility 120ms ease',
+            top: tooltip.y
           }}
           dangerouslySetInnerHTML={{ __html: tooltip.html }}
         />
