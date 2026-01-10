@@ -19,7 +19,7 @@ export function RidgeChart({ isDark = true, guideActive = false }) {
         // Fetch data - CSV with columns: WEEK, country, event_type, events
         const fetchData = async () => {
             try {
-                const url = new URL('../Dataset/events_per_week.csv', import.meta.url).href;
+                const url = new URL('../Dataset/processed/events_per_week.csv', import.meta.url).href;
                 const response = await fetch(url);
                 const text = await response.text();
 
@@ -492,7 +492,7 @@ export function RidgeChart({ isDark = true, guideActive = false }) {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     {availableEventTypes.map((eventType, index) => (
                         <label
-                            key={eventType}
+                            key={eventType + '-' + index}
                             style={{
                                 display: 'flex',
                                 alignItems: 'center',

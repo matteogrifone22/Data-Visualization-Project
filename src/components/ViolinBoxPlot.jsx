@@ -86,7 +86,7 @@ export function ViolinBoxPlot({ isDark = true, guideActive = false }) {
   // Load dataset once
   useEffect(() => {
     const load = async () => {
-      const url = new URL("../Dataset/mortality_rate_grouped.csv", import.meta.url).href;
+      const url = new URL("../Dataset/processed/mortality_rate_grouped.csv", import.meta.url).href;
       const rows = await d3.csv(url);
       if (!rows || rows.length === 0) return;
 

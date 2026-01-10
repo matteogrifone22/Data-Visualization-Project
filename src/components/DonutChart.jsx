@@ -11,7 +11,7 @@ function DonutChart() {
     useEffect(() => {
         let isMounted = true;
         const load = async () => {
-            const url = new URL('../Dataset/fatalities_per_month.csv', import.meta.url).href;
+            const url = new URL('../Dataset/processed/fatalities_per_month.csv', import.meta.url).href;
             const rows = await d3.csv(url, (d) => {
                 const fatalities = Number(d.fatalities);
                 const country = d.country;

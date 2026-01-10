@@ -13,6 +13,7 @@ const damageSitesUrl = new URL('../GazaMap/Damage_Sites_clusters_500m.geojson', 
 
 // Add guideActive prop for overlay control
 const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
+    
     const svgRef = useRef();
     const wrapperRef = useRef();
     const mapContainerRef = useRef();
@@ -106,17 +107,18 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
             const colorScale = d3.scaleOrdinal()
                 .domain(['Food System', 'Health Care'])
                 .range([themeColor, themeColor]);
-            // Reference the persistent tooltip div
-            const tooltip = d3.select('body').selectAll('.chart-tooltip').data([null]).join('div')
-                .attr('class', 'chart-tooltip')
-                .style('position', 'absolute')
-                .style('visibility', 'hidden')
-                .style('opacity', '0')
-                .style('pointer-events', 'none')
-                .style('z-index', '9000')
-                .style('max-width', '400px')
-                .style('word-wrap', 'break-word')
-                .style('white-space', 'normal');
+            // Reference or create the persistent tooltip div ONCE
+            let tooltip = d3.select('body').select('.chart-tooltip');
+            if (tooltip.empty()) {
+                tooltip = d3.select('body').append('div')
+                    .attr('class', 'chart-tooltip')
+                    .style('position', 'absolute')
+                    .style('z-index', '9000')
+                    .style('max-width', '400px')
+                    .style('word-wrap', 'break-word')
+                    .style('white-space', 'normal');
+            }
+            // Do not reset/hide tooltip at the start of each render; only hide on mouseout
             // Parse incidents with date
             const allIncidents = d3.csvParse(incidentsData, d => ({
                 ...d,
@@ -151,20 +153,26 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                     incidents = incidents.filter(d => d.date >= monthStart && d.date <= monthEnd);
                 }
             }
+
             // Draw incident points (only show when incidents mode is selected)
             if (datasetMode === 'incidents') {
+                // Filter out points with invalid coordinates
+                const validIncidents = incidents.filter(d => {
+                    const coords = projection([d.longitude, d.latitude]);
+                    return coords && !isNaN(coords[0]) && !isNaN(coords[1]);
+                });
                 const points = mapGroup.append('g')
                     .attr('class', 'incidents')
                     .selectAll('circle')
-                    .data(incidents)
+                    .data(validIncidents)
                     .join('circle')
                     .attr('cx', d => {
                         const coords = projection([d.longitude, d.latitude]);
-                        return coords ? coords[0] : null;
+                        return coords[0];
                     })
                     .attr('cy', d => {
                         const coords = projection([d.longitude, d.latitude]);
-                        return coords ? coords[1] : null;
+                        return coords[1];
                     })
                     .attr('r', 4)
                     .attr('fill', d => colorScale(d.type))
@@ -178,17 +186,26 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                         .duration(200)
                         .attr('r', 6)
                         .attr('fill-opacity', 1);
+                    // Format date as DD-MM-YYYY, do NOT mutate d.date
+                    let dateStr = '';
+                    if (d.date instanceof Date && !isNaN(d.date)) {
+                        dateStr = d.date.toLocaleDateString('en-GB');
+                    } else if (typeof d.date === 'string') {
+                        const parsed = new Date(d.date);
+                        dateStr = !isNaN(parsed) ? parsed.toLocaleDateString('en-GB') : d.date;
+                    } else {
+                        dateStr = '';
+                    }
                     tooltip
                         .style('visibility', 'visible')
                         .style('opacity', '1')
                         .style('pointer-events', 'auto')
                         .html(`
                                 <strong>${d.type}</strong><br/>
-                                <strong>Date:</strong> ${d.date}<br/>
-                                <strong>Location:</strong> ${d.latitude.toFixed(4)}, ${d.longitude.toFixed(4)}<br/>
+                                <strong>Date:</strong> ${dateStr}<br/>
                                 ${d.perpetrator ? `<strong>Perpetrator:</strong> ${d.perpetrator}<br/>` : ''}
                                 ${d.weapon ? `<strong>Weapon:</strong> ${d.weapon}<br/>` : ''}
-                                ${d.description ? `<div style="margin-top:6px;font-size:12px;">${d.description.slice(0, 150)}${d.description.length > 150 ? '...' : ''}</div>` : ''}
+                                ${d.description ? `<div style='margin-top:6px;font-size:12px;'><strong>Description:</strong> ${d.description}</div>` : ''}
                             `);
                 })
                     .on('mousemove', event => {
@@ -234,6 +251,7 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                         if (!center || !offset) return 3;
                         return Math.max(2, offset[0] - center[0]);
                     };
+
                     mapGroup.append('g')
                         .attr('class', 'damage-sites')
                         .selectAll('circle')
@@ -265,12 +283,31 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                             d3.select(this)
                                 .attr('fill-opacity', 0.85)
                                 .attr('stroke-width', 2);
-                            const radiusMeters = Math.sqrt(d.properties.count) * 10;
+                            const areaM2 = d.properties.area_m2;
+
+                            let areaDisplay;
+                            if (!areaM2) {
+                            areaDisplay = '?';
+                            } else {
+                            const areaKm2 = areaM2 / 1e6;
+                            if (areaKm2 >= 0.01) {
+                                areaDisplay = areaKm2.toFixed(2) + ' km²';
+                            } else {
+                                areaDisplay = areaM2.toFixed(0) + ' m²';
+                            }
+                            }
                             tooltip
                                 .style('visibility', 'visible')
                                 .style('opacity', '1')
                                 .style('pointer-events', 'auto')
-                                .html(`<strong>Damage area</strong><br/>Buildings: ${d.properties.count}<br/>Area radius: ${Math.round(radiusMeters)}m`);
+                                .html(`
+                                    <strong>Damage area</strong><br/>
+                                    <strong>Buildings:</strong> ${d.properties.count}<br/>
+                                    <strong>Area:</strong> ${areaDisplay}<br/>
+                                    <span style="font-size: 0.8em; opacity: 0.7;">
+                                        Area represents the cluster extent, not real damaged area.
+                                    </span>
+                                `);
                         })
                         .on('mousemove', event => {
                             tooltip
@@ -292,7 +329,7 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                         .attr('font-size', '12px')
                         .attr('font-weight', '600')
                         .attr('fill', 'var(--text-primary)')
-                        .text(`Total destroyed buildings: ${totalBuildings.toLocaleString()}`);
+                        .text(`Total dameged buildings: ${totalBuildings.toLocaleString()}`);
                 }
             }
         }
@@ -305,6 +342,7 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
             resizeObserver.observe(mapContainerRef.current);
         }
         return () => {
+            
             if (resizeObserver) resizeObserver.disconnect();
         };
     }, [isDark, isMonochromacy, selectedType, zoomLevel, panOffset, viewMode, selectedDate, damageSitesData, datasetMode, dateRange, selectedDate]);
@@ -335,6 +373,7 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
         }
 
         return () => {
+            
             if (animationInterval.current) {
                 clearInterval(animationInterval.current);
             }
@@ -518,7 +557,7 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                 {datasetMode === null && (
                     <div style={{
                         position: 'absolute',
-                        top: 0,
+                        top: 190,
                         left: 0,
                         width: '100%',
                         height: '100%',
@@ -526,13 +565,13 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         fontSize: '1.2rem',
-                        color: 'var(--text-secondary)',
+                        textcolor: 'var(--color-details)',
                         minHeight: '400px',
                         fontWeight: 600,
                         zIndex: 10,
                         pointerEvents: 'none',
                         borderRadius: '16px',
-                        textShadow: '0 1px 3px #000, 0 0px 1px #000'
+                       
                     }}>
                         Please select a dataset to display the map data.
                     </div>
@@ -542,7 +581,7 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                         <div style={{
                             position: 'absolute',
                             right: 12,
-                            bottom: 70,
+                            bottom: 10,
                             fontSize: '0.95rem',
                             color: isDark ? 'var(--text-secondary)' : 'var(--text-secondary)',
                             opacity: 0.5,

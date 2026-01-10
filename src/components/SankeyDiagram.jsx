@@ -13,7 +13,7 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false, gui
   useEffect(() => {
     animationPlayedRef.current = false;
     const load = async () => {
-      const url = new URL("../Dataset/events_sankey.csv", import.meta.url).href;
+      const url = new URL("../Dataset/processed/events_sankey.csv", import.meta.url).href;
       const rows = await d3.csv(url);
       if (!rows || rows.length === 0) return;
 

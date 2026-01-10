@@ -1,0 +1,1241 @@
+WEEK,country,event_type,events
+2023-01-07,Gaza,Protests,4
+2023-01-07,Gaza,Strategic developments,18
+2023-01-07,Israel,Protests,18
+2023-01-07,Israel,Strategic developments,1
+2023-01-14,Gaza,Strategic developments,25
+2023-01-14,Israel,Protests,27
+2023-01-14,Israel,Riots,3
+2023-01-14,Israel,Strategic developments,2
+2023-01-21,Gaza,Battles,1
+2023-01-21,Gaza,Explosions/Remote violence,2
+2023-01-21,Gaza,Protests,14
+2023-01-21,Gaza,Strategic developments,10
+2023-01-21,Israel,Explosions/Remote violence,1
+2023-01-21,Israel,Protests,29
+2023-01-21,Israel,Strategic developments,5
+2023-01-21,Israel,Violence against civilians,1
+2023-01-28,Gaza,Battles,4
+2023-01-28,Gaza,Explosions/Remote violence,1
+2023-01-28,Gaza,Protests,5
+2023-01-28,Gaza,Strategic developments,4
+2023-01-28,Israel,Explosions/Remote violence,1
+2023-01-28,Israel,Protests,39
+2023-01-28,Israel,Riots,1
+2023-01-28,Israel,Strategic developments,4
+2023-02-04,Gaza,Protests,3
+2023-02-04,Gaza,Strategic developments,6
+2023-02-04,Israel,Protests,60
+2023-02-04,Israel,Riots,2
+2023-02-04,Israel,Strategic developments,2
+2023-02-04,Israel,Violence against civilians,1
+2023-02-11,Gaza,Battles,1
+2023-02-11,Gaza,Explosions/Remote violence,2
+2023-02-11,Gaza,Protests,4
+2023-02-11,Gaza,Riots,1
+2023-02-11,Gaza,Strategic developments,9
+2023-02-11,Israel,Explosions/Remote violence,1
+2023-02-11,Israel,Protests,43
+2023-02-11,Israel,Strategic developments,4
+2023-02-18,Gaza,Battles,2
+2023-02-18,Gaza,Protests,18
+2023-02-18,Gaza,Riots,2
+2023-02-18,Gaza,Strategic developments,10
+2023-02-18,Israel,Explosions/Remote violence,1
+2023-02-18,Israel,Protests,89
+2023-02-18,Israel,Riots,2
+2023-02-18,Israel,Strategic developments,2
+2023-02-25,Gaza,Protests,8
+2023-02-25,Gaza,Riots,4
+2023-02-25,Gaza,Strategic developments,17
+2023-02-25,Israel,Protests,79
+2023-02-25,Israel,Riots,3
+2023-02-25,Israel,Strategic developments,1
+2023-03-04,Gaza,Explosions/Remote violence,2
+2023-03-04,Gaza,Protests,9
+2023-03-04,Gaza,Strategic developments,11
+2023-03-04,Gaza,Violence against civilians,1
+2023-03-04,Israel,Explosions/Remote violence,2
+2023-03-04,Israel,Protests,110
+2023-03-04,Israel,Riots,3
+2023-03-04,Israel,Strategic developments,3
+2023-03-04,Israel,Violence against civilians,2
+2023-03-11,Gaza,Protests,3
+2023-03-11,Gaza,Strategic developments,7
+2023-03-11,Israel,Battles,1
+2023-03-11,Israel,Explosions/Remote violence,1
+2023-03-11,Israel,Protests,103
+2023-03-11,Israel,Riots,5
+2023-03-11,Israel,Strategic developments,2
+2023-03-18,Gaza,Protests,5
+2023-03-18,Gaza,Riots,1
+2023-03-18,Gaza,Strategic developments,9
+2023-03-18,Israel,Explosions/Remote violence,2
+2023-03-18,Israel,Protests,110
+2023-03-18,Israel,Riots,8
+2023-03-18,Israel,Strategic developments,2
+2023-03-25,Gaza,Protests,2
+2023-03-25,Gaza,Strategic developments,3
+2023-03-25,Gaza,Violence against civilians,1
+2023-03-25,Israel,Protests,101
+2023-03-25,Israel,Riots,11
+2023-03-25,Israel,Strategic developments,3
+2023-04-01,Gaza,Battles,14
+2023-04-01,Gaza,Explosions/Remote violence,7
+2023-04-01,Gaza,Protests,7
+2023-04-01,Gaza,Riots,5
+2023-04-01,Gaza,Strategic developments,5
+2023-04-01,Israel,Battles,2
+2023-04-01,Israel,Explosions/Remote violence,7
+2023-04-01,Israel,Protests,53
+2023-04-01,Israel,Riots,19
+2023-04-01,Israel,Strategic developments,2
+2023-04-01,Israel,Violence against civilians,2
+2023-04-08,Gaza,Protests,4
+2023-04-08,Gaza,Strategic developments,5
+2023-04-08,Israel,Protests,46
+2023-04-08,Israel,Riots,3
+2023-04-08,Israel,Strategic developments,1
+2023-04-15,Gaza,Protests,1
+2023-04-15,Gaza,Strategic developments,6
+2023-04-15,Gaza,Violence against civilians,1
+2023-04-15,Israel,Protests,53
+2023-04-15,Israel,Strategic developments,1
+2023-04-15,Israel,Violence against civilians,2
+2023-04-22,Gaza,Protests,1
+2023-04-22,Gaza,Strategic developments,10
+2023-04-22,Israel,Protests,51
+2023-04-22,Israel,Riots,3
+2023-04-22,Israel,Violence against civilians,3
+2023-04-29,Gaza,Battles,14
+2023-04-29,Gaza,Explosions/Remote violence,6
+2023-04-29,Gaza,Protests,8
+2023-04-29,Gaza,Strategic developments,9
+2023-04-29,Gaza,Violence against civilians,1
+2023-04-29,Israel,Explosions/Remote violence,4
+2023-04-29,Israel,Protests,62
+2023-04-29,Israel,Riots,3
+2023-04-29,Israel,Strategic developments,2
+2023-04-29,Israel,Violence against civilians,1
+2023-05-06,Gaza,Explosions/Remote violence,124
+2023-05-06,Gaza,Protests,1
+2023-05-06,Gaza,Strategic developments,5
+2023-05-06,Israel,Explosions/Remote violence,32
+2023-05-06,Israel,Protests,50
+2023-05-06,Israel,Riots,3
+2023-05-06,Israel,Strategic developments,2
+2023-05-06,Israel,Violence against civilians,2
+2023-05-13,Gaza,Explosions/Remote violence,35
+2023-05-13,Gaza,Protests,2
+2023-05-13,Gaza,Riots,1
+2023-05-13,Gaza,Strategic developments,3
+2023-05-13,Israel,Explosions/Remote violence,7
+2023-05-13,Israel,Protests,45
+2023-05-13,Israel,Riots,1
+2023-05-13,Israel,Strategic developments,3
+2023-05-20,Gaza,Protests,9
+2023-05-20,Gaza,Strategic developments,18
+2023-05-20,Gaza,Violence against civilians,1
+2023-05-20,Israel,Protests,51
+2023-05-20,Israel,Riots,1
+2023-05-20,Israel,Strategic developments,1
+2023-05-27,Gaza,Protests,5
+2023-05-27,Gaza,Strategic developments,16
+2023-05-27,Israel,Protests,62
+2023-05-27,Israel,Riots,2
+2023-05-27,Israel,Strategic developments,1
+2023-05-27,Israel,Violence against civilians,3
+2023-06-03,Gaza,Protests,3
+2023-06-03,Gaza,Strategic developments,10
+2023-06-03,Israel,Battles,1
+2023-06-03,Israel,Protests,73
+2023-06-03,Israel,Riots,4
+2023-06-03,Israel,Strategic developments,3
+2023-06-03,Israel,Violence against civilians,1
+2023-06-10,Gaza,Protests,2
+2023-06-10,Gaza,Strategic developments,8
+2023-06-10,Gaza,Violence against civilians,1
+2023-06-10,Israel,Protests,61
+2023-06-10,Israel,Riots,3
+2023-06-10,Israel,Strategic developments,3
+2023-06-17,Gaza,Protests,4
+2023-06-17,Gaza,Riots,1
+2023-06-17,Gaza,Strategic developments,7
+2023-06-17,Israel,Protests,65
+2023-06-17,Israel,Riots,4
+2023-06-17,Israel,Strategic developments,3
+2023-06-24,Gaza,Protests,1
+2023-06-24,Gaza,Strategic developments,5
+2023-06-24,Israel,Protests,37
+2023-06-24,Israel,Riots,5
+2023-07-01,Gaza,Explosions/Remote violence,3
+2023-07-01,Gaza,Protests,7
+2023-07-01,Gaza,Riots,4
+2023-07-01,Gaza,Strategic developments,1
+2023-07-01,Israel,Protests,84
+2023-07-01,Israel,Riots,9
+2023-07-01,Israel,Strategic developments,3
+2023-07-01,Israel,Violence against civilians,2
+2023-07-08,Gaza,Strategic developments,4
+2023-07-08,Israel,Protests,103
+2023-07-08,Israel,Riots,9
+2023-07-08,Israel,Strategic developments,1
+2023-07-08,Israel,Violence against civilians,1
+2023-07-15,Gaza,Protests,2
+2023-07-15,Gaza,Strategic developments,3
+2023-07-15,Israel,Protests,142
+2023-07-15,Israel,Riots,6
+2023-07-15,Israel,Strategic developments,3
+2023-07-22,Gaza,Protests,1
+2023-07-22,Gaza,Riots,2
+2023-07-22,Gaza,Strategic developments,7
+2023-07-22,Gaza,Violence against civilians,1
+2023-07-22,Israel,Battles,1
+2023-07-22,Israel,Protests,70
+2023-07-22,Israel,Riots,9
+2023-07-22,Israel,Strategic developments,6
+2023-07-29,Gaza,Protests,9
+2023-07-29,Gaza,Riots,2
+2023-07-29,Gaza,Strategic developments,4
+2023-07-29,Gaza,Violence against civilians,1
+2023-07-29,Israel,Protests,37
+2023-07-29,Israel,Strategic developments,2
+2023-08-05,Gaza,Protests,3
+2023-08-05,Gaza,Strategic developments,7
+2023-08-05,Israel,Battles,1
+2023-08-05,Israel,Protests,49
+2023-08-05,Israel,Violence against civilians,1
+2023-08-12,Gaza,Protests,1
+2023-08-12,Gaza,Strategic developments,7
+2023-08-12,Israel,Battles,1
+2023-08-12,Israel,Protests,43
+2023-08-12,Israel,Riots,3
+2023-08-12,Israel,Strategic developments,4
+2023-08-19,Gaza,Battles,1
+2023-08-19,Gaza,Protests,2
+2023-08-19,Gaza,Riots,1
+2023-08-19,Gaza,Strategic developments,7
+2023-08-19,Gaza,Violence against civilians,1
+2023-08-19,Israel,Protests,34
+2023-08-19,Israel,Riots,3
+2023-08-19,Israel,Strategic developments,4
+2023-08-19,Israel,Violence against civilians,1
+2023-08-26,Gaza,Explosions/Remote violence,1
+2023-08-26,Gaza,Protests,5
+2023-08-26,Gaza,Strategic developments,9
+2023-08-26,Israel,Protests,45
+2023-08-26,Israel,Riots,3
+2023-08-26,Israel,Strategic developments,4
+2023-08-26,Israel,Violence against civilians,1
+2023-09-02,Gaza,Explosions/Remote violence,1
+2023-09-02,Gaza,Protests,3
+2023-09-02,Gaza,Riots,1
+2023-09-02,Gaza,Strategic developments,8
+2023-09-02,Gaza,Violence against civilians,1
+2023-09-02,Israel,Protests,37
+2023-09-02,Israel,Riots,3
+2023-09-09,Gaza,Explosions/Remote violence,3
+2023-09-09,Gaza,Protests,3
+2023-09-09,Gaza,Riots,6
+2023-09-09,Gaza,Strategic developments,8
+2023-09-09,Gaza,Violence against civilians,1
+2023-09-09,Israel,Explosions/Remote violence,1
+2023-09-09,Israel,Protests,29
+2023-09-09,Israel,Riots,4
+2023-09-09,Israel,Strategic developments,1
+2023-09-09,Israel,Violence against civilians,1
+2023-09-16,Gaza,Battles,1
+2023-09-16,Gaza,Explosions/Remote violence,3
+2023-09-16,Gaza,Riots,24
+2023-09-16,Gaza,Strategic developments,2
+2023-09-16,Gaza,Violence against civilians,1
+2023-09-16,Israel,Explosions/Remote violence,1
+2023-09-16,Israel,Protests,19
+2023-09-16,Israel,Riots,1
+2023-09-16,Israel,Strategic developments,1
+2023-09-23,Gaza,Battles,3
+2023-09-23,Gaza,Explosions/Remote violence,9
+2023-09-23,Gaza,Protests,4
+2023-09-23,Gaza,Riots,15
+2023-09-23,Gaza,Strategic developments,4
+2023-09-23,Israel,Explosions/Remote violence,4
+2023-09-23,Israel,Protests,44
+2023-09-23,Israel,Riots,3
+2023-09-23,Israel,Strategic developments,2
+2023-09-23,Israel,Violence against civilians,2
+2023-09-30,Gaza,Protests,3
+2023-09-30,Gaza,Strategic developments,2
+2023-09-30,Gaza,Violence against civilians,2
+2023-09-30,Israel,Protests,34
+2023-09-30,Israel,Riots,2
+2023-09-30,Israel,Strategic developments,1
+2023-09-30,Israel,Violence against civilians,3
+2023-10-07,Gaza,Battles,2
+2023-10-07,Gaza,Explosions/Remote violence,226
+2023-10-07,Gaza,Strategic developments,3
+2023-10-07,Gaza,Violence against civilians,3
+2023-10-07,Israel,Battles,112
+2023-10-07,Israel,Explosions/Remote violence,103
+2023-10-07,Israel,Strategic developments,38
+2023-10-07,Israel,Violence against civilians,65
+2023-10-14,Gaza,Battles,1
+2023-10-14,Gaza,Explosions/Remote violence,217
+2023-10-14,Gaza,Protests,1
+2023-10-14,Gaza,Strategic developments,1
+2023-10-14,Israel,Battles,6
+2023-10-14,Israel,Explosions/Remote violence,114
+2023-10-14,Israel,Protests,9
+2023-10-14,Israel,Riots,2
+2023-10-14,Israel,Strategic developments,64
+2023-10-14,Israel,Violence against civilians,4
+2023-10-21,Gaza,Battles,11
+2023-10-21,Gaza,Explosions/Remote violence,278
+2023-10-21,Gaza,Strategic developments,3
+2023-10-21,Israel,Battles,4
+2023-10-21,Israel,Explosions/Remote violence,53
+2023-10-21,Israel,Protests,5
+2023-10-21,Israel,Strategic developments,64
+2023-10-28,Gaza,Battles,48
+2023-10-28,Gaza,Explosions/Remote violence,308
+2023-10-28,Gaza,Strategic developments,7
+2023-10-28,Gaza,Violence against civilians,4
+2023-10-28,Israel,Battles,2
+2023-10-28,Israel,Explosions/Remote violence,98
+2023-10-28,Israel,Protests,8
+2023-10-28,Israel,Riots,2
+2023-10-28,Israel,Strategic developments,48
+2023-10-28,Israel,Violence against civilians,2
+2023-11-04,Gaza,Battles,57
+2023-11-04,Gaza,Explosions/Remote violence,306
+2023-11-04,Gaza,Strategic developments,1
+2023-11-04,Gaza,Violence against civilians,1
+2023-11-04,Israel,Battles,4
+2023-11-04,Israel,Explosions/Remote violence,59
+2023-11-04,Israel,Protests,15
+2023-11-04,Israel,Riots,1
+2023-11-04,Israel,Strategic developments,26
+2023-11-11,Gaza,Battles,43
+2023-11-11,Gaza,Explosions/Remote violence,276
+2023-11-11,Gaza,Strategic developments,2
+2023-11-11,Gaza,Violence against civilians,5
+2023-11-11,Israel,Battles,2
+2023-11-11,Israel,Explosions/Remote violence,71
+2023-11-11,Israel,Protests,14
+2023-11-11,Israel,Riots,1
+2023-11-11,Israel,Strategic developments,37
+2023-11-18,Gaza,Battles,38
+2023-11-18,Gaza,Explosions/Remote violence,266
+2023-11-18,Gaza,Strategic developments,2
+2023-11-18,Gaza,Violence against civilians,5
+2023-11-18,Israel,Explosions/Remote violence,80
+2023-11-18,Israel,Protests,17
+2023-11-18,Israel,Strategic developments,37
+2023-11-18,Israel,Violence against civilians,1
+2023-11-25,Gaza,Battles,7
+2023-11-25,Gaza,Explosions/Remote violence,60
+2023-11-25,Gaza,Strategic developments,6
+2023-11-25,Gaza,Violence against civilians,21
+2023-11-25,Israel,Explosions/Remote violence,11
+2023-11-25,Israel,Protests,8
+2023-11-25,Israel,Strategic developments,22
+2023-11-25,Israel,Violence against civilians,2
+2023-12-02,Gaza,Battles,62
+2023-12-02,Gaza,Explosions/Remote violence,272
+2023-12-02,Gaza,Strategic developments,7
+2023-12-02,Gaza,Violence against civilians,4
+2023-12-02,Israel,Explosions/Remote violence,82
+2023-12-02,Israel,Protests,15
+2023-12-02,Israel,Strategic developments,38
+2023-12-09,Gaza,Battles,48
+2023-12-09,Gaza,Explosions/Remote violence,261
+2023-12-09,Gaza,Strategic developments,9
+2023-12-09,Gaza,Violence against civilians,6
+2023-12-09,Israel,Battles,8
+2023-12-09,Israel,Explosions/Remote violence,55
+2023-12-09,Israel,Protests,10
+2023-12-09,Israel,Strategic developments,24
+2023-12-16,Gaza,Battles,63
+2023-12-16,Gaza,Explosions/Remote violence,255
+2023-12-16,Gaza,Strategic developments,8
+2023-12-16,Gaza,Violence against civilians,8
+2023-12-16,Israel,Battles,10
+2023-12-16,Israel,Explosions/Remote violence,48
+2023-12-16,Israel,Protests,6
+2023-12-16,Israel,Strategic developments,22
+2023-12-23,Gaza,Battles,43
+2023-12-23,Gaza,Explosions/Remote violence,250
+2023-12-23,Gaza,Strategic developments,11
+2023-12-23,Gaza,Violence against civilians,4
+2023-12-23,Israel,Battles,12
+2023-12-23,Israel,Explosions/Remote violence,40
+2023-12-23,Israel,Protests,8
+2023-12-23,Israel,Strategic developments,29
+2023-12-30,Gaza,Battles,47
+2023-12-30,Gaza,Explosions/Remote violence,256
+2023-12-30,Gaza,Strategic developments,7
+2023-12-30,Gaza,Violence against civilians,1
+2023-12-30,Israel,Battles,7
+2023-12-30,Israel,Explosions/Remote violence,37
+2023-12-30,Israel,Protests,6
+2023-12-30,Israel,Strategic developments,18
+2024-01-06,Gaza,Battles,45
+2024-01-06,Gaza,Explosions/Remote violence,242
+2024-01-06,Gaza,Strategic developments,9
+2024-01-06,Gaza,Violence against civilians,2
+2024-01-06,Israel,Battles,7
+2024-01-06,Israel,Explosions/Remote violence,41
+2024-01-06,Israel,Protests,11
+2024-01-06,Israel,Strategic developments,23
+2024-01-13,Gaza,Battles,55
+2024-01-13,Gaza,Explosions/Remote violence,252
+2024-01-13,Gaza,Strategic developments,22
+2024-01-13,Gaza,Violence against civilians,1
+2024-01-13,Israel,Battles,11
+2024-01-13,Israel,Explosions/Remote violence,40
+2024-01-13,Israel,Protests,19
+2024-01-13,Israel,Riots,1
+2024-01-13,Israel,Strategic developments,10
+2024-01-13,Israel,Violence against civilians,1
+2024-01-20,Gaza,Battles,51
+2024-01-20,Gaza,Explosions/Remote violence,226
+2024-01-20,Gaza,Strategic developments,21
+2024-01-20,Gaza,Violence against civilians,5
+2024-01-20,Israel,Battles,5
+2024-01-20,Israel,Explosions/Remote violence,22
+2024-01-20,Israel,Protests,32
+2024-01-20,Israel,Strategic developments,6
+2024-01-27,Gaza,Battles,51
+2024-01-27,Gaza,Explosions/Remote violence,227
+2024-01-27,Gaza,Strategic developments,21
+2024-01-27,Gaza,Violence against civilians,10
+2024-01-27,Israel,Battles,11
+2024-01-27,Israel,Explosions/Remote violence,38
+2024-01-27,Israel,Protests,28
+2024-01-27,Israel,Riots,4
+2024-01-27,Israel,Strategic developments,9
+2024-02-03,Gaza,Battles,39
+2024-02-03,Gaza,Explosions/Remote violence,237
+2024-02-03,Gaza,Strategic developments,23
+2024-02-03,Gaza,Violence against civilians,15
+2024-02-03,Israel,Battles,9
+2024-02-03,Israel,Explosions/Remote violence,35
+2024-02-03,Israel,Protests,22
+2024-02-03,Israel,Riots,8
+2024-02-03,Israel,Strategic developments,6
+2024-02-03,Israel,Violence against civilians,1
+2024-02-10,Gaza,Battles,13
+2024-02-10,Gaza,Explosions/Remote violence,173
+2024-02-10,Gaza,Protests,1
+2024-02-10,Gaza,Riots,1
+2024-02-10,Gaza,Strategic developments,14
+2024-02-10,Gaza,Violence against civilians,16
+2024-02-10,Israel,Battles,4
+2024-02-10,Israel,Explosions/Remote violence,36
+2024-02-10,Israel,Protests,40
+2024-02-10,Israel,Riots,2
+2024-02-10,Israel,Strategic developments,5
+2024-02-10,Israel,Violence against civilians,2
+2024-02-17,Gaza,Battles,22
+2024-02-17,Gaza,Explosions/Remote violence,259
+2024-02-17,Gaza,Protests,4
+2024-02-17,Gaza,Riots,1
+2024-02-17,Gaza,Strategic developments,12
+2024-02-17,Gaza,Violence against civilians,2
+2024-02-17,Israel,Battles,3
+2024-02-17,Israel,Explosions/Remote violence,32
+2024-02-17,Israel,Protests,39
+2024-02-17,Israel,Riots,4
+2024-02-17,Israel,Strategic developments,6
+2024-02-24,Gaza,Battles,29
+2024-02-24,Gaza,Explosions/Remote violence,223
+2024-02-24,Gaza,Strategic developments,8
+2024-02-24,Gaza,Violence against civilians,2
+2024-02-24,Israel,Battles,6
+2024-02-24,Israel,Explosions/Remote violence,37
+2024-02-24,Israel,Protests,26
+2024-02-24,Israel,Riots,4
+2024-02-24,Israel,Strategic developments,10
+2024-02-24,Israel,Violence against civilians,2
+2024-03-02,Gaza,Battles,11
+2024-03-02,Gaza,Explosions/Remote violence,246
+2024-03-02,Gaza,Strategic developments,9
+2024-03-02,Gaza,Violence against civilians,7
+2024-03-02,Israel,Battles,3
+2024-03-02,Israel,Explosions/Remote violence,37
+2024-03-02,Israel,Protests,40
+2024-03-02,Israel,Riots,3
+2024-03-02,Israel,Strategic developments,8
+2024-03-09,Gaza,Battles,13
+2024-03-09,Gaza,Explosions/Remote violence,229
+2024-03-09,Gaza,Strategic developments,10
+2024-03-09,Gaza,Violence against civilians,6
+2024-03-09,Israel,Battles,8
+2024-03-09,Israel,Explosions/Remote violence,45
+2024-03-09,Israel,Protests,23
+2024-03-09,Israel,Riots,3
+2024-03-09,Israel,Strategic developments,5
+2024-03-16,Gaza,Battles,16
+2024-03-16,Gaza,Explosions/Remote violence,229
+2024-03-16,Gaza,Strategic developments,13
+2024-03-16,Gaza,Violence against civilians,2
+2024-03-16,Israel,Battles,12
+2024-03-16,Israel,Explosions/Remote violence,36
+2024-03-16,Israel,Protests,27
+2024-03-16,Israel,Riots,6
+2024-03-16,Israel,Strategic developments,9
+2024-03-16,Israel,Violence against civilians,1
+2024-03-23,Gaza,Battles,32
+2024-03-23,Gaza,Explosions/Remote violence,226
+2024-03-23,Gaza,Strategic developments,9
+2024-03-23,Gaza,Violence against civilians,8
+2024-03-23,Israel,Battles,7
+2024-03-23,Israel,Explosions/Remote violence,41
+2024-03-23,Israel,Protests,16
+2024-03-23,Israel,Riots,4
+2024-03-23,Israel,Strategic developments,8
+2024-03-30,Gaza,Battles,21
+2024-03-30,Gaza,Explosions/Remote violence,198
+2024-03-30,Gaza,Strategic developments,12
+2024-03-30,Israel,Battles,6
+2024-03-30,Israel,Explosions/Remote violence,37
+2024-03-30,Israel,Protests,34
+2024-03-30,Israel,Riots,7
+2024-03-30,Israel,Strategic developments,7
+2024-03-30,Israel,Violence against civilians,1
+2024-04-06,Gaza,Battles,12
+2024-04-06,Gaza,Explosions/Remote violence,188
+2024-04-06,Gaza,Strategic developments,11
+2024-04-06,Gaza,Violence against civilians,1
+2024-04-06,Israel,Battles,1
+2024-04-06,Israel,Explosions/Remote violence,30
+2024-04-06,Israel,Protests,28
+2024-04-06,Israel,Riots,4
+2024-04-06,Israel,Strategic developments,4
+2024-04-06,Israel,Violence against civilians,2
+2024-04-13,Gaza,Battles,11
+2024-04-13,Gaza,Explosions/Remote violence,167
+2024-04-13,Gaza,Strategic developments,14
+2024-04-13,Gaza,Violence against civilians,4
+2024-04-13,Israel,Battles,10
+2024-04-13,Israel,Explosions/Remote violence,42
+2024-04-13,Israel,Protests,17
+2024-04-13,Israel,Riots,3
+2024-04-13,Israel,Strategic developments,16
+2024-04-20,Gaza,Battles,11
+2024-04-20,Gaza,Explosions/Remote violence,229
+2024-04-20,Gaza,Strategic developments,8
+2024-04-20,Gaza,Violence against civilians,1
+2024-04-20,Israel,Explosions/Remote violence,38
+2024-04-20,Israel,Protests,27
+2024-04-20,Israel,Riots,2
+2024-04-20,Israel,Strategic developments,7
+2024-04-20,Israel,Violence against civilians,5
+2024-04-27,Gaza,Battles,3
+2024-04-27,Gaza,Explosions/Remote violence,215
+2024-04-27,Gaza,Strategic developments,5
+2024-04-27,Gaza,Violence against civilians,3
+2024-04-27,Israel,Battles,5
+2024-04-27,Israel,Explosions/Remote violence,25
+2024-04-27,Israel,Protests,18
+2024-04-27,Israel,Riots,3
+2024-04-27,Israel,Strategic developments,3
+2024-04-27,Israel,Violence against civilians,1
+2024-05-04,Gaza,Battles,17
+2024-05-04,Gaza,Explosions/Remote violence,236
+2024-05-04,Gaza,Strategic developments,14
+2024-05-04,Israel,Battles,3
+2024-05-04,Israel,Explosions/Remote violence,60
+2024-05-04,Israel,Protests,32
+2024-05-04,Israel,Riots,7
+2024-05-04,Israel,Strategic developments,8
+2024-05-11,Gaza,Battles,41
+2024-05-11,Gaza,Explosions/Remote violence,216
+2024-05-11,Gaza,Strategic developments,26
+2024-05-11,Gaza,Violence against civilians,1
+2024-05-11,Israel,Explosions/Remote violence,66
+2024-05-11,Israel,Protests,33
+2024-05-11,Israel,Riots,5
+2024-05-11,Israel,Strategic developments,10
+2024-05-18,Gaza,Battles,34
+2024-05-18,Gaza,Explosions/Remote violence,228
+2024-05-18,Gaza,Strategic developments,9
+2024-05-18,Gaza,Violence against civilians,3
+2024-05-18,Israel,Battles,7
+2024-05-18,Israel,Explosions/Remote violence,57
+2024-05-18,Israel,Protests,30
+2024-05-18,Israel,Riots,5
+2024-05-18,Israel,Strategic developments,13
+2024-05-18,Israel,Violence against civilians,2
+2024-05-25,Gaza,Battles,26
+2024-05-25,Gaza,Explosions/Remote violence,235
+2024-05-25,Gaza,Strategic developments,18
+2024-05-25,Gaza,Violence against civilians,2
+2024-05-25,Israel,Explosions/Remote violence,61
+2024-05-25,Israel,Protests,48
+2024-05-25,Israel,Riots,7
+2024-05-25,Israel,Strategic developments,4
+2024-05-25,Israel,Violence against civilians,7
+2024-06-01,Gaza,Battles,17
+2024-06-01,Gaza,Explosions/Remote violence,223
+2024-06-01,Gaza,Strategic developments,16
+2024-06-01,Israel,Explosions/Remote violence,70
+2024-06-01,Israel,Protests,37
+2024-06-01,Israel,Riots,5
+2024-06-01,Israel,Strategic developments,12
+2024-06-01,Israel,Violence against civilians,1
+2024-06-08,Gaza,Battles,20
+2024-06-08,Gaza,Explosions/Remote violence,181
+2024-06-08,Gaza,Strategic developments,5
+2024-06-08,Israel,Battles,4
+2024-06-08,Israel,Explosions/Remote violence,85
+2024-06-08,Israel,Protests,18
+2024-06-08,Israel,Riots,1
+2024-06-08,Israel,Strategic developments,13
+2024-06-15,Gaza,Battles,11
+2024-06-15,Gaza,Explosions/Remote violence,179
+2024-06-15,Gaza,Strategic developments,18
+2024-06-15,Israel,Battles,1
+2024-06-15,Israel,Explosions/Remote violence,29
+2024-06-15,Israel,Protests,33
+2024-06-15,Israel,Riots,5
+2024-06-15,Israel,Strategic developments,11
+2024-06-15,Israel,Violence against civilians,1
+2024-06-22,Gaza,Battles,18
+2024-06-22,Gaza,Explosions/Remote violence,207
+2024-06-22,Gaza,Strategic developments,29
+2024-06-22,Gaza,Violence against civilians,7
+2024-06-22,Israel,Battles,1
+2024-06-22,Israel,Explosions/Remote violence,40
+2024-06-22,Israel,Protests,40
+2024-06-22,Israel,Riots,4
+2024-06-22,Israel,Strategic developments,24
+2024-06-22,Israel,Violence against civilians,2
+2024-06-29,Gaza,Battles,24
+2024-06-29,Gaza,Explosions/Remote violence,197
+2024-06-29,Gaza,Strategic developments,17
+2024-06-29,Gaza,Violence against civilians,2
+2024-06-29,Israel,Battles,5
+2024-06-29,Israel,Explosions/Remote violence,77
+2024-06-29,Israel,Protests,32
+2024-06-29,Israel,Riots,2
+2024-06-29,Israel,Strategic developments,2
+2024-06-29,Israel,Violence against civilians,1
+2024-07-06,Gaza,Battles,18
+2024-07-06,Gaza,Explosions/Remote violence,222
+2024-07-06,Gaza,Strategic developments,20
+2024-07-06,Gaza,Violence against civilians,3
+2024-07-06,Israel,Battles,1
+2024-07-06,Israel,Explosions/Remote violence,55
+2024-07-06,Israel,Protests,58
+2024-07-06,Israel,Riots,6
+2024-07-06,Israel,Strategic developments,16
+2024-07-06,Israel,Violence against civilians,2
+2024-07-13,Gaza,Battles,10
+2024-07-13,Gaza,Explosions/Remote violence,172
+2024-07-13,Gaza,Strategic developments,9
+2024-07-13,Gaza,Violence against civilians,7
+2024-07-13,Israel,Battles,1
+2024-07-13,Israel,Explosions/Remote violence,70
+2024-07-13,Israel,Protests,46
+2024-07-13,Israel,Riots,3
+2024-07-13,Israel,Strategic developments,11
+2024-07-13,Israel,Violence against civilians,1
+2024-07-20,Gaza,Battles,15
+2024-07-20,Gaza,Explosions/Remote violence,178
+2024-07-20,Gaza,Strategic developments,19
+2024-07-20,Gaza,Violence against civilians,12
+2024-07-20,Israel,Battles,2
+2024-07-20,Israel,Explosions/Remote violence,56
+2024-07-20,Israel,Protests,25
+2024-07-20,Israel,Riots,1
+2024-07-20,Israel,Strategic developments,11
+2024-07-20,Israel,Violence against civilians,1
+2024-07-27,Gaza,Battles,14
+2024-07-27,Gaza,Explosions/Remote violence,224
+2024-07-27,Gaza,Strategic developments,19
+2024-07-27,Gaza,Violence against civilians,1
+2024-07-27,Israel,Battles,1
+2024-07-27,Israel,Explosions/Remote violence,46
+2024-07-27,Israel,Protests,34
+2024-07-27,Israel,Riots,7
+2024-07-27,Israel,Strategic developments,5
+2024-07-27,Israel,Violence against civilians,3
+2024-08-03,Gaza,Battles,14
+2024-08-03,Gaza,Explosions/Remote violence,204
+2024-08-03,Gaza,Strategic developments,15
+2024-08-03,Gaza,Violence against civilians,3
+2024-08-03,Israel,Battles,2
+2024-08-03,Israel,Explosions/Remote violence,71
+2024-08-03,Israel,Protests,24
+2024-08-03,Israel,Riots,4
+2024-08-03,Israel,Strategic developments,7
+2024-08-03,Israel,Violence against civilians,3
+2024-08-10,Gaza,Battles,16
+2024-08-10,Gaza,Explosions/Remote violence,236
+2024-08-10,Gaza,Strategic developments,24
+2024-08-10,Gaza,Violence against civilians,6
+2024-08-10,Israel,Battles,2
+2024-08-10,Israel,Explosions/Remote violence,76
+2024-08-10,Israel,Protests,21
+2024-08-10,Israel,Riots,2
+2024-08-10,Israel,Strategic developments,6
+2024-08-10,Israel,Violence against civilians,1
+2024-08-17,Gaza,Battles,30
+2024-08-17,Gaza,Explosions/Remote violence,229
+2024-08-17,Gaza,Strategic developments,22
+2024-08-17,Gaza,Violence against civilians,4
+2024-08-17,Israel,Explosions/Remote violence,102
+2024-08-17,Israel,Protests,25
+2024-08-17,Israel,Riots,3
+2024-08-17,Israel,Strategic developments,6
+2024-08-24,Gaza,Battles,15
+2024-08-24,Gaza,Explosions/Remote violence,236
+2024-08-24,Gaza,Strategic developments,20
+2024-08-24,Gaza,Violence against civilians,2
+2024-08-24,Israel,Battles,1
+2024-08-24,Israel,Explosions/Remote violence,56
+2024-08-24,Israel,Protests,23
+2024-08-24,Israel,Riots,2
+2024-08-24,Israel,Strategic developments,21
+2024-08-31,Gaza,Battles,5
+2024-08-31,Gaza,Explosions/Remote violence,179
+2024-08-31,Gaza,Strategic developments,12
+2024-08-31,Gaza,Violence against civilians,2
+2024-08-31,Israel,Explosions/Remote violence,51
+2024-08-31,Israel,Protests,125
+2024-08-31,Israel,Riots,10
+2024-08-31,Israel,Strategic developments,12
+2024-09-07,Gaza,Battles,6
+2024-09-07,Gaza,Explosions/Remote violence,169
+2024-09-07,Gaza,Strategic developments,10
+2024-09-07,Gaza,Violence against civilians,2
+2024-09-07,Israel,Explosions/Remote violence,53
+2024-09-07,Israel,Protests,38
+2024-09-07,Israel,Riots,4
+2024-09-07,Israel,Strategic developments,15
+2024-09-14,Gaza,Battles,4
+2024-09-14,Gaza,Explosions/Remote violence,166
+2024-09-14,Gaza,Strategic developments,19
+2024-09-14,Israel,Explosions/Remote violence,74
+2024-09-14,Israel,Protests,24
+2024-09-14,Israel,Riots,1
+2024-09-14,Israel,Strategic developments,20
+2024-09-21,Gaza,Battles,4
+2024-09-21,Gaza,Explosions/Remote violence,173
+2024-09-21,Gaza,Protests,1
+2024-09-21,Gaza,Strategic developments,19
+2024-09-21,Gaza,Violence against civilians,1
+2024-09-21,Israel,Battles,2
+2024-09-21,Israel,Explosions/Remote violence,146
+2024-09-21,Israel,Protests,24
+2024-09-21,Israel,Riots,4
+2024-09-21,Israel,Strategic developments,40
+2024-09-21,Israel,Violence against civilians,1
+2024-09-28,Gaza,Battles,1
+2024-09-28,Gaza,Explosions/Remote violence,176
+2024-09-28,Gaza,Protests,1
+2024-09-28,Gaza,Strategic developments,11
+2024-09-28,Gaza,Violence against civilians,1
+2024-09-28,Israel,Explosions/Remote violence,150
+2024-09-28,Israel,Protests,8
+2024-09-28,Israel,Riots,3
+2024-09-28,Israel,Strategic developments,42
+2024-09-28,Israel,Violence against civilians,1
+2024-10-05,Gaza,Battles,18
+2024-10-05,Gaza,Explosions/Remote violence,214
+2024-10-05,Gaza,Strategic developments,19
+2024-10-05,Gaza,Violence against civilians,4
+2024-10-05,Israel,Explosions/Remote violence,145
+2024-10-05,Israel,Protests,16
+2024-10-05,Israel,Strategic developments,52
+2024-10-05,Israel,Violence against civilians,2
+2024-10-12,Gaza,Battles,12
+2024-10-12,Gaza,Explosions/Remote violence,198
+2024-10-12,Gaza,Strategic developments,13
+2024-10-12,Gaza,Violence against civilians,3
+2024-10-12,Israel,Battles,1
+2024-10-12,Israel,Explosions/Remote violence,141
+2024-10-12,Israel,Protests,4
+2024-10-12,Israel,Riots,1
+2024-10-12,Israel,Strategic developments,54
+2024-10-12,Israel,Violence against civilians,3
+2024-10-19,Gaza,Battles,14
+2024-10-19,Gaza,Explosions/Remote violence,194
+2024-10-19,Gaza,Protests,1
+2024-10-19,Gaza,Strategic developments,26
+2024-10-19,Gaza,Violence against civilians,2
+2024-10-19,Israel,Explosions/Remote violence,179
+2024-10-19,Israel,Protests,10
+2024-10-19,Israel,Strategic developments,48
+2024-10-26,Gaza,Battles,9
+2024-10-26,Gaza,Explosions/Remote violence,223
+2024-10-26,Gaza,Strategic developments,19
+2024-10-26,Gaza,Violence against civilians,2
+2024-10-26,Israel,Explosions/Remote violence,120
+2024-10-26,Israel,Protests,15
+2024-10-26,Israel,Riots,3
+2024-10-26,Israel,Strategic developments,28
+2024-10-26,Israel,Violence against civilians,2
+2024-11-02,Gaza,Battles,11
+2024-11-02,Gaza,Explosions/Remote violence,201
+2024-11-02,Gaza,Protests,4
+2024-11-02,Gaza,Strategic developments,19
+2024-11-02,Gaza,Violence against civilians,1
+2024-11-02,Israel,Battles,1
+2024-11-02,Israel,Explosions/Remote violence,98
+2024-11-02,Israel,Protests,40
+2024-11-02,Israel,Riots,6
+2024-11-02,Israel,Strategic developments,38
+2024-11-02,Israel,Violence against civilians,1
+2024-11-09,Gaza,Battles,16
+2024-11-09,Gaza,Explosions/Remote violence,198
+2024-11-09,Gaza,Strategic developments,18
+2024-11-09,Gaza,Violence against civilians,4
+2024-11-09,Israel,Battles,1
+2024-11-09,Israel,Explosions/Remote violence,132
+2024-11-09,Israel,Protests,8
+2024-11-09,Israel,Strategic developments,41
+2024-11-16,Gaza,Battles,14
+2024-11-16,Gaza,Explosions/Remote violence,197
+2024-11-16,Gaza,Strategic developments,27
+2024-11-16,Gaza,Violence against civilians,3
+2024-11-16,Israel,Battles,1
+2024-11-16,Israel,Explosions/Remote violence,122
+2024-11-16,Israel,Protests,18
+2024-11-16,Israel,Strategic developments,28
+2024-11-16,Israel,Violence against civilians,2
+2024-11-23,Gaza,Battles,10
+2024-11-23,Gaza,Explosions/Remote violence,173
+2024-11-23,Gaza,Strategic developments,31
+2024-11-23,Gaza,Violence against civilians,2
+2024-11-23,Israel,Explosions/Remote violence,77
+2024-11-23,Israel,Protests,24
+2024-11-23,Israel,Strategic developments,19
+2024-11-23,Israel,Violence against civilians,1
+2024-11-30,Gaza,Battles,8
+2024-11-30,Gaza,Explosions/Remote violence,179
+2024-11-30,Gaza,Strategic developments,23
+2024-11-30,Gaza,Violence against civilians,4
+2024-11-30,Israel,Battles,1
+2024-11-30,Israel,Explosions/Remote violence,2
+2024-11-30,Israel,Protests,17
+2024-11-30,Israel,Strategic developments,2
+2024-12-07,Gaza,Battles,3
+2024-12-07,Gaza,Explosions/Remote violence,162
+2024-12-07,Gaza,Strategic developments,35
+2024-12-07,Israel,Battles,1
+2024-12-07,Israel,Explosions/Remote violence,5
+2024-12-07,Israel,Protests,20
+2024-12-07,Israel,Strategic developments,7
+2024-12-07,Israel,Violence against civilians,2
+2024-12-14,Gaza,Battles,8
+2024-12-14,Gaza,Explosions/Remote violence,176
+2024-12-14,Gaza,Strategic developments,24
+2024-12-14,Gaza,Violence against civilians,2
+2024-12-14,Israel,Explosions/Remote violence,4
+2024-12-14,Israel,Protests,27
+2024-12-14,Israel,Strategic developments,3
+2024-12-21,Gaza,Battles,9
+2024-12-21,Gaza,Explosions/Remote violence,165
+2024-12-21,Gaza,Strategic developments,29
+2024-12-21,Gaza,Violence against civilians,1
+2024-12-21,Israel,Explosions/Remote violence,6
+2024-12-21,Israel,Protests,19
+2024-12-21,Israel,Riots,1
+2024-12-21,Israel,Strategic developments,4
+2024-12-21,Israel,Violence against civilians,1
+2024-12-28,Gaza,Battles,5
+2024-12-28,Gaza,Explosions/Remote violence,165
+2024-12-28,Gaza,Strategic developments,15
+2024-12-28,Gaza,Violence against civilians,4
+2024-12-28,Israel,Explosions/Remote violence,5
+2024-12-28,Israel,Protests,33
+2024-12-28,Israel,Riots,1
+2024-12-28,Israel,Strategic developments,12
+2025-01-04,Gaza,Battles,5
+2025-01-04,Gaza,Explosions/Remote violence,196
+2025-01-04,Gaza,Strategic developments,19
+2025-01-04,Gaza,Violence against civilians,4
+2025-01-04,Israel,Explosions/Remote violence,3
+2025-01-04,Israel,Protests,36
+2025-01-04,Israel,Riots,3
+2025-01-04,Israel,Strategic developments,5
+2025-01-11,Gaza,Battles,6
+2025-01-11,Gaza,Explosions/Remote violence,169
+2025-01-11,Gaza,Strategic developments,24
+2025-01-11,Israel,Explosions/Remote violence,2
+2025-01-11,Israel,Protests,30
+2025-01-11,Israel,Riots,3
+2025-01-11,Israel,Strategic developments,4
+2025-01-18,Gaza,Battles,3
+2025-01-18,Gaza,Explosions/Remote violence,60
+2025-01-18,Gaza,Strategic developments,13
+2025-01-18,Gaza,Violence against civilians,14
+2025-01-18,Israel,Protests,19
+2025-01-18,Israel,Riots,5
+2025-01-18,Israel,Strategic developments,5
+2025-01-18,Israel,Violence against civilians,2
+2025-01-25,Gaza,Battles,1
+2025-01-25,Gaza,Explosions/Remote violence,13
+2025-01-25,Gaza,Strategic developments,4
+2025-01-25,Gaza,Violence against civilians,12
+2025-01-25,Israel,Protests,24
+2025-01-25,Israel,Riots,3
+2025-01-25,Israel,Strategic developments,4
+2025-02-01,Gaza,Explosions/Remote violence,16
+2025-02-01,Gaza,Strategic developments,1
+2025-02-01,Gaza,Violence against civilians,6
+2025-02-01,Israel,Protests,11
+2025-02-01,Israel,Riots,1
+2025-02-01,Israel,Strategic developments,1
+2025-02-08,Gaza,Explosions/Remote violence,21
+2025-02-08,Gaza,Strategic developments,9
+2025-02-08,Gaza,Violence against civilians,12
+2025-02-08,Israel,Protests,28
+2025-02-08,Israel,Riots,4
+2025-02-08,Israel,Strategic developments,2
+2025-02-15,Gaza,Explosions/Remote violence,34
+2025-02-15,Gaza,Strategic developments,3
+2025-02-15,Gaza,Violence against civilians,6
+2025-02-15,Israel,Explosions/Remote violence,1
+2025-02-15,Israel,Protests,21
+2025-02-15,Israel,Riots,1
+2025-02-15,Israel,Strategic developments,3
+2025-02-22,Gaza,Battles,2
+2025-02-22,Gaza,Explosions/Remote violence,27
+2025-02-22,Gaza,Strategic developments,4
+2025-02-22,Gaza,Violence against civilians,9
+2025-02-22,Israel,Protests,15
+2025-02-22,Israel,Riots,1
+2025-02-22,Israel,Violence against civilians,1
+2025-03-01,Gaza,Explosions/Remote violence,50
+2025-03-01,Gaza,Strategic developments,4
+2025-03-01,Gaza,Violence against civilians,7
+2025-03-01,Israel,Protests,21
+2025-03-01,Israel,Riots,3
+2025-03-01,Israel,Strategic developments,1
+2025-03-01,Israel,Violence against civilians,1
+2025-03-08,Gaza,Battles,1
+2025-03-08,Gaza,Explosions/Remote violence,59
+2025-03-08,Gaza,Strategic developments,1
+2025-03-08,Gaza,Violence against civilians,9
+2025-03-08,Israel,Protests,15
+2025-03-08,Israel,Riots,1
+2025-03-08,Israel,Violence against civilians,1
+2025-03-15,Gaza,Explosions/Remote violence,162
+2025-03-15,Gaza,Strategic developments,16
+2025-03-15,Gaza,Violence against civilians,3
+2025-03-15,Israel,Explosions/Remote violence,1
+2025-03-15,Israel,Protests,32
+2025-03-15,Israel,Riots,4
+2025-03-15,Israel,Strategic developments,9
+2025-03-22,Gaza,Explosions/Remote violence,197
+2025-03-22,Gaza,Protests,4
+2025-03-22,Gaza,Riots,1
+2025-03-22,Gaza,Strategic developments,22
+2025-03-22,Gaza,Violence against civilians,7
+2025-03-22,Israel,Explosions/Remote violence,3
+2025-03-22,Israel,Protests,32
+2025-03-22,Israel,Riots,7
+2025-03-22,Israel,Strategic developments,10
+2025-03-22,Israel,Violence against civilians,1
+2025-03-29,Gaza,Battles,3
+2025-03-29,Gaza,Explosions/Remote violence,186
+2025-03-29,Gaza,Protests,1
+2025-03-29,Gaza,Strategic developments,51
+2025-03-29,Gaza,Violence against civilians,7
+2025-03-29,Israel,Explosions/Remote violence,2
+2025-03-29,Israel,Protests,12
+2025-03-29,Israel,Riots,3
+2025-03-29,Israel,Strategic developments,5
+2025-04-05,Gaza,Battles,1
+2025-04-05,Gaza,Explosions/Remote violence,164
+2025-04-05,Gaza,Strategic developments,25
+2025-04-05,Gaza,Violence against civilians,1
+2025-04-05,Israel,Explosions/Remote violence,4
+2025-04-05,Israel,Protests,18
+2025-04-05,Israel,Strategic developments,4
+2025-04-12,Gaza,Battles,1
+2025-04-12,Gaza,Explosions/Remote violence,212
+2025-04-12,Gaza,Protests,1
+2025-04-12,Gaza,Strategic developments,47
+2025-04-12,Gaza,Violence against civilians,1
+2025-04-12,Israel,Explosions/Remote violence,2
+2025-04-12,Israel,Protests,9
+2025-04-12,Israel,Riots,1
+2025-04-12,Israel,Strategic developments,9
+2025-04-19,Gaza,Battles,7
+2025-04-19,Gaza,Explosions/Remote violence,201
+2025-04-19,Gaza,Strategic developments,36
+2025-04-19,Gaza,Violence against civilians,4
+2025-04-19,Israel,Explosions/Remote violence,2
+2025-04-19,Israel,Protests,16
+2025-04-19,Israel,Riots,1
+2025-04-19,Israel,Strategic developments,6
+2025-04-26,Gaza,Battles,6
+2025-04-26,Gaza,Explosions/Remote violence,211
+2025-04-26,Gaza,Strategic developments,19
+2025-04-26,Gaza,Violence against civilians,4
+2025-04-26,Israel,Explosions/Remote violence,2
+2025-04-26,Israel,Protests,27
+2025-04-26,Israel,Riots,12
+2025-04-26,Israel,Strategic developments,13
+2025-05-03,Gaza,Battles,5
+2025-05-03,Gaza,Explosions/Remote violence,195
+2025-05-03,Gaza,Strategic developments,21
+2025-05-03,Gaza,Violence against civilians,12
+2025-05-03,Israel,Explosions/Remote violence,3
+2025-05-03,Israel,Protests,13
+2025-05-03,Israel,Riots,4
+2025-05-03,Israel,Strategic developments,8
+2025-05-10,Gaza,Battles,3
+2025-05-10,Gaza,Explosions/Remote violence,196
+2025-05-10,Gaza,Protests,1
+2025-05-10,Gaza,Strategic developments,21
+2025-05-10,Gaza,Violence against civilians,7
+2025-05-10,Israel,Explosions/Remote violence,2
+2025-05-10,Israel,Protests,56
+2025-05-10,Israel,Riots,2
+2025-05-10,Israel,Strategic developments,6
+2025-05-17,Gaza,Battles,6
+2025-05-17,Gaza,Explosions/Remote violence,244
+2025-05-17,Gaza,Protests,2
+2025-05-17,Gaza,Strategic developments,53
+2025-05-17,Gaza,Violence against civilians,6
+2025-05-17,Israel,Explosions/Remote violence,3
+2025-05-17,Israel,Protests,17
+2025-05-17,Israel,Riots,4
+2025-05-17,Israel,Strategic developments,9
+2025-05-17,Israel,Violence against civilians,1
+2025-05-24,Gaza,Battles,12
+2025-05-24,Gaza,Explosions/Remote violence,225
+2025-05-24,Gaza,Protests,1
+2025-05-24,Gaza,Riots,1
+2025-05-24,Gaza,Strategic developments,51
+2025-05-24,Gaza,Violence against civilians,18
+2025-05-24,Israel,Protests,38
+2025-05-24,Israel,Riots,4
+2025-05-24,Israel,Strategic developments,4
+2025-05-31,Gaza,Battles,10
+2025-05-31,Gaza,Explosions/Remote violence,234
+2025-05-31,Gaza,Strategic developments,52
+2025-05-31,Gaza,Violence against civilians,26
+2025-05-31,Israel,Explosions/Remote violence,3
+2025-05-31,Israel,Protests,20
+2025-05-31,Israel,Riots,4
+2025-05-31,Israel,Strategic developments,9
+2025-06-07,Gaza,Battles,16
+2025-06-07,Gaza,Explosions/Remote violence,200
+2025-06-07,Gaza,Strategic developments,36
+2025-06-07,Gaza,Violence against civilians,19
+2025-06-07,Israel,Explosions/Remote violence,5
+2025-06-07,Israel,Protests,43
+2025-06-07,Israel,Riots,1
+2025-06-07,Israel,Strategic developments,14
+2025-06-14,Gaza,Battles,8
+2025-06-14,Gaza,Explosions/Remote violence,173
+2025-06-14,Gaza,Strategic developments,32
+2025-06-14,Gaza,Violence against civilians,13
+2025-06-14,Israel,Explosions/Remote violence,67
+2025-06-14,Israel,Protests,5
+2025-06-14,Israel,Strategic developments,42
+2025-06-21,Gaza,Battles,15
+2025-06-21,Gaza,Explosions/Remote violence,166
+2025-06-21,Gaza,Protests,1
+2025-06-21,Gaza,Strategic developments,30
+2025-06-21,Gaza,Violence against civilians,30
+2025-06-21,Israel,Explosions/Remote violence,17
+2025-06-21,Israel,Protests,21
+2025-06-21,Israel,Riots,1
+2025-06-21,Israel,Strategic developments,18
+2025-06-28,Gaza,Battles,9
+2025-06-28,Gaza,Explosions/Remote violence,203
+2025-06-28,Gaza,Strategic developments,60
+2025-06-28,Gaza,Violence against civilians,19
+2025-06-28,Israel,Explosions/Remote violence,2
+2025-06-28,Israel,Protests,37
+2025-06-28,Israel,Riots,2
+2025-06-28,Israel,Strategic developments,6
+2025-07-05,Gaza,Battles,7
+2025-07-05,Gaza,Explosions/Remote violence,223
+2025-07-05,Gaza,Strategic developments,37
+2025-07-05,Gaza,Violence against civilians,21
+2025-07-05,Israel,Explosions/Remote violence,2
+2025-07-05,Israel,Protests,42
+2025-07-05,Israel,Riots,1
+2025-07-05,Israel,Strategic developments,7
+2025-07-12,Gaza,Battles,9
+2025-07-12,Gaza,Explosions/Remote violence,210
+2025-07-12,Gaza,Strategic developments,50
+2025-07-12,Gaza,Violence against civilians,16
+2025-07-12,Israel,Explosions/Remote violence,2
+2025-07-12,Israel,Protests,38
+2025-07-12,Israel,Riots,3
+2025-07-12,Israel,Strategic developments,7
+2025-07-19,Gaza,Battles,7
+2025-07-19,Gaza,Explosions/Remote violence,168
+2025-07-19,Gaza,Strategic developments,44
+2025-07-19,Gaza,Violence against civilians,27
+2025-07-19,Israel,Battles,1
+2025-07-19,Israel,Explosions/Remote violence,4
+2025-07-19,Israel,Protests,32
+2025-07-19,Israel,Riots,11
+2025-07-19,Israel,Strategic developments,5
+2025-07-26,Gaza,Battles,7
+2025-07-26,Gaza,Explosions/Remote violence,148
+2025-07-26,Gaza,Strategic developments,32
+2025-07-26,Gaza,Violence against civilians,19
+2025-07-26,Israel,Explosions/Remote violence,2
+2025-07-26,Israel,Protests,58
+2025-07-26,Israel,Riots,2
+2025-07-26,Israel,Strategic developments,8
+2025-08-02,Gaza,Battles,2
+2025-08-02,Gaza,Explosions/Remote violence,160
+2025-08-02,Gaza,Strategic developments,33
+2025-08-02,Gaza,Violence against civilians,31
+2025-08-02,Israel,Battles,1
+2025-08-02,Israel,Explosions/Remote violence,2
+2025-08-02,Israel,Protests,58
+2025-08-02,Israel,Riots,9
+2025-08-02,Israel,Strategic developments,5
+2025-08-09,Gaza,Battles,4
+2025-08-09,Gaza,Explosions/Remote violence,156
+2025-08-09,Gaza,Strategic developments,32
+2025-08-09,Gaza,Violence against civilians,29
+2025-08-09,Israel,Explosions/Remote violence,2
+2025-08-09,Israel,Protests,53
+2025-08-09,Israel,Riots,2
+2025-08-09,Israel,Strategic developments,5
+2025-08-16,Gaza,Battles,2
+2025-08-16,Gaza,Explosions/Remote violence,158
+2025-08-16,Gaza,Protests,3
+2025-08-16,Gaza,Strategic developments,32
+2025-08-16,Gaza,Violence against civilians,23
+2025-08-16,Israel,Battles,1
+2025-08-16,Israel,Explosions/Remote violence,3
+2025-08-16,Israel,Protests,80
+2025-08-16,Israel,Riots,8
+2025-08-16,Israel,Strategic developments,7
+2025-08-23,Gaza,Battles,4
+2025-08-23,Gaza,Explosions/Remote violence,184
+2025-08-23,Gaza,Strategic developments,35
+2025-08-23,Gaza,Violence against civilians,26
+2025-08-23,Israel,Protests,81
+2025-08-23,Israel,Riots,4
+2025-08-23,Israel,Strategic developments,9
+2025-08-30,Gaza,Battles,2
+2025-08-30,Gaza,Explosions/Remote violence,185
+2025-08-30,Gaza,Protests,1
+2025-08-30,Gaza,Strategic developments,37
+2025-08-30,Gaza,Violence against civilians,25
+2025-08-30,Israel,Explosions/Remote violence,2
+2025-08-30,Israel,Protests,60
+2025-08-30,Israel,Riots,5
+2025-08-30,Israel,Strategic developments,4
+2025-09-06,Gaza,Battles,4
+2025-09-06,Gaza,Explosions/Remote violence,169
+2025-09-06,Gaza,Protests,1
+2025-09-06,Gaza,Strategic developments,25
+2025-09-06,Gaza,Violence against civilians,21
+2025-09-06,Israel,Explosions/Remote violence,5
+2025-09-06,Israel,Protests,33
+2025-09-06,Israel,Riots,2
+2025-09-06,Israel,Strategic developments,10
+2025-09-06,Israel,Violence against civilians,1
+2025-09-13,Gaza,Battles,4
+2025-09-13,Gaza,Explosions/Remote violence,179
+2025-09-13,Gaza,Strategic developments,26
+2025-09-13,Gaza,Violence against civilians,13
+2025-09-13,Israel,Explosions/Remote violence,5
+2025-09-13,Israel,Protests,42
+2025-09-13,Israel,Riots,6
+2025-09-13,Israel,Strategic developments,7
+2025-09-20,Gaza,Battles,10
+2025-09-20,Gaza,Explosions/Remote violence,185
+2025-09-20,Gaza,Strategic developments,19
+2025-09-20,Gaza,Violence against civilians,16
+2025-09-20,Israel,Explosions/Remote violence,5
+2025-09-20,Israel,Protests,30
+2025-09-20,Israel,Strategic developments,5
+2025-09-27,Gaza,Battles,12
+2025-09-27,Gaza,Explosions/Remote violence,208
+2025-09-27,Gaza,Strategic developments,28
+2025-09-27,Gaza,Violence against civilians,12
+2025-09-27,Israel,Explosions/Remote violence,2
+2025-09-27,Israel,Protests,36
+2025-09-27,Israel,Strategic developments,7
+2025-09-27,Israel,Violence against civilians,1
+2025-10-04,Gaza,Battles,4
+2025-10-04,Gaza,Explosions/Remote violence,169
+2025-10-04,Gaza,Protests,1
+2025-10-04,Gaza,Strategic developments,24
+2025-10-04,Gaza,Violence against civilians,10
+2025-10-04,Israel,Explosions/Remote violence,1
+2025-10-04,Israel,Protests,54
+2025-10-04,Israel,Riots,3
+2025-10-04,Israel,Strategic developments,6
+2025-10-11,Gaza,Battles,12
+2025-10-11,Gaza,Explosions/Remote violence,26
+2025-10-11,Gaza,Strategic developments,9
+2025-10-11,Gaza,Violence against civilians,9
+2025-10-11,Israel,Battles,1
+2025-10-11,Israel,Protests,11
+2025-10-11,Israel,Riots,1
+2025-10-11,Israel,Strategic developments,1
+2025-10-18,Gaza,Battles,3
+2025-10-18,Gaza,Explosions/Remote violence,43
+2025-10-18,Gaza,Strategic developments,16
+2025-10-18,Gaza,Violence against civilians,5
+2025-10-18,Israel,Protests,16
+2025-10-18,Israel,Riots,6
+2025-10-18,Israel,Strategic developments,1
+2025-10-25,Gaza,Battles,1
+2025-10-25,Gaza,Explosions/Remote violence,88
+2025-10-25,Gaza,Strategic developments,30
+2025-10-25,Gaza,Violence against civilians,4
+2025-10-25,Israel,Protests,25
+2025-10-25,Israel,Riots,1
+2025-10-25,Israel,Strategic developments,6
+2025-10-25,Israel,Violence against civilians,1
+2025-11-01,Gaza,Explosions/Remote violence,64
+2025-11-01,Gaza,Strategic developments,38
+2025-11-01,Gaza,Violence against civilians,2
+2025-11-01,Israel,Protests,16
+2025-11-01,Israel,Riots,1
+2025-11-01,Israel,Strategic developments,4
+2025-11-01,Israel,Violence against civilians,1
+2025-11-08,Gaza,Battles,4
+2025-11-08,Gaza,Explosions/Remote violence,55
+2025-11-08,Gaza,Strategic developments,28
+2025-11-08,Gaza,Violence against civilians,2
+2025-11-08,Israel,Protests,17
+2025-11-08,Israel,Riots,3
+2025-11-08,Israel,Strategic developments,3
+2025-11-15,Gaza,Battles,2
+2025-11-15,Gaza,Explosions/Remote violence,84
+2025-11-15,Gaza,Strategic developments,20
+2025-11-15,Gaza,Violence against civilians,2
+2025-11-15,Israel,Protests,24
+2025-11-15,Israel,Riots,2
+2025-11-15,Israel,Strategic developments,5
+2025-11-22,Gaza,Battles,5
+2025-11-22,Gaza,Explosions/Remote violence,81
+2025-11-22,Gaza,Strategic developments,19
+2025-11-22,Gaza,Violence against civilians,1
+2025-11-22,Israel,Protests,21
+2025-11-22,Israel,Riots,4
+2025-11-22,Israel,Strategic developments,4
+2025-11-29,Gaza,Battles,4
+2025-11-29,Gaza,Explosions/Remote violence,87
+2025-11-29,Gaza,Strategic developments,15
+2025-11-29,Gaza,Violence against civilians,2
+2025-11-29,Israel,Protests,24
+2025-11-29,Israel,Riots,3
+2025-11-29,Israel,Strategic developments,2
+2025-12-06,Gaza,Battles,1
+2025-12-06,Gaza,Explosions/Remote violence,74
+2025-12-06,Gaza,Strategic developments,26
+2025-12-06,Gaza,Violence against civilians,4
+2025-12-06,Israel,Protests,14
+2025-12-06,Israel,Riots,1
+2025-12-06,Israel,Strategic developments,3

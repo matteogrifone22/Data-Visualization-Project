@@ -1,17 +1,21 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { HashRouter, Routes, Route } from 'react-router-dom'
-import './style.css'
-import App from './App.jsx'
-import Datasets from './Datasets.jsx'
+
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import { HashRouter, Routes, Route } from 'react-router-dom';
+import './style.css';
+import App from './App.jsx';
+import Datasets from './Datasets.jsx';
+import { ThemeProvider } from './ThemeContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/datasets" element={<Datasets />} />
-      </Routes>
-    </HashRouter>
+    <ThemeProvider>
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/datasets" element={<Datasets />} />
+        </Routes>
+      </HashRouter>
+    </ThemeProvider>
   </StrictMode>,
-)
+);

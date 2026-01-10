@@ -48,7 +48,7 @@ h1, h2, h3, h4, h5, h6 {
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: var(--bg-primary);
 
   /* Core palette used in inline styles (e.g., footer background) */
   --color-unige-blue: #002677;

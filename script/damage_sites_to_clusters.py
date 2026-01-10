@@ -87,6 +87,7 @@ class Cluster:
         
         # Calculate radius based on sqrt(count) * 10m (no cap for proper proportions)
         self.radius = math.sqrt(self.count) * BUILDING_SIZE
+        self.area = math.pi * (self.radius ** 2)
     
     def overlaps(self, other):
         """Check if this cluster's circle overlaps with another."""
@@ -108,6 +109,7 @@ class Cluster:
         
         # Recalculate radius
         self.radius = math.sqrt(self.count) * BUILDING_SIZE
+        self.area = math.pi * (self.radius ** 2)
     
     def to_geojson_feature(self):
         """Convert to GeoJSON Point feature."""
@@ -116,7 +118,9 @@ class Cluster:
             'type': 'Feature',
             'properties': {
                 'count': self.count,
-                'radius': round(self.radius, 2)
+                'radius': round(self.radius, 2),
+                'area_m2': round(self.area, 2),
+                'area_ha': round(self.area / 10000, 2)
             },
             'geometry': {
                 'type': 'Point',
@@ -164,34 +168,45 @@ def merge_overlapping_clusters(clusters):
     return clusters
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument('--input', required=True)
-    ap.add_argument('--output', required=True)
-    ap.add_argument('--eps', type=float, default=500.0, help='Clustering distance in meters')
-    args = ap.parse_args()
 
-    print(f"Loading {args.input}...")
-    with open(args.input, 'r', encoding='utf-8') as f:
+    # --- HARDCODED INPUTS ---
+    INPUT_PATH = r'C:\Users\mfmat\Documents\Magistrale\SecondoAnno\DV\Data-Visualization-Project\src\GazaMap\Damage_Sites_GazaStrip_20251011_slim.geojson'  # Change as needed
+    OUTPUT_PATH = r'C:\Users\mfmat\Documents\Magistrale\SecondoAnno\DV\Data-Visualization-Project\src\GazaMap\Damage_Sites_clusters_500m.geojson'
+    EPS = 500.0  # meters
+
+    print(f"Loading {INPUT_PATH}...")
+    with open(INPUT_PATH, 'r', encoding='utf-8') as f:
         gj = json.load(f)
 
-    # Collect points
-    points_ll = []
+
+    # Collect points and deduplicate (within 1cm)
+    points_ll_raw = []
     for feat in gj.get('features', []):
         geom = feat.get('geometry')
         if not geom:
             continue
         if geom.get('type') == 'Point':
             lon, lat = geom['coordinates'][:2]
-            points_ll.append((float(lon), float(lat)))
+            points_ll_raw.append((float(lon), float(lat)))
+
+    # Deduplicate points (round to 5 decimal places ~1m, or 6 for ~10cm)
+    seen = set()
+    points_ll = []
+    for lon, lat in points_ll_raw:
+        key = (round(lon, 6), round(lat, 6))
+        if key not in seen:
+            seen.add(key)
+            points_ll.append((lon, lat))
 
     if not points_ll:
         raise SystemExit('No Point features found in input.')
 
-    print(f"Found {len(points_ll)} points")
+    print(f"Found {len(points_ll_raw)} points, {len(points_ll)} after deduplication")
 
     # Initial clustering
-    print(f"Initial clustering with eps={args.eps}m...")
-    clusters = cluster_points(points_ll, args.eps)
+
+    print(f"Initial clustering with eps={EPS}m...")
+    clusters = cluster_points(points_ll, EPS)
     print(f"  Created {len(clusters)} initial clusters")
 
     # Merge overlapping clusters
@@ -207,10 +222,11 @@ def main():
         'features': features
     }
 
-    with open(args.output, 'w', encoding='utf-8') as f:
+
+    with open(OUTPUT_PATH, 'w', encoding='utf-8') as f:
         json.dump(out, f, separators=(',', ':'))
 
-    print(f"Saved {len(clusters)} non-overlapping cluster centroids -> {args.output}")
+    print(f"Saved {len(clusters)} non-overlapping cluster centroids -> {OUTPUT_PATH}")
 
 if __name__ == '__main__':
     main()

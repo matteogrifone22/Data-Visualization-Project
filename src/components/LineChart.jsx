@@ -18,7 +18,7 @@ export function LineChart({ isDark = true, guideActive = false }) {
 
         const load = async () => {
             if (dataRef.current.length === 0) {
-                const url = new URL('../Dataset/fatalities_per_month.csv', import.meta.url).href;
+                const url = new URL('../Dataset/processed/fatalities_per_month.csv', import.meta.url).href;
                 const rows = await d3.csv(url, (d) => {
                     const date = parseDate(d.MONTH);
                     const fatalities = Number(d.fatalities);
@@ -372,8 +372,8 @@ export function LineChart({ isDark = true, guideActive = false }) {
                     .style('opacity', 1)
                     .style('visibility', 'visible')
                     .html(tooltipHtml)
-                    .style('left', `${event.pageX + 12}px`)
-                    .style('top', `${event.pageY - 20}px`);
+                    .style('left', `${(event.pageX !== undefined ? event.pageX : event.clientX) + 12}px`)
+                    .style('top', `${(event.pageY !== undefined ? event.pageY : event.clientY) - 20}px`);
             };
 
             overlay

@@ -1,7 +1,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import NearMeIcon from '@mui/icons-material/NearMe';
 import ZoomInMapOutlinedIcon from '@mui/icons-material/ZoomInMapOutlined';
 import ZoomOutMapOutlinedIcon from '@mui/icons-material/ZoomOutMapOutlined';
@@ -332,17 +331,17 @@ export function SmallMultipleChart({ isDark = true, guideActive = false }) {
                                         arrow = '→';
                                         changeColor = 'var(--color-neutral)';
                                     } else if (change > 0) {
-                                        arrow = '↑';
+                                        arrow = '↑ +';
                                         changeColor = 'var(--color-positive)';
                                     } else {
-                                        arrow = '↓';
+                                        arrow = '↓ -';
                                         changeColor = 'var(--color-negative)';
                                     }
 
                                     content += `
                                         <div class="tooltip-trend">
                                             <span class="tooltip-trend-label">vs. ${year - 1}: </span>
-                                            <span class="tooltip-trend-value" style="color: ${changeColor};">${arrow} ${change > 0 ? '+' : ''}${changeFormatted}${metric.unit}</span>
+                                            <span class="tooltip-trend-value" style="color: ${changeColor};">${arrow} ${changeFormatted}${metric.unit}</span>
                                         </div>
                                     `;
                                 }
