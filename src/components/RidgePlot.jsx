@@ -4,8 +4,7 @@ import NearMeIcon from '@mui/icons-material/NearMe';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 
 export function RidgeChart({ isDark = true, guideActive = false }) {
-        // Track if any original country was 'Gaza' for legend/tooltip display
-        const originalCountryRef = useRef({ hasGaza: false });
+    const originalCountryRef = useRef({ hasGaza: false });
     const svgRef = useRef(null);
     const wrapperRef = useRef(null);
     const dataRef = useRef([]);
@@ -468,7 +467,7 @@ export function RidgeChart({ isDark = true, guideActive = false }) {
                 alignSelf: 'flex-start',
                 position: 'sticky',
                 top: '20px',
-                zIndex: 21000,
+                
             }}>
                 <div style={{ marginBottom: '15px', fontWeight: 'bold', fontSize: '14px', color: 'var(--text-primary)' }}>
                     Event Types
@@ -550,7 +549,7 @@ export function RidgeChart({ isDark = true, guideActive = false }) {
                         <div
                             style={{
                                 position: 'absolute',
-                                left: '-2%',
+                                left: '0%',
                                 top: '30%',
                                 zIndex: 20999,
                                 display: 'flex',

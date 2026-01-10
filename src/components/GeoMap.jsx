@@ -449,8 +449,8 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                             Hover tooltip
                         </div>
                     )}
-                    {/* Zoom controls banner (always visible if map is shown) */}
-                    {datasetMode && (
+                    {/* Zoom controls banner (always visible if map is shown or guide is active) */}
+                    {(datasetMode || guideActive) && (
                         <>
                             <div style={{
                                 position: 'absolute', left: '89%', top: '-1%', zIndex: 21000, display: 'flex', alignItems: 'center',
@@ -490,7 +490,7 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                 </>
             )}
             {/* Controls on the left */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '120px', zIndex: 21000 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', width: '120px'}}>
                 {/* Dataset Selector */}
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'stretch', gap: '6px' }}>
                     <label style={{ fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)' }}>Dataset</label>
@@ -580,34 +580,17 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                 <div style={{ position: 'relative', zIndex: 1 }}>
                         <div style={{
                             position: 'absolute',
-                            right: 12,
-                            bottom: 10,
-                            fontSize: '0.95rem',
-                            color: isDark ? 'var(--text-secondary)' : 'var(--text-secondary)',
-                            opacity: 0.5,
-                            padding: '2px 10px',
-                            borderRadius: '12px',
-                            fontFamily: 'var(--font-serif)',
-                            zIndex: 2
-                        }}>
-                            Data source: <strong>HDX    </strong>
-                        </div>
-                        {/* Zoom Controls */}
-                        <div style={{
-                            position: 'absolute',
                             top: '0px',
                             right: '10px',
-                            zIndex: 10,
                             display: 'flex',
                             flexDirection: 'column',
                             gap: '6px',
-                            alignItems: 'center',
-                            zIndex: 21000
+                            alignItems: 'center'
                         }}>
                             <button
                                 onClick={handleZoomIn}
                                 className="control-button"
-                                style={{ width: '50px', fontSize: '16px' }}
+                                style={{ width: '50px', fontSize: '16px'}}
                             >
                                 +
                             </button>
@@ -639,6 +622,20 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                                 Zoom: {zoomLevel.toFixed(1)}x
                             </div>
                         </div>
+                        <div style={{
+                            position: 'absolute',
+                            right: 12,
+                            bottom: 10,
+                            fontSize: '0.95rem',
+                            color: isDark ? 'var(--text-secondary)' : 'var(--text-secondary)',
+                            opacity: 0.5,
+                            padding: '2px 10px',
+                            borderRadius: '12px',
+                            fontFamily: 'var(--font-serif)',
+                            zIndex: 2
+                        }}>
+                            Data source: <strong>HDX    </strong>
+                        </div>
                         {/* Date Display and Map Container - Fixed height to prevent shifting */}
                         <div ref={mapContainerRef} style={{ minHeight: '430px' }}>
                             {/* Current Date Display - Prominent at top when in monthly view */}
@@ -663,7 +660,6 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                                         className="chapter2-icon-button"
                                         onClick={() => setIsPlaying(!isPlaying)}
                                         aria-label={isPlaying ? 'Pause autoplay' : 'Play autoplay'}
-                                        style={{ zIndex: 21000 }}
                                     >
                                         {isPlaying ? '⏸' : '▶'}
                                     </button>
@@ -671,7 +667,6 @@ const GeoChart = ({ isDark, isMonochromacy = false, guideActive = false }) => {
                                         className="chapter2-icon-button"
                                         onClick={() => setSelectedDate(dateRange.min)}
                                         aria-label="Reset to start"
-                                        style={{ zIndex: 21000 }}
                                     >
                                         ⏮
                                     </button>

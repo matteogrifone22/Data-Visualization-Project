@@ -504,7 +504,6 @@ export function ViolinBoxPlot({ isDark = true, guideActive = false }) {
           aria-pressed={showCompare}
           aria-label={showCompare ? "Hide compare" : "Show compare"}
           title={showCompare ? "Hide compare" : "Show compare"}
-          style={{ zIndex: 21000 }}
         >
           <CompareArrows fontSize="small" />
         </button>
@@ -512,7 +511,6 @@ export function ViolinBoxPlot({ isDark = true, guideActive = false }) {
           className="chapter2-icon-button"
           onClick={() => setIsPlaying((p) => !p)}
           aria-label={isPlaying ? "Pause autoplay" : "Play autoplay"}
-          style={{ zIndex: 21000 }}
         >
           {isPlaying ? <Pause fontSize="small" /> : <PlayArrow fontSize="small" />}
         </button>

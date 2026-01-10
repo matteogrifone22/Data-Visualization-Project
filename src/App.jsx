@@ -18,51 +18,8 @@ export default function App() {
   const [guideActive, setGuideActive] = useState(false);
   const { isDark, setIsDark, isMonochromacy, setIsMonochromacy } = useThemeContext();
     // Guide overlay content for each plot
-    const getGuideContent = () => {
-      switch (activeSection) {
-        case 'chapter6': // Map
-          return (
-            <Box sx={{ color: 'var(--text-primary)', p: 3, maxWidth: 420, background: 'var(--bg-secondary)', borderRadius: 3, boxShadow: 3, border: '2px solid var(--color-details)' }}>
-              <Typography variant="h6" sx={{ mb: 1, color: 'var(--color-details)' }}>Map Guide</Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                <b>Zoom & Pan:</b> Use your mouse or touchpad to zoom and drag the map.<br/>
-                <b>Incident Icons:</b> Hover for details. Click to focus.<br/>
-                <b>Legend & Filters:</b> Use the controls to filter by type/date.<br/>
-                <b>Animation:</b> Use the play button to animate events over time.<br/>
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'var(--color-details)' }}>
-                Click anywhere to close this guide.
-              </Typography>
-            </Box>
-          );
-        case 'introduction':
-          return (
-            <Box sx={{ color: 'var(--text-primary)', p: 3, maxWidth: 420, background: 'var(--bg-secondary)', borderRadius: 3, boxShadow: 3, border: '2px solid var(--color-details)', textAlign: 'center' }}>
-              <Typography variant="h6" sx={{ mb: 1, color: 'var(--color-details)' }}>Guide</Typography>
-              <Typography variant="body1" sx={{ mb: 2, fontWeight: 500, color: 'var(--text-primary)' }}>
-                This guide will explain how to interact with the charts.<br/>
-                Please inquadrane una.
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'var(--color-details)' }}>
-                Click anywhere to close this guide.
-              </Typography>
-            </Box>
-          );
-        default:
-          return (
-            <Box sx={{ color: 'var(--text-primary)', p: 3, maxWidth: 420, background: 'var(--bg-secondary)', borderRadius: 3, boxShadow: 3, border: '2px solid var(--color-details)' }}>
-              <Typography variant="h6" sx={{ mb: 1, color: 'var(--color-details)' }}>Guide</Typography>
-              <Typography variant="body2" sx={{ mb: 1 }}>
-                This section contains interactive charts. Hover, click, or use controls to explore the data.<br/>
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'var(--color-details)' }}>
-                Click anywhere to close this guide.
-              </Typography>
-            </Box>
-          );
-      }
-    };
-  
+    
+      
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeSection, setActiveSection] = useState('introduction');
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -211,19 +168,8 @@ export default function App() {
 
   if (isMobileBlocked) {
     return (
-      <Box
-        sx={{
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: 'var(--bg-primary)',
-          color: 'var(--text-primary)',
-          padding: '24px',
-          textAlign: 'center'
-        }}
-      >
-        <Box sx={{ maxWidth: 520, border: '1px solid var(--color-details)', borderRadius: '12px', padding: '24px 20px', boxShadow: '0 12px 32px rgba(0,0,0,0.18)', backgroundColor: 'var(--bg-secondary)' }}>
+      <Box sx={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', padding: '24px', textAlign: 'center' }}>
+        <Box sx={{ maxWidth: 520, margin: '32px auto', border: '1px solid var(--color-details)', borderRadius: '12px', padding: '24px 20px', boxShadow: '0 12px 32px rgba(0,0,0,0.18)', backgroundColor: 'var(--bg-secondary)' }}>
           <Typography variant="h6" sx={{ fontWeight: 700, marginBottom: '10px' }}>
             Desktop Experience Required
           </Typography>
@@ -526,7 +472,7 @@ export default function App() {
               py: 3,
               minWidth: 120,
               minHeight: 60,
-              zIndex: 20001,
+              zIndex: 24000,
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',

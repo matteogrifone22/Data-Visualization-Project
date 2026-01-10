@@ -71,7 +71,6 @@ export default function Footer({ isDark, isMonochromacy }) {
                 }
               }
             }}
-            arrow
           >
             <Link
               href="https://www.linkedin.com/in/mfmatteoferrari/"
@@ -105,7 +104,6 @@ export default function Footer({ isDark, isMonochromacy }) {
                 }
               }
             }}
-            arrow
           >
             <Link
               href="https://github.com/matteogrifone22"
@@ -139,7 +137,6 @@ export default function Footer({ isDark, isMonochromacy }) {
                 }
               }
             }}
-            arrow
           >
             <Link
               href="https://github.com/matteogrifone22/Data-Visualization-Project"

@@ -10,6 +10,29 @@ import Footer from './Footer';
 import { useThemeContext } from './ThemeContext.jsx';
 
 export default function Datasets() {
+    // Scroll to top on mount
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }, []);
+
+    // Prevent scrolling under the footer, but allow the footer to be fully visible
+    useEffect(() => {
+      const handleScroll = () => {
+        const footer = document.querySelector('footer');
+        if (!footer) return;
+        const footerRect = footer.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        const footerHeight = footer.offsetHeight;
+        // The maximum scroll position so the bottom of the viewport is at the bottom of the page (footer fully visible)
+        const maxScroll = docHeight - windowHeight;
+        if (window.scrollY > maxScroll) {
+          window.scrollTo({ top: maxScroll, behavior: 'auto' });
+        }
+      };
+      window.addEventListener('scroll', handleScroll);
+      return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
   const { isDark, setIsDark, isMonochromacy, setIsMonochromacy } = useThemeContext();
 
   useLayoutEffect(() => {
