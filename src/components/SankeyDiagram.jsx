@@ -474,47 +474,71 @@ export function EventsSankeyDiagram({ isDark = true, isMonochromacy = false, gui
         svg.selectAll(".sankey-link").attr("opacity", 0.4);
         setTooltip(t => ({ ...t, visible: false }));
       });
+    // Create labelData before using it
+    const labelData = [];
+    graph.nodes.forEach(d => {
+      const name = d.name || d.id;
+      const nodeHeight = d.y1 - d.y0;
+      // Determine position: countries (left col) → right side, event types (center col) → left side, sub-events (right col) → left side
+      const isCountry = d.id === "Israel" || d.id === "Gaza";
+      const isSubEvent = d.id.includes("|");
+      const isEventType = !isCountry && !isSubEvent;
+      let labelX, textAnchor;
+      if (isCountry) {
+        labelX = d.x1 + 6;
+        textAnchor = "start";
+      } else {
+        labelX = d.x0 - 6;
+        textAnchor = "end";
+      }
+      const fontSize = nodeHeight < 15 ? 9 : 11;
+      const maxLength = 35;
+      const displayName = name.length > maxLength ? name.substring(0, maxLength - 3) + "..." : name;
+      labelData.push({
+        node: d,
+        name: displayName,
+        x: labelX,
+        y: (d.y1 + d.y0) / 2,
+        textAnchor: textAnchor,
+        fontSize: fontSize,
+        originalY: (d.y1 + d.y0) / 2
+      });
+    });
+
     // Second pass: adjust positions to avoid overlaps
     // Group labels by their text-anchor direction (right-aligned vs left-aligned)
     const rightAnchoredLabels = labelData.filter(d => d.textAnchor === "end").sort((a, b) => a.originalY - b.originalY);
     const leftAnchoredLabels = labelData.filter(d => d.textAnchor === "start").sort((a, b) => a.originalY - b.originalY);
-    
+
     const adjustLabels = (labels) => {
       const minSpacing = 14; // Minimum vertical spacing between labels
-      
       for (let i = 1; i < labels.length; i++) {
         const current = labels[i];
         const previous = labels[i - 1];
         const overlap = (previous.y + minSpacing) - current.y;
-        
         if (overlap > 0) {
           current.y = previous.y + minSpacing;
         }
       }
-      
       // Second pass: push down from top if needed
       for (let i = labels.length - 2; i >= 0; i--) {
         const current = labels[i];
         const next = labels[i + 1];
         const overlap = (current.y + minSpacing) - next.y;
-        
         if (overlap > 0) {
           current.y = next.y - minSpacing;
         }
       }
     };
-    
+
     adjustLabels(rightAnchoredLabels);
     adjustLabels(leftAnchoredLabels);
-    
+
     // Third pass: render labels with adjusted positions
     nodeGroups.each(function(d) {
       const group = d3.select(this);
       const labelInfo = labelData.find(l => l.node === d);
       if (!labelInfo) return;
-      
-      // Removed label connection lines
-      
       group
         .append("text")
         .attr("class", "node-label")
