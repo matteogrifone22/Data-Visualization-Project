@@ -1,4 +1,4 @@
-import { Box, Typography, Link, AppBar, Toolbar, IconButton, Fab } from '@mui/material';
+import { Box, Typography, Link, AppBar, Toolbar, IconButton, Fab, Tooltip } from '@mui/material';
 import { DarkMode, LightMode, Visibility, VisibilityOff, KeyboardArrowUp as KeyboardArrowUpIcon } from '@mui/icons-material';
 import { useState, useLayoutEffect, useEffect, useRef } from 'react';
 import acledLogo from './DatasetIcons/ACLED-Logo-Coloured.webp';
@@ -222,55 +222,86 @@ export default function Datasets() {
             >
               <strong>Back to Home</strong>
             </Link>
-            <IconButton
-              onClick={toggleTheme}
-              disableRipple
-              disableFocusRipple
-              disableTouchRipple
-              sx={{
-                color: navbarTextColor,
-                transition: 'transform 0.3s ease, color 0.3s ease',
-                outline: 'none !important',
-            
-                boxShadow: 'none !important',
-                '&:before, &:after': { display: 'none' },
-                '&:active': { backgroundColor: 'transparent !important' },
-                '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
-                '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
-                '&& .MuiTouchRipple-root': { display: 'none' },
-                '&:hover': {
-                  color: linkHoverColor,
-                  transform: 'rotate(20deg)',
-                  backgroundColor: 'transparent !important'
+            <Tooltip
+              title={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+              slotProps={{
+                tooltip: {
+                  sx: {
+                    backgroundColor: 'var(--bg-primary)',
+                    color: navbarTextColor,
+                    fontWeight: 600,
+                    fontSize: '0.95rem',
+                    border: `1px solid ${linkHoverColor}`,
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.12)'
+                  }
                 }
               }}
             >
-              {isDark ? <LightMode /> : <DarkMode />}
-            </IconButton>
-            <IconButton
-              onClick={toggleMonochromacy}
-              disableRipple
-              disableFocusRipple
-              disableTouchRipple
-              sx={{
-                color: navbarTextColor,
-                transition: 'transform 0.3s ease, color 0.3s ease',
-                outline: 'none !important',
-                boxShadow: 'none !important',
-                '&:before, &:after': { display: 'none' },
-                '&:active': { backgroundColor: 'transparent !important' },
-                '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
-                '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
-                '&& .MuiTouchRipple-root': { display: 'none' },
-                '&:hover': {
-                  color: linkHoverColor,
-                  transform: 'scale(1.15)',
-                  backgroundColor: 'transparent !important'
+              <IconButton
+                onClick={toggleTheme}
+                disableRipple
+                disableFocusRipple
+                disableTouchRipple
+                sx={{
+                  color: navbarTextColor,
+                  transition: 'transform 0.3s ease, color 0.3s ease',
+                  outline: 'none !important',
+                  boxShadow: 'none !important',
+                  '&:before, &:after': { display: 'none' },
+                  '&:active': { backgroundColor: 'transparent !important' },
+                  '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+                  '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+                  '&& .MuiTouchRipple-root': { display: 'none' },
+                  '&:hover': {
+                    color: linkHoverColor,
+                    transform: 'rotate(20deg)',
+                    backgroundColor: 'transparent !important'
+                  }
+                }}
+              >
+                {isDark ? <LightMode /> : <DarkMode />}
+              </IconButton>
+            </Tooltip>
+            <Tooltip
+              title={isMonochromacy ? 'Disable Colorblind Guide' : 'Enable Colorblind Guide'}
+              slotProps={{
+                tooltip: {
+                  sx: {
+                    backgroundColor: 'var(--bg-primary)',
+                    color: navbarTextColor,
+                    fontWeight: 600,
+                    fontSize: '0.95rem',
+                    border: `1px solid ${linkHoverColor}`,
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.12)'
+                  }
                 }
               }}
             >
-              {isMonochromacy ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
+              <IconButton
+                onClick={toggleMonochromacy}
+                disableRipple
+                disableFocusRipple
+                disableTouchRipple
+                sx={{
+                  color: navbarTextColor,
+                  transition: 'transform 0.3s ease, color 0.3s ease',
+                  outline: 'none !important',
+                  boxShadow: 'none !important',
+                  '&:before, &:after': { display: 'none' },
+                  '&:active': { backgroundColor: 'transparent !important' },
+                  '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+                  '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+                  '&& .MuiTouchRipple-root': { display: 'none' },
+                  '&:hover': {
+                    color: linkHoverColor,
+                    transform: 'scale(1.15)',
+                    backgroundColor: 'transparent !important'
+                  }
+                }}
+              >
+                {isMonochromacy ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </Tooltip>
           </Box>
         </Toolbar>
       </AppBar>

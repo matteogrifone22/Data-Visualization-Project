@@ -1,6 +1,8 @@
+
 import { useState, useEffect, useRef, useLayoutEffect } from 'react';
-import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab, Tooltip, Backdrop } from '@mui/material';
-import { DarkMode, LightMode, Visibility, VisibilityOff, HelpOutline } from '@mui/icons-material';
+import { AppBar, Toolbar, Typography, Box, Link, IconButton, Fab, Tooltip, Backdrop, Menu, MenuItem } from '@mui/material';
+import { DarkMode, LightMode, Visibility, VisibilityOff, HelpOutline, Menu as MenuIcon } from '@mui/icons-material';
+
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import TerritoryMap from './components/TerritoryMap';
 import LineChart from './components/LineChart';
@@ -12,9 +14,36 @@ import DonutChart from './components/DonutChart';
 import GeoChart from './components/GeoMap';
 import Footer from './Footer.jsx';
 import { useThemeContext } from './ThemeContext.jsx';
+
+import ResponsiveNavbar from './ResponsiveNavbar.jsx';
 import { rgb } from 'd3';
 
 export default function App() {
+  // All hooks must be inside the function component!
+  const [anchorEl, setAnchorEl] = useState(null);
+  const isMenuOpen = Boolean(anchorEl);
+
+  // Chapter definitions
+  const [useShortLabels, setUseShortLabels] = useState(false); // move this up so it's available for chapters
+  const chapters = [
+    { id: 'introduction', label: 'War or Genocide?' },
+    { id: 'chapter1', label: useShortLabels ? 'Life' : 'Life' },
+    { id: 'chapter2', label: useShortLabels ? 'Mortality' : 'Mortality' },
+    { id: 'chapter3', label: useShortLabels ? 'Events' : 'Events' },
+    { id: 'chapter4', label: useShortLabels ? 'Timeline' : 'Timeline' },
+    { id: 'chapter5', label: useShortLabels ? 'Fatalities' : 'Fatalities' },
+    { id: 'chapter6', label: useShortLabels ? 'Map' : 'Map' },
+  ];
+
+  const handleMenuOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+
   const [guideActive, setGuideActive] = useState(false);
   const { isDark, setIsDark, isMonochromacy, setIsMonochromacy } = useThemeContext();
     // Guide overlay content for each plot
@@ -25,7 +54,6 @@ export default function App() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [emailCopied, setEmailCopied] = useState(false);
   const [isMobileBlocked, setIsMobileBlocked] = useState(false);
-  const [useShortLabels, setUseShortLabels] = useState(false);
   const navbarRef = useRef(null);
   const toolbarRef = useRef(null);
   const mobileBlockedRef = useRef(false);
@@ -84,9 +112,10 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    // Trigger responsive navbar at a larger width (e.g., 1350px)
     const updateLabels = () => {
       const w = window.innerWidth || document.documentElement.clientWidth;
-      setUseShortLabels(w < 1195);
+      setUseShortLabels(w < 1350);
     };
 
     updateLabels();
@@ -165,7 +194,7 @@ export default function App() {
   const navbarShadow = 'var(--navbar-shadow)';
   const navbarBgColor = 'var(--bg-primary)';
 
-
+/*
   if (isMobileBlocked) {
     return (
       <Box sx={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', padding: '24px', textAlign: 'center' }}>
@@ -180,7 +209,7 @@ export default function App() {
       </Box>
     );
   }
-
+  */
   return (
     <Box sx={{
       backgroundColor: bgColor,
@@ -202,13 +231,11 @@ export default function App() {
           transform: 'translateX(-50%)',
           width: { xs: '95%', md: 'auto' },
           maxWidth: { xs: '95%', md: '90%' },
-          minWidth: '700px',
+          minWidth: '60%',
           borderRadius: '50px',
-          // Semi-transparent background for glass effect
           backgroundColor: 'color-mix(in srgb, var(--bg-secondary) 70%, transparent)',
           backdropFilter: 'blur(16px) saturate(180%)',
           WebkitBackdropFilter: 'blur(16px) saturate(180%)',
-          // Remove colored border
           border: 'none',
           zIndex: 1300,
           boxShadow: navbarShadow,
@@ -219,133 +246,158 @@ export default function App() {
         <Toolbar
           sx={{
             display: 'flex',
-            flexWrap: 'nowrap', // Prevent wrapping
-            overflow: 'hidden', // Hide overflowed content
-            textOverflow: 'ellipsis', // Show ellipsis if overflow
-            whiteSpace: 'nowrap', // Force single line
+            flexWrap: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
             rowGap: { xs: 0.75, md: 1 },
             columnGap: { xs: 0.6, md: 1.5 },
             padding: { xs: '8px 10px', md: '8px 24px' },
             justifyContent: 'center',
-            minWidth: 0 // Allow shrinking
+            minWidth: 0
           }}
           ref={toolbarRef}
         >
-
-          <Link
-            href="#introduction"
-            onClick={(e) => scrollToSection(e, 'introduction')}
-            sx={{
-              color: activeSection === 'introduction' ? linkHoverColor : navbarTextColor,
-              textDecoration: 'none',
-              fontSize: { xs: '0.8rem', md: '0.95rem' },
-              cursor: 'pointer',
-              transition: 'color 0.3s ease',
-              fontFamily: 'var(--font-serif)',
-              fontWeight: activeSection === 'introduction' ? 700 : 600,
-              '&:hover': { color: linkHoverColor, opacity: 1 }
-            }}
-          >
-            War or Genocide?
-          </Link>
-          <Link
-            href="#chapter1"
-            onClick={(e) => scrollToSection(e, 'chapter1')}
-            sx={{
-              color: activeSection === 'chapter1' ? linkHoverColor : navbarTextColor,
-              textDecoration: 'none',
-              fontSize: { xs: '0.8rem', md: '0.95rem' },
-              cursor: 'pointer',
-              transition: 'color 0.3s ease',
-              fontFamily: 'var(--font-serif)',
-              fontWeight: activeSection === 'chapter1' ? 700 : 600,
-              '&:hover': { color: linkHoverColor, opacity: 1 }
-            }}
-          >
-            {useShortLabels ? 'Life' : 'Life'}
-          </Link>
-          <Link
-            href="#chapter2"
-            onClick={(e) => scrollToSection(e, 'chapter2')}
-            sx={{
-              color: activeSection === 'chapter2' ? linkHoverColor : navbarTextColor,
-              textDecoration: 'none',
-              fontSize: { xs: '0.8rem', md: '0.95rem' },
-              cursor: 'pointer',
-              transition: 'color 0.3s ease',
-              fontFamily: 'var(--font-serif)',
-              fontWeight: activeSection === 'chapter2' ? 700 : 600,
-              '&:hover': { color: linkHoverColor, opacity: 1 }
-            }}
-          >
-            {useShortLabels ? 'Mortality' : 'Mortality'}
-          </Link>
-          <Link
-            href="#chapter3"
-            onClick={(e) => scrollToSection(e, 'chapter3')}
-            sx={{
-              color: activeSection === 'chapter3' ? linkHoverColor : navbarTextColor,
-              textDecoration: 'none',
-              fontSize: { xs: '0.8rem', md: '0.95rem' },
-              cursor: 'pointer',
-              transition: 'color 0.3s ease',
-              fontFamily: 'var(--font-serif)',
-              fontWeight: activeSection === 'chapter3' ? 700 : 600,
-              '&:hover': { color: linkHoverColor, opacity: 1 }
-            }}
-          >
-            {useShortLabels ? 'Events' : 'Events'}
-          </Link>
-          <Link
-            href="#chapter4"
-            onClick={(e) => scrollToSection(e, 'chapter4')}
-            sx={{
-              color: activeSection === 'chapter4' ? linkHoverColor : navbarTextColor,
-              textDecoration: 'none',
-              fontSize: { xs: '0.8rem', md: '0.95rem' },
-              cursor: 'pointer',
-              transition: 'color 0.3s ease',
-              fontFamily: 'var(--font-serif)',
-              fontWeight: activeSection === 'chapter4' ? 700 : 600,
-              '&:hover': { color: linkHoverColor, opacity: 1 }
-            }}
-          >
-            {useShortLabels ? 'Timeline' : 'Timeline'}
-          </Link>
-          <Link
-            href="#chapter5"
-            onClick={(e) => scrollToSection(e, 'chapter5')}
-            sx={{
-              color: activeSection === 'chapter5' ? linkHoverColor : navbarTextColor,
-              textDecoration: 'none',
-              fontSize: { xs: '0.8rem', md: '0.95rem' },
-              cursor: 'pointer',
-              transition: 'color 0.3s ease',
-              fontFamily: 'var(--font-serif)',
-              fontWeight: activeSection === 'chapter5' ? 700 : 600,
-              '&:hover': { color: linkHoverColor, opacity: 1 }
-            }}
-          >
-            {useShortLabels ? 'Fatalities' : 'Fatalities'}
-          </Link>
-          <Link
-            href="#chapter6"
-            onClick={(e) => scrollToSection(e, 'chapter6')}
-            sx={{
-              color: activeSection === 'chapter6' ? linkHoverColor : navbarTextColor,
-              textDecoration: 'none',
-              fontSize: { xs: '0.8rem', md: '0.95rem' },
-              cursor: 'pointer',
-              transition: 'color 0.3s ease',
-              fontFamily: 'var(--font-serif)',
-              fontWeight: activeSection === 'chapter6' ? 700 : 600,
-              '&:hover': { color: linkHoverColor, opacity: 1 }
-            }}
-          >
-            {useShortLabels ? 'Map' : 'Map'}
-          </Link>
+          {/* Responsive: classic navbar for desktop, dropdown for mobile */}
+          {useShortLabels ? (
+            <>
+              {/* Show only active chapter */}
+              <Link
+                href={`#${activeSection}`}
+                onClick={(e) => scrollToSection(e, activeSection)}
+                sx={{
+                  color: linkHoverColor,
+                  textDecoration: 'none',
+                  fontSize: { xs: '0.9rem', md: '1rem' },
+                  cursor: 'pointer',
+                  fontFamily: 'var(--font-serif)',
+                  fontWeight: 700,
+                  mr: 1.5
+                }}
+              >
+                {chapters.find((c) => c.id === activeSection)?.label || 'Chapter'}
+              </Link>
+              {/* Dropdown menu for all chapters */}
+              <Menu
+                anchorEl={anchorEl}
+                open={isMenuOpen}
+                onClose={handleMenuClose}
+                keepMounted
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+                PaperProps={{
+                  sx: {
+                    borderRadius: 3,
+                    boxShadow: '0 8px 32px 0 rgba(0,0,0,0.18)',
+                    background: 'var(--bg-secondary)',
+                    color: 'var(--text-navbar)',
+                    minWidth: 180,
+                    py: 1,
+                  },
+                }}
+              >
+                {chapters.map((chapter) => (
+                  <MenuItem
+                    key={chapter.id}
+                    onClick={(e) => {
+                      handleMenuClose();
+                      scrollToSection(e, chapter.id);
+                    }}
+                    sx={{
+                      borderRadius: 2,
+                      mx: 1,
+                      my: 0.5,
+                      fontWeight: activeSection === chapter.id ? 700 : 500,
+                      color: activeSection === chapter.id ? 'var(--color-link-hover)' : 'var(--text-navbar)',
+                      backgroundColor: activeSection === chapter.id ? 'rgba(0,0,0,0.04)' : 'transparent',
+                      '&:hover': {
+                        backgroundColor: 'var(--color-link-hover)',
+                        color: 'var(--bg-primary)',
+                      },
+                      transition: 'all 0.2s',
+                    }}
+                  >
+                    {chapter.label}
+                  </MenuItem>
+                ))}
+              </Menu>
+              <IconButton
+                onClick={handleMenuOpen}
+                disableRipple
+                disableFocusRipple
+                disableTouchRipple
+                sx={{
+                  color: navbarTextColor,
+                  ml: 0.5,
+                  transition: 'color 0.3s ease',
+                  outline: 'none !important',
+                  boxShadow: 'none !important',
+                  backgroundColor: 'transparent !important',
+                  '&:hover': {
+                    color: linkHoverColor,
+                    backgroundColor: 'transparent !important',
+                  },
+                  '&:active': {
+                    backgroundColor: 'transparent !important',
+                  },
+                  '&:focus': {
+                    backgroundColor: 'transparent !important',
+                    boxShadow: 'none !important',
+                    outline: 'none !important',
+                  },
+                  '&:focusVisible': {
+                    backgroundColor: 'transparent !important',
+                    boxShadow: 'none !important',
+                    outline: 'none !important',
+                  },
+                  '&& .MuiTouchRipple-root': { display: 'none' },
+                }}
+                aria-label="Open navigation menu"
+              >
+                <MenuIcon />
+              </IconButton>
+            </>
+          ) : (
+            // Desktop: show all chapter links
+            <>
+              {chapters.map((chapter) => (
+                <Link
+                  key={chapter.id}
+                  href={`#${chapter.id}`}
+                  onClick={(e) => scrollToSection(e, chapter.id)}
+                  sx={{
+                    color: activeSection === chapter.id ? linkHoverColor : navbarTextColor,
+                    textDecoration: 'none',
+                    fontSize: { xs: '0.8rem', md: '0.95rem' },
+                    cursor: 'pointer',
+                    transition: 'color 0.3s ease',
+                    fontFamily: 'var(--font-serif)',
+                    fontWeight: activeSection === chapter.id ? 700 : 600,
+                    '&:hover': { color: linkHoverColor, opacity: 1 },
+                    mr: 1.2
+                  }}
+                >
+                  {chapter.label}
+                </Link>
+              ))}
+            </>
+          )}
           <Box sx={{ display: 'flex', gap: { xs: 0.6, md: 1 }, flexShrink: 0 }}>
-            <Tooltip title="Show Guide" arrow>
+            <Tooltip
+              title="Show Guide"
+              slotProps={{
+                tooltip: {
+                  sx: {
+                    backgroundColor: bgColor,
+                    color: navbarTextColor,
+                    fontWeight: 600,
+                    fontSize: '0.95rem',
+                    border: `1px solid ${linkHoverColor}`,
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.12)'
+                  }
+                }
+              }}
+            >
               <IconButton
                 onClick={() => setGuideActive(true)}
                 disableRipple
@@ -366,70 +418,101 @@ export default function App() {
                 <HelpOutline />
               </IconButton>
             </Tooltip>
-            <IconButton
-              onClick={toggleTheme}
-              disableRipple
-              disableFocusRipple
-              disableTouchRipple
-              sx={{
-                color: navbarTextColor,
-                transition: 'transform 0.3s ease, color 0.3s ease',
-                outline: 'none !important',
-                boxShadow: 'none !important',
-                '&:before, &:after': { display: 'none' },
-                '&:active': { backgroundColor: 'transparent !important' },
-                '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
-                '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
-                '&& .MuiTouchRipple-root': { display: 'none' },
-                '&:hover': {
-                  color: linkHoverColor,
-                  transform: 'rotate(20deg)',
-                  backgroundColor: 'transparent !important'
+            <Tooltip
+              title={isDark ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+              slotProps={{
+                tooltip: {
+                  sx: {
+                    backgroundColor: bgColor,
+                    color: navbarTextColor,
+                    fontWeight: 600,
+                    fontSize: '0.95rem',
+                    border: `1px solid ${linkHoverColor}`,
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.12)'
+                  }
                 }
               }}
             >
-              {isDark ? <LightMode /> : <DarkMode />}
-            </IconButton>
-            <IconButton
-              onClick={toggleMonochromacy}
-              disableRipple
-              disableFocusRipple
-              disableTouchRipple
-              sx={{
-                color: navbarTextColor,
-                transition: 'transform 0.3s ease, color 0.3s ease',
-                outline: 'none !important',
-                boxShadow: 'none !important',
-                '&:before, &:after': { display: 'none' },
-                '&:active': { backgroundColor: 'transparent !important' },
-                '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
-                '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
-                '&& .MuiTouchRipple-root': { display: 'none' },
-                '&:hover': {
-                  color: linkHoverColor,
-                  transform: 'scale(1.15)',
-                  backgroundColor: 'transparent !important'
+              <IconButton
+                onClick={toggleTheme}
+                disableRipple
+                disableFocusRipple
+                disableTouchRipple
+                sx={{
+                  color: navbarTextColor,
+                  transition: 'transform 0.3s ease, color 0.3s ease',
+                  outline: 'none !important',
+                  boxShadow: 'none !important',
+                  '&:before, &:after': { display: 'none' },
+                  '&:active': { backgroundColor: 'transparent !important' },
+                  '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+                  '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+                  '&& .MuiTouchRipple-root': { display: 'none' },
+                  '&:hover': {
+                    color: linkHoverColor,
+                    transform: 'rotate(20deg)',
+                    backgroundColor: 'transparent !important'
+                  }
+                }}
+              >
+                {isDark ? <LightMode /> : <DarkMode />}
+              </IconButton>
+            </Tooltip>
+            <Tooltip
+              title={isMonochromacy ? 'Disable Colorblind Mode' : 'Enable Colorblind Mode'}
+              slotProps={{
+                tooltip: {
+                  sx: {
+                    backgroundColor: bgColor,
+                    color: navbarTextColor,
+                    fontWeight: 600,
+                    fontSize: '0.95rem',
+                    border: `1px solid ${linkHoverColor}`,
+                    boxShadow: '0 2px 12px rgba(0,0,0,0.12)'
+                  }
                 }
               }}
             >
-              {isMonochromacy ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
+              <IconButton
+                onClick={toggleMonochromacy}
+                disableRipple
+                disableFocusRipple
+                disableTouchRipple
+                sx={{
+                  color: navbarTextColor,
+                  transition: 'transform 0.3s ease, color 0.3s ease',
+                  outline: 'none !important',
+                  boxShadow: 'none !important',
+                  '&:before, &:after': { display: 'none' },
+                  '&:active': { backgroundColor: 'transparent !important' },
+                  '&:focus': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+                  '&:focusVisible': { backgroundColor: 'transparent !important', boxShadow: 'none !important', outline: 'none !important' },
+                  '&& .MuiTouchRipple-root': { display: 'none' },
+                  '&:hover': {
+                    color: linkHoverColor,
+                    transform: 'scale(1.15)',
+                    backgroundColor: 'transparent !important'
+                  }
+                }}
+              >
+                {isMonochromacy ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </Tooltip>
             <Link
-            href="#/datasets"
-            rel="noopener noreferrer"
-            sx={{
-              color: navbarTextColor,
-              textDecoration: 'none',
-              display: 'flex',
-              alignItems: 'center',
-              transition: 'color 0.3s ease',
-              '&:hover': { color: linkHoverColor }
-            }}
-            aria-label="Datasets and Sources"
-          >
-            
-            <strong>Data</strong>
-          </Link>
+              href="#/datasets"
+              rel="noopener noreferrer"
+              sx={{
+                color: navbarTextColor,
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                transition: 'color 0.3s ease',
+                '&:hover': { color: linkHoverColor }
+              }}
+              aria-label="Datasets and Sources"
+            >
+              <strong>Data</strong>
+            </Link>
           </Box>
         </Toolbar>
       </AppBar>
