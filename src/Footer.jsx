@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import UnigeLogoBlack from './DatasetIcons/logo_orizzontale_BLACK.svg';
+import UnigeLogoWhite from './DatasetIcons/logo_orizzontale.LIGHT.svg';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
@@ -54,6 +56,22 @@ export default function Footer({ isDark, isMonochromacy }) {
       <Typography variant="body2" sx={{ fontSize: '0.95rem', mb: 1, textAlign: 'center' }}>
         A.Y. 2025-2026 Data Visualization Project - Università di Genova
       </Typography>
+      
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', mt: 2, mb: 2 }}>
+        <img
+          src={isDark ? UnigeLogoWhite : UnigeLogoBlack}
+          alt="Università di Genova Logo"
+          style={{
+            height: 48,
+            width: 'auto',
+            maxWidth: 320,
+            filter: isDark ? 'drop-shadow(0 2px 8px rgba(0,0,0,0.25))' : 'drop-shadow(0 2px 8px rgba(0,0,0,0.10))',
+            transition: 'filter 0.3s',
+            margin: '0 auto',
+            display: 'block',
+          }}
+        />
+      </Box>
       <Typography variant="body2" sx={{ fontSize: '0.85rem', mb: 1, textAlign: 'center' }}>
         Created by Matteo Ferrari
       </Typography>

@@ -46,9 +46,9 @@ export default function App() {
 
   const [guideActive, setGuideActive] = useState(false);
   const { isDark, setIsDark, isMonochromacy, setIsMonochromacy } = useThemeContext();
-    // Guide overlay content for each plot
-    
-      
+  // Guide overlay content for each plot
+
+
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [activeSection, setActiveSection] = useState('introduction');
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -194,22 +194,48 @@ export default function App() {
   const navbarShadow = 'var(--navbar-shadow)';
   const navbarBgColor = 'var(--bg-primary)';
 
-/*
+
   if (isMobileBlocked) {
     return (
-      <Box sx={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)', padding: '24px', textAlign: 'center' }}>
-        <Box sx={{ maxWidth: 520, margin: '32px auto', border: '1px solid var(--color-details)', borderRadius: '12px', padding: '24px 20px', boxShadow: '0 12px 32px rgba(0,0,0,0.18)', backgroundColor: 'var(--bg-secondary)' }}>
-          <Typography variant="h6" sx={{ fontWeight: 700, marginBottom: '10px' }}>
+      <Box sx={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: 'var(--bg-primary)',
+        color: 'var(--text-primary)',
+        textAlign: 'center',
+        zIndex: 20000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        p: { xs: 1, sm: 2, md: 3 },
+        boxSizing: 'border-box',
+        mr: { xs: 1.5, sm: 2, md: 3 }, // right margin for all sizes
+      }}>
+        <Box sx={{
+          width: '100%',
+          maxWidth: { xs: '95vw', sm: 400, md: 520 },
+          border: '1px solid var(--color-details)',
+          borderRadius: '12px',
+          p: { xs: 2, sm: 3, md: '24px 20px' },
+          boxShadow: '0 12px 32px rgba(0,0,0,0.18)',
+          backgroundColor: 'var(--bg-secondary)',
+          wordBreak: 'break-word',
+          textAlign: 'center',
+        }}>
+          <Typography variant="h6" sx={{ fontWeight: 700, mb: 1, fontSize: { xs: '1.1rem', sm: '1.25rem', md: '1.35rem' }, textAlign: 'center' }}>
             Desktop Experience Required
           </Typography>
-          <Typography sx={{ fontSize: '15px', lineHeight: 1.5 }}>
-            This data visualization is optimized for larger screens. Please visit from a desktop or widen your window to explore the content.
+          <Typography sx={{ fontSize: { xs: '0.95rem', sm: '1.05rem', md: '1.1rem' }, lineHeight: 1.5, textAlign: 'center' }}>
+            This visualization is optimized for larger screens.<br /> View on desktop or expand your window to explore the content.<br /> If you are on mobile, try switching to desktop mode.<br />(This does not guarantee a perfect experience.)
           </Typography>
         </Box>
       </Box>
     );
   }
-  */
+
   return (
     <Box sx={{
       backgroundColor: bgColor,
@@ -1278,7 +1304,7 @@ export default function App() {
 
       <Footer isDark={isDark} isMonochromacy={isMonochromacy} />
 
-      
+
 
       {/* Scroll to Top Button */}
       <Fab
